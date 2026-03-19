@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  /* Dark blue palette */
+  /* Cosmic dark blue palette */
   --background: 220 60% 4%;
   --foreground: 0 0% 95%;
   --muted-foreground: 0 0% 70%;
@@ -31,7 +31,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Liquid Glass (adapted for near-black bg) */
+/* Liquid Glass */
 .liquid-glass {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(6px);
@@ -72,7 +72,57 @@ body {
   z-index: 1;
 }
 
-/* Card style matching Blink */
+/* ── STAR FIELD ── */
+.starfield {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #fff;
+  border-radius: 50%;
+  animation: twinkle var(--duration, 3s) ease-in-out var(--delay, 0s) infinite alternate;
+}
+.star.bright {
+  width: 3px;
+  height: 3px;
+  box-shadow: 0 0 6px 1px rgba(180, 210, 255, 0.6);
+}
+.star.glow {
+  width: 2px;
+  height: 2px;
+  box-shadow: 0 0 8px 2px rgba(33, 107, 228, 0.5), 0 0 16px 4px rgba(33, 107, 228, 0.2);
+}
+@keyframes twinkle {
+  0% { opacity: 0.15; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1.2); }
+}
+
+/* ── CONSTELLATION LOGO GLOW ── */
+.logo-constellation {
+  filter: drop-shadow(0 0 20px rgba(33, 107, 228, 0.4))
+          drop-shadow(0 0 60px rgba(33, 107, 228, 0.15));
+  animation: logo-breathe 4s ease-in-out infinite alternate;
+}
+@keyframes logo-breathe {
+  0% { filter: drop-shadow(0 0 20px rgba(33,107,228,0.3)) drop-shadow(0 0 60px rgba(33,107,228,0.1)); }
+  100% { filter: drop-shadow(0 0 30px rgba(33,107,228,0.6)) drop-shadow(0 0 80px rgba(33,107,228,0.25)); }
+}
+
+/* ── HERO DIVIDER LINE ── */
+.hero-divider {
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  margin: 0 auto;
+}
+
+/* Card style */
 .blink-card {
   background: hsl(var(--card));
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -148,3 +198,4 @@ body {
 .animate-fade-rise-delay { animation: fade-rise 0.8s ease-out 0.2s both; }
 .animate-fade-rise-delay-2 { animation: fade-rise 0.8s ease-out 0.4s both; }
 .animate-fade-rise-delay-3 { animation: fade-rise 0.8s ease-out 0.6s both; }
+.animate-fade-rise-delay-4 { animation: fade-rise 0.8s ease-out 0.8s both; }

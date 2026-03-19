@@ -34,6 +34,9 @@ function App() {
         <div className="spotlight" />
         <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent via-transparent to-[#060a14]" />
 
+        {/* Star field */}
+        <StarField />
+
         {/* Nav */}
         <nav className="relative z-10 border-b border-white/[0.06]">
           <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4 sm:py-5 max-w-[90rem] mx-auto">
@@ -85,36 +88,52 @@ function App() {
         </nav>
 
         {/* Hero Content */}
-        <section className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 pt-20 sm:pt-28 md:pt-36 pb-24 sm:pb-32">
-          <div className="animate-fade-rise mb-6 sm:mb-8">
-            <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs font-medium border border-[#216BE4]/30 bg-[#216BE4]/10 text-[#216BE4]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#216BE4] animate-pulse" />
-              Introducing Aetheryx AI
-            </span>
+        <section className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 pt-16 sm:pt-24 md:pt-28 pb-24 sm:pb-32">
+          {/* Constellation Logo */}
+          <div className="animate-fade-rise mb-6 sm:mb-8 logo-constellation">
+            <ConstellationLogo className="w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32" />
           </div>
 
           <h1
-            className="animate-fade-rise text-[32px] sm:text-5xl md:text-7xl lg:text-[80px] font-normal leading-[0.95] tracking-[-1px] sm:tracking-[-2px] max-w-5xl px-2"
+            className="animate-fade-rise text-[36px] sm:text-6xl md:text-7xl lg:text-[84px] font-normal leading-[0.95] tracking-[0.04em] sm:tracking-[0.06em] max-w-5xl px-2 uppercase"
             style={serif}
           >
-            Your AI sales co-pilot{" "}
-            <span className="text-[#216BE4]">working for you,</span>{" "}
-            on every call.
+            Aetheryx
           </h1>
 
-          <p className="animate-fade-rise-delay text-[#b3b3b3] text-sm sm:text-base md:text-lg max-w-2xl mt-5 sm:mt-7 leading-relaxed px-2">
+          {/* Divider */}
+          <div className="animate-fade-rise-delay hero-divider mt-4 sm:mt-5 mb-4 sm:mb-5" />
+
+          {/* Tagline */}
+          <p
+            className="animate-fade-rise-delay text-base sm:text-lg md:text-xl text-white/70 tracking-[0.02em]"
+            style={serif}
+          >
+            The Intelligence Layer for Modern Sales
+          </p>
+
+          <p className="animate-fade-rise-delay-2 text-[#b3b3b3] text-sm sm:text-base max-w-2xl mt-5 sm:mt-7 leading-relaxed px-2">
             The easiest way to close more deals. Live transcription, instant prospect research,
             On call and Post call Intelligence, auto summaries & follow-ups — all synced to HubSpot / Gmail.
             No setup, no API keys. Ready in 60 seconds.
           </p>
 
-          <div className="animate-fade-rise-delay-2 flex flex-col sm:flex-row gap-3 mt-8 sm:mt-10 w-full sm:w-auto px-4 sm:px-0">
+          <div className="animate-fade-rise-delay-3 flex flex-col sm:flex-row gap-3 mt-8 sm:mt-10 w-full sm:w-auto px-4 sm:px-0">
             <button className="btn-blink text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-3.5 w-full sm:w-auto">
               Get my first agent →
             </button>
             <button className="btn-ghost-blink text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-3.5 w-full sm:w-auto">
               See pricing
             </button>
+          </div>
+
+          {/* Bottom pillars */}
+          <div className="animate-fade-rise-delay-4 flex flex-col sm:flex-row items-center gap-2 sm:gap-0 mt-12 sm:mt-16 text-[11px] sm:text-xs text-white/30 tracking-wide italic" style={serif}>
+            <span>Real-Time Prospect Intelligence</span>
+            <span className="hidden sm:inline mx-3 text-white/15">›</span>
+            <span>Rep-Controlled AI Guidance</span>
+            <span className="hidden sm:inline mx-3 text-white/15">›</span>
+            <span>Self-Learning Execution</span>
           </div>
         </section>
 
@@ -538,6 +557,99 @@ function ScreenPreview({ tab }: { tab: number }) {
           </div>
         ))}
       </div>
+    </div>
+  );
+}
+
+/* ── Constellation "A" Logo ── */
+function ConstellationLogo({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 200 200" className={className} xmlns="http://www.w3.org/2000/svg">
+      {/* Outer glow */}
+      <defs>
+        <radialGradient id="logoGlow" cx="50%" cy="40%" r="50%">
+          <stop offset="0%" stopColor="#216BE4" stopOpacity="0.3" />
+          <stop offset="100%" stopColor="#216BE4" stopOpacity="0" />
+        </radialGradient>
+        <filter id="starGlow">
+          <feGaussianBlur stdDeviation="2" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+      <circle cx="100" cy="100" r="90" fill="url(#logoGlow)" />
+      {/* Main "A" shape — constellation lines */}
+      <g stroke="rgba(100,180,255,0.5)" strokeWidth="1" fill="none" filter="url(#starGlow)">
+        {/* Left leg */}
+        <line x1="100" y1="30" x2="45" y2="160" />
+        {/* Right leg */}
+        <line x1="100" y1="30" x2="155" y2="160" />
+        {/* Crossbar */}
+        <line x1="65" y1="110" x2="135" y2="110" />
+        {/* Inner structure lines */}
+        <line x1="100" y1="30" x2="100" y2="75" />
+        <line x1="100" y1="75" x2="75" y2="110" />
+        <line x1="100" y1="75" x2="125" y2="110" />
+        {/* Lower inner */}
+        <line x1="75" y1="110" x2="60" y2="145" />
+        <line x1="125" y1="110" x2="140" y2="145" />
+      </g>
+      {/* Constellation star nodes */}
+      {[
+        [100, 30, 5],   // apex
+        [45, 160, 3],   // bottom left
+        [155, 160, 3],  // bottom right
+        [65, 110, 3],   // crossbar left
+        [135, 110, 3],  // crossbar right
+        [100, 75, 4],   // center
+        [75, 110, 2.5],
+        [125, 110, 2.5],
+        [60, 145, 2],
+        [140, 145, 2],
+      ].map(([cx, cy, r], i) => (
+        <g key={i}>
+          <circle cx={cx} cy={cy} r={(r as number) * 2} fill="rgba(33,107,228,0.15)" />
+          <circle cx={cx} cy={cy} r={r as number} fill="#fff" filter="url(#starGlow)">
+            <animate attributeName="opacity" values="0.7;1;0.7" dur={`${2 + i * 0.3}s`} repeatCount="indefinite" />
+          </circle>
+        </g>
+      ))}
+      {/* Central bright star at apex */}
+      <circle cx="100" cy="30" r="3" fill="#fff" opacity="0.9">
+        <animate attributeName="r" values="3;5;3" dur="3s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.9;1;0.9" dur="3s" repeatCount="indefinite" />
+      </circle>
+    </svg>
+  );
+}
+
+/* ── Star Field (randomly placed twinkling stars) ── */
+function StarField() {
+  const stars = Array.from({ length: 80 }, (_, i) => ({
+    id: i,
+    left: `${Math.random() * 100}%`,
+    top: `${Math.random() * 100}%`,
+    duration: `${2 + Math.random() * 4}s`,
+    delay: `${Math.random() * 3}s`,
+    type: Math.random() > 0.85 ? "bright" : Math.random() > 0.92 ? "glow" : "",
+  }));
+
+  return (
+    <div className="starfield">
+      {stars.map((s) => (
+        <div
+          key={s.id}
+          className={`star ${s.type}`}
+          style={{
+            left: s.left,
+            top: s.top,
+            "--duration": s.duration,
+            "--delay": s.delay,
+          } as React.CSSProperties}
+        />
+      ))}
     </div>
   );
 }
