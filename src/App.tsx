@@ -88,52 +88,36 @@ function App() {
         </nav>
 
         {/* Hero Content */}
-        <section className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 pt-16 sm:pt-24 md:pt-28 pb-24 sm:pb-32">
-          {/* Constellation Logo */}
-          <div className="animate-fade-rise mb-6 sm:mb-8 logo-constellation">
-            <ConstellationLogo className="w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32" />
+        <section className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 pt-20 sm:pt-28 md:pt-36 pb-24 sm:pb-32">
+          <div className="animate-fade-rise mb-6 sm:mb-8">
+            <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs font-medium border border-[#216BE4]/30 bg-[#216BE4]/10 text-[#216BE4]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#216BE4] animate-pulse" />
+              Introducing Aetheryx AI
+            </span>
           </div>
 
           <h1
-            className="animate-fade-rise text-[36px] sm:text-6xl md:text-7xl lg:text-[84px] font-normal leading-[0.95] tracking-[0.04em] sm:tracking-[0.06em] max-w-5xl px-2 uppercase"
+            className="animate-fade-rise text-[32px] sm:text-5xl md:text-7xl lg:text-[80px] font-normal leading-[0.95] tracking-[-1px] sm:tracking-[-2px] max-w-5xl px-2"
             style={serif}
           >
-            Aetheryx
+            Your AI sales co-pilot{" "}
+            <span className="text-[#216BE4]">working for you,</span>{" "}
+            on every call.
           </h1>
 
-          {/* Divider */}
-          <div className="animate-fade-rise-delay hero-divider mt-4 sm:mt-5 mb-4 sm:mb-5" />
-
-          {/* Tagline */}
-          <p
-            className="animate-fade-rise-delay text-base sm:text-lg md:text-xl text-white/70 tracking-[0.02em]"
-            style={serif}
-          >
-            The Intelligence Layer for Modern Sales
-          </p>
-
-          <p className="animate-fade-rise-delay-2 text-[#b3b3b3] text-sm sm:text-base max-w-2xl mt-5 sm:mt-7 leading-relaxed px-2">
+          <p className="animate-fade-rise-delay text-[#b3b3b3] text-sm sm:text-base md:text-lg max-w-2xl mt-5 sm:mt-7 leading-relaxed px-2">
             The easiest way to close more deals. Live transcription, instant prospect research,
             On call and Post call Intelligence, auto summaries & follow-ups — all synced to HubSpot / Gmail.
             No setup, no API keys. Ready in 60 seconds.
           </p>
 
-          <div className="animate-fade-rise-delay-3 flex flex-col sm:flex-row gap-3 mt-8 sm:mt-10 w-full sm:w-auto px-4 sm:px-0">
+          <div className="animate-fade-rise-delay-2 flex flex-col sm:flex-row gap-3 mt-8 sm:mt-10 w-full sm:w-auto px-4 sm:px-0">
             <button className="btn-blink text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-3.5 w-full sm:w-auto">
               Get my first agent →
             </button>
             <button className="btn-ghost-blink text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-3.5 w-full sm:w-auto">
               See pricing
             </button>
-          </div>
-
-          {/* Bottom pillars */}
-          <div className="animate-fade-rise-delay-4 flex flex-col sm:flex-row items-center gap-2 sm:gap-0 mt-12 sm:mt-16 text-[11px] sm:text-xs text-white/30 tracking-wide italic" style={serif}>
-            <span>Real-Time Prospect Intelligence</span>
-            <span className="hidden sm:inline mx-3 text-white/15">›</span>
-            <span>Rep-Controlled AI Guidance</span>
-            <span className="hidden sm:inline mx-3 text-white/15">›</span>
-            <span>Self-Learning Execution</span>
           </div>
         </section>
 
