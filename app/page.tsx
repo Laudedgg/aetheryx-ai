@@ -87,17 +87,17 @@ export default function LandingPage() {
         <nav className="relative z-10 border-b border-white/[0.06]">
           <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3 sm:py-5 max-w-[90rem] mx-auto">
             <a href="#" className="text-lg sm:text-2xl tracking-tight" style={serif}>Aetheryx<sup className="text-[9px] sm:text-[10px] ml-0.5 text-[#216BE4]">AI</sup></a>
-            <ul className="hidden xl:flex items-center gap-8">{["Features","Agents","Platform","Integrations","Pricing"].map(i=><li key={i}><a href={`#${i.toLowerCase()}`} className="text-sm text-[#b3b3b3] hover:text-white transition-colors">{i}</a></li>)}</ul>
+            <ul className="items-center gap-8" style={{display:'none'}} data-nav-cta>{["Features","Agents","Platform","Integrations","Pricing"].map(i=><li key={i}><a href={`#${i.toLowerCase()}`} className="text-sm text-[#b3b3b3] hover:text-white transition-colors">{i}</a></li>)}</ul>
             <div className="flex gap-2 items-center">
-              <a href="#pricing" className="btn-ghost-blink hidden xl:inline-flex text-sm">See Pricing</a>
-              <Link href={APP_URL} className="btn-blink hidden xl:inline-flex text-sm px-6 py-3">Get Started</Link>
-              <button className="xl:hidden p-2 text-white/70 hover:text-white rounded-lg hover:bg-white/[0.06] transition-colors" onClick={()=>setMenuOpen(!menuOpen)}>
+              <a href="#pricing" className="btn-ghost-blink text-sm" style={{display:'none'}} data-nav-cta>See Pricing</a>
+              <Link href={APP_URL} className="btn-blink text-sm px-6 py-3" style={{display:'none'}} data-nav-cta>Get Started</Link>
+              <button className="p-2 text-white/70 hover:text-white rounded-lg hover:bg-white/[0.06] transition-colors" data-nav-burger onClick={()=>setMenuOpen(!menuOpen)}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">{menuOpen?<path d="M6 6l12 12M6 18L18 6"/>:<path d="M4 7h16M4 12h16M4 17h16"/>}</svg>
               </button>
             </div>
           </div>
           {menuOpen && (
-            <div className="xl:hidden border-t border-white/[0.06] bg-[#060a14]/98 backdrop-blur-xl px-5 py-3 pb-5">
+            <div className="border-t border-white/[0.06] bg-[#060a14]/98 backdrop-blur-xl px-5 py-3 pb-5" data-nav-burger>
               {["Features","Agents","Platform","Integrations","Pricing"].map(i=>(
                 <a key={i} href={`#${i.toLowerCase()}`} className="block py-3 text-[15px] text-white/60 hover:text-white transition-colors" onClick={()=>setMenuOpen(false)}>{i}</a>
               ))}
