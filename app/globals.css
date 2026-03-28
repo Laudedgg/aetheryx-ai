@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Aetheryx light palette */
+    --background: 220 20% 97%;
+    --foreground: 220 30% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 30% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 30% 10%;
+    --primary: 217 76% 51%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 15% 93%;
+    --secondary-foreground: 220 20% 20%;
+    --muted: 220 15% 92%;
+    --muted-foreground: 220 10% 45%;
+    --accent: 217 76% 51%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 217 76% 51%;
+    --radius: 0.5rem;
+    --sidebar-background: 220 18% 95%;
+    --sidebar-foreground: 220 30% 10%;
+    --sidebar-border: 220 15% 88%;
+    --sidebar-primary: 217 76% 51%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 15% 92%;
+    --sidebar-accent-foreground: 220 30% 10%;
+    --sidebar-ring: 217 76% 51%;
+    --chart-1: 217 76% 51%;
+    --chart-2: 160 65% 40%;
+    --chart-3: 280 55% 55%;
+    --chart-4: 35 80% 50%;
+    --chart-5: 0 70% 50%;
+  }
+
+  .dark {
+    /* Aetheryx dark-blue palette */
+    --background: 220 40% 5%;
+    --foreground: 210 20% 95%;
+    --card: 220 35% 8%;
+    --card-foreground: 210 20% 95%;
+    --popover: 220 35% 8%;
+    --popover-foreground: 210 20% 95%;
+    --primary: 217 76% 51%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 35% 10%;
+    --secondary-foreground: 210 20% 85%;
+    --muted: 220 30% 12%;
+    --muted-foreground: 215 15% 65%;
+    --accent: 217 76% 51%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 30% 14%;
+    --input: 220 30% 14%;
+    --ring: 217 76% 51%;
+    --sidebar-background: 220 35% 8%;
+    --sidebar-foreground: 210 20% 95%;
+    --sidebar-border: 220 30% 14%;
+    --sidebar-primary: 217 76% 51%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 30% 12%;
+    --sidebar-accent-foreground: 210 20% 95%;
+    --sidebar-ring: 217 76% 51%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+/* Liquid glass card effect */
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+}
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.04) 40%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(255, 255, 255, 0.04) 60%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+}
+
+/* Spotlight radial glow */
+.spotlight {
+  position: relative;
+}
+.spotlight::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 800px;
+  background: radial-gradient(
+    ellipse at center top,
+    rgba(33, 107, 228, 0.15) 0%,
+    rgba(33, 107, 228, 0.06) 30%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Blink card style */
+.blink-card {
+  background: hsl(var(--card));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  transition: border-color 0.3s, background 0.3s;
+}
+.blink-card:hover {
+  border-color: rgba(33, 107, 228, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Section glow divider */
+.section-glow {
+  position: relative;
+}
+.section-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(33, 107, 228, 0.3) 50%,
+    transparent 100%
+  );
+}
+
+/* Display font */
+.font-display {
+  font-family: 'Instrument Serif', serif;
+}
+
+/* Animations */
+@keyframes fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-rise {
+  animation: fade-rise 0.8s ease-out forwards;
+}
+.animate-fade-rise-delay {
+  animation: fade-rise 0.8s ease-out 0.2s forwards;
+  opacity: 0;
+}
+.animate-fade-rise-delay-2 {
+  animation: fade-rise 0.8s ease-out 0.4s forwards;
+  opacity: 0;
+}
+
+/* Star field */
+.starfield { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1; }
+.star { position: absolute; width: 2px; height: 2px; background: #fff; border-radius: 50%; animation: twinkle var(--duration, 3s) ease-in-out var(--delay, 0s) infinite alternate; }
+.star.bright { width: 3px; height: 3px; box-shadow: 0 0 6px 1px rgba(180, 210, 255, 0.6); }
+.star.glow { width: 2px; height: 2px; box-shadow: 0 0 8px 2px rgba(33, 107, 228, 0.5), 0 0 16px 4px rgba(33, 107, 228, 0.2); }
+@keyframes twinkle { 0% { opacity: 0.15; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
+
+/* Landing page buttons */
+.btn-blink { background: hsl(var(--primary)); color: #fff; border: none; border-radius: 8px; padding: 12px 24px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.2s; font-family: inherit; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
+.btn-blink:hover { filter: brightness(1.1); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(33, 107, 228, 0.3); }
+.btn-ghost-blink { background: transparent; color: hsl(var(--foreground)); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 12px 24px; font-weight: 500; font-size: 14px; cursor: pointer; transition: all 0.2s; font-family: inherit; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
+.btn-ghost-blink:hover { border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.04); }
+
+.animate-fade-rise-delay-3 { animation: fade-rise 0.8s ease-out 0.6s forwards; opacity: 0; }
+
+/* Scrollbar styling for dark theme */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}

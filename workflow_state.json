@@ -1,0 +1,70 @@
+{
+  "project": "SalesMaster AI",
+  "agents": [
+    {
+      "agent_id": "69b03c357b2057cc3ff92a2b",
+      "name": "Research Agent",
+      "type": "independent",
+      "provider": "Perplexity",
+      "model": "sonar-pro",
+      "temperature": 0.2,
+      "top_p": 1,
+      "tools": [],
+      "capabilities": ["text"],
+      "response_schema_file": "response_schemas/research_agent_response.json"
+    },
+    {
+      "agent_id": "69b03c36778bd73de86e5ffd",
+      "name": "Sales Strategy Agent",
+      "type": "independent",
+      "provider": "Anthropic",
+      "model": "claude-sonnet-4-5",
+      "temperature": 0.5,
+      "top_p": 0.95,
+      "tools": [],
+      "capabilities": ["text"],
+      "response_schema_file": "response_schemas/sales_strategy_agent_response.json"
+    },
+    {
+      "agent_id": "69b03c5393c7264ffc5fcc0d",
+      "name": "Post-Call Intelligence Agent",
+      "type": "independent",
+      "provider": "OpenAI",
+      "model": "gpt-4.1",
+      "temperature": 0.4,
+      "top_p": 0.95,
+      "tools": [],
+      "capabilities": ["text"],
+      "response_schema_file": "response_schemas/post_call_intelligence_agent_response.json"
+    },
+    {
+      "agent_id": "69b03c652f39e130540f1d49",
+      "name": "CRM & Email Sync Agent",
+      "type": "independent",
+      "provider": "OpenAI",
+      "model": "gpt-4.1",
+      "temperature": 0.2,
+      "top_p": 1,
+      "tools": ["HUBSPOT_CREATE_CONTACT", "HUBSPOT_CREATE_DEAL", "HUBSPOT_FETCH_CONTACT_DETAILS_BY_ID", "GMAIL_SEND_EMAIL"],
+      "capabilities": ["text", "tool_calling"],
+      "response_schema_file": "response_schemas/crm_email_sync_agent_response.json"
+    }
+  ],
+  "workflow": {
+    "nodes": [
+      {"id": "input_node", "type": "Input", "label": "User Input", "nodeCategory": "input"},
+      {"id": "research_agent", "type": "Agent", "label": "Research Agent", "nodeCategory": "agent"},
+      {"id": "sales_strategy_agent", "type": "Agent", "label": "Sales Strategy Agent", "nodeCategory": "agent"},
+      {"id": "post_call_agent", "type": "Agent", "label": "Post-Call Intelligence Agent", "nodeCategory": "agent"},
+      {"id": "crm_email_agent", "type": "Agent", "label": "CRM & Email Sync Agent", "nodeCategory": "agent"},
+      {"id": "output_node", "type": "Output", "label": "Output", "nodeCategory": "end"}
+    ],
+    "edges": [
+      {"source": "input_node", "target": "research_agent"},
+      {"source": "research_agent", "target": "sales_strategy_agent"},
+      {"source": "sales_strategy_agent", "target": "post_call_agent"},
+      {"source": "post_call_agent", "target": "crm_email_agent"},
+      {"source": "crm_email_agent", "target": "output_node"}
+    ]
+  }
+}

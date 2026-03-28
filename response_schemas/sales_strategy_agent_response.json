@@ -1,0 +1,24 @@
+{
+  "agent_name": "Sales Strategy Agent",
+  "agent_id": "69b03c36778bd73de86e5ffd",
+  "description": "Analyzes live conversation transcript chunks and generates contextual objection handling suggestions, next best questions, and pitch angle recommendations for the sales rep",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "objection_handlers": "string",
+    "next_questions": "string",
+    "pitch_angles": "string",
+    "engagement_level": "string",
+    "deal_signals": "string",
+    "closing_probability": "string"
+  },
+  "example_response": {
+    "objection_handlers": "sample string",
+    "next_questions": "sample string",
+    "pitch_angles": "sample string",
+    "engagement_level": "sample string",
+    "deal_signals": "sample string",
+    "closing_probability": "sample string"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "agent_name": "Post-Call Intelligence Agent",
+  "agent_id": "69b03c5393c7264ffc5fcc0d",
+  "description": "Processes the complete call transcript to generate a structured call summary, deal-closing probability score with signal analysis, and a personalized follow-up email draft",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "summary": {
+      "client_name": "string",
+      "company": "string",
+      "call_outcome": "string",
+      "key_points": "string",
+      "pain_points": "string",
+      "next_steps": "string"
+    },
+    "deal_probability": {
+      "score": "string",
+      "positive_signals": "string",
+      "negative_signals": "string",
+      "risk_factors": "string"
+    },
+    "follow_up_email": {
+      "subject": "string",
+      "body": "string",
+      "recipient_suggestion": "string"
+    }
+  },
+  "example_response": {
+    "summary": {
+      "client_name": "sample string",
+      "company": "sample string",
+      "call_outcome": "sample string",
+      "key_points": "sample string",
+      "pain_points": "sample string",
+      "next_steps": "sample string"
+    },
+    "deal_probability": {
+      "score": "sample string",
+      "positive_signals": "sample string",
+      "negative_signals": "sample string",
+      "risk_factors": "sample string"
+    },
+    "follow_up_email": {
+      "subject": "sample string",
+      "body": "sample string",
+      "recipient_suggestion": "sample string"
+    }
+  }
+}

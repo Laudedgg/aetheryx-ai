@@ -1,0 +1,56 @@
+{
+  "agent_name": "Research Agent",
+  "agent_id": "69b03c357b2057cc3ff92a2b",
+  "description": "Researches prospect and company information in real-time using web search \u2014 surfaces company profile, funding history, tech stack, recent news, and suggested pitch angles",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "company_profile": {
+      "name": "string",
+      "industry": "string",
+      "size": "string",
+      "headquarters": "string",
+      "description": "string",
+      "key_products": "string"
+    },
+    "funding": {
+      "total_raised": "string",
+      "latest_round": "string",
+      "key_investors": "string",
+      "financial_health": "string"
+    },
+    "tech_stack": {
+      "technologies": "string",
+      "infrastructure": "string",
+      "tools": "string"
+    },
+    "recent_news": "string",
+    "pitch_angles": "string",
+    "pain_points": "string"
+  },
+  "example_response": {
+    "company_profile": {
+      "name": "sample string",
+      "industry": "sample string",
+      "size": "sample string",
+      "headquarters": "sample string",
+      "description": "sample string",
+      "key_products": "sample string"
+    },
+    "funding": {
+      "total_raised": "sample string",
+      "latest_round": "sample string",
+      "key_investors": "sample string",
+      "financial_health": "sample string"
+    },
+    "tech_stack": {
+      "technologies": "sample string",
+      "infrastructure": "sample string",
+      "tools": "sample string"
+    },
+    "recent_news": "sample string",
+    "pitch_angles": "sample string",
+    "pain_points": "sample string"
+  }
+}

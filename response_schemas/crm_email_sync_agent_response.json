@@ -1,0 +1,40 @@
+{
+  "agent_name": "CRM & Email Sync Agent",
+  "agent_id": "69b03c652f39e130540f1d49",
+  "description": "Takes approved call summary and follow-up email, creates/updates HubSpot contact and deal records, and sends the follow-up email via Gmail",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "hubspot_sync": {
+      "contact_status": "string",
+      "contact_id": "string",
+      "deal_status": "string",
+      "deal_id": "string",
+      "notes_added": "string"
+    },
+    "email_status": {
+      "sent": "string",
+      "recipient": "string",
+      "subject": "string",
+      "timestamp": "string"
+    },
+    "sync_summary": "string"
+  },
+  "example_response": {
+    "hubspot_sync": {
+      "contact_status": "sample string",
+      "contact_id": "sample string",
+      "deal_status": "sample string",
+      "deal_id": "sample string",
+      "notes_added": "sample string"
+    },
+    "email_status": {
+      "sent": "sample string",
+      "recipient": "sample string",
+      "subject": "sample string",
+      "timestamp": "sample string"
+    },
+    "sync_summary": "sample string"
+  }
+}
