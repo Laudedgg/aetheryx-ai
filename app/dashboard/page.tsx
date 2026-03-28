@@ -304,9 +304,9 @@ export default function Page() {
 
   return (
     <div className="min-h-screen bg-background text-foreground flex">
-      {/* Sidebar */}
+      {/* Sidebar — hidden on mobile, shown on md+ */}
       <aside className={cn(
-        'flex flex-col border-r border-border bg-sidebar transition-all duration-200',
+        'hidden md:flex flex-col border-r border-border bg-sidebar transition-all duration-200',
         sidebarOpen ? 'w-52' : 'w-12'
       )}>
         <div className="flex items-center gap-2 px-3 h-14 border-b border-border">
@@ -412,10 +412,16 @@ export default function Page() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col min-w-0 spotlight">
-        <header className="flex items-center justify-between px-5 h-14 border-b border-border bg-sidebar relative z-10">
-          <div className="flex items-center gap-3">
-            <h1 className="text-sm font-semibold font-display tracking-wide">{sectionLabel[activeSection]}</h1>
+      <main className="flex-1 flex flex-col min-w-0 spotlight pb-16 md:pb-0">
+        <header className="flex items-center justify-between px-3 sm:px-5 h-12 sm:h-14 border-b border-border bg-sidebar relative z-10">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            {/* Mobile logo */}
+            <div className="md:hidden flex items-center gap-2 mr-1">
+              <div className="w-6 h-6 rounded-md bg-primary flex items-center justify-center flex-shrink-0">
+                <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </div>
+            </div>
+            <h1 className="text-xs sm:text-sm font-semibold font-display tracking-wide truncate">{sectionLabel[activeSection]}</h1>
             {callActive && activeSection === 'live-call' && (
               <span className="inline-flex items-center gap-1.5 bg-green-500/15 text-green-400 text-[11px] px-2.5 py-0.5 rounded-full font-medium border border-green-500/20">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" /> {callStatus}
@@ -511,8 +517,8 @@ export default function Page() {
         </div>
       </main>
 
-      {/* Global AI Chat Panel — always open */}
-      <div className="flex-shrink-0 w-80 border-l border-border bg-sidebar flex flex-col overflow-hidden">
+      {/* Global AI Chat Panel — hidden on mobile, shown on lg+ */}
+      <div className="hidden lg:flex flex-shrink-0 w-80 border-l border-border bg-sidebar flex-col overflow-hidden">
           {/* Header */}
           <div className="flex items-center justify-between px-3 h-14 border-b border-border flex-shrink-0">
             <div className="flex items-center gap-2">
@@ -622,6 +628,34 @@ export default function Page() {
             </div>
           </div>
       </div>
+
+      {/* Mobile Bottom Nav (PWA style) */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-sidebar/95 backdrop-blur-xl border-t border-border safe-area-bottom">
+        <div className="flex items-center justify-around h-14">
+          {[
+            { key: 'live-call' as Section, label: 'Call', icon: 'M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z' },
+            { key: 'call-history' as Section, label: 'History', icon: 'M12 2a10 10 0 1 0 10 10H12V2z' },
+            { key: 'analytics' as Section, label: 'Analytics', icon: 'M18 20V10M12 20V4M6 20v-6' },
+            { key: 'configuration' as Section, label: 'Settings', icon: 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z' },
+          ].map(function(item) {
+            const isActive = activeSection === item.key
+            return (
+              <button
+                key={item.key}
+                onClick={function() { setActiveSection(item.key) }}
+                className={cn(
+                  'flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-lg transition-colors min-w-0',
+                  isActive ? 'text-primary' : 'text-muted-foreground'
+                )}
+              >
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={item.icon}/></svg>
+                <span className="text-[10px] font-medium">{item.label}</span>
+                {isActive && <span className="w-1 h-1 rounded-full bg-primary" />}
+              </button>
+            )
+          })}
+        </div>
+      </nav>
     </div>
   )
 }

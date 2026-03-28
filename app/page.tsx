@@ -85,16 +85,28 @@ export default function LandingPage() {
         <StarField />
 
         <nav className="relative z-10 border-b border-white/[0.06]">
-          <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4 sm:py-5 max-w-[90rem] mx-auto">
-            <a href="#" className="text-xl sm:text-2xl tracking-tight" style={serif}>Aetheryx<sup className="text-[10px] ml-0.5 text-[#216BE4]">AI</sup></a>
+          <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3 sm:py-5 max-w-[90rem] mx-auto">
+            <a href="#" className="text-lg sm:text-2xl tracking-tight" style={serif}>Aetheryx<sup className="text-[9px] sm:text-[10px] ml-0.5 text-[#216BE4]">AI</sup></a>
             <ul className="hidden md:flex items-center gap-8">{["Features","Agents","Platform","Integrations","Pricing"].map(i=><li key={i}><a href={`#${i.toLowerCase()}`} className="text-sm text-[#b3b3b3] hover:text-white transition-colors">{i}</a></li>)}</ul>
             <div className="flex gap-2 sm:gap-3 items-center">
-              <a href="#pricing" className="btn-ghost-blink hidden sm:block text-sm">See Pricing</a>
-              <Link href={APP_URL} className="btn-blink text-sm px-4 py-2 sm:px-6 sm:py-3">Get Started</Link>
-              <button className="md:hidden ml-1 p-2 text-white/60 hover:text-white" onClick={()=>setMenuOpen(!menuOpen)}><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">{menuOpen?<path d="M6 6l12 12M6 18L18 6"/>:<path d="M4 6h16M4 12h16M4 18h16"/>}</svg></button>
+              <a href="#pricing" className="btn-ghost-blink hidden md:block text-sm">See Pricing</a>
+              <Link href={APP_URL} className="btn-blink hidden sm:inline-flex text-sm px-6 py-3">Get Started</Link>
+              <button className="md:hidden p-2 text-white/70 hover:text-white rounded-lg hover:bg-white/[0.06] transition-colors" onClick={()=>setMenuOpen(!menuOpen)}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">{menuOpen?<path d="M6 6l12 12M6 18L18 6"/>:<path d="M4 7h16M4 12h16M4 17h16"/>}</svg>
+              </button>
             </div>
           </div>
-          {menuOpen && <div className="md:hidden border-t border-white/[0.06] bg-[#060a14]/95 backdrop-blur-lg px-4 py-4">{["Features","Agents","Platform","Integrations","Pricing"].map(i=><a key={i} href={`#${i.toLowerCase()}`} className="block py-3 text-sm text-[#b3b3b3] hover:text-white border-b border-white/[0.04] last:border-0" onClick={()=>setMenuOpen(false)}>{i}</a>)}</div>}
+          {menuOpen && (
+            <div className="md:hidden border-t border-white/[0.06] bg-[#060a14]/98 backdrop-blur-xl px-5 py-3 pb-5">
+              {["Features","Agents","Platform","Integrations","Pricing"].map(i=>(
+                <a key={i} href={`#${i.toLowerCase()}`} className="block py-3 text-[15px] text-white/60 hover:text-white transition-colors" onClick={()=>setMenuOpen(false)}>{i}</a>
+              ))}
+              <div className="mt-4 pt-4 border-t border-white/[0.08] flex gap-3">
+                <a href="#pricing" className="btn-ghost-blink flex-1 text-sm text-center py-2.5">Pricing</a>
+                <Link href={APP_URL} className="btn-blink flex-1 text-sm text-center py-2.5" onClick={()=>setMenuOpen(false)}>Get Started</Link>
+              </div>
+            </div>
+          )}
         </nav>
 
         <section className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 pt-20 sm:pt-28 md:pt-36 pb-24 sm:pb-32">
