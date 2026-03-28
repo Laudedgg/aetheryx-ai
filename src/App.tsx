@@ -4,6 +4,7 @@ const VIDEO_SRC =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4";
 
 const serif = { fontFamily: "'Instrument Serif', serif" };
+const APP_URL = "http://localhost:3333";
 
 const agents = [
   { icon: "🔍", name: "Research Agent", desc: "Researches prospect and company in real-time — surfaces company profile, funding history, tech stack, recent news, and suggested pitch angles.", provider: "Perplexity", model: "sonar-pro", trigger: "Research Prospect" },
@@ -53,8 +54,8 @@ function App() {
               ))}
             </ul>
             <div className="flex gap-2 sm:gap-3 items-center">
-              <button className="btn-ghost-blink hidden sm:block">See Pricing</button>
-              <button className="btn-blink text-sm px-4 py-2 sm:px-6 sm:py-3">Get Started</button>
+              <a href="#pricing" className="btn-ghost-blink hidden sm:block">See Pricing</a>
+              <a href={APP_URL} className="btn-blink text-sm px-4 py-2 sm:px-6 sm:py-3">Get Started</a>
               {/* Mobile menu toggle */}
               <button
                 className="md:hidden ml-1 p-2 text-white/60 hover:text-white"
@@ -112,12 +113,12 @@ function App() {
           </p>
 
           <div className="animate-fade-rise-delay-2 flex flex-col sm:flex-row gap-3 mt-8 sm:mt-10 w-full sm:w-auto px-4 sm:px-0">
-            <button className="btn-blink text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-3.5 w-full sm:w-auto">
+            <a href={APP_URL} className="btn-blink text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-3.5 w-full sm:w-auto text-center">
               Get my first agent →
-            </button>
-            <button className="btn-ghost-blink text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-3.5 w-full sm:w-auto">
+            </a>
+            <a href="#pricing" className="btn-ghost-blink text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-3.5 w-full sm:w-auto text-center">
               See pricing
-            </button>
+            </a>
           </div>
         </section>
 
@@ -307,12 +308,12 @@ function App() {
             Join sales teams using Aetheryx AI to close more deals with real-time intelligence.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4 sm:px-0">
-            <button className="btn-blink text-sm sm:text-base px-8 sm:px-10 py-3 sm:py-4 w-full sm:w-auto">
+            <a href={APP_URL} className="btn-blink text-sm sm:text-base px-8 sm:px-10 py-3 sm:py-4 w-full sm:w-auto text-center">
               Get my first agent →
-            </button>
-            <button className="btn-ghost-blink text-sm sm:text-base px-8 sm:px-10 py-3 sm:py-4 w-full sm:w-auto">
+            </a>
+            <a href={APP_URL} className="btn-ghost-blink text-sm sm:text-base px-8 sm:px-10 py-3 sm:py-4 w-full sm:w-auto text-center">
               Book a Demo
-            </button>
+            </a>
           </div>
         </div>
       </section>
