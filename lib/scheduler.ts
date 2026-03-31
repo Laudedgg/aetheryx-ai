@@ -3,7 +3,7 @@
 /**
  * Scheduler Client Utility
  *
- * Client-side wrapper for managing Lyzr Schedules via the /api/scheduler proxy.
+ * Client-side wrapper for managing Aetheryx Schedules via the /api/scheduler proxy.
  * All API calls are proxied through the server so the API key never reaches the browser.
  */
 

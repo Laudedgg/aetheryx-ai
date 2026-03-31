@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: 'Aetheryx AI — The Intelligence Layer for Modern Sales',
   description: 'Real-time call transcription, prospect research, AI-powered objection handling, auto summaries and CRM sync.',
   icons: {
-    icon: '/lyzr.png',
+    icon: '/favicon.ico',
   },
 }
 

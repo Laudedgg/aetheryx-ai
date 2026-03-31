@@ -1,21 +1,49 @@
 import { NextRequest, NextResponse } from 'next/server'
 import parseLLMJson from '@/lib/jsonParser'
 
-const LYZR_TASK_URL = 'https://agent-prod.studio.lyzr.ai/v3/inference/chat/task'
-const LYZR_API_KEY = process.env.LYZR_API_KEY || ''
+// Provider API endpoints
+const OPENAI_URL = 'https://api.openai.com/v1/chat/completions'
+const ANTHROPIC_URL = 'https://api.anthropic.com/v1/messages'
+const PERPLEXITY_URL = 'https://api.perplexity.ai/chat/completions'
+
+// Keys
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY || ''
+const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || ''
+const PERPLEXITY_API_KEY = process.env.PERPLEXITY_API_KEY || ''
+
+// Agent config from workflow_state
+const AGENT_CONFIG: Record<string, { provider: string; model: string; temperature: number; top_p: number; systemPrompt: string }> = {
+  '69b03c357b2057cc3ff92a2b': {
+    provider: 'perplexity',
+    model: 'sonar-pro',
+    temperature: 0.2,
+    top_p: 1,
+    systemPrompt: `You are a Research Agent for Aetheryx AI. Research prospect and company information using web search. Return a JSON object with: company_profile (name, industry, size, headquarters, description, key_products), funding (total_raised, latest_round, key_investors, financial_health), tech_stack (technologies, infrastructure, tools), recent_news, pitch_angles, pain_points. Be thorough and factual.`,
+  },
+  '69b03c36778bd73de86e5ffd': {
+    provider: 'anthropic',
+    model: 'claude-sonnet-4-5-20250514',
+    temperature: 0.5,
+    top_p: 0.95,
+    systemPrompt: `You are a Sales Strategy Agent for Aetheryx AI. Analyze live conversation transcript chunks and generate contextual suggestions. Return a JSON object with: objection_handlers (specific responses to prospect pushback), next_questions (best follow-up questions), pitch_angles (recommended talking points), engagement_level (assessment), deal_signals (buying signals detected), closing_probability (estimated percentage with reasoning).`,
+  },
+  '69b03c5393c7264ffc5fcc0d': {
+    provider: 'openai',
+    model: 'gpt-4.1',
+    temperature: 0.4,
+    top_p: 0.95,
+    systemPrompt: `You are a Post-Call Intelligence Agent for Aetheryx AI. Process the complete call transcript. Return a JSON object with: summary (client_name, company, call_outcome, key_points, pain_points, next_steps), deal_probability (score as percentage, positive_signals, negative_signals, risk_factors), follow_up_email (subject, body, recipient_suggestion). Be specific and actionable.`,
+  },
+  '69b03c652f39e130540f1d49': {
+    provider: 'openai',
+    model: 'gpt-4.1',
+    temperature: 0.2,
+    top_p: 1,
+    systemPrompt: `You are a CRM & Email Sync Agent for Aetheryx AI. Take the approved call summary and follow-up email data, then describe the HubSpot and Gmail sync actions. Return a JSON object with: hubspot_sync (contact_status, contact_id, deal_status, deal_id, notes_added), email_status (sent, recipient, subject, timestamp), sync_summary. If actual API integration isn't available, describe what would be synced.`,
+  },
+}
 
 // Types
-interface ArtifactFile {
-  file_url: string
-  name: string
-  format_type: string
-}
-
-interface ModuleOutputs {
-  artifact_files?: ArtifactFile[]
-  [key: string]: any
-}
-
 interface NormalizedAgentResponse {
   status: 'success' | 'error'
   result: Record<string, any>
@@ -36,276 +64,246 @@ function generateUUID(): string {
 }
 
 function normalizeResponse(parsed: any): NormalizedAgentResponse {
-  if (!parsed) {
-    return {
-      status: 'error',
-      result: {},
-      message: 'Empty response from agent',
-    }
-  }
-
-  if (typeof parsed === 'string') {
-    return {
-      status: 'success',
-      result: { text: parsed },
-      message: parsed,
-    }
-  }
-
-  if (typeof parsed !== 'object') {
-    return {
-      status: 'success',
-      result: { value: parsed },
-      message: String(parsed),
-    }
-  }
-
-  if ('status' in parsed && 'result' in parsed) {
-    return {
-      status: parsed.status === 'error' ? 'error' : 'success',
-      result: parsed.result || {},
-      message: parsed.message,
-      metadata: parsed.metadata,
-    }
-  }
-
-  if ('status' in parsed) {
-    const { status, message, metadata, ...rest } = parsed
-    return {
-      status: status === 'error' ? 'error' : 'success',
-      result: Object.keys(rest).length > 0 ? rest : {},
-      message,
-      metadata,
-    }
-  }
-
+  if (!parsed) return { status: 'error', result: {}, message: 'Empty response from agent' }
+  if (typeof parsed === 'string') return { status: 'success', result: { text: parsed }, message: parsed }
+  if (typeof parsed !== 'object') return { status: 'success', result: { value: parsed }, message: String(parsed) }
+  if ('status' in parsed && 'result' in parsed) return { status: parsed.status === 'error' ? 'error' : 'success', result: parsed.result || {}, message: parsed.message, metadata: parsed.metadata }
   if ('result' in parsed) {
     const r = parsed.result
-    const msg = parsed.message
-      ?? (typeof r === 'string' ? r : null)
-      ?? (r && typeof r === 'object'
-          ? (r.text ?? r.message ?? r.response ?? r.answer ?? r.summary ?? r.content)
-          : null)
-    return {
-      status: 'success',
-      result: typeof r === 'string' ? { text: r } : (r || {}),
-      message: typeof msg === 'string' ? msg : undefined,
-      metadata: parsed.metadata,
-    }
+    const msg = parsed.message ?? (typeof r === 'string' ? r : null) ?? (r && typeof r === 'object' ? (r.text ?? r.message ?? r.response ?? r.answer ?? r.summary ?? r.content) : null)
+    return { status: 'success', result: typeof r === 'string' ? { text: r } : (r || {}), message: typeof msg === 'string' ? msg : undefined, metadata: parsed.metadata }
   }
+  if ('message' in parsed && typeof parsed.message === 'string') return { status: 'success', result: { text: parsed.message }, message: parsed.message }
+  if ('response' in parsed) return normalizeResponse(parsed.response)
+  return { status: 'success', result: parsed, message: undefined, metadata: undefined }
+}
 
-  if ('message' in parsed && typeof parsed.message === 'string') {
-    return {
-      status: 'success',
-      result: { text: parsed.message },
-      message: parsed.message,
-    }
+// ── Provider call functions ──
+
+async function callOpenAI(message: string, config: typeof AGENT_CONFIG[string]): Promise<string> {
+  const res = await fetch(OPENAI_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${OPENAI_API_KEY}` },
+    body: JSON.stringify({
+      model: config.model,
+      temperature: config.temperature,
+      top_p: config.top_p,
+      response_format: { type: 'json_object' },
+      messages: [
+        { role: 'system', content: config.systemPrompt },
+        { role: 'user', content: message },
+      ],
+    }),
+  })
+  if (!res.ok) {
+    const err = await res.text()
+    throw new Error(`OpenAI API error (${res.status}): ${err}`)
   }
+  const data = await res.json()
+  return data.choices[0].message.content
+}
 
-  if ('response' in parsed) {
-    return normalizeResponse(parsed.response)
+async function callAnthropic(message: string, config: typeof AGENT_CONFIG[string]): Promise<string> {
+  const res = await fetch(ANTHROPIC_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': ANTHROPIC_API_KEY,
+      'anthropic-version': '2023-06-01',
+    },
+    body: JSON.stringify({
+      model: config.model,
+      max_tokens: 4096,
+      temperature: config.temperature,
+      top_p: config.top_p,
+      system: config.systemPrompt,
+      messages: [{ role: 'user', content: message }],
+    }),
+  })
+  if (!res.ok) {
+    const err = await res.text()
+    throw new Error(`Anthropic API error (${res.status}): ${err}`)
   }
+  const data = await res.json()
+  return data.content[0].text
+}
 
-  return {
-    status: 'success',
-    result: parsed,
-    message: undefined,
-    metadata: undefined,
+async function callPerplexity(message: string, config: typeof AGENT_CONFIG[string]): Promise<string> {
+  const res = await fetch(PERPLEXITY_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${PERPLEXITY_API_KEY}` },
+    body: JSON.stringify({
+      model: config.model,
+      temperature: config.temperature,
+      top_p: config.top_p,
+      messages: [
+        { role: 'system', content: config.systemPrompt },
+        { role: 'user', content: message },
+      ],
+    }),
+  })
+  if (!res.ok) {
+    const err = await res.text()
+    throw new Error(`Perplexity API error (${res.status}): ${err}`)
+  }
+  const data = await res.json()
+  return data.choices[0].message.content
+}
+
+async function callProvider(message: string, agentId: string): Promise<string> {
+  const config = AGENT_CONFIG[agentId]
+  if (!config) throw new Error(`Unknown agent_id: ${agentId}`)
+
+  switch (config.provider) {
+    case 'openai': return callOpenAI(message, config)
+    case 'anthropic': return callAnthropic(message, config)
+    case 'perplexity': return callPerplexity(message, config)
+    default: throw new Error(`Unknown provider: ${config.provider}`)
   }
 }
 
 /**
  * POST /api/agent
  *
- * Two modes, both POST:
- *   1. Submit:  body has { message, agent_id, ... }  → submits task, returns { task_id }
- *   2. Poll:    body has { task_id }                  → polls Lyzr, returns status/result
+ * Two modes:
+ *   1. Submit + execute: body has { message, agent_id } → calls provider directly, returns result
+ *   2. Poll (legacy compat): body has { task_id } → returns completed (tasks execute synchronously now)
  */
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
 
-    if (!LYZR_API_KEY) {
-      return NextResponse.json(
-        {
-          success: false,
-          response: { status: 'error', result: {}, message: 'LYZR_API_KEY not configured' },
-          error: 'LYZR_API_KEY not configured on server',
-        },
-        { status: 500 }
-      )
-    }
-
-    // ── Poll mode: body has task_id ──
+    // Poll mode: client sends { task_id } to check status
     if (body.task_id) {
-      return pollTask(body.task_id)
+      const taskId = body.task_id
+
+      if (pendingTasks.has(taskId)) {
+        return NextResponse.json({ status: 'processing' })
+      }
+
+      const result = completedTasks.get(taskId)
+      if (result) {
+        completedTasks.delete(taskId)
+        return NextResponse.json(result)
+      }
+
+      // Task might still be starting up
+      return NextResponse.json({ status: 'processing' })
     }
 
-    // ── Submit mode: body has message + agent_id ──
-    return submitTask(body)
-  } catch (error) {
-    const errorMsg = error instanceof Error ? error.message : 'Server error'
-    return NextResponse.json(
-      {
-        success: false,
-        response: { status: 'error', result: {}, message: errorMsg },
-        error: errorMsg,
-      },
-      { status: 500 }
-    )
-  }
-}
+    const { message, agent_id, user_id, session_id } = body
 
-/**
- * Submit a new async task to Lyzr
- */
-async function submitTask(body: any) {
-  const { message, agent_id, user_id, session_id, assets } = body
-
-  if (!message || !agent_id) {
-    return NextResponse.json(
-      {
+    if (!message || !agent_id) {
+      return NextResponse.json({
         success: false,
         response: { status: 'error', result: {}, message: 'message and agent_id are required' },
         error: 'message and agent_id are required',
-      },
-      { status: 400 }
-    )
-  }
-
-  const finalUserId = user_id || process.env.LYZR_USER_ID || process.env.NEXT_LYZR_USER_ID || `user-${generateUUID()}`
-  const finalSessionId = session_id || `${agent_id}-${generateUUID().substring(0, 12)}`
-
-  const payload: Record<string, any> = {
-    message,
-    agent_id,
-    user_id: finalUserId,
-    session_id: finalSessionId,
-  }
-
-  if (assets && assets.length > 0) {
-    payload.assets = assets
-  }
-
-  const submitRes = await fetch(LYZR_TASK_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': LYZR_API_KEY,
-    },
-    body: JSON.stringify(payload),
-  })
-
-  if (!submitRes.ok) {
-    const submitText = await submitRes.text()
-    let errorMsg = `Task submit failed with status ${submitRes.status}`
-    try {
-      const errorData = JSON.parse(submitText)
-      errorMsg = errorData?.detail || errorData?.error || errorData?.message || errorMsg
-    } catch {
-      try {
-        const errorData = parseLLMJson(submitText)
-        errorMsg = errorData?.error || errorData?.message || errorMsg
-      } catch {}
+      }, { status: 400 })
     }
-    return NextResponse.json(
-      {
+
+    // Check we have the right API key
+    const config = AGENT_CONFIG[agent_id]
+    if (!config) {
+      return NextResponse.json({
         success: false,
-        response: { status: 'error', result: {}, message: errorMsg },
-        error: errorMsg,
-        raw_response: submitText,
-      },
-      { status: submitRes.status }
-    )
+        response: { status: 'error', result: {}, message: `Unknown agent_id: ${agent_id}` },
+        error: `Unknown agent_id: ${agent_id}`,
+      }, { status: 400 })
+    }
+
+    const keyCheck = (config.provider === 'openai' && !OPENAI_API_KEY)
+      || (config.provider === 'anthropic' && !ANTHROPIC_API_KEY)
+      || (config.provider === 'perplexity' && !PERPLEXITY_API_KEY)
+
+    if (keyCheck) {
+      return NextResponse.json({
+        success: false,
+        response: { status: 'error', result: {}, message: `${config.provider.toUpperCase()}_API_KEY not configured` },
+        error: `${config.provider.toUpperCase()}_API_KEY not configured`,
+      }, { status: 500 })
+    }
+
+    const finalUserId = user_id || `user-${generateUUID()}`
+    const finalSessionId = session_id || `${agent_id}-${generateUUID().substring(0, 12)}`
+
+    // For backward compatibility with the polling client, we return a task_id first
+    // Then when the client polls, we execute and return
+    // BUT — to make it simpler, let's store the request and execute inline
+
+    // Actually, the client-side callAIAgent uses submit→poll pattern.
+    // We need to keep that interface. So: submit returns task_id, poll executes.
+
+    // Store pending tasks in memory (simple Map — works for single-instance)
+    const taskId = generateUUID()
+    pendingTasks.set(taskId, { message, agent_id, user_id: finalUserId, session_id: finalSessionId })
+
+    // Start execution in background
+    executeTask(taskId).catch(() => {})
+
+    return NextResponse.json({
+      task_id: taskId,
+      agent_id,
+      user_id: finalUserId,
+      session_id: finalSessionId,
+    })
+  } catch (error) {
+    const errorMsg = error instanceof Error ? error.message : 'Server error'
+    return NextResponse.json({
+      success: false,
+      response: { status: 'error', result: {}, message: errorMsg },
+      error: errorMsg,
+    }, { status: 500 })
   }
-
-  const { task_id } = await submitRes.json()
-
-  return NextResponse.json({
-    task_id,
-    agent_id,
-    user_id: finalUserId,
-    session_id: finalSessionId,
-  })
 }
 
-/**
- * Poll a task by ID — single request proxy with API key
- */
-async function pollTask(task_id: string) {
-  const pollRes = await fetch(`${LYZR_TASK_URL}/${task_id}`, {
-    headers: {
-      'accept': 'application/json',
-      'x-api-key': LYZR_API_KEY,
-    },
-  })
+// In-memory task store
+const pendingTasks = new Map<string, { message: string; agent_id: string; user_id: string; session_id: string }>()
+const completedTasks = new Map<string, any>()
 
-  if (!pollRes.ok) {
-    const pollText = await pollRes.text()
-    const msg = pollRes.status === 404
-      ? 'Task expired or not found'
-      : `Poll failed with status ${pollRes.status}`
-    return NextResponse.json(
-      {
-        success: false,
-        status: 'failed',
-        error: msg,
-        raw_response: pollText,
-      },
-      { status: pollRes.status }
-    )
+async function executeTask(taskId: string) {
+  const task = pendingTasks.get(taskId)
+  if (!task) return
+
+  try {
+    const rawText = await callProvider(task.message, task.agent_id)
+    const parsed = parseLLMJson(rawText)
+    const normalized = normalizeResponse(parsed)
+
+    completedTasks.set(taskId, {
+      success: true,
+      status: 'completed',
+      response: normalized,
+      timestamp: new Date().toISOString(),
+      raw_response: rawText,
+    })
+  } catch (error) {
+    completedTasks.set(taskId, {
+      success: false,
+      status: 'failed',
+      response: { status: 'error', result: {}, message: error instanceof Error ? error.message : 'Agent execution failed' },
+      error: error instanceof Error ? error.message : 'Agent execution failed',
+    })
+  } finally {
+    pendingTasks.delete(taskId)
+  }
+}
+
+// Also handle poll via a separate check
+export async function GET(request: NextRequest) {
+  const taskId = request.nextUrl.searchParams.get('task_id')
+  if (!taskId) {
+    return NextResponse.json({ error: 'task_id required' }, { status: 400 })
   }
 
-  const task = await pollRes.json()
-
-  // Still processing
-  if (task.status === 'processing') {
+  if (pendingTasks.has(taskId)) {
     return NextResponse.json({ status: 'processing' })
   }
 
-  // Task failed
-  if (task.status === 'failed') {
-    return NextResponse.json(
-      {
-        success: false,
-        status: 'failed',
-        response: { status: 'error', result: {}, message: task.error || 'Agent task failed' },
-        error: task.error || 'Agent task failed',
-      },
-      { status: 500 }
-    )
+  const result = completedTasks.get(taskId)
+  if (result) {
+    completedTasks.delete(taskId) // Clean up
+    return NextResponse.json(result)
   }
 
-  // Task completed — envelope extraction + parseLLMJson + normalizeResponse
-  const rawText = JSON.stringify(task.response)
-  let moduleOutputs: ModuleOutputs | undefined
-  let agentResponseRaw: any = rawText
-
-  try {
-    const envelope = JSON.parse(rawText)
-    if (envelope && typeof envelope === 'object' && 'response' in envelope) {
-      moduleOutputs = envelope.module_outputs
-      agentResponseRaw = envelope.response
-    }
-  } catch {
-    // Not standard JSON envelope — parseLLMJson will handle it
-  }
-
-  const parsed = parseLLMJson(agentResponseRaw)
-
-  const toNormalize =
-    parsed && typeof parsed === 'object' && parsed.success === false && parsed.data === null
-      ? agentResponseRaw
-      : parsed
-
-  const normalized = normalizeResponse(toNormalize)
-
-  return NextResponse.json({
-    success: true,
-    status: 'completed',
-    response: normalized,
-    module_outputs: moduleOutputs,
-    timestamp: new Date().toISOString(),
-    raw_response: rawText,
-  })
+  return NextResponse.json({ status: 'processing' }) // Not found yet, might still be executing
 }

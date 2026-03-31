@@ -1,122 +1,56 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { writeFile, mkdir } from 'fs/promises'
+import path from 'path'
 
-const LYZR_UPLOAD_URL = 'https://agent-prod.studio.lyzr.ai/v3/assets/upload'
-const LYZR_API_KEY = process.env.LYZR_API_KEY || ''
-
+/**
+ * POST /api/upload
+ * Stores uploaded files locally in /public/uploads/ and returns asset references.
+ */
 export async function POST(request: NextRequest) {
   try {
-    if (!LYZR_API_KEY) {
-      return NextResponse.json(
-        {
-          success: false,
-          asset_ids: [],
-          files: [],
-          total_files: 0,
-          successful_uploads: 0,
-          failed_uploads: 0,
-          message: 'LYZR_API_KEY not configured',
-          timestamp: new Date().toISOString(),
-          error: 'LYZR_API_KEY not configured on server',
-        },
-        { status: 500 }
-      )
-    }
-
     const formData = await request.formData()
-    const files = formData.getAll('files')
+    const files = formData.getAll('files') as File[]
 
-    if (files.length === 0) {
-      return NextResponse.json(
-        {
-          success: false,
-          asset_ids: [],
-          files: [],
-          total_files: 0,
-          successful_uploads: 0,
-          failed_uploads: 0,
-          message: 'No files provided',
-          timestamp: new Date().toISOString(),
-          error: 'No files provided',
-        },
-        { status: 400 }
-      )
+    if (!files || files.length === 0) {
+      return NextResponse.json({ success: false, error: 'No files provided', asset_ids: [], files: [], total_files: 0, successful_uploads: 0, failed_uploads: 0, message: 'No files provided', timestamp: new Date().toISOString() }, { status: 400 })
     }
 
-    // Forward the request to Lyzr API
-    const uploadFormData = new FormData()
+    const uploadDir = path.join(process.cwd(), 'public', 'uploads')
+    await mkdir(uploadDir, { recursive: true })
+
+    const results: { asset_id: string; file_name: string; success: boolean; error?: string }[] = []
+
     for (const file of files) {
-      if (file instanceof File) {
-        uploadFormData.append('files', file, file.name)
+      try {
+        const bytes = await file.arrayBuffer()
+        const buffer = Buffer.from(bytes)
+        const uniqueName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`
+        const filePath = path.join(uploadDir, uniqueName)
+        await writeFile(filePath, buffer)
+        results.push({ asset_id: uniqueName, file_name: file.name, success: true })
+      } catch (err) {
+        results.push({ asset_id: '', file_name: file.name, success: false, error: err instanceof Error ? err.message : 'Upload failed' })
       }
     }
 
-    const response = await fetch(LYZR_UPLOAD_URL, {
-      method: 'POST',
-      headers: {
-        'x-api-key': LYZR_API_KEY,
-      },
-      body: uploadFormData,
+    const successful = results.filter(r => r.success)
+    const failed = results.filter(r => !r.success)
+
+    return NextResponse.json({
+      success: failed.length === 0,
+      asset_ids: successful.map(r => r.asset_id),
+      files: results,
+      total_files: files.length,
+      successful_uploads: successful.length,
+      failed_uploads: failed.length,
+      message: `${successful.length}/${files.length} files uploaded`,
+      timestamp: new Date().toISOString(),
     })
-
-    if (response.ok) {
-      const data = await response.json()
-
-      const uploadedFiles = (data.results || []).map((r: any) => ({
-        asset_id: r.asset_id || '',
-        file_name: r.file_name || '',
-        success: r.success ?? true,
-        error: r.error,
-      }))
-
-      const assetIds = uploadedFiles
-        .filter((f: any) => f.success && f.asset_id)
-        .map((f: any) => f.asset_id)
-
-      return NextResponse.json({
-        success: true,
-        asset_ids: assetIds,
-        files: uploadedFiles,
-        total_files: data.total_files || files.length,
-        successful_uploads: data.successful_uploads || assetIds.length,
-        failed_uploads: data.failed_uploads || 0,
-        message: `Successfully uploaded ${assetIds.length} file(s)`,
-        timestamp: new Date().toISOString(),
-      })
-    } else {
-      const errorText = await response.text()
-      console.error('Upload API error:', response.status, errorText)
-
-      return NextResponse.json(
-        {
-          success: false,
-          asset_ids: [],
-          files: [],
-          total_files: files.length,
-          successful_uploads: 0,
-          failed_uploads: files.length,
-          message: `Upload failed with status ${response.status}`,
-          timestamp: new Date().toISOString(),
-          error: errorText,
-        },
-        { status: response.status }
-      )
-    }
   } catch (error) {
-    console.error('File upload error:', error)
-
-    return NextResponse.json(
-      {
-        success: false,
-        asset_ids: [],
-        files: [],
-        total_files: 0,
-        successful_uploads: 0,
-        failed_uploads: 0,
-        message: 'Server error during upload',
-        timestamp: new Date().toISOString(),
-        error: error instanceof Error ? error.message : String(error),
-      },
-      { status: 500 }
-    )
+    return NextResponse.json({
+      success: false, error: error instanceof Error ? error.message : 'Server error',
+      asset_ids: [], files: [], total_files: 0, successful_uploads: 0, failed_uploads: 0,
+      message: 'Upload failed', timestamp: new Date().toISOString(),
+    }, { status: 500 })
   }
 }
