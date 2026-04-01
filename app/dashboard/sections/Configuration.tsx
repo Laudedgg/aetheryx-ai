@@ -28,7 +28,7 @@ export function loadConfig(): AppConfig {
     const saved = localStorage.getItem(STORAGE_KEY)
     if (saved) return JSON.parse(saved)
   } catch (_e) { /* ignore */ }
-  return { twilioSid: '', twilioAuth: '', fromNumber: '', deepgramKey: '', repPhone: '', llmApiKey: '', llmBaseUrl: 'https://api.openai.com/v1', llmModel: 'gpt-4o-mini', liveMode: false }
+  return { twilioSid: 'server-managed', twilioAuth: 'server-managed', fromNumber: 'server-managed', deepgramKey: 'server-managed', repPhone: '', llmApiKey: '', llmBaseUrl: 'https://api.openai.com/v1', llmModel: 'gpt-4o-mini', liveMode: true }
 }
 
 export default function Configuration({ onConfigSaved }: ConfigurationProps) {
@@ -38,7 +38,17 @@ export default function Configuration({ onConfigSaved }: ConfigurationProps) {
   useEffect(() => {
     setMounted(true)
     const config = loadConfig()
-    setLiveMode(config.liveMode || false)
+    setLiveMode(config.liveMode !== false)
+    // Auto-fetch telephony keys on first load if live mode
+    if (config.liveMode !== false) {
+      fetch('/api/config/telephony').then(r => r.json()).then(data => {
+        if (data.success) {
+          const liveConfig = { ...config, ...data.config, liveMode: true }
+          try { localStorage.setItem(STORAGE_KEY, JSON.stringify(liveConfig)) } catch (_e) {}
+          onConfigSaved(liveConfig)
+        }
+      }).catch(() => {})
+    }
   }, [])
 
   function toggleMode() {
