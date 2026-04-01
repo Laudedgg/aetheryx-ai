@@ -1,11 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+const SERVER_OPENAI_KEY = process.env.OPENAI_API_KEY || ''
+
 export async function POST(request: NextRequest) {
   try {
     const { messages, apiKey, baseUrl, model } = await request.json()
 
-    if (!apiKey) {
-      return NextResponse.json({ error: 'LLM API key not configured. Go to Configuration to set it up.' }, { status: 400 })
+    // Use client-provided key if available, otherwise fall back to server key
+    const effectiveKey = apiKey || SERVER_OPENAI_KEY
+
+    if (!effectiveKey) {
+      return NextResponse.json({ error: 'No API key available. Server OPENAI_API_KEY is not configured.' }, { status: 400 })
     }
 
     const url = (baseUrl || 'https://api.openai.com/v1').replace(/\/+$/, '') + '/chat/completions'
@@ -14,7 +19,7 @@ export async function POST(request: NextRequest) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`,
+        'Authorization': `Bearer ${effectiveKey}`,
       },
       body: JSON.stringify({
         model: model || 'gpt-4o-mini',

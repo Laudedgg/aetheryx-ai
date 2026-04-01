@@ -302,160 +302,216 @@ export default function Page() {
     )
   }
 
+  // Compute stats for the hero banner
+  const totalCalls = callHistory.length
+  const activeAgents = AGENTS.filter(function(a) { return activeAgentId === a.id }).length + (callActive ? 1 : 0)
+  const syncedCalls = callHistory.filter(function(c) { return c.status === 'synced' }).length
+  const avgDuration = totalCalls > 0
+    ? Math.round(callHistory.reduce(function(sum, c) { return sum + (c.duration || 0) }, 0) / totalCalls)
+    : 0
+
   return (
     <div className="min-h-screen bg-background text-foreground flex">
-      {/* Sidebar — hidden on mobile, shown on md+ */}
-      <aside className={cn(
-        'hidden md:flex flex-col border-r border-border bg-sidebar transition-all duration-200',
-        sidebarOpen ? 'w-52' : 'w-12'
-      )}>
-        <div className="flex items-center gap-2 px-3 h-14 border-b border-border">
-          {sidebarOpen && (
-            <div className="flex items-center gap-2.5 flex-1 min-w-0">
-              <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center flex-shrink-0">
-                <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-              </div>
-              <span className="text-sm font-bold truncate font-display tracking-wide text-foreground">Aetheryx AI</span>
+
+      {/* ===== LEFT SIDEBAR ===== hidden on mobile, shown on md+ */}
+      <aside className="hidden md:flex flex-col w-60 flex-shrink-0 p-3 gap-3 overflow-y-auto">
+
+        {/* Logo Card */}
+        <div className="bg-sidebar border border-border rounded-2xl px-4 py-3.5">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/25">
+              <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
             </div>
-          )}
-          <button onClick={function() { setSidebarOpen(!sidebarOpen) }} className="text-muted-foreground hover:text-foreground p-1 rounded hover:bg-muted transition-colors flex-shrink-0">
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              {sidebarOpen ? <polyline points="15 18 9 12 15 6"/> : <><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></>}
-            </svg>
-          </button>
+            <div className="min-w-0">
+              <h1 className="text-sm font-bold font-display tracking-wide text-foreground leading-tight">Aetheryx AI</h1>
+              <p className="text-[10px] text-muted-foreground mt-0.5">Sales Co-Pilot</p>
+            </div>
+          </div>
         </div>
 
-        <nav className="flex-1 py-3 px-2 space-y-1">
-          {[
-            { key: 'live-call' as Section, label: 'Live Call', d: 'M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z' },
-            { key: 'call-history' as Section, label: 'Call History', d: 'M12 2a10 10 0 1 0 10 10H12V2zM21.18 8.02A10 10 0 0 0 15.98 2.82' },
-            { key: 'analytics' as Section, label: 'Analytics', d: 'M18 20V10M12 20V4M6 20v-6' },
-          ].map(function(item) {
-            return (
-              <button key={item.key} onClick={function() { setActiveSection(item.key) }} className={cn(
-                'w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-xs font-medium transition-all duration-200',
-                activeSection === item.key
+        {/* Navigation Card */}
+        <div className="bg-sidebar border border-border rounded-2xl p-2">
+          <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider px-2.5 pt-1 pb-2">Navigation</p>
+          <nav className="space-y-0.5">
+            {[
+              { key: 'live-call' as Section, label: 'Live Call', d: 'M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z' },
+              { key: 'call-history' as Section, label: 'Call History', d: 'M12 2a10 10 0 1 0 10 10H12V2zM21.18 8.02A10 10 0 0 0 15.98 2.82' },
+              { key: 'analytics' as Section, label: 'Analytics', d: 'M18 20V10M12 20V4M6 20v-6' },
+              { key: 'configuration' as Section, label: 'Configuration', d: 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14' },
+            ].map(function(item) {
+              return (
+                <button key={item.key} onClick={function() { setActiveSection(item.key) }} className={cn(
+                  'w-full flex items-center gap-2.5 px-2.5 py-2 rounded-xl text-xs font-medium transition-all duration-200',
+                  activeSection === item.key
+                    ? 'bg-primary text-primary-foreground shadow-md shadow-primary/20'
+                    : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                )}>
+                  <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={item.d}/></svg>
+                  <span>{item.label}</span>
+                  {item.key === 'configuration' && config.twilioSid && config.twilioAuth && config.deepgramKey && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 ml-auto flex-shrink-0" />
+                  )}
+                </button>
+              )
+            })}
+            {showPostCallNav && (
+              <button onClick={function() { setActiveSection('post-call-review') }} className={cn(
+                'w-full flex items-center gap-2.5 px-2.5 py-2 rounded-xl text-xs font-medium transition-all duration-200',
+                activeSection === 'post-call-review'
                   ? 'bg-primary text-primary-foreground shadow-md shadow-primary/20'
                   : 'text-muted-foreground hover:bg-muted hover:text-foreground'
               )}>
-                <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={item.d}/></svg>
-                {sidebarOpen && <span>{item.label}</span>}
+                <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                <span>Post-Call</span>
               </button>
-            )
-          })}
-          {showPostCallNav && (
-            <button onClick={function() { setActiveSection('post-call-review') }} className={cn(
-              'w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-xs font-medium transition-all duration-200',
-              activeSection === 'post-call-review'
-                ? 'bg-primary text-primary-foreground shadow-md shadow-primary/20'
-                : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-            )}>
-              <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-              {sidebarOpen && <span>Post-Call</span>}
-            </button>
-          )}
-        </nav>
-
-        {/* Bottom: Configuration nav + Agents */}
-        <div className="px-2 pb-2">
-          <button onClick={function() { setActiveSection('configuration') }} className={cn(
-            'w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-xs font-medium transition-all duration-200',
-            activeSection === 'configuration'
-              ? 'bg-primary text-primary-foreground shadow-md shadow-primary/20'
-              : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-          )}>
-            <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
-              <path d="M12 2v2M12 20v2M2 12h2M20 12h2"/>
-            </svg>
-            {sidebarOpen && (
-              <span className="flex items-center gap-1.5 flex-1">
-                Configuration
-                {(config.twilioSid && config.twilioAuth && config.deepgramKey) && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0" />
-                )}
-              </span>
             )}
-          </button>
+          </nav>
         </div>
 
-        {sidebarOpen && (
-          <div className="px-3 py-3 border-t border-border">
-            <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-2">Agents</p>
-            <div className="space-y-1.5">
-              {AGENTS.map(function(agent) {
+        {/* Agent Status Card */}
+        <div className="bg-sidebar border border-border rounded-2xl px-4 py-3">
+          <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-2.5">Agent Status</p>
+          <div className="space-y-2">
+            {AGENTS.map(function(agent) {
+              return (
+                <div key={agent.id} className="flex items-center gap-2.5">
+                  <span className={cn(
+                    'w-2 h-2 rounded-full flex-shrink-0',
+                    activeAgentId === agent.id ? 'bg-green-400 animate-pulse' : 'bg-muted-foreground/30'
+                  )} />
+                  <span className="text-[11px] text-muted-foreground truncate">{agent.name}</span>
+                </div>
+              )
+            })}
+          </div>
+          {callActive && (
+            <div className="mt-3 pt-3 border-t border-border">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                <span className="text-[11px] text-green-400 font-semibold">Call Active</span>
+              </div>
+              <p className="text-xs text-muted-foreground font-mono mt-1 tabular-nums">
+                {String(Math.floor(callDuration / 60)).padStart(2, '0')}:{String(callDuration % 60).padStart(2, '0')}
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Recent Calls Card */}
+        {callHistory.length > 0 && (
+          <div className="bg-sidebar border border-border rounded-2xl px-4 py-3">
+            <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-2.5">Recent Calls</p>
+            <div className="space-y-2">
+              {callHistory.slice(0, 3).map(function(call) {
                 return (
-                  <div key={agent.id} className="flex items-center gap-2">
+                  <button
+                    key={call.id}
+                    onClick={function() { handleViewCall(call) }}
+                    className="w-full flex items-center gap-2.5 p-2 rounded-lg hover:bg-muted transition-colors text-left"
+                  >
                     <span className={cn(
                       'w-2 h-2 rounded-full flex-shrink-0',
-                      activeAgentId === agent.id ? 'bg-green-400 animate-pulse' : 'bg-muted-foreground/30'
+                      call.status === 'synced' ? 'bg-primary' : call.status === 'completed' ? 'bg-amber-400' : 'bg-muted-foreground/30'
                     )} />
-                    <span className="text-[11px] text-muted-foreground truncate">{agent.name}</span>
-                  </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-[11px] text-foreground truncate">{call.phoneNumber || 'Unknown'}</p>
+                      <p className="text-[10px] text-muted-foreground">
+                        {call.duration ? Math.floor(call.duration / 60) + 'm ' + (call.duration % 60) + 's' : '--'}
+                      </p>
+                    </div>
+                  </button>
                 )
               })}
             </div>
-
-            {callActive && (
-              <div className="mt-3 pt-3 border-t border-border">
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                  <span className="text-[11px] text-green-400 font-semibold">Call Active</span>
-                </div>
-                <p className="text-xs text-muted-foreground font-mono mt-1 tabular-nums">
-                  {String(Math.floor(callDuration / 60)).padStart(2, '0')}:{String(callDuration % 60).padStart(2, '0')}
-                </p>
-              </div>
-            )}
           </div>
         )}
+
+        {/* Dark mode toggle at bottom */}
+        <div className="mt-auto pt-2">
+          <button
+            onClick={function() { setDarkMode(!darkMode) }}
+            className="w-full flex items-center gap-2.5 px-4 py-2 rounded-xl text-xs text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+          >
+            {darkMode ? (
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            ) : (
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            )}
+            <span className="font-medium">{darkMode ? 'Light Mode' : 'Dark Mode'}</span>
+          </button>
+        </div>
       </aside>
 
-      {/* Main Content */}
-      <main className="flex-1 flex flex-col min-w-0 spotlight pb-16 md:pb-0">
-        <header className="flex items-center justify-between px-3 sm:px-5 h-12 sm:h-14 border-b border-border bg-sidebar relative z-10">
-          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+      {/* ===== CENTER CONTENT ===== */}
+      <main className="flex-1 flex flex-col min-w-0 pb-16 md:pb-0">
+
+        {/* Hero Banner */}
+        <div className="mx-3 md:mx-4 mt-3 md:mt-4 rounded-2xl bg-gradient-to-br from-primary/20 via-primary/10 to-transparent border border-primary/20 p-4 md:p-6">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+              <h2 className="text-lg md:text-xl font-display font-bold text-foreground">Welcome back</h2>
+              <p className="text-xs text-muted-foreground mt-1">
+                {callActive ? 'You have an active call in progress.' : 'Your AI sales co-pilot is ready.'}
+                {activeAgentId && (
+                  <span className="inline-flex items-center gap-1.5 ml-2 text-green-400 font-medium">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                    {(AGENTS.find(function(a) { return a.id === activeAgentId }) || {name:'Processing'}).name}...
+                  </span>
+                )}
+              </p>
+            </div>
+            <div className="flex items-center gap-4 md:gap-6">
+              <div className="text-center">
+                <p className="text-lg md:text-xl font-bold font-display text-foreground tabular-nums">{totalCalls}</p>
+                <p className="text-[10px] text-muted-foreground">Total Calls</p>
+              </div>
+              <div className="w-px h-8 bg-border" />
+              <div className="text-center">
+                <p className="text-lg md:text-xl font-bold font-display text-foreground tabular-nums">{activeAgents || AGENTS.length}</p>
+                <p className="text-[10px] text-muted-foreground">Agents</p>
+              </div>
+              <div className="w-px h-8 bg-border" />
+              <div className="text-center">
+                <p className="text-lg md:text-xl font-bold font-display text-foreground tabular-nums">
+                  {avgDuration > 0 ? Math.floor(avgDuration / 60) + 'm' : '--'}
+                </p>
+                <p className="text-[10px] text-muted-foreground">Avg Duration</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Call status badges */}
+          {callActive && activeSection === 'live-call' && (
+            <div className="mt-3">
+              <span className="inline-flex items-center gap-1.5 bg-green-500/15 text-green-400 text-[11px] px-2.5 py-0.5 rounded-full font-medium border border-green-500/20">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" /> {callStatus}
+              </span>
+            </div>
+          )}
+          {!callActive && callStatus === 'Call Ended' && (
+            <div className="mt-3">
+              <span className="inline-flex items-center gap-1.5 bg-muted text-muted-foreground text-[11px] px-2.5 py-0.5 rounded-full font-medium border border-border">
+                Call Ended
+              </span>
+            </div>
+          )}
+        </div>
+
+        {/* Section Label */}
+        <div className="px-3 md:px-4 pt-4 pb-2">
+          <div className="flex items-center gap-2">
             {/* Mobile logo */}
             <div className="md:hidden flex items-center gap-2 mr-1">
               <div className="w-6 h-6 rounded-md bg-primary flex items-center justify-center flex-shrink-0">
                 <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
               </div>
             </div>
-            <h1 className="text-xs sm:text-sm font-semibold font-display tracking-wide truncate">{sectionLabel[activeSection]}</h1>
-            {callActive && activeSection === 'live-call' && (
-              <span className="inline-flex items-center gap-1.5 bg-green-500/15 text-green-400 text-[11px] px-2.5 py-0.5 rounded-full font-medium border border-green-500/20">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" /> {callStatus}
-              </span>
-            )}
-            {!callActive && callStatus === 'Call Ended' && (
-              <span className="inline-flex items-center gap-1.5 bg-muted text-muted-foreground text-[11px] px-2.5 py-0.5 rounded-full font-medium border border-border">
-                Call Ended
-              </span>
-            )}
+            <h3 className="text-sm font-semibold font-display tracking-wide">{sectionLabel[activeSection]}</h3>
           </div>
-          <div className="flex items-center gap-4">
-            {activeAgentId && (
-              <span className="text-[11px] text-green-400 flex items-center gap-1.5 font-medium">
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                {(AGENTS.find(function(a) { return a.id === activeAgentId }) || {name:'Processing'}).name}...
-              </span>
-            )}
-            <button
-              onClick={function() { setDarkMode(!darkMode) }}
-              className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-              title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-            >
-              {darkMode ? (
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-              ) : (
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-              )}
-              <span className="text-[11px] font-medium">{darkMode ? 'Light' : 'Dark'}</span>
-            </button>
-          </div>
-        </header>
+        </div>
 
-        <div className="flex-1 p-4 overflow-auto relative z-10">
+        {/* Active Section Content */}
+        <div className="flex-1 px-3 md:px-4 pb-4 overflow-auto">
           <React.Suspense fallback={<SectionFallback />}>
             {activeSection === 'live-call' && (
               <LiveCallDashboard
@@ -515,21 +571,82 @@ export default function Page() {
             )}
           </React.Suspense>
         </div>
+
+        {/* Floating Chat Input (SocietyAI "Ask Sai anything" style) */}
+        <div className="px-3 md:px-4 pb-3 md:pb-4 flex-shrink-0">
+          <div className="bg-sidebar border border-border rounded-2xl p-2 shadow-lg shadow-black/10">
+            <div className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-primary flex-shrink-0 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+              <Input
+                value={globalChatInput}
+                onChange={function(e) { setGlobalChatInput(e.target.value) }}
+                onKeyDown={function(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleGlobalChatSend() } }}
+                placeholder="Ask Aetheryx anything..."
+                className="flex-1 h-9 text-xs bg-transparent border-0 shadow-none focus-visible:ring-0 placeholder:text-muted-foreground/50"
+                disabled={globalChatLoading}
+              />
+              <Button
+                onClick={handleGlobalChatSend}
+                disabled={!globalChatInput.trim() || globalChatLoading}
+                size="sm"
+                className="h-8 w-8 p-0 flex-shrink-0 rounded-xl"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </Button>
+            </div>
+          </div>
+        </div>
       </main>
 
-      {/* Global AI Chat Panel — hidden on mobile, shown on lg+ */}
-      <div className="hidden lg:flex flex-shrink-0 w-80 border-l border-border bg-sidebar flex-col overflow-hidden">
+      {/* ===== RIGHT PANEL ===== hidden below xl */}
+      <aside className="hidden xl:flex flex-col w-80 flex-shrink-0 p-3 gap-3 overflow-y-auto">
+
+        {/* Agent Pulse Card */}
+        <div className="bg-sidebar border border-border rounded-2xl px-4 py-3.5">
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-xs font-semibold font-display tracking-wide text-foreground">Agent Pulse</p>
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-medium text-green-400 bg-green-500/10 px-2 py-0.5 rounded-full border border-green-500/20">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+              Live
+            </span>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="bg-muted/50 rounded-xl p-3">
+              <p className="text-lg font-bold font-display text-foreground tabular-nums">{totalCalls}</p>
+              <p className="text-[10px] text-muted-foreground mt-0.5">Total Calls</p>
+            </div>
+            <div className="bg-muted/50 rounded-xl p-3">
+              <p className="text-lg font-bold font-display text-foreground tabular-nums">{syncedCalls}</p>
+              <p className="text-[10px] text-muted-foreground mt-0.5">Deals Synced</p>
+            </div>
+            <div className="bg-muted/50 rounded-xl p-3">
+              <p className="text-lg font-bold font-display text-foreground tabular-nums">
+                {avgDuration > 0 ? Math.floor(avgDuration / 60) + ':' + String(avgDuration % 60).padStart(2, '0') : '--:--'}
+              </p>
+              <p className="text-[10px] text-muted-foreground mt-0.5">Avg Duration</p>
+            </div>
+            <div className="bg-muted/50 rounded-xl p-3">
+              <p className="text-lg font-bold font-display text-foreground tabular-nums">
+                {callHistory.filter(function(c) { return c.syncData }).length}
+              </p>
+              <p className="text-[10px] text-muted-foreground mt-0.5">Emails Sent</p>
+            </div>
+          </div>
+        </div>
+
+        {/* AI Chat / Recent Activity Panel */}
+        <div className="bg-sidebar border border-border rounded-2xl flex flex-col flex-1 min-h-0 overflow-hidden">
           {/* Header */}
-          <div className="flex items-center justify-between px-3 h-14 border-b border-border flex-shrink-0">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-border flex-shrink-0">
             <div className="flex items-center gap-2">
               <svg className="w-4 h-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
-              <span className="text-sm font-semibold font-display tracking-wide">AI Assistant</span>
+              <span className="text-xs font-semibold font-display tracking-wide">AI Assistant</span>
             </div>
             <span className="text-[10px] text-muted-foreground font-medium px-1.5 py-0.5 rounded bg-muted">Always On</span>
           </div>
 
           {/* Context indicator */}
-          <div className="px-3 py-2 border-b border-border flex-shrink-0">
+          <div className="px-4 py-2 border-b border-border flex-shrink-0">
             <div className="flex items-center gap-2">
               {callActive ? (
                 <>
@@ -606,7 +723,7 @@ export default function Page() {
             )}
           </div>
 
-          {/* Input */}
+          {/* Right panel chat input */}
           <div className="border-t border-border p-2 flex-shrink-0">
             <div className="flex gap-2">
               <Input
@@ -627,9 +744,10 @@ export default function Page() {
               </Button>
             </div>
           </div>
-      </div>
+        </div>
+      </aside>
 
-      {/* Mobile Bottom Nav (PWA style) */}
+      {/* ===== MOBILE BOTTOM NAV (PWA style) ===== */}
       <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-sidebar/95 backdrop-blur-xl border-t border-border safe-area-bottom">
         <div className="flex items-center justify-around h-14">
           {[
