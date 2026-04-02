@@ -275,19 +275,6 @@ export default function Page() {
           </React.Suspense>
         </div>
 
-        {/* Bottom chat bar — SocietyAI "Ask Sai anything" style */}
-        <div className="flex-shrink-0 p-3 md:p-4 pt-0">
-          <div className={C + ' flex items-center gap-3 px-4 py-2'} style={{ background: cardBg }}>
-            <svg className="w-4 h-4 flex-shrink-0" style={{ color: '#216BE4' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3Z"/></svg>
-            <Input value={globalChatInput} onChange={e => setGlobalChatInput(e.target.value)} onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleGlobalChatSend() } }} placeholder="Ask Aetheryx anything..." className="flex-1 h-9 text-[13px] bg-transparent border-0 shadow-none focus-visible:ring-0 placeholder:text-white/20 text-white/70" disabled={globalChatLoading} />
-            <div className="flex items-center gap-2 flex-shrink-0">
-              <span className="text-[10px] text-white/15 hidden sm:block">AI Co-Pilot</span>
-              <Button onClick={handleGlobalChatSend} disabled={!globalChatInput.trim() || globalChatLoading} size="sm" className="h-8 w-8 p-0 rounded-xl" style={{ background: '#216BE4' }}>
-                <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-              </Button>
-            </div>
-          </div>
-        </div>
       </main>
 
       {/* ══════ RIGHT PANEL ══════ */}
