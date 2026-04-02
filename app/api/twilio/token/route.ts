@@ -4,6 +4,7 @@ import crypto from 'crypto'
 const API_KEY_SID = process.env.TWILIO_API_KEY_SID || ''
 const API_KEY_SECRET = process.env.TWILIO_API_KEY_SECRET || ''
 const TWIML_APP_SID = process.env.TWILIO_TWIML_APP_SID || ''
+const ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID || ''
 
 function base64url(input: string | Buffer): string {
   const buf = typeof input === 'string' ? Buffer.from(input) : input
@@ -40,10 +41,15 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     )
   }
-  const { accountSid } = await request.json()
+
+  // Use server-side account SID, fall back to client-provided
+  const body = await request.json()
+  const accountSid = ACCOUNT_SID || body.accountSid
+
   if (!accountSid) {
-    return NextResponse.json({ success: false, error: 'accountSid required' }, { status: 400 })
+    return NextResponse.json({ success: false, error: 'No Twilio Account SID available' }, { status: 400 })
   }
+
   const token = generateAccessToken(accountSid)
   return NextResponse.json({ success: true, token })
 }
