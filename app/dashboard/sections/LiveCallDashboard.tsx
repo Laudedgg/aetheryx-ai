@@ -793,7 +793,7 @@ function LiveCallDashboardInner({
       <div className="h-[calc(100vh-80px)] flex flex-col">
         {/* Dialer */}
         <div className="flex-1 flex items-center justify-center">
-          <div className="w-full max-w-md">
+          <div className="w-full max-w-2xl">
             <Card className="border border-border shadow-sm">
               <CardHeader className="py-5 px-5 text-center space-y-2">
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-1">
