@@ -28,10 +28,14 @@ function SectionFallback() {
   return <div className="flex items-center justify-center h-64"><div className="w-6 h-6 border-2 border-white/10 border-t-[#216BE4] rounded-full animate-spin" /></div>
 }
 
+/* ── Shared card wrapper ── */
+const C = 'rounded-2xl border border-white/[0.06]'
+const cardBg = '#0c1120'
+const panelBg = '#080d18'
+
 export default function Page() {
   const [mounted, setMounted] = useState(false)
   const [activeSection, setActiveSection] = useState<Section>('live-call')
-  const [sidebarOpen, setSidebarOpen] = useState(true)
   const [useSampleData] = useState(false)
   const [darkMode, setDarkMode] = useState(true)
   const [activeAgentId, setActiveAgentId] = useState<string | null>(null)
@@ -86,126 +90,173 @@ export default function Page() {
   }, [globalChatInput, globalChatLoading, transcript, callHistory, globalChatMessages, config.llmApiKey, config.llmBaseUrl, config.llmModel])
 
   const showPostCallNav = postCallData !== null || (callHistory.length > 0 && !callActive)
-
-  const NAV: { key: Section; label: string; icon: React.ReactNode }[] = [
-    { key: 'live-call', label: 'Live Call', icon: <svg className="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> },
-    { key: 'call-history', label: 'Call History', icon: <svg className="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> },
-    { key: 'analytics', label: 'Analytics', icon: <svg className="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> },
-    { key: 'configuration', label: 'Settings', icon: <svg className="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> },
-  ]
-
-  const SECTION_LABELS: Record<Section, string> = { 'live-call': 'Live Call Dashboard', 'call-history': 'Call History', 'analytics': 'Analytics', 'post-call-review': 'Post-Call Review', 'configuration': 'Configuration' }
+  const totalCalls = callHistory.length
+  const syncedCalls = callHistory.filter(c => c.status === 'synced').length
+  const avgDur = totalCalls ? Math.round(callHistory.reduce((s, c) => s + (c.duration || 0), 0) / totalCalls) : 0
+  const emailsSent = callHistory.filter(c => c.syncData).length
 
   if (!mounted) return (
     <div className="h-screen flex items-center justify-center" style={{ background: '#060a14' }}>
-      <div className="text-center"><div className="w-8 h-8 border-2 border-white/10 border-t-[#216BE4] rounded-full animate-spin mx-auto mb-3" /><p className="text-sm text-white/40">Loading Aetheryx AI...</p></div>
+      <div className="text-center"><div className="w-8 h-8 border-2 border-white/10 border-t-[#216BE4] rounded-full animate-spin mx-auto mb-3" /><p className="text-[13px] text-white/30">Loading Aetheryx AI...</p></div>
     </div>
   )
 
+  /* ════════════════════════════════════════════════════════════════════ */
   return (
-    <div className="h-screen flex overflow-hidden" style={{ background: '#060a14', color: '#e8eaf0' }}>
+    <div className="h-screen flex overflow-hidden" style={{ background: '#060a14', color: '#dde1ea' }}>
 
-      {/* ═══ SIDEBAR ═══ */}
-      <aside className={cn(
-        'hidden md:flex flex-col flex-shrink-0 transition-all duration-300 border-r border-white/[0.06]',
-        sidebarOpen ? 'w-[220px]' : 'w-[56px]'
-      )} style={{ background: '#0a0f1a' }}>
+      {/* ══════ LEFT SIDEBAR ══════ */}
+      <aside className="hidden md:flex flex-col w-[240px] flex-shrink-0 p-3 gap-2.5 overflow-y-auto" style={{ background: panelBg }}>
 
         {/* Logo */}
-        <div className="h-14 flex items-center px-3 border-b border-white/[0.06] flex-shrink-0">
-          {sidebarOpen ? (
-            <div className="flex items-center gap-2.5 flex-1">
-              <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: 'linear-gradient(135deg, #216BE4, #1a5bc7)' }}>
-                <svg className="w-4.5 h-4.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-              </div>
-              <div>
-                <p className="text-[13px] font-bold tracking-wide" style={{ fontFamily: "'Instrument Serif', serif" }}>Aetheryx</p>
-                <p className="text-[9px] text-white/30 -mt-0.5">Sales Intelligence</p>
-              </div>
-            </div>
-          ) : (
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center mx-auto" style={{ background: 'linear-gradient(135deg, #216BE4, #1a5bc7)' }}>
-              <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-            </div>
-          )}
-          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="ml-auto text-white/20 hover:text-white/50 p-1 rounded transition-colors flex-shrink-0">
-            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">{sidebarOpen ? <polyline points="15 18 9 12 15 6"/> : <><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></>}</svg>
+        <div className={C + ' p-3.5 flex items-center gap-3'} style={{ background: cardBg }}>
+          <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-[#216BE4]/20" style={{ background: 'linear-gradient(135deg, #216BE4, #1a5bc7)' }}>
+            <svg className="w-[18px] h-[18px] text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div>
+            <p className="text-[14px] font-bold tracking-wide leading-tight" style={{ fontFamily: "'Instrument Serif', serif" }}>Aetheryx AI</p>
+            <p className="text-[10px] text-white/25 leading-tight">Sales Intelligence</p>
+          </div>
+          <button onClick={() => setDarkMode(!darkMode)} className="ml-auto text-white/15 hover:text-white/40 transition-colors p-1">
+            {darkMode ? <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/></svg> : <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>}
           </button>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 py-3 px-2 space-y-0.5 overflow-y-auto">
-          {NAV.map(item => (
+        <div className={C + ' p-2'} style={{ background: cardBg }}>
+          {[
+            { key: 'live-call' as Section, label: 'Live Call', icon: '📞' },
+            { key: 'call-history' as Section, label: 'Call History', icon: '📋' },
+            { key: 'analytics' as Section, label: 'Analytics', icon: '📊' },
+            { key: 'configuration' as Section, label: 'Settings', icon: '⚙️' },
+          ].map(item => (
             <button key={item.key} onClick={() => setActiveSection(item.key)} className={cn(
-              'w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-medium transition-all duration-200',
+              'w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-medium transition-all duration-200 mb-0.5',
               activeSection === item.key
-                ? 'text-white shadow-lg shadow-[#216BE4]/25'
-                : 'text-white/40 hover:text-white/70 hover:bg-white/[0.03]'
+                ? 'text-white shadow-lg shadow-[#216BE4]/20'
+                : 'text-white/35 hover:text-white/60 hover:bg-white/[0.03]'
             )} style={activeSection === item.key ? { background: 'linear-gradient(135deg, #216BE4, #1a5bc7)' } : {}}>
-              {item.icon}
-              {sidebarOpen && <span>{item.label}</span>}
+              <span className="text-[15px]">{item.icon}</span>
+              <span>{item.label}</span>
             </button>
           ))}
           {showPostCallNav && (
             <button onClick={() => setActiveSection('post-call-review')} className={cn(
               'w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-medium transition-all duration-200',
-              activeSection === 'post-call-review' ? 'text-white shadow-lg shadow-[#216BE4]/25' : 'text-white/40 hover:text-white/70 hover:bg-white/[0.03]'
+              activeSection === 'post-call-review' ? 'text-white shadow-lg shadow-[#216BE4]/20' : 'text-white/35 hover:text-white/60 hover:bg-white/[0.03]'
             )} style={activeSection === 'post-call-review' ? { background: 'linear-gradient(135deg, #216BE4, #1a5bc7)' } : {}}>
-              <svg className="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-              {sidebarOpen && <span>Post-Call</span>}
+              <span className="text-[15px]">📄</span><span>Post-Call</span>
             </button>
           )}
-        </nav>
+        </div>
 
-        {/* Agents */}
-        {sidebarOpen && (
-          <div className="px-3 py-3 border-t border-white/[0.06] flex-shrink-0">
-            <p className="text-[9px] font-bold text-white/20 uppercase tracking-[0.15em] mb-2.5">Agents</p>
-            <div className="space-y-1.5">
-              {AGENTS.map(a => (
-                <div key={a.id} className="flex items-center gap-2.5 px-2 py-1 rounded-lg" style={activeAgentId === a.id ? { background: 'rgba(52,211,153,0.06)' } : {}}>
-                  <span className={cn('w-[6px] h-[6px] rounded-full flex-shrink-0 transition-all', activeAgentId === a.id ? 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)] animate-pulse' : 'bg-white/10')} />
-                  <span className="text-[11px] text-white/35">{a.icon}</span>
-                  <span className={cn('text-[11px] truncate', activeAgentId === a.id ? 'text-emerald-400 font-medium' : 'text-white/30')}>{a.name}</span>
-                </div>
+        {/* Agent Status */}
+        <div className={C + ' p-3.5'} style={{ background: cardBg }}>
+          <p className="text-[10px] font-bold text-white/20 uppercase tracking-[0.15em] mb-3">Agents</p>
+          <div className="space-y-2">
+            {AGENTS.map(a => (
+              <div key={a.id} className={cn('flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg transition-all',
+                activeAgentId === a.id ? 'bg-emerald-500/[0.06]' : ''
+              )}>
+                <span className={cn('w-[7px] h-[7px] rounded-full flex-shrink-0 transition-all',
+                  activeAgentId === a.id ? 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)] animate-pulse' : 'bg-white/[0.08]'
+                )} />
+                <span className="text-[13px]">{a.icon}</span>
+                <span className={cn('text-[12px] truncate', activeAgentId === a.id ? 'text-emerald-400 font-medium' : 'text-white/30')}>{a.name}</span>
+              </div>
+            ))}
+          </div>
+          {callActive && (
+            <div className="mt-3 pt-3 border-t border-white/[0.06] flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="w-[7px] h-[7px] rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.5)]" />
+                <span className="text-[11px] text-emerald-400 font-semibold">Call Active</span>
+              </div>
+              <span className="text-[12px] text-emerald-400 font-mono tabular-nums font-semibold">
+                {String(Math.floor(callDuration / 60)).padStart(2, '0')}:{String(callDuration % 60).padStart(2, '0')}
+              </span>
+            </div>
+          )}
+        </div>
+
+        {/* Recent Calls */}
+        {callHistory.length > 0 && (
+          <div className={C + ' p-3.5'} style={{ background: cardBg }}>
+            <div className="flex items-center justify-between mb-3">
+              <p className="text-[10px] font-bold text-white/20 uppercase tracking-[0.15em]">Recent Calls</p>
+              <span className="text-[10px] text-white/15">{totalCalls}</span>
+            </div>
+            <div className="space-y-1">
+              {callHistory.slice(0, 4).map(call => (
+                <button key={call.id} onClick={() => handleViewCall(call)} className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg hover:bg-white/[0.03] transition-all text-left group">
+                  <span className={cn('w-[6px] h-[6px] rounded-full flex-shrink-0',
+                    call.status === 'synced' ? 'bg-[#216BE4]' : call.status === 'completed' ? 'bg-amber-400' : 'bg-white/10'
+                  )} />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[11px] text-white/40 group-hover:text-white/60 truncate transition-colors">{call.phoneNumber || 'Demo Call'}</p>
+                  </div>
+                  <span className="text-[10px] text-white/15 font-mono tabular-nums">
+                    {call.duration ? Math.floor(call.duration / 60) + ':' + String(call.duration % 60).padStart(2, '0') : '--'}
+                  </span>
+                </button>
               ))}
             </div>
-            {callActive && (
-              <div className="mt-3 pt-2.5 border-t border-white/[0.04] flex items-center gap-2">
-                <span className="w-[6px] h-[6px] rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.5)]" />
-                <span className="text-[11px] text-emerald-400 font-semibold font-mono tabular-nums">
-                  {String(Math.floor(callDuration / 60)).padStart(2, '0')}:{String(callDuration % 60).padStart(2, '0')}
-                </span>
-              </div>
-            )}
           </div>
         )}
 
-        {/* Dark mode */}
-        <div className="px-2 py-2 border-t border-white/[0.06] flex-shrink-0">
-          <button onClick={() => setDarkMode(!darkMode)} className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[11px] text-white/25 hover:text-white/50 hover:bg-white/[0.03] transition-all">
-            {darkMode ? <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg> : <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>}
-            {sidebarOpen && <span>{darkMode ? 'Light' : 'Dark'}</span>}
-          </button>
+        {/* User Profile (bottom) */}
+        <div className="mt-auto">
+          <div className={C + ' p-3 flex items-center gap-2.5'} style={{ background: cardBg }}>
+            <div className="w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold text-white" style={{ background: 'linear-gradient(135deg, #216BE4, #6366f1)' }}>A</div>
+            <div className="flex-1 min-w-0">
+              <p className="text-[11px] text-white/50 font-medium truncate">Aetheryx User</p>
+              <p className="text-[9px] text-white/20 truncate">Pro Plan</p>
+            </div>
+            <span className="text-white/10 text-[10px]">•••</span>
+          </div>
         </div>
       </aside>
 
-      {/* ═══ MAIN CONTENT ═══ */}
-      <main className="flex-1 flex flex-col min-w-0 pb-14 md:pb-0">
-        {/* Top bar */}
-        <header className="h-12 flex items-center justify-between px-4 md:px-5 border-b border-white/[0.06] flex-shrink-0" style={{ background: '#0a0f1a' }}>
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="md:hidden w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: 'linear-gradient(135deg, #216BE4, #1a5bc7)' }}>
-              <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      {/* ══════ CENTER CONTENT ══════ */}
+      <main className="flex-1 flex flex-col min-w-0 pb-14 md:pb-0 overflow-hidden" style={{ background: '#060a14' }}>
+
+        {/* Section content */}
+        <div className="flex-1 overflow-y-auto p-3 md:p-4">
+
+          {/* Welcome banner (only on live-call) */}
+          {activeSection === 'live-call' && !callActive && (
+            <div className={C + ' mb-4 overflow-hidden relative'} style={{ background: 'linear-gradient(135deg, #0c1a35 0%, #0f1d3a 50%, #0c1530 100%)' }}>
+              <div className="absolute inset-0 opacity-20" style={{ background: 'radial-gradient(ellipse at 30% 50%, rgba(33,107,228,0.3) 0%, transparent 70%)' }} />
+              <div className="relative p-5 md:p-6">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-medium mb-3" style={{ background: 'rgba(33,107,228,0.15)', color: '#5b9cf5', border: '1px solid rgba(33,107,228,0.2)' }}>
+                  <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                  Welcome to Aetheryx AI
+                </span>
+                <h2 className="text-lg md:text-xl font-bold mb-1" style={{ fontFamily: "'Instrument Serif', serif" }}>Your AI Sales Co-Pilot</h2>
+                <p className="text-[13px] text-white/40 max-w-lg">Real-time call intelligence, prospect research, objection handling, and post-call automation — all powered by AI agents working together.</p>
+                <div className="flex gap-2 mt-4">
+                  <button onClick={() => setActiveSection('live-call')} className="px-4 py-2 rounded-xl text-[12px] font-semibold text-white transition-all hover:shadow-lg hover:shadow-[#216BE4]/20" style={{ background: 'linear-gradient(135deg, #216BE4, #1a5bc7)' }}>Start a Call</button>
+                  <button onClick={() => setActiveSection('analytics')} className="px-4 py-2 rounded-xl text-[12px] font-medium text-white/40 hover:text-white/60 transition-all" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>View Analytics</button>
+                </div>
+              </div>
             </div>
-            <h1 className="text-sm font-semibold truncate" style={{ fontFamily: "'Instrument Serif', serif", color: '#e8eaf0' }}>{SECTION_LABELS[activeSection]}</h1>
-            {callActive && (
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold border" style={{ background: 'rgba(52,211,153,0.08)', borderColor: 'rgba(52,211,153,0.2)', color: '#34d399' }}>
-                <span className="w-[5px] h-[5px] rounded-full bg-emerald-400 animate-pulse" /> {callStatus}
-              </span>
-            )}
-          </div>
-          <div className="flex items-center gap-3">
+          )}
+
+          {/* Section header */}
+          <div className="flex items-center justify-between mb-3 md:mb-4">
+            <div className="flex items-center gap-3">
+              <div className="md:hidden w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: 'linear-gradient(135deg, #216BE4, #1a5bc7)' }}>
+                <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </div>
+              <h1 className="text-[15px] md:text-base font-semibold" style={{ fontFamily: "'Instrument Serif', serif" }}>
+                {{ 'live-call': 'Live Call Dashboard', 'call-history': 'Call History', 'analytics': 'Analytics', 'post-call-review': 'Post-Call Review', 'configuration': 'Configuration' }[activeSection]}
+              </h1>
+              {callActive && (
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold" style={{ background: 'rgba(52,211,153,0.08)', border: '1px solid rgba(52,211,153,0.2)', color: '#34d399' }}>
+                  <span className="w-[5px] h-[5px] rounded-full bg-emerald-400 animate-pulse" /> {callStatus}
+                </span>
+              )}
+            </div>
             {activeAgentId && (
               <span className="text-[10px] text-emerald-400 flex items-center gap-1.5 font-medium">
                 <span className="w-[5px] h-[5px] rounded-full bg-emerald-400 animate-pulse" />
@@ -213,10 +264,8 @@ export default function Page() {
               </span>
             )}
           </div>
-        </header>
 
-        {/* Content area */}
-        <div className="flex-1 overflow-auto p-3 md:p-5">
+          {/* Active section */}
           <React.Suspense fallback={<SectionFallback />}>
             {activeSection === 'live-call' && <LiveCallDashboard callActive={callActive} transcript={transcript} researchData={researchData} strategyData={strategyData} onStartCall={handleStartCall} onEndCall={handleEndCall} onAddTranscript={handleAddTranscript} onResearchData={setResearchData} onStrategyData={setStrategyData} activeAgentId={activeAgentId} setActiveAgentId={setActiveAgentId} useSampleData={useSampleData} callDuration={callDuration} callStatus={callStatus} phoneNumber={phoneNumber} onPhoneNumberChange={setPhoneNumber} twilioSid={config.twilioSid} twilioAuth={config.twilioAuth} fromNumber={config.fromNumber} deepgramKey={config.deepgramKey} repPhone={config.repPhone} onNavigateToConfig={() => setActiveSection('configuration')} />}
             {activeSection === 'post-call-review' && <PostCallReview transcript={transcript} postCallData={postCallData} syncData={syncData} onPostCallData={handlePostCallData} onSyncData={handleSyncData} activeAgentId={activeAgentId} setActiveAgentId={setActiveAgentId} useSampleData={useSampleData} autoTrigger={autoTriggerPostCall} />}
@@ -225,88 +274,133 @@ export default function Page() {
             {activeSection === 'configuration' && <Configuration onConfigSaved={cfg => setConfig(cfg)} />}
           </React.Suspense>
         </div>
+
+        {/* Bottom chat bar — SocietyAI "Ask Sai anything" style */}
+        <div className="flex-shrink-0 p-3 md:p-4 pt-0">
+          <div className={C + ' flex items-center gap-3 px-4 py-2'} style={{ background: cardBg }}>
+            <svg className="w-4 h-4 flex-shrink-0" style={{ color: '#216BE4' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3Z"/></svg>
+            <Input value={globalChatInput} onChange={e => setGlobalChatInput(e.target.value)} onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleGlobalChatSend() } }} placeholder="Ask Aetheryx anything..." className="flex-1 h-9 text-[13px] bg-transparent border-0 shadow-none focus-visible:ring-0 placeholder:text-white/20 text-white/70" disabled={globalChatLoading} />
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <span className="text-[10px] text-white/15 hidden sm:block">AI Co-Pilot</span>
+              <Button onClick={handleGlobalChatSend} disabled={!globalChatInput.trim() || globalChatLoading} size="sm" className="h-8 w-8 p-0 rounded-xl" style={{ background: '#216BE4' }}>
+                <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </Button>
+            </div>
+          </div>
+        </div>
       </main>
 
-      {/* ═══ RIGHT PANEL — AI CHAT ═══ */}
-      <aside className="hidden lg:flex flex-col w-[300px] xl:w-[320px] flex-shrink-0 border-l border-white/[0.06]" style={{ background: '#0a0f1a' }}>
-        {/* Header */}
-        <div className="h-12 flex items-center justify-between px-4 border-b border-white/[0.06] flex-shrink-0">
-          <div className="flex items-center gap-2">
-            <div className="w-5 h-5 rounded flex items-center justify-center" style={{ background: 'rgba(33,107,228,0.15)' }}>
-              <svg className="w-3 h-3" style={{ color: '#216BE4' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3Z"/></svg>
-            </div>
-            <span className="text-xs font-semibold" style={{ fontFamily: "'Instrument Serif', serif" }}>AI Assistant</span>
-          </div>
-          <span className="text-[9px] font-medium px-2 py-0.5 rounded-full" style={{ background: 'rgba(52,211,153,0.08)', color: '#34d399', border: '1px solid rgba(52,211,153,0.15)' }}>Online</span>
-        </div>
+      {/* ══════ RIGHT PANEL ══════ */}
+      <aside className="hidden xl:flex flex-col w-[340px] flex-shrink-0 p-3 gap-2.5 overflow-y-auto" style={{ background: panelBg }}>
 
-        {/* Context */}
-        <div className="px-4 py-2 border-b border-white/[0.06] flex-shrink-0">
-          <div className="flex items-center gap-2">
-            <span className={cn('w-[5px] h-[5px] rounded-full', callActive ? 'bg-emerald-400 animate-pulse' : callHistory.length ? 'bg-[#216BE4]' : 'bg-white/10')} />
-            <span className="text-[10px] text-white/30">
-              {callActive ? 'Live call context' : callHistory.length ? `${callHistory.length} call${callHistory.length !== 1 ? 's' : ''} in memory` : 'No context yet'}
+        {/* Agent Pulse */}
+        <div className={C + ' p-4'} style={{ background: cardBg }}>
+          <div className="flex items-center justify-between mb-4">
+            <p className="text-[14px] font-bold" style={{ fontFamily: "'Instrument Serif', serif" }}>Agent Pulse</p>
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold px-2.5 py-1 rounded-full" style={{ background: 'rgba(52,211,153,0.08)', color: '#34d399', border: '1px solid rgba(52,211,153,0.15)' }}>
+              <span className="w-[5px] h-[5px] rounded-full bg-emerald-400 animate-pulse" /> Live
             </span>
           </div>
+          <div className="grid grid-cols-2 gap-2.5">
+            {[
+              { icon: '📞', val: totalCalls, label: 'Total Calls' },
+              { icon: '🔗', val: syncedCalls, label: 'Deals Synced' },
+              { icon: '⏱️', val: avgDur > 0 ? Math.floor(avgDur / 60) + ':' + String(avgDur % 60).padStart(2, '0') : '--:--', label: 'Avg Duration' },
+              { icon: '📧', val: emailsSent, label: 'Emails Sent' },
+            ].map(s => (
+              <div key={s.label} className={C + ' p-3'} style={{ background: 'rgba(255,255,255,0.015)' }}>
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span className="text-[13px]">{s.icon}</span>
+                  <p className="text-[18px] font-bold tabular-nums" style={{ fontFamily: "'Instrument Serif', serif" }}>{s.val}</p>
+                </div>
+                <p className="text-[10px] text-white/25">{s.label}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Messages */}
-        <div ref={globalChatScrollRef} className="flex-1 overflow-y-auto p-3 space-y-2.5">
-          {!globalChatMessages.length && (
-            <div className="flex flex-col items-center justify-center py-16 px-3">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style={{ background: 'rgba(33,107,228,0.06)' }}>
-                <svg className="w-5 h-5" style={{ color: 'rgba(33,107,228,0.25)' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3Z"/></svg>
+        {/* AI Chat / Activity */}
+        <div className={C + ' flex flex-col flex-1 min-h-0 overflow-hidden'} style={{ background: cardBg }}>
+          <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.06] flex-shrink-0">
+            <div className="flex items-center gap-2">
+              <div className="w-5 h-5 rounded-md flex items-center justify-center" style={{ background: 'rgba(33,107,228,0.12)' }}>
+                <svg className="w-3 h-3" style={{ color: '#216BE4' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3Z"/></svg>
               </div>
-              <p className="text-[11px] text-white/30 text-center font-medium">Your AI sales assistant</p>
-              <p className="text-[10px] text-white/15 text-center mt-1">Ask about calls, coaching, or follow-ups.</p>
-              <div className="flex flex-wrap gap-1.5 mt-4 justify-center">
-                {['Summarize my last call', 'Prep for a follow-up', 'Coaching tips'].map(q => (
-                  <button key={q} onClick={() => setGlobalChatInput(q)} className="text-[9px] px-2.5 py-1 rounded-full text-white/25 hover:text-white/50 transition-colors" style={{ border: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.02)' }}>{q}</button>
-                ))}
-              </div>
+              <span className="text-[12px] font-semibold" style={{ fontFamily: "'Instrument Serif', serif" }}>AI Assistant</span>
             </div>
-          )}
-          {globalChatMessages.map(m => (
-            <div key={m.id} className={'flex ' + (m.role === 'user' ? 'justify-end' : 'justify-start')}>
-              <div className={cn('max-w-[88%] px-3 py-2 rounded-2xl text-[11px] leading-relaxed',
-                m.role === 'user' ? 'rounded-br-md text-white' : 'rounded-bl-md text-white/70'
-              )} style={m.role === 'user' ? { background: '#216BE4' } : { background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                <p className="whitespace-pre-wrap">{m.text}</p>
-              </div>
-            </div>
-          ))}
-          {globalChatLoading && (
-            <div className="flex justify-start">
-              <div className="rounded-2xl rounded-bl-md px-3 py-2.5 flex items-center gap-1.5" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#216BE4] animate-pulse" /><span className="w-1.5 h-1.5 rounded-full bg-[#216BE4] animate-pulse [animation-delay:0.2s]" /><span className="w-1.5 h-1.5 rounded-full bg-[#216BE4] animate-pulse [animation-delay:0.4s]" />
-              </div>
-            </div>
-          )}
-        </div>
+            <span className="text-[9px] font-medium text-white/20 px-2 py-0.5 rounded-md" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.04)' }}>Always On</span>
+          </div>
 
-        {/* Input */}
-        <div className="p-3 border-t border-white/[0.06] flex-shrink-0">
-          <div className="flex gap-2 items-center rounded-xl px-3 py-1" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
-            <Input value={globalChatInput} onChange={e => setGlobalChatInput(e.target.value)} onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleGlobalChatSend() } }} placeholder="Ask the AI..." className="flex-1 h-8 text-[11px] bg-transparent border-0 shadow-none focus-visible:ring-0 placeholder:text-white/15 text-white/70" disabled={globalChatLoading} />
-            <Button onClick={handleGlobalChatSend} disabled={!globalChatInput.trim() || globalChatLoading} size="sm" className="h-7 w-7 p-0 rounded-lg flex-shrink-0" style={{ background: '#216BE4' }}>
-              <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            </Button>
+          {/* Context */}
+          <div className="px-4 py-2 border-b border-white/[0.04] flex-shrink-0">
+            <div className="flex items-center gap-2">
+              <span className={cn('w-[5px] h-[5px] rounded-full', callActive ? 'bg-emerald-400 animate-pulse' : callHistory.length ? 'bg-[#216BE4]' : 'bg-white/10')} />
+              <span className="text-[10px] text-white/25">
+                {callActive ? 'Live call context' : callHistory.length ? `${callHistory.length} call${callHistory.length !== 1 ? 's' : ''} in memory` : 'No context yet'}
+              </span>
+            </div>
+          </div>
+
+          {/* Messages */}
+          <div ref={globalChatScrollRef} className="flex-1 overflow-y-auto p-3 space-y-2">
+            {!globalChatMessages.length && (
+              <div className="flex flex-col items-center justify-center py-10 px-3">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style={{ background: 'rgba(33,107,228,0.05)' }}>
+                  <svg className="w-5 h-5" style={{ color: 'rgba(33,107,228,0.2)' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3Z"/></svg>
+                </div>
+                <p className="text-[11px] text-white/25 text-center font-medium">Your AI sales assistant</p>
+                <p className="text-[10px] text-white/12 text-center mt-1">Ask about calls, coaching, or follow-ups.</p>
+                <div className="flex flex-wrap gap-1.5 mt-4 justify-center">
+                  {['Summarize my last call', 'Prep for a follow-up', 'Coaching tips'].map(q => (
+                    <button key={q} onClick={() => setGlobalChatInput(q)} className="text-[9px] px-2.5 py-1 rounded-full text-white/20 hover:text-white/40 transition-colors" style={{ border: '1px solid rgba(255,255,255,0.05)', background: 'rgba(255,255,255,0.015)' }}>{q}</button>
+                  ))}
+                </div>
+              </div>
+            )}
+            {globalChatMessages.map(m => (
+              <div key={m.id} className={'flex ' + (m.role === 'user' ? 'justify-end' : 'justify-start')}>
+                <div className={cn('max-w-[88%] px-3 py-2 text-[11px] leading-relaxed',
+                  m.role === 'user' ? 'rounded-2xl rounded-br-md text-white' : 'rounded-2xl rounded-bl-md text-white/60'
+                )} style={m.role === 'user' ? { background: '#216BE4' } : { background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
+                  <p className="whitespace-pre-wrap">{m.text}</p>
+                </div>
+              </div>
+            ))}
+            {globalChatLoading && (
+              <div className="flex justify-start">
+                <div className="rounded-2xl rounded-bl-md px-3 py-2.5 flex items-center gap-1.5" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#216BE4] animate-pulse" /><span className="w-1.5 h-1.5 rounded-full bg-[#216BE4] animate-pulse [animation-delay:0.2s]" /><span className="w-1.5 h-1.5 rounded-full bg-[#216BE4] animate-pulse [animation-delay:0.4s]" />
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Chat input */}
+          <div className="p-3 border-t border-white/[0.04] flex-shrink-0">
+            <div className="flex gap-2 items-center rounded-xl px-3 py-1" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }}>
+              <Input value={globalChatInput} onChange={e => setGlobalChatInput(e.target.value)} onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleGlobalChatSend() } }} placeholder="Ask the AI..." className="flex-1 h-8 text-[11px] bg-transparent border-0 shadow-none focus-visible:ring-0 placeholder:text-white/12 text-white/60" disabled={globalChatLoading} />
+              <Button onClick={handleGlobalChatSend} disabled={!globalChatInput.trim() || globalChatLoading} size="sm" className="h-7 w-7 p-0 rounded-lg flex-shrink-0" style={{ background: '#216BE4' }}>
+                <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </Button>
+            </div>
           </div>
         </div>
       </aside>
 
-      {/* ═══ MOBILE NAV ═══ */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 border-t border-white/[0.06] safe-area-bottom" style={{ background: 'rgba(10,15,26,0.97)', backdropFilter: 'blur(20px)' }}>
+      {/* ══════ MOBILE NAV ══════ */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 border-t border-white/[0.06] safe-area-bottom" style={{ background: 'rgba(8,13,24,0.97)', backdropFilter: 'blur(20px)' }}>
         <div className="flex items-center justify-around h-14">
-          {NAV.map(item => {
-            const active = activeSection === item.key
-            return (
-              <button key={item.key} onClick={() => setActiveSection(item.key)} className={cn('flex flex-col items-center gap-0.5 px-4 py-1.5 rounded-xl transition-all', active ? 'text-[#216BE4]' : 'text-white/25')}>
-                {item.icon}
-                <span className="text-[9px] font-medium">{item.label}</span>
-              </button>
-            )
-          })}
+          {[
+            { key: 'live-call' as Section, label: 'Call', icon: '📞' },
+            { key: 'call-history' as Section, label: 'History', icon: '📋' },
+            { key: 'analytics' as Section, label: 'Analytics', icon: '📊' },
+            { key: 'configuration' as Section, label: 'Settings', icon: '⚙️' },
+          ].map(item => (
+            <button key={item.key} onClick={() => setActiveSection(item.key)} className={cn('flex flex-col items-center gap-1 px-4 py-1.5 rounded-xl transition-all', activeSection === item.key ? 'text-[#216BE4]' : 'text-white/20')}>
+              <span className="text-[18px]">{item.icon}</span>
+              <span className="text-[9px] font-medium">{item.label}</span>
+            </button>
+          ))}
         </div>
       </nav>
     </div>
