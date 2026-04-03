@@ -62,7 +62,20 @@ export default function Page() {
   useEffect(() => { setMounted(true) }, [])
   useEffect(() => { if (!mounted) return; try { const s = localStorage.getItem('salesmaster_dark_mode'); if (s !== null) setDarkMode(s === 'true') } catch {} }, [mounted])
   useEffect(() => { if (!mounted) return; document.documentElement.classList.toggle('dark', darkMode); try { localStorage.setItem('salesmaster_dark_mode', String(darkMode)) } catch {} }, [darkMode, mounted])
-  useEffect(() => { if (!mounted) return; setConfig(loadConfig()); try { const s = localStorage.getItem('salesmaster_call_history'); if (s) { const p = JSON.parse(s); if (Array.isArray(p)) setCallHistory(p) } } catch {} }, [mounted])
+  useEffect(() => {
+    if (!mounted) return
+    const saved = loadConfig()
+    setConfig(saved)
+    // Always fetch real telephony keys from server to replace placeholders
+    fetch('/api/config/telephony').then(r => r.json()).then(data => {
+      if (data.success) {
+        const real = { ...saved, ...data.config, liveMode: true }
+        setConfig(real)
+        try { localStorage.setItem('salesmaster_config', JSON.stringify(real)) } catch {}
+      }
+    }).catch(() => {})
+    try { const s = localStorage.getItem('salesmaster_call_history'); if (s) { const p = JSON.parse(s); if (Array.isArray(p)) setCallHistory(p) } } catch {}
+  }, [mounted])
   useEffect(() => { if (!mounted || !callHistory.length) return; try { localStorage.setItem('salesmaster_call_history', JSON.stringify(callHistory)) } catch {} }, [callHistory, mounted])
   useEffect(() => { if (callActive && callStartTime) { durationTimerRef.current = setInterval(() => setCallDuration(Math.floor((Date.now() - callStartTime) / 1000)), 1000) } else { if (durationTimerRef.current) { clearInterval(durationTimerRef.current); durationTimerRef.current = null } } return () => { if (durationTimerRef.current) clearInterval(durationTimerRef.current) } }, [callActive, callStartTime])
 
