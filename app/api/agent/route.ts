@@ -21,8 +21,8 @@ const AGENT_CONFIG: Record<string, { provider: string; model: string; temperatur
     systemPrompt: `You are a Research Agent for Aetheryx AI. Research prospect and company information using web search. Return a JSON object with: company_profile (name, industry, size, headquarters, description, key_products), funding (total_raised, latest_round, key_investors, financial_health), tech_stack (technologies, infrastructure, tools), recent_news, pitch_angles, pain_points. Be thorough and factual.`,
   },
   '69b03c36778bd73de86e5ffd': {
-    provider: 'anthropic',
-    model: 'claude-sonnet-4-5-20250514',
+    provider: 'openai',
+    model: 'gpt-4.1',
     temperature: 0.5,
     top_p: 0.95,
     systemPrompt: `You are a Sales Strategy Agent for Aetheryx AI. Analyze live conversation transcript chunks and generate contextual suggestions. Return a JSON object with: objection_handlers (specific responses to prospect pushback), next_questions (best follow-up questions), pitch_angles (recommended talking points), engagement_level (assessment), deal_signals (buying signals detected), closing_probability (estimated percentage with reasoning).`,
