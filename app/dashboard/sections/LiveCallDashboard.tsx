@@ -608,17 +608,51 @@ function LiveCallDashboardInner({
   // --- Live Mode: Transcribe prospect's voice (remote WebRTC audio) ---
   const startRemoteTranscription = useCallback(async (call: any) => {
     try {
-      // Get the underlying RTCPeerConnection from Twilio's media handler
+      // Try multiple ways to get RTCPeerConnection from Twilio Voice SDK v2
       const pc: RTCPeerConnection | undefined =
         call?._mediaHandler?.version?.pc ??
-        call?._mediaHandler?.peerConnection
+        call?._mediaHandler?.peerConnection ??
+        call?.mediaStream?.version?.pc ??
+        call?.['_peerConnection'] ??
+        // SDK v2.x uses getRemoteStream or internal _remoteStream
+        null
 
-      if (!pc) return
+      // Method 1: Use PeerConnection receivers
+      if (pc) {
+        const remoteStream = new MediaStream()
+        pc.getReceivers().forEach((receiver: RTCRtpReceiver) => {
+          if (receiver.track?.kind === 'audio') remoteStream.addTrack(receiver.track)
+        })
+        if (remoteStream.getTracks().length > 0) {
+          return startRemoteDgStream(remoteStream)
+        }
+      }
 
-      const remoteStream = new MediaStream()
-      pc.getReceivers().forEach((receiver: RTCRtpReceiver) => {
-        if (receiver.track?.kind === 'audio') remoteStream.addTrack(receiver.track)
-      })
+      // Method 2: Use Twilio's getRemoteStream (SDK v2)
+      if (typeof call?.getRemoteStream === 'function') {
+        const remoteStream = call.getRemoteStream()
+        if (remoteStream && remoteStream.getTracks().length > 0) {
+          return startRemoteDgStream(remoteStream)
+        }
+      }
+
+      // Method 3: Extract from audio element (browser plays remote audio)
+      // Wait a moment for audio to initialize
+      await new Promise(r => setTimeout(r, 2000))
+      const audioElements = document.querySelectorAll('audio')
+      for (const audio of audioElements) {
+        const ms = (audio as any).captureStream?.() || (audio as any).mozCaptureStream?.()
+        if (ms && ms.getAudioTracks().length > 0) {
+          return startRemoteDgStream(ms)
+        }
+      }
+
+      console.log('[Aetheryx] Could not capture remote audio stream — prospect transcription unavailable')
+    } catch (_e) { /* ignore — remote transcription is best-effort */ }
+  }, [deepgramKey, onAddTranscript])
+
+  const startRemoteDgStream = useCallback(async (remoteStream: MediaStream) => {
+    try {
       if (remoteStream.getTracks().length === 0) return
 
       const dgUrl = 'wss://api.deepgram.com/v1/listen?model=nova-2&encoding=linear16&sample_rate=16000&channels=1&punctuate=true&interim_results=false&utterance_end_ms=1500&smart_format=true&language=en&filler_words=false&numerals=true'
