@@ -74,20 +74,27 @@ export default function Page() {
         try { localStorage.setItem('salesmaster_config', JSON.stringify(real)) } catch {}
       }
     }).catch(() => {})
-    // Load call history: merge localStorage + server
+    // Load call history: merge localStorage + server, then sync back
     let localCalls: any[] = []
     try { const s = localStorage.getItem('salesmaster_call_history'); if (s) { const p = JSON.parse(s); if (Array.isArray(p)) localCalls = p } } catch {}
     fetch('/api/calls').then(r => r.json()).then(data => {
-      if (data.success && Array.isArray(data.calls)) {
-        const merged = new Map<string, any>()
-        for (const c of data.calls) merged.set(c.id, c)
-        for (const c of localCalls) merged.set(c.id, c)
-        const final = Array.from(merged.values()).sort((a: any, b: any) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
-        setCallHistory(final)
-      } else {
-        setCallHistory(localCalls)
+      const serverCalls = (data.success && Array.isArray(data.calls)) ? data.calls : []
+      const merged = new Map<string, any>()
+      for (const c of serverCalls) merged.set(c.id, c)
+      for (const c of localCalls) merged.set(c.id, c)
+      const final = Array.from(merged.values()).sort((a: any, b: any) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
+      setCallHistory(final)
+      // Always sync merged result back to server (ensures localStorage-only calls get persisted)
+      if (final.length > 0) {
+        fetch('/api/calls', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ calls: final }) }).catch(() => {})
       }
-    }).catch(() => setCallHistory(localCalls))
+    }).catch(() => {
+      setCallHistory(localCalls)
+      // Sync localStorage calls to server even if GET failed
+      if (localCalls.length > 0) {
+        fetch('/api/calls', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ calls: localCalls }) }).catch(() => {})
+      }
+    })
   }, [mounted])
   useEffect(() => {
     if (!mounted || !callHistory.length) return
