@@ -138,9 +138,9 @@ function CallHistoryInner({ callHistory, onViewCall }: CallHistoryProps) {
   }
 
   return (
-    <div className="space-y-4 h-[calc(100vh-88px)]">
+    <div className="space-y-3 pb-4">
       {/* Search & Filters */}
-      <div className="flex gap-3">
+      <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
         <div className="relative flex-1">
           <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input placeholder="Search by client or company..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="h-9 text-xs pl-9" />
@@ -154,7 +154,7 @@ function CallHistoryInner({ callHistory, onViewCall }: CallHistoryProps) {
       </div>
 
       {/* Call List */}
-      <div className="overflow-y-auto" style={{ maxHeight: 'calc(100vh - 148px)' }}>
+      <div>
         <div className="space-y-2.5">
           {filteredCalls.length === 0 ? (
             <p className="text-xs text-muted-foreground text-center py-10 font-medium">No calls match your search.</p>
@@ -177,16 +177,16 @@ function CallHistoryInner({ callHistory, onViewCall }: CallHistoryProps) {
             return (
               <Card key={callId} className="border border-border shadow-sm">
                 <div className="px-4 py-3 cursor-pointer hover:bg-muted/50 transition-colors" onClick={() => setExpandedId(isExpanded ? null : callId)}>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <div className="text-xs text-muted-foreground w-20 flex-shrink-0">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="text-xs text-muted-foreground flex-shrink-0">
                         <p className="font-mono font-medium">{startDate}</p>
                         <p className="text-[11px] mt-0.5">{startTime}</p>
                       </div>
-                      <Separator orientation="vertical" className="h-9" />
-                      <div>
-                        <p className="text-sm font-semibold">{clientName}</p>
-                        <p className="text-[11px] text-muted-foreground">{company}</p>
+                      <Separator orientation="vertical" className="h-9 hidden sm:block" />
+                      <div className="min-w-0">
+                        <p className="text-sm font-semibold truncate">{clientName}</p>
+                        <p className="text-[11px] text-muted-foreground truncate">{company}</p>
                         {callPhone ? (
                           <p className="text-[11px] text-muted-foreground flex items-center gap-1 mt-0.5">
                             <FiPhone className="w-3 h-3" /> {callPhone}
@@ -194,9 +194,9 @@ function CallHistoryInner({ callHistory, onViewCall }: CallHistoryProps) {
                         ) : null}
                       </div>
                     </div>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
                       {callDur ? <span className="text-[11px] font-mono text-muted-foreground tabular-nums">{callDur}</span> : null}
-                      <Badge variant={syncStatus === 'Synced' ? 'default' : 'secondary'} className="text-[11px] h-5">{syncStatus}</Badge>
+                      <Badge variant={syncStatus === 'Synced' ? 'default' : 'secondary'} className="text-[10px] sm:text-[11px] h-5">{syncStatus}</Badge>
                       <span className="text-sm font-mono font-bold text-primary">{score}</span>
                       {isExpanded ? <FiChevronUp className="w-4 h-4 text-muted-foreground" /> : <FiChevronDown className="w-4 h-4 text-muted-foreground" />}
                     </div>

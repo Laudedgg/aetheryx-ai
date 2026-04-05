@@ -176,9 +176,9 @@ function AnalyticsDashboardInner({ callHistory, useSampleData }: AnalyticsDashbo
   }
 
   return (
-    <div className="space-y-4 h-[calc(100vh-88px)] overflow-y-auto">
+    <div className="space-y-4 pb-4">
       {/* KPI Cards */}
-      <div className="grid grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
         <Card className="border border-border shadow-sm">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
@@ -247,7 +247,7 @@ function AnalyticsDashboardInner({ callHistory, useSampleData }: AnalyticsDashbo
         </Card>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         {/* Probability Distribution Chart */}
         <Card className="border border-border shadow-sm">
           <CardHeader className="py-2.5 px-4">
