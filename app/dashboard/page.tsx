@@ -74,9 +74,27 @@ export default function Page() {
         try { localStorage.setItem('salesmaster_config', JSON.stringify(real)) } catch {}
       }
     }).catch(() => {})
-    try { const s = localStorage.getItem('salesmaster_call_history'); if (s) { const p = JSON.parse(s); if (Array.isArray(p)) setCallHistory(p) } } catch {}
+    // Load call history: merge localStorage + server
+    let localCalls: any[] = []
+    try { const s = localStorage.getItem('salesmaster_call_history'); if (s) { const p = JSON.parse(s); if (Array.isArray(p)) localCalls = p } } catch {}
+    fetch('/api/calls').then(r => r.json()).then(data => {
+      if (data.success && Array.isArray(data.calls)) {
+        const merged = new Map<string, any>()
+        for (const c of data.calls) merged.set(c.id, c)
+        for (const c of localCalls) merged.set(c.id, c)
+        const final = Array.from(merged.values()).sort((a: any, b: any) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
+        setCallHistory(final)
+      } else {
+        setCallHistory(localCalls)
+      }
+    }).catch(() => setCallHistory(localCalls))
   }, [mounted])
-  useEffect(() => { if (!mounted || !callHistory.length) return; try { localStorage.setItem('salesmaster_call_history', JSON.stringify(callHistory)) } catch {} }, [callHistory, mounted])
+  useEffect(() => {
+    if (!mounted || !callHistory.length) return
+    try { localStorage.setItem('salesmaster_call_history', JSON.stringify(callHistory)) } catch {}
+    // Sync to server
+    fetch('/api/calls', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ calls: callHistory }) }).catch(() => {})
+  }, [callHistory, mounted])
   useEffect(() => { if (callActive && callStartTime) { durationTimerRef.current = setInterval(() => setCallDuration(Math.floor((Date.now() - callStartTime) / 1000)), 1000) } else { if (durationTimerRef.current) { clearInterval(durationTimerRef.current); durationTimerRef.current = null } } return () => { if (durationTimerRef.current) clearInterval(durationTimerRef.current) } }, [callActive, callStartTime])
 
   const handleStartCall = useCallback((_n: string) => { const id = 'call-' + Date.now(); setCurrentCallId(id); setCallActive(true); setCallStartTime(Date.now()); setCallDuration(0); setCallStatus('Connecting...'); setTranscript([]); setResearchData(null); setStrategyData(null); setPostCallData(null); setSyncData(null); setAutoTriggerPostCall(false); setTimeout(() => setCallStatus('Call Active'), 1500) }, [])
