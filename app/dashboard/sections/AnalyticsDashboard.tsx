@@ -8,6 +8,7 @@ import { FiPhone, FiTrendingUp, FiTarget, FiCalendar, FiBarChart2, FiClock } fro
 interface AnalyticsDashboardProps {
   callHistory: any[]
   useSampleData: boolean
+  callsLoaded?: boolean
 }
 
 function safeText(val: any, fallback: string = 'N/A'): string {
@@ -77,7 +78,7 @@ export default function AnalyticsDashboard(props: AnalyticsDashboardProps) {
   }
 }
 
-function AnalyticsDashboardInner({ callHistory, useSampleData }: AnalyticsDashboardProps) {
+function AnalyticsDashboardInner({ callHistory, useSampleData, callsLoaded }: AnalyticsDashboardProps) {
   const safeCalls = Array.isArray(callHistory) ? callHistory : []
   const displayCalls = useSampleData ? SAMPLE_CALLS : safeCalls
 
@@ -164,6 +165,14 @@ function AnalyticsDashboardInner({ callHistory, useSampleData }: AnalyticsDashbo
   const recentCalls = Array.isArray(displayCalls) ? displayCalls.slice(0, 5) : []
 
   if ((Array.isArray(displayCalls) ? displayCalls.length : 0) === 0) {
+    if (!callsLoaded) {
+      return (
+        <div className="flex flex-col items-center justify-center h-full py-20">
+          <div className="w-8 h-8 border-2 border-muted border-t-primary rounded-full animate-spin mb-3" />
+          <p className="text-xs text-muted-foreground">Loading analytics...</p>
+        </div>
+      )
+    }
     return (
       <div className="flex flex-col items-center justify-center h-full py-20">
         <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mb-4">

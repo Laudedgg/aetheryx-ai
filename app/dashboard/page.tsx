@@ -40,6 +40,7 @@ export default function Page() {
   const [darkMode, setDarkMode] = useState(true)
   const [activeAgentId, setActiveAgentId] = useState<string | null>(null)
   const [config, setConfig] = useState<AppConfig>({ twilioSid: '', twilioAuth: '', fromNumber: '', deepgramKey: '', repPhone: '', llmApiKey: '', llmBaseUrl: 'https://api.openai.com/v1', llmModel: 'gpt-4o-mini' })
+  const [callsLoaded, setCallsLoaded] = useState(false)
   const [callActive, setCallActive] = useState(false)
   const [currentCallId, setCurrentCallId] = useState<string | null>(null)
   const [transcript, setTranscript] = useState<TranscriptLine[]>([])
@@ -84,13 +85,13 @@ export default function Page() {
       for (const c of localCalls) merged.set(c.id, c)
       const final = Array.from(merged.values()).sort((a: any, b: any) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
       setCallHistory(final)
-      // Always sync merged result back to server (ensures localStorage-only calls get persisted)
+      setCallsLoaded(true)
       if (final.length > 0) {
         fetch('/api/calls', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ calls: final }) }).catch(() => {})
       }
     }).catch(() => {
       setCallHistory(localCalls)
-      // Sync localStorage calls to server even if GET failed
+      setCallsLoaded(true)
       if (localCalls.length > 0) {
         fetch('/api/calls', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ calls: localCalls }) }).catch(() => {})
       }
@@ -307,8 +308,8 @@ export default function Page() {
           <React.Suspense fallback={<SectionFallback />}>
             {activeSection === 'live-call' && <LiveCallDashboard callActive={callActive} transcript={transcript} researchData={researchData} strategyData={strategyData} onStartCall={handleStartCall} onEndCall={handleEndCall} onAddTranscript={handleAddTranscript} onResearchData={setResearchData} onStrategyData={setStrategyData} activeAgentId={activeAgentId} setActiveAgentId={setActiveAgentId} useSampleData={useSampleData} callDuration={callDuration} callStatus={callStatus} phoneNumber={phoneNumber} onPhoneNumberChange={setPhoneNumber} twilioSid={config.twilioSid} twilioAuth={config.twilioAuth} fromNumber={config.fromNumber} deepgramKey={config.deepgramKey} repPhone={config.repPhone} onNavigateToConfig={() => setActiveSection('configuration')} />}
             {activeSection === 'post-call-review' && <PostCallReview transcript={transcript} postCallData={postCallData} syncData={syncData} onPostCallData={handlePostCallData} onSyncData={handleSyncData} activeAgentId={activeAgentId} setActiveAgentId={setActiveAgentId} useSampleData={useSampleData} autoTrigger={autoTriggerPostCall} />}
-            {activeSection === 'call-history' && <CallHistory callHistory={callHistory} onViewCall={handleViewCall} />}
-            {activeSection === 'analytics' && <AnalyticsDashboard callHistory={callHistory} useSampleData={useSampleData} />}
+            {activeSection === 'call-history' && <CallHistory callHistory={callHistory} onViewCall={handleViewCall} callsLoaded={callsLoaded} />}
+            {activeSection === 'analytics' && <AnalyticsDashboard callHistory={callHistory} useSampleData={useSampleData} callsLoaded={callsLoaded} />}
             {activeSection === 'configuration' && <Configuration onConfigSaved={cfg => setConfig(cfg)} />}
           </React.Suspense>
         </div>

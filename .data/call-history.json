@@ -1,0 +1,1117 @@
+[
+  {
+    "id": "call-1775396627624",
+    "startTime": "2026-04-05T13:43:47.624Z",
+    "endTime": "2026-04-05T13:43:47.624Z",
+    "transcript": [],
+    "researchData": null,
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+971521201808",
+    "duration": 0
+  },
+  {
+    "id": "call-1775396530526",
+    "startTime": "2026-04-05T13:42:10.526Z",
+    "endTime": "2026-04-05T13:43:47.624Z",
+    "transcript": [
+      {
+        "id": "live-1775396569772-1ouc",
+        "speaker": "rep",
+        "text": "Hello? How are you doing?",
+        "timestamp": "05:42:49 PM"
+      },
+      {
+        "id": "live-1775396571571-8kgr",
+        "speaker": "rep",
+        "text": "Hi.",
+        "timestamp": "05:42:51 PM"
+      },
+      {
+        "id": "live-1775396574642-r30k",
+        "speaker": "prospect",
+        "text": "How are you?",
+        "timestamp": "05:42:54 PM"
+      },
+      {
+        "id": "live-1775396575932-f84f",
+        "speaker": "rep",
+        "text": "Great.",
+        "timestamp": "05:42:55 PM"
+      },
+      {
+        "id": "live-1775396581318-dwzk",
+        "speaker": "rep",
+        "text": "How did you know it's me?",
+        "timestamp": "05:43:01 PM"
+      },
+      {
+        "id": "live-1775396586927-wnkd",
+        "speaker": "prospect",
+        "text": "What?",
+        "timestamp": "05:43:06 PM"
+      },
+      {
+        "id": "live-1775396596425-9894",
+        "speaker": "rep",
+        "text": "I'm actually it's an this is an AI agent.",
+        "timestamp": "05:43:16 PM"
+      },
+      {
+        "id": "live-1775396598995-jfcs",
+        "speaker": "rep",
+        "text": "Sales AI agent. So I was just doing a test.",
+        "timestamp": "05:43:18 PM"
+      },
+      {
+        "id": "live-1775396612053-hz9q",
+        "speaker": "rep",
+        "text": "I was doing a test, but it's not reading what you're saying. Is",
+        "timestamp": "05:43:32 PM"
+      },
+      {
+        "id": "live-1775396612830-3cvj",
+        "speaker": "rep",
+        "text": "reading what I'm saying.",
+        "timestamp": "05:43:32 PM"
+      },
+      {
+        "id": "live-1775396615118-m8qj",
+        "speaker": "rep",
+        "text": "Don't worry. I think",
+        "timestamp": "05:43:35 PM"
+      },
+      {
+        "id": "live-1775396618454-tttb",
+        "speaker": "rep",
+        "text": "I'll fix it later. Sorry for disturbing you.",
+        "timestamp": "05:43:38 PM"
+      },
+      {
+        "id": "live-1775396625859-nmvz",
+        "speaker": "rep",
+        "text": "Alright. Take care.",
+        "timestamp": "05:43:45 PM"
+      }
+    ],
+    "researchData": {
+      "company_profile": {
+        "name": "No identifiable company",
+        "industry": "Unknown",
+        "size": "Unknown",
+        "headquarters": "Unknown",
+        "description": "No company details could be extracted or inferred from the transcript or search results.",
+        "key_products": "None identified"
+      },
+      "funding": {
+        "total_raised": "N/A",
+        "latest_round": "N/A",
+        "key_investors": "N/A",
+        "financial_health": "Unknown"
+      },
+      "tech_stack": {
+        "technologies": "None identified",
+        "infrastructure": "None identified",
+        "tools": "None identified"
+      },
+      "recent_news": "No relevant news found in search results.",
+      "pitch_angles": "No basis for pitch angles due to lack of identifiable prospect.",
+      "pain_points": "None identified"
+    },
+    "strategyData": {
+      "objection_handlers": [
+        "If the prospect expresses confusion or concern about speaking with an AI agent, clarify: 'I understand this might be a bit unusual. I'm here to make things easier and faster for you—let me know if you have any questions or concerns about how I can help.'",
+        "If the prospect seems uncertain about continuing, reassure them: 'I'm here to assist you just like a human representative would, and our conversation is confidential and secure.'"
+      ],
+      "next_questions": [
+        "Can I ask what brought you to this call today, or is there something specific you’d like to discuss?",
+        "Is there a particular challenge or goal you’re hoping to address?",
+        "Have you interacted with AI-powered solutions before?"
+      ],
+      "pitch_angles": [
+        "Highlight the efficiency and convenience of using an AI sales agent—quick responses, 24/7 availability, and personalized recommendations.",
+        "Emphasize the security and privacy of their information during this AI-enabled interaction.",
+        "Position the AI as a tool to save the prospect time and streamline their experience."
+      ],
+      "engagement_level": "Low—The conversation is awkward, and the prospect is confused by the AI introduction. No strong interest or engagement detected yet.",
+      "deal_signals": [],
+      "closing_probability": "10%—There are no buying signals yet, and the introduction has led to confusion. The prospect’s engagement needs to be established and trust built before progressing."
+    },
+    "status": "completed",
+    "phoneNumber": "+971521201808",
+    "duration": 97,
+    "postCallData": {
+      "summary": {
+        "client_name": "Unknown",
+        "company": "Unknown",
+        "call_outcome": "Unsuccessful - Test Call, No Sales Discussion",
+        "key_points": [
+          "Sales rep identified themselves as an AI agent.",
+          "The call was a test of the AI agent's functionality.",
+          "Technical issues were encountered: the system was only reading the sales rep's side.",
+          "No product, service, or business needs were discussed."
+        ],
+        "pain_points": [
+          "Technical malfunction: AI agent not capturing the prospect's responses."
+        ],
+        "next_steps": [
+          "Resolve technical issues with the AI agent before contacting prospects again.",
+          "No follow-up required with this prospect for sales purposes."
+        ]
+      },
+      "deal_probability": {
+        "score": 0,
+        "positive_signals": [
+          "Prospect answered the call."
+        ],
+        "negative_signals": [
+          "No sales conversation occurred.",
+          "Technical issues prevented two-way communication.",
+          "Sales rep ended the call without discussing any offering."
+        ],
+        "risk_factors": [
+          "AI agent malfunction.",
+          "Potential negative impression on the prospect due to test call."
+        ]
+      },
+      "follow_up_email": {
+        "subject": "Apologies for Earlier Call – Technical Test",
+        "body": "Hello,\n\nI wanted to apologize for the unexpected call earlier. We were conducting a test of our AI calling system and encountered a technical issue. No further action is required on your part. Thank you for your understanding, and sorry for any inconvenience caused.\n\nBest regards,\n[Your Name]\nAetheryx AI",
+        "recipient_suggestion": "Prospect from the test call (if their contact is known)"
+      }
+    }
+  },
+  {
+    "id": "call-1775386772700",
+    "startTime": "2026-04-05T10:59:32.700Z",
+    "endTime": "2026-04-05T10:59:32.700Z",
+    "transcript": [],
+    "researchData": null,
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+971561118752",
+    "duration": 0,
+    "postCallData": {
+      "summary": {
+        "client_name": "Unknown (Prospect's name not provided)",
+        "company": "Unknown (Company not specified)",
+        "call_outcome": "Unsuccessful - technical difficulties prevented meaningful conversation",
+        "key_points": [
+          "Attempted to initiate call, but experienced technical issues.",
+          "Prospect could not hear the sales rep properly.",
+          "Prospect indicated that the system was not taking the sales rep's voicemail.",
+          "No product, service, or business discussion took place."
+        ],
+        "pain_points": [
+          "Technical issues with audio connection.",
+          "Difficulty in establishing clear communication."
+        ],
+        "next_steps": [
+          "Troubleshoot and resolve technical issues before next call.",
+          "Reschedule the call with the prospect.",
+          "Test audio and connection prior to the next meeting."
+        ]
+      },
+      "deal_probability": {
+        "score": 5,
+        "positive_signals": [
+          "Prospect attempted to engage and troubleshoot."
+        ],
+        "negative_signals": [
+          "No business discussion occurred.",
+          "Technical issues prevented conversation."
+        ],
+        "risk_factors": [
+          "Technical barriers may frustrate the prospect.",
+          "Delay in engagement could reduce interest."
+        ]
+      },
+      "follow_up_email": {
+        "subject": "Apologies for Earlier Technical Issues – Let’s Reschedule Our Call",
+        "body": "Hi,\n\nI apologize for the technical difficulties we experienced during our recent call. I understand how frustrating that can be, and I appreciate your patience while we tried to resolve the issue.\n\nI’d like to ensure we have a smooth conversation next time. Would you be available to reschedule our call at your convenience? I will make sure all technical aspects are tested beforehand.\n\nPlease let me know a time that works for you, or feel free to suggest an alternative communication method if that’s easier.\n\nThank you again for your understanding. Looking forward to connecting soon!\n\nBest regards,\n[Your Name]",
+        "recipient_suggestion": "Prospect (name and email to be confirmed)"
+      }
+    }
+  },
+  {
+    "id": "call-1775306502377",
+    "startTime": "2026-04-04T12:41:42.377Z",
+    "endTime": "2026-04-04T12:41:42.377Z",
+    "transcript": [],
+    "researchData": null,
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+971561118752",
+    "duration": 0
+  },
+  {
+    "id": "call-1775306469558",
+    "startTime": "2026-04-04T12:41:09.558Z",
+    "endTime": "2026-04-04T12:41:42.377Z",
+    "transcript": [
+      {
+        "id": "live-1775306485386-vqex",
+        "speaker": "rep",
+        "text": "Hi. How are you?",
+        "timestamp": "04:41:25 PM"
+      },
+      {
+        "id": "live-1775306489746-24dv",
+        "speaker": "rep",
+        "text": "I'm great myself.",
+        "timestamp": "04:41:29 PM"
+      },
+      {
+        "id": "live-1775306492044-50wh",
+        "speaker": "rep",
+        "text": "What's your name, please?",
+        "timestamp": "04:41:32 PM"
+      },
+      {
+        "id": "live-1775306499227-p51k",
+        "speaker": "rep",
+        "text": "Okay. Sure. Sorry. I need to fix something.",
+        "timestamp": "04:41:39 PM"
+      },
+      {
+        "id": "live-1775306500260-3cff",
+        "speaker": "rep",
+        "text": "Don't worry.",
+        "timestamp": "04:41:40 PM"
+      }
+    ],
+    "researchData": {
+      "company_profile": {
+        "name": "No company identified",
+        "industry": "Unknown",
+        "size": "Unknown",
+        "headquarters": "Unknown",
+        "description": "No company details extracted from the transcript or search results.",
+        "key_products": []
+      },
+      "funding": {
+        "total_raised": "Unknown",
+        "latest_round": "Unknown",
+        "key_investors": [],
+        "financial_health": "Unknown"
+      },
+      "tech_stack": {
+        "technologies": [],
+        "infrastructure": [],
+        "tools": []
+      },
+      "recent_news": [],
+      "pitch_angles": [],
+      "pain_points": []
+    },
+    "strategyData": {
+      "objection_handlers": [
+        "If the prospect hesitates to share their name: 'I understand if you’d prefer not to share your name right away. I just want to make sure I personalize our conversation and address your needs.'",
+        "If the prospect seems guarded: 'No worries if you’d rather stay anonymous for now. I can still share how we help companies like yours.'"
+      ],
+      "next_questions": [
+        "What prompted you to take this call today?",
+        "Can you tell me a bit about your role and responsibilities?",
+        "Are there any challenges you’re currently facing that I might be able to help with?"
+      ],
+      "pitch_angles": [
+        "Personalization: Emphasize that your solutions are tailored to each client’s unique situation.",
+        "Rapport-building: Show genuine curiosity about their role and company to build trust.",
+        "Value-first: Briefly mention how Aetheryx AI has helped similar clients streamline their processes or save time."
+      ],
+      "engagement_level": "Low – The conversation is still in the introduction phase, and the prospect hasn’t engaged yet.",
+      "deal_signals": [],
+      "closing_probability": "5% – It’s too early in the conversation to assess intent or interest. The prospect has not provided any information or buying signals yet.",
+      "reasoning": "The rep has only introduced themselves and asked for the prospect’s name. No objections, engagement, or buying signals have been detected. The next best action is to ask an open-ended question to move beyond introductions and uncover needs or pain points."
+    },
+    "status": "completed",
+    "phoneNumber": "+971561118752",
+    "duration": 32,
+    "postCallData": {
+      "summary": {
+        "client_name": "Unknown",
+        "company": "Unknown",
+        "call_outcome": "No meaningful conversation; call did not progress.",
+        "key_points": [
+          "Sales rep greeted the client.",
+          "Sales rep asked for the client's name.",
+          "Sales rep mentioned needing to fix something (possibly technical issue)."
+        ],
+        "pain_points": [
+          "No client input or business pain points were discussed.",
+          "Technical or process interruption prevented call progress."
+        ],
+        "next_steps": [
+          "Reschedule the call with the client.",
+          "Ensure technical setup is working before next call.",
+          "Prepare an introduction and agenda for the next conversation."
+        ]
+      },
+      "deal_probability": {
+        "score": 5,
+        "positive_signals": [
+          "Sales rep initiated contact.",
+          "Sales rep attempted to gather client information."
+        ],
+        "negative_signals": [
+          "No client engagement.",
+          "Call was interrupted and did not progress."
+        ],
+        "risk_factors": [
+          "Potential technical or process issues.",
+          "No rapport or needs established with client."
+        ]
+      },
+      "follow_up_email": {
+        "subject": "Let's Reschedule Our Call",
+        "body": "Hi,\n\nI apologize for the interruption during our recent call. I'd like to ensure we have a smooth conversation and learn more about your needs. Could we reschedule at a time that's convenient for you? Please let me know your availability.\n\nLooking forward to connecting soon.\n\nBest regards,\n[Your Name]",
+        "recipient_suggestion": "Client's main contact (name and email to be confirmed)"
+      }
+    }
+  },
+  {
+    "id": "call-1775231100245",
+    "startTime": "2026-04-03T15:45:00.245Z",
+    "endTime": "2026-04-03T15:45:22.112Z",
+    "transcript": [
+      {
+        "id": "live-1775231111549-ha33",
+        "speaker": "rep",
+        "text": "Hello, Brian.",
+        "timestamp": "07:45:11 PM"
+      },
+      {
+        "id": "live-1775231111592-3wpm",
+        "speaker": "rep",
+        "text": "Hello, Brian.",
+        "timestamp": "07:45:11 PM"
+      },
+      {
+        "id": "live-1775231111604-7zgt",
+        "speaker": "rep",
+        "text": "Hello, Brian.",
+        "timestamp": "07:45:11 PM"
+      },
+      {
+        "id": "live-1775231111615-cgbv",
+        "speaker": "rep",
+        "text": "Hello, Brian.",
+        "timestamp": "07:45:11 PM"
+      },
+      {
+        "id": "live-1775231115193-bu2d",
+        "speaker": "rep",
+        "text": "Great. Great.",
+        "timestamp": "07:45:15 PM"
+      },
+      {
+        "id": "live-1775231115203-hth7",
+        "speaker": "rep",
+        "text": "Great. Great.",
+        "timestamp": "07:45:15 PM"
+      },
+      {
+        "id": "live-1775231115212-bd9x",
+        "speaker": "rep",
+        "text": "Great. Great.",
+        "timestamp": "07:45:15 PM"
+      },
+      {
+        "id": "live-1775231115422-kyig",
+        "speaker": "rep",
+        "text": "Great. Great.",
+        "timestamp": "07:45:15 PM"
+      },
+      {
+        "id": "live-1775231118225-x6rp",
+        "speaker": "rep",
+        "text": "Okay. I'll I'll I'll start to just testing the",
+        "timestamp": "07:45:18 PM"
+      },
+      {
+        "id": "live-1775231118268-w0gf",
+        "speaker": "rep",
+        "text": "Okay. I'll I'll I'll start to just testing the",
+        "timestamp": "07:45:18 PM"
+      },
+      {
+        "id": "live-1775231118281-9bnc",
+        "speaker": "rep",
+        "text": "Okay. I'll I'll I'll start to just testing the",
+        "timestamp": "07:45:18 PM"
+      },
+      {
+        "id": "live-1775231118292-voh7",
+        "speaker": "rep",
+        "text": "Okay. I'll I'll I'll try to just testing the",
+        "timestamp": "07:45:18 PM"
+      },
+      {
+        "id": "live-1775231120571-z4d9",
+        "speaker": "rep",
+        "text": "the transcript. Don't worry. It's what",
+        "timestamp": "07:45:20 PM"
+      },
+      {
+        "id": "live-1775231120584-5shm",
+        "speaker": "rep",
+        "text": "the transcript. Don't worry. It's what",
+        "timestamp": "07:45:20 PM"
+      },
+      {
+        "id": "live-1775231120595-rsd8",
+        "speaker": "rep",
+        "text": "the transcript. Don't worry. It worked.",
+        "timestamp": "07:45:20 PM"
+      },
+      {
+        "id": "live-1775231120611-bbgr",
+        "speaker": "rep",
+        "text": "the transcript. Don't worry. It's what",
+        "timestamp": "07:45:20 PM"
+      }
+    ],
+    "researchData": {
+      "company_profile": {
+        "name": "Brian Tracy International",
+        "industry": "Professional Training & Coaching",
+        "size": "Small (11-50 employees)",
+        "headquarters": "Chandler, Arizona, United States",
+        "description": "Brian Tracy International provides sales training programs, motivational speaking, and personal development resources focused on sales strategies, leadership, and success principles. Founded by renowned author and speaker Brian Tracy, the company offers books, online courses, seminars, and consulting to help individuals and organizations improve sales performance and achieve goals.",
+        "key_products": [
+          "Sales training programs and workshops",
+          "Books such as 'The Psychology of Selling'",
+          "Online courses on sales success and prospecting",
+          "Motivational audio programs and keynotes"
+        ]
+      },
+      "funding": {
+        "total_raised": "Not publicly disclosed (self-funded or bootstrapped by founder)",
+        "latest_round": "N/A",
+        "key_investors": "N/A",
+        "financial_health": "Stable; operates as an established brand with ongoing revenue from training programs, book sales, and speaking engagements. No recent signs of financial distress."
+      },
+      "tech_stack": {
+        "technologies": "WordPress for website, online learning platforms (e.g., Thinkific or similar LMS), email marketing tools (e.g., Mailchimp), Zoom for virtual training",
+        "infrastructure": "Cloud-based hosting, CRM systems for sales leads",
+        "tools": "Sales enablement software, video conferencing, digital course delivery platforms"
+      },
+      "recent_news": [
+        "Continued promotion of sales training resources, with blog updates on prospecting tips and sales strategies as of recent years.",
+        "Brian Tracy remains active in content creation, including summaries of his books like 'The Psychology of Selling' shared across platforms.",
+        "No major acquisitions, pivots, or funding announcements in 2025-2026; focus on evergreen sales education content."
+      ],
+      "pitch_angles": [
+        "Leverage expertise in sales psychology to complement their training programs with AI-powered sales tools for prospecting and call analysis.",
+        "Enhance their online courses with real-time transcription and insight extraction from sales calls, addressing speech-to-text errors.",
+        "Position as a partner for scaling virtual sales training with automated rapport-building and objection-handling AI.",
+        "Target their audience of salespeople with tools that implement Brian Tracy's 80/20 rule and emotional needs framework."
+      ],
+      "pain_points": [
+        "Manual prospecting and lead qualification in a competitive training market.",
+        "Dependence on live calls and webinars, where speech-to-text errors could hinder post-call analysis.",
+        "Scaling personalized sales coaching for global audiences without advanced tech automation.",
+        "Keeping content fresh amid evolving sales tactics like AI-driven personalization."
+      ]
+    },
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+971554978474",
+    "duration": 21,
+    "postCallData": {
+      "summary": {
+        "client_name": "Brian",
+        "company": "Unknown",
+        "call_outcome": "Test Call / No Business Discussion",
+        "key_points": [
+          "Sales rep greeted Brian multiple times.",
+          "Sales rep indicated the call was a test.",
+          "Sales rep reassured Brian about the transcript functionality."
+        ],
+        "pain_points": [
+          "No business pain points discussed; call was purely a test."
+        ],
+        "next_steps": [
+          "Schedule a follow-up call for actual business discussion.",
+          "Confirm with Brian if the next meeting time works."
+        ]
+      },
+      "deal_probability": {
+        "score": 0,
+        "positive_signals": [
+          "Client (Brian) was present and responsive."
+        ],
+        "negative_signals": [
+          "No product or service discussed.",
+          "No needs or interest expressed."
+        ],
+        "risk_factors": [
+          "No engagement on business topics.",
+          "Call was only for testing purposes."
+        ]
+      },
+      "follow_up_email": {
+        "subject": "Scheduling Our Next Call",
+        "body": "Hi Brian,\n\nThank you for your time earlier during our test call. Now that we've confirmed everything is working, I'd like to schedule a follow-up meeting to discuss how we can support your business needs.\n\nPlease let me know your availability this week or suggest a time that works for you.\n\nLooking forward to our conversation!\n\nBest regards,\n[Your Name]",
+        "recipient_suggestion": "Brian"
+      }
+    }
+  },
+  {
+    "id": "call-1775231062914",
+    "startTime": "2026-04-03T15:44:22.914Z",
+    "endTime": "2026-04-03T15:45:22.112Z",
+    "transcript": [],
+    "researchData": null,
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+971554978474",
+    "duration": 0
+  },
+  {
+    "id": "call-1775231059015",
+    "startTime": "2026-04-03T15:44:19.015Z",
+    "endTime": "2026-04-03T15:44:23.528Z",
+    "transcript": [],
+    "researchData": null,
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+971524592120",
+    "duration": 0
+  },
+  {
+    "id": "call-1775230862130",
+    "startTime": "2026-04-03T15:41:02.130Z",
+    "endTime": "2026-04-03T15:41:02.130Z",
+    "transcript": [],
+    "researchData": null,
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+971501715226",
+    "duration": 0
+  },
+  {
+    "id": "call-1775230816196",
+    "startTime": "2026-04-03T15:40:16.196Z",
+    "endTime": "2026-04-03T15:41:02.130Z",
+    "transcript": [
+      {
+        "id": "live-1775230828915-ce4h",
+        "speaker": "rep",
+        "text": "I didn't",
+        "timestamp": "07:40:28 PM"
+      },
+      {
+        "id": "live-1775230841032-no8o",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "07:40:41 PM"
+      },
+      {
+        "id": "live-1775230842783-bl9y",
+        "speaker": "rep",
+        "text": "I do.",
+        "timestamp": "07:40:42 PM"
+      },
+      {
+        "id": "live-1775230845577-lo5s",
+        "speaker": "rep",
+        "text": "How are you?",
+        "timestamp": "07:40:45 PM"
+      }
+    ],
+    "researchData": {
+      "company_profile": {
+        "name": null,
+        "industry": null,
+        "size": null,
+        "headquarters": null,
+        "description": null,
+        "key_products": null
+      },
+      "funding": {
+        "total_raised": null,
+        "latest_round": null,
+        "key_investors": null,
+        "financial_health": null
+      },
+      "tech_stack": {
+        "technologies": null,
+        "infrastructure": null,
+        "tools": null
+      },
+      "recent_news": null,
+      "pitch_angles": null,
+      "pain_points": null
+    },
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+971501715226",
+    "duration": 45,
+    "postCallData": {
+      "summary": {
+        "client_name": "Unknown",
+        "company": "Unknown",
+        "call_outcome": "No substantive conversation occurred.",
+        "key_points": [
+          "Sales rep greeted the client.",
+          "No response or engagement from the client.",
+          "No product, service, or needs discussed."
+        ],
+        "pain_points": [
+          "Unable to reach or engage the client."
+        ],
+        "next_steps": [
+          "Attempt to reconnect with the client via phone or email.",
+          "Confirm correct contact information.",
+          "Schedule a follow-up call at a mutually convenient time."
+        ]
+      },
+      "deal_probability": {
+        "score": "0%",
+        "positive_signals": [
+          "Sales rep attempted to initiate conversation."
+        ],
+        "negative_signals": [
+          "No response or engagement from the client.",
+          "No discussion of needs, solutions, or next steps."
+        ],
+        "risk_factors": [
+          "Potential incorrect contact information.",
+          "Client may not be available or interested."
+        ]
+      },
+      "follow_up_email": {
+        "subject": "Following Up on Our Recent Call Attempt",
+        "body": "Hello,\n\nI recently tried to reach you by phone but was unable to connect. I would love to discuss how we can support your needs and answer any questions you might have. Please let me know a convenient time for us to speak, or feel free to reply to this email with your availability.\n\nLooking forward to connecting soon!\n\nBest regards,\n[Your Name]",
+        "recipient_suggestion": "Client's primary contact email (if available)"
+      }
+    }
+  },
+  {
+    "id": "call-1775226916460",
+    "startTime": "2026-04-03T14:35:16.460Z",
+    "endTime": "2026-04-03T14:36:39.094Z",
+    "transcript": [],
+    "researchData": null,
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+971507587246",
+    "duration": 82
+  },
+  {
+    "id": "call-1775226897493",
+    "startTime": "2026-04-03T14:34:57.493Z",
+    "endTime": "2026-04-03T14:36:39.094Z",
+    "transcript": [],
+    "researchData": null,
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+971507587246",
+    "duration": 8
+  },
+  {
+    "id": "call-1775226873810",
+    "startTime": "2026-04-03T14:34:33.810Z",
+    "endTime": "2026-04-03T14:34:33.810Z",
+    "transcript": [],
+    "researchData": null,
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+971507587246",
+    "duration": 0
+  },
+  {
+    "id": "call-1775226871231",
+    "startTime": "2026-04-03T14:34:31.231Z",
+    "endTime": "2026-04-03T14:35:06.498Z",
+    "transcript": [],
+    "researchData": null,
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+971501715226",
+    "duration": 2
+  },
+  {
+    "id": "call-1775163093582",
+    "startTime": "2026-04-02T20:51:33.582Z",
+    "endTime": "2026-04-02T20:51:40.055Z",
+    "transcript": [],
+    "researchData": null,
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+971501715226",
+    "duration": 6,
+    "postCallData": {
+      "summary": {
+        "client_name": "Unknown (Prospect did not provide name)",
+        "company": "Unknown",
+        "call_outcome": "Incomplete/No Engagement",
+        "key_points": [
+          "Prospect asked for the caller's phone number.",
+          "Prospect indicated they wanted to check something before starting."
+        ],
+        "pain_points": [
+          "Prospect may be uncertain about the caller's identity or legitimacy.",
+          "Lack of readiness or willingness to proceed with the call at this time."
+        ],
+        "next_steps": [
+          "Follow up with an introductory email including full contact information and company background.",
+          "Offer to schedule a call at the prospect's convenience.",
+          "Clarify the purpose of the outreach and provide value proposition upfront."
+        ]
+      },
+      "deal_probability": {
+        "score": 5,
+        "positive_signals": [
+          "Prospect did not immediately reject the call."
+        ],
+        "negative_signals": [
+          "Prospect did not engage in discussion.",
+          "No information exchanged about needs or interest."
+        ],
+        "risk_factors": [
+          "Prospect may be screening calls for legitimacy.",
+          "Lack of engagement or willingness to proceed."
+        ]
+      },
+      "follow_up_email": {
+        "subject": "Following Up: Introduction and Contact Information",
+        "body": "Hi,\n\nThank you for taking my call earlier. I wanted to follow up and provide my direct contact information as well as a brief introduction to our company, Aetheryx AI. We help businesses like yours [insert value proposition or relevant benefit].\n\nIf you have any questions or would like to schedule a brief call at your convenience, please let me know. I’m happy to provide any additional information you need.\n\nBest regards,\n[Your Name]\n[Your Phone Number]\nAetheryx AI",
+        "recipient_suggestion": "Prospect (email address not provided; use available CRM data or request during next contact)"
+      }
+    }
+  },
+  {
+    "id": "call-1775163028708",
+    "startTime": "2026-04-02T20:50:28.708Z",
+    "endTime": "2026-04-02T20:51:40.055Z",
+    "transcript": [
+      {
+        "id": "live-1775163030283-811n",
+        "speaker": "prospect",
+        "text": "our number? Or what Yeah. I told you, sir, 5 2164, yeah, 24592120.",
+        "timestamp": "12:50:30 AM"
+      },
+      {
+        "id": "live-1775163030352-7d3o",
+        "speaker": "rep",
+        "text": "Told you this is your 52164, yeah, 24592120.",
+        "timestamp": "12:50:30 AM"
+      },
+      {
+        "id": "live-1775163030371-pda4",
+        "speaker": "rep",
+        "text": "Told you this is your 52164, yeah, 24592120.",
+        "timestamp": "12:50:30 AM"
+      },
+      {
+        "id": "live-1775163039001-2hd0",
+        "speaker": "rep",
+        "text": "It's not my numb call my number then.",
+        "timestamp": "12:50:39 AM"
+      },
+      {
+        "id": "live-1775163039060-erxp",
+        "speaker": "rep",
+        "text": "It's not my number. Call my number then.",
+        "timestamp": "12:50:39 AM"
+      },
+      {
+        "id": "live-1775163039065-hk0j",
+        "speaker": "rep",
+        "text": "It's not my number. Call my number then.",
+        "timestamp": "12:50:39 AM"
+      },
+      {
+        "id": "live-1775163039235-wkwx",
+        "speaker": "rep",
+        "text": "It's not my number. Call my number then.",
+        "timestamp": "12:50:39 AM"
+      },
+      {
+        "id": "live-1775163043479-lo0q",
+        "speaker": "rep",
+        "text": "Mhmm. You call my number.",
+        "timestamp": "12:50:43 AM"
+      },
+      {
+        "id": "live-1775163043605-0sxr",
+        "speaker": "rep",
+        "text": "Mhmm. You call my number.",
+        "timestamp": "12:50:43 AM"
+      },
+      {
+        "id": "live-1775163043630-01ey",
+        "speaker": "rep",
+        "text": "You call my number.",
+        "timestamp": "12:50:43 AM"
+      },
+      {
+        "id": "live-1775163043695-dkp2",
+        "speaker": "rep",
+        "text": "Mhmm. You call my number.",
+        "timestamp": "12:50:43 AM"
+      },
+      {
+        "id": "live-1775163060573-gzvt",
+        "speaker": "rep",
+        "text": "My name is Pileo. That's me. That's the",
+        "timestamp": "12:51:00 AM"
+      },
+      {
+        "id": "live-1775163060588-45ut",
+        "speaker": "rep",
+        "text": "My name is Pileo. That's me. That's the",
+        "timestamp": "12:51:00 AM"
+      },
+      {
+        "id": "live-1775163060732-t90z",
+        "speaker": "rep",
+        "text": "My name is Pileo. That's",
+        "timestamp": "12:51:00 AM"
+      },
+      {
+        "id": "live-1775163060741-9m7k",
+        "speaker": "rep",
+        "text": "My name is Piyu. And that's me. That's the",
+        "timestamp": "12:51:00 AM"
+      },
+      {
+        "id": "live-1775163064897-7xfu",
+        "speaker": "prospect",
+        "text": "a new number. Right? Mhmm. I said that's my name.",
+        "timestamp": "12:51:04 AM"
+      },
+      {
+        "id": "live-1775163064937-bpmi",
+        "speaker": "prospect",
+        "text": "a new number. Right? Mhmm. I said that's my name.",
+        "timestamp": "12:51:04 AM"
+      },
+      {
+        "id": "live-1775163064965-fih0",
+        "speaker": "rep",
+        "text": "a new number. Right? Mhmm. I said that's my name.",
+        "timestamp": "12:51:04 AM"
+      },
+      {
+        "id": "live-1775163065092-8zw1",
+        "speaker": "rep",
+        "text": "new number. Right? Mhmm. I said that's my name.",
+        "timestamp": "12:51:05 AM"
+      },
+      {
+        "id": "live-1775163069225-itmg",
+        "speaker": "prospect",
+        "text": "C. New. New is like a new number. New.",
+        "timestamp": "12:51:09 AM"
+      },
+      {
+        "id": "live-1775163069291-jt0m",
+        "speaker": "prospect",
+        "text": "New. New is like a new number. New.",
+        "timestamp": "12:51:09 AM"
+      },
+      {
+        "id": "live-1775163069299-lseh",
+        "speaker": "prospect",
+        "text": "New. New is like a new number. New.",
+        "timestamp": "12:51:09 AM"
+      },
+      {
+        "id": "live-1775163069447-obz5",
+        "speaker": "rep",
+        "text": "New. New is like a new number.",
+        "timestamp": "12:51:09 AM"
+      },
+      {
+        "id": "live-1775163074569-0v5y",
+        "speaker": "prospect",
+        "text": "New is like the new, but",
+        "timestamp": "12:51:14 AM"
+      },
+      {
+        "id": "live-1775163074611-x4eo",
+        "speaker": "prospect",
+        "text": "New is like the name of the",
+        "timestamp": "12:51:14 AM"
+      },
+      {
+        "id": "live-1775163074636-tdsc",
+        "speaker": "rep",
+        "text": "New is like the name of the",
+        "timestamp": "12:51:14 AM"
+      },
+      {
+        "id": "live-1775163082522-3dok",
+        "speaker": "prospect",
+        "text": "Another to see what I can do with this guy, by any way, is",
+        "timestamp": "12:51:22 AM"
+      },
+      {
+        "id": "live-1775163082784-qh7b",
+        "speaker": "prospect",
+        "text": "I don't know if you see what I'm gonna do with this guy, but anyways,",
+        "timestamp": "12:51:22 AM"
+      },
+      {
+        "id": "live-1775163082831-ljzh",
+        "speaker": "prospect",
+        "text": "I wanted to see what I can do with this guy, but anyways,",
+        "timestamp": "12:51:22 AM"
+      },
+      {
+        "id": "live-1775163082861-uo2n",
+        "speaker": "rep",
+        "text": "I wanted to see what I can do with this guy, but anyways,",
+        "timestamp": "12:51:22 AM"
+      },
+      {
+        "id": "live-1775163091210-ygr7",
+        "speaker": "prospect",
+        "text": "I think it's just I'm just trying to balance",
+        "timestamp": "12:51:31 AM"
+      },
+      {
+        "id": "live-1775163091214-w4ks",
+        "speaker": "prospect",
+        "text": "I think it's just I'm just trying to balance",
+        "timestamp": "12:51:31 AM"
+      },
+      {
+        "id": "live-1775163091256-1ui7",
+        "speaker": "prospect",
+        "text": "I think it's just I'm just trying to balance",
+        "timestamp": "12:51:31 AM"
+      },
+      {
+        "id": "live-1775163091310-q1w3",
+        "speaker": "rep",
+        "text": "I think it's just I'm just trying to balance",
+        "timestamp": "12:51:31 AM"
+      }
+    ],
+    "researchData": null,
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+971501715226",
+    "duration": 0
+  },
+  {
+    "id": "call-1775162804288",
+    "startTime": "2026-04-02T20:46:44.288Z",
+    "endTime": "2026-04-02T20:46:49.883Z",
+    "transcript": [],
+    "researchData": null,
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+971561118752",
+    "duration": 5
+  },
+  {
+    "id": "call-1775162757287",
+    "startTime": "2026-04-02T20:45:57.287Z",
+    "endTime": "2026-04-02T20:46:49.882Z",
+    "transcript": [
+      {
+        "id": "live-1775162798321-aw6n",
+        "speaker": "rep",
+        "text": "Since we're 59.",
+        "timestamp": "12:46:38 AM"
+      },
+      {
+        "id": "live-1775162798384-k4jr",
+        "speaker": "rep",
+        "text": "Since we're 59.",
+        "timestamp": "12:46:38 AM"
+      },
+      {
+        "id": "live-1775162801007-gq4r",
+        "speaker": "rep",
+        "text": "Yeah. Yeah. You're right. You're right. 24. Yeah. Yeah. Yeah.",
+        "timestamp": "12:46:41 AM"
+      },
+      {
+        "id": "live-1775162801249-flgb",
+        "speaker": "rep",
+        "text": "Yeah. Yeah. You're right. You're right. 24. Yeah. Yeah. Yeah.",
+        "timestamp": "12:46:41 AM"
+      }
+    ],
+    "researchData": null,
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+971561118752",
+    "duration": 0
+  },
+  {
+    "id": "call-1775162729522",
+    "startTime": "2026-04-02T20:45:29.522Z",
+    "endTime": "2026-04-02T20:45:29.522Z",
+    "transcript": [],
+    "researchData": null,
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+971524592120",
+    "duration": 0
+  },
+  {
+    "id": "call-1775162728810",
+    "startTime": "2026-04-02T20:45:28.810Z",
+    "endTime": "2026-04-02T20:45:57.910Z",
+    "transcript": [],
+    "researchData": null,
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+971524592120",
+    "duration": 0
+  },
+  {
+    "id": "call-1775052754444",
+    "startTime": "2026-04-01T14:12:34.444Z",
+    "endTime": "2026-04-01T14:12:34.444Z",
+    "transcript": [],
+    "researchData": null,
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+971561118752",
+    "duration": 0,
+    "postCallData": {
+      "summary": {
+        "client_name": "Not specified",
+        "company": "Not specified",
+        "call_outcome": "No substantial conversation occurred; call did not progress beyond initial greeting.",
+        "key_points": [
+          "Sales representative initiated the call with a greeting."
+        ],
+        "pain_points": [
+          "Unable to connect with client or gather any information."
+        ],
+        "next_steps": [
+          "Attempt to reconnect with the client.",
+          "Ensure correct contact information and scheduled time for next call."
+        ]
+      },
+      "deal_probability": {
+        "score": 0,
+        "positive_signals": [
+          "Sales rep initiated contact."
+        ],
+        "negative_signals": [
+          "No response from client.",
+          "No information exchanged."
+        ],
+        "risk_factors": [
+          "Potential incorrect contact information.",
+          "Client may not be available or interested."
+        ]
+      },
+      "follow_up_email": {
+        "subject": "Following Up on Our Recent Call Attempt",
+        "body": "Hello,\n\nI recently tried to reach you by phone but was unable to connect. I’d like to ensure we have the opportunity to discuss how we can support your needs. Please let me know a convenient time for you, or feel free to reply to this email with your availability.\n\nLooking forward to connecting soon.\n\nBest regards,\n[Your Name]",
+        "recipient_suggestion": "Client's primary email address (if available)"
+      }
+    }
+  }
+]

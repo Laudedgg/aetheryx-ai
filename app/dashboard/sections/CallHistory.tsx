@@ -32,6 +32,7 @@ interface CallData {
 interface CallHistoryProps {
   callHistory: any[]
   onViewCall: (call: any) => void
+  callsLoaded?: boolean
 }
 
 function safeText(val: any, fallback: string = 'N/A'): string {
@@ -104,7 +105,7 @@ export default function CallHistory(props: CallHistoryProps) {
   }
 }
 
-function CallHistoryInner({ callHistory, onViewCall }: CallHistoryProps) {
+function CallHistoryInner({ callHistory, onViewCall, callsLoaded }: CallHistoryProps) {
   const [searchQuery, setSearchQuery] = useState('')
   const [expandedId, setExpandedId] = useState<string | null>(null)
   const [filterOutcome, setFilterOutcome] = useState<string>('all')
@@ -126,6 +127,14 @@ function CallHistoryInner({ callHistory, onViewCall }: CallHistoryProps) {
   })
 
   if (safeCalls.length === 0) {
+    if (!callsLoaded) {
+      return (
+        <div className="flex flex-col items-center justify-center h-full py-20">
+          <div className="w-8 h-8 border-2 border-muted border-t-primary rounded-full animate-spin mb-3" />
+          <p className="text-xs text-muted-foreground">Loading call history...</p>
+        </div>
+      )
+    }
     return (
       <div className="flex flex-col items-center justify-center h-full py-20">
         <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mb-4">
