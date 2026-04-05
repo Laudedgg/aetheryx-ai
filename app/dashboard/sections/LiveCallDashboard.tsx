@@ -607,48 +607,57 @@ function LiveCallDashboardInner({
 
   // --- Live Mode: Transcribe prospect's voice (remote WebRTC audio) ---
   const startRemoteTranscription = useCallback(async (call: any) => {
-    try {
-      // Try multiple ways to get RTCPeerConnection from Twilio Voice SDK v2
-      const pc: RTCPeerConnection | undefined =
-        call?._mediaHandler?.version?.pc ??
-        call?._mediaHandler?.peerConnection ??
-        call?.mediaStream?.version?.pc ??
-        call?.['_peerConnection'] ??
-        // SDK v2.x uses getRemoteStream or internal _remoteStream
-        null
-
-      // Method 1: Use PeerConnection receivers
-      if (pc) {
-        const remoteStream = new MediaStream()
-        pc.getReceivers().forEach((receiver: RTCRtpReceiver) => {
-          if (receiver.track?.kind === 'audio') remoteStream.addTrack(receiver.track)
-        })
-        if (remoteStream.getTracks().length > 0) {
-          return startRemoteDgStream(remoteStream)
+    // Retry loop — remote stream may not be available immediately after 'accept'
+    for (let attempt = 0; attempt < 10; attempt++) {
+      try {
+        // Method 1: Twilio SDK v2 getRemoteStream()
+        if (typeof call?.getRemoteStream === 'function') {
+          const rs = call.getRemoteStream()
+          if (rs && rs.getAudioTracks().length > 0) {
+            console.log('[Aetheryx] Got remote stream via getRemoteStream() on attempt', attempt)
+            return startRemoteDgStream(rs)
+          }
         }
-      }
 
-      // Method 2: Use Twilio's getRemoteStream (SDK v2)
-      if (typeof call?.getRemoteStream === 'function') {
-        const remoteStream = call.getRemoteStream()
-        if (remoteStream && remoteStream.getTracks().length > 0) {
-          return startRemoteDgStream(remoteStream)
+        // Method 2: Internal _remoteStream
+        const rs2 = call?._mediaHandler?._remoteStream
+        if (rs2 && rs2.getAudioTracks().length > 0) {
+          console.log('[Aetheryx] Got remote stream via _mediaHandler._remoteStream on attempt', attempt)
+          return startRemoteDgStream(rs2)
         }
-      }
 
-      // Method 3: Extract from audio element (browser plays remote audio)
-      // Wait a moment for audio to initialize
-      await new Promise(r => setTimeout(r, 2000))
-      const audioElements = document.querySelectorAll('audio')
-      for (const audio of audioElements) {
-        const ms = (audio as any).captureStream?.() || (audio as any).mozCaptureStream?.()
-        if (ms && ms.getAudioTracks().length > 0) {
-          return startRemoteDgStream(ms)
+        // Method 3: PeerConnection receivers
+        const pc: RTCPeerConnection | undefined =
+          call?._mediaHandler?.version?.pc ??
+          call?._mediaHandler?.peerConnection
+        if (pc) {
+          const ms = new MediaStream()
+          pc.getReceivers().forEach((r: RTCRtpReceiver) => {
+            if (r.track?.kind === 'audio') ms.addTrack(r.track)
+          })
+          if (ms.getAudioTracks().length > 0) {
+            console.log('[Aetheryx] Got remote stream via PeerConnection receivers on attempt', attempt)
+            return startRemoteDgStream(ms)
+          }
         }
-      }
 
-      console.log('[Aetheryx] Could not capture remote audio stream — prospect transcription unavailable')
-    } catch (_e) { /* ignore — remote transcription is best-effort */ }
+        // Method 4: Capture from <audio> elements Twilio creates
+        if (attempt >= 3) {
+          const audioEls = document.querySelectorAll('audio')
+          for (const audio of audioEls) {
+            const cap = (audio as any).captureStream?.() || (audio as any).mozCaptureStream?.()
+            if (cap && cap.getAudioTracks().length > 0) {
+              console.log('[Aetheryx] Got remote stream via audio element capture on attempt', attempt)
+              return startRemoteDgStream(cap)
+            }
+          }
+        }
+      } catch (_e) { /* retry */ }
+
+      // Wait before retrying — increasing delay
+      await new Promise(r => setTimeout(r, 500 + attempt * 300))
+    }
+    console.log('[Aetheryx] Could not capture remote audio after 10 attempts')
   }, [deepgramKey, onAddTranscript])
 
   const startRemoteDgStream = useCallback(async (remoteStream: MediaStream) => {
