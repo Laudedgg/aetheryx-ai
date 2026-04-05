@@ -207,15 +207,42 @@ function PostCallReviewInner({
   }
 
   return (
-    <div className="grid grid-cols-2 gap-4 h-[calc(100vh-88px)]">
+    <div className="flex flex-col gap-4 h-[calc(100vh-88px)]">
       {/* Auto-trigger banner */}
       {autoTrigger && postCallLoading && (
-        <div className="col-span-2 bg-primary/5 border border-primary/20 rounded-lg p-3 flex items-center gap-2.5">
+        <div className="bg-primary/5 border border-primary/20 rounded-lg p-3 flex items-center gap-2.5 flex-shrink-0">
           <FiZap className="w-4 h-4 text-primary animate-pulse" />
           <span className="text-xs text-primary font-semibold">Automatically generating post-call intelligence report...</span>
           <FiRefreshCw className="w-3.5 h-3.5 text-primary animate-spin ml-auto" />
         </div>
       )}
+
+      {/* Call Transcript — collapsible, full width */}
+      {safeTranscript.length > 0 && (
+        <Card className="border border-border shadow-sm flex-shrink-0">
+          <CardHeader className="py-2.5 px-4 flex flex-row items-center justify-between space-y-0">
+            <CardTitle className="text-sm font-semibold flex items-center gap-2">
+              📞 Call Transcript
+              <Badge variant="outline" className="text-[10px] h-5 ml-1">{safeTranscript.length} lines</Badge>
+            </CardTitle>
+          </CardHeader>
+          <Separator />
+          <div className="max-h-[200px] overflow-y-auto px-4 py-3 space-y-2">
+            {safeTranscript.map((line, i) => (
+              <div key={line?.id || i} className="flex gap-2.5 items-start">
+                <span className={`text-[10px] font-bold uppercase flex-shrink-0 w-16 pt-0.5 ${line?.speaker === 'rep' ? 'text-primary' : 'text-pink-400'}`}>
+                  {line?.speaker === 'rep' ? 'Rep' : 'Prospect'}
+                </span>
+                <p className="text-xs text-foreground/70 leading-relaxed">{safeText(line?.text, '')}</p>
+                <span className="text-[9px] text-muted-foreground/40 flex-shrink-0 ml-auto">{line?.timestamp || ''}</span>
+              </div>
+            ))}
+          </div>
+        </Card>
+      )}
+
+      {/* Summary + Email — 2 columns */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1 min-h-0">
 
       {/* Left: Call Summary */}
       <div className="flex flex-col">
@@ -388,6 +415,7 @@ function PostCallReviewInner({
             )}
           </div>
         </Card>
+      </div>
       </div>
     </div>
   )
