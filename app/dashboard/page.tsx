@@ -261,17 +261,16 @@ export default function Page() {
           {activeSection === 'live-call' && !callActive && (
             <div className={C + ' mb-3 overflow-hidden relative flex-shrink-0'} style={{ background: 'linear-gradient(135deg, #0c1a35 0%, #0f1d3a 50%, #0c1530 100%)' }}>
               <div className="absolute inset-0 opacity-20" style={{ background: 'radial-gradient(ellipse at 30% 50%, rgba(33,107,228,0.3) 0%, transparent 70%)' }} />
-              <div className="relative px-5 py-4 md:px-6 md:py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                <div>
-                  <h2 className="text-base md:text-lg font-bold text-white/80 mb-0.5" style={{ fontFamily: "'Instrument Serif', serif" }}>Welcome back</h2>
-                  <p className="text-[12px] text-white/30">Dial a number below to start a live AI-coached sales call. 4 agents are standing by.</p>
-                </div>
-                <div className="flex items-center gap-4 flex-shrink-0">
-                  <div className="text-center"><p className="text-lg font-bold text-white/70" style={{ fontFamily: "'Instrument Serif', serif" }}>{totalCalls}</p><p className="text-[9px] text-white/20">Calls</p></div>
-                  <div className="w-px h-8 bg-white/[0.06]" />
-                  <div className="text-center"><p className="text-lg font-bold text-white/70" style={{ fontFamily: "'Instrument Serif', serif" }}>{AGENTS.length}</p><p className="text-[9px] text-white/20">Agents</p></div>
-                  <div className="w-px h-8 bg-white/[0.06]" />
-                  <div className="text-center"><p className="text-lg font-bold text-white/70" style={{ fontFamily: "'Instrument Serif', serif" }}>{syncedCalls}</p><p className="text-[9px] text-white/20">Synced</p></div>
+              <div className="relative p-5 md:p-6">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-medium mb-3" style={{ background: 'rgba(33,107,228,0.15)', color: '#5b9cf5', border: '1px solid rgba(33,107,228,0.2)' }}>
+                  <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                  Welcome to Aetheryx AI
+                </span>
+                <h2 className="text-lg md:text-xl font-bold mb-1" style={{ fontFamily: "'Instrument Serif', serif" }}>Your AI Sales Co-Pilot</h2>
+                <p className="text-[13px] text-white/40 max-w-lg">Real-time call intelligence, prospect research, objection handling, and post-call automation — all powered by AI agents working together.</p>
+                <div className="flex gap-2 mt-4">
+                  <button className="px-4 py-2 rounded-xl text-[12px] font-semibold text-white transition-all hover:shadow-lg hover:shadow-[#216BE4]/20" style={{ background: 'linear-gradient(135deg, #216BE4, #1a5bc7)' }}>Start a Call</button>
+                  <button onClick={() => setActiveSection('analytics')} className="px-4 py-2 rounded-xl text-[12px] font-medium text-white/40 hover:text-white/60 transition-all" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>View Analytics</button>
                 </div>
               </div>
             </div>
