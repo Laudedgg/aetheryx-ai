@@ -254,8 +254,8 @@ export default function Page() {
       {/* ══════ CENTER CONTENT ══════ */}
       <main className="flex-1 flex flex-col min-w-0 pb-14 md:pb-0 overflow-hidden" style={{ background: '#060a14' }}>
 
-        {/* Section content */}
-        <div className="flex-1 overflow-y-auto p-3 md:p-4">
+        {/* Section content — fills remaining space, scrolls only when needed */}
+        <div className="flex-1 flex flex-col min-h-0 p-3 md:p-4 overflow-y-auto">
 
           {/* Welcome banner (only on live-call) */}
           {activeSection === 'live-call' && !callActive && (

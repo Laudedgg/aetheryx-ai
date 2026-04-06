@@ -869,7 +869,7 @@ function LiveCallDashboardInner({
   // --- Pre-Call State: Full-height Dialer ---
   if (!callActive) {
     return (
-      <div className="rounded-2xl border border-white/[0.06] flex flex-col" style={{ background: '#0c1120', height: 'calc(100vh - 180px)', minHeight: 400 }}>
+      <div className="rounded-2xl border border-white/[0.06] flex flex-col flex-1" style={{ background: '#0c1120' }}>
 
         {/* Header */}
         <div className="flex items-center gap-3 px-5 pt-5 pb-3 flex-shrink-0">
