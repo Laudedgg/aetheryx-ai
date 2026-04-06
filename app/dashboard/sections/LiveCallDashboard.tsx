@@ -854,21 +854,13 @@ function LiveCallDashboardInner({
 
               {/* Phone input + dial button inline */}
               <div className="flex gap-2">
-                <div className="flex-1 flex gap-1.5">
-                  <button
-                    onClick={() => { if (!phoneNumber.startsWith('+')) onPhoneNumberChange('+' + phoneNumber) }}
-                    className="h-11 w-11 rounded-xl flex items-center justify-center text-lg font-mono font-bold flex-shrink-0 transition-all hover:bg-white/[0.06]"
-                    style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', color: '#216BE4' }}
-                    title="Add + prefix"
-                  >+</button>
-                  <Input
-                    value={phoneNumber}
-                    onChange={(e) => onPhoneNumberChange(e.target.value)}
-                    placeholder={isLiveMode ? '+1 (555) 123-4567' : '+971 55 123 4567'}
-                    className="flex-1 h-11 text-sm font-mono bg-white/[0.03] border-white/[0.08]"
-                    onKeyDown={(e) => { if (e.key === 'Enter') handleDial() }}
-                  />
-                </div>
+                <Input
+                  value={phoneNumber}
+                  onChange={(e) => onPhoneNumberChange(e.target.value)}
+                  placeholder={isLiveMode ? '+1 (555) 123-4567' : '+971 55 123 4567'}
+                  className="flex-1 h-11 text-sm font-mono bg-white/[0.03] border-white/[0.08]"
+                  onKeyDown={(e) => { if (e.key === 'Enter') handleDial() }}
+                />
                 <Button
                   onClick={handleDial}
                   disabled={!phoneNumber.trim() || dialingLive}
@@ -896,7 +888,7 @@ function LiveCallDashboardInner({
 
             {/* Right: compact dial pad */}
             <div className="grid grid-cols-3 gap-1.5 w-full md:w-52 flex-shrink-0">
-              {['1','2','3','4','5','6','7','8','9','*','0','#'].map(function(d) {
+              {['1','2','3','4','5','6','7','8','9','+','0','#'].map(function(d) {
                 return (
                   <button
                     key={d}
