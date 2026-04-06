@@ -871,39 +871,39 @@ function LiveCallDashboardInner({
     return (
       <div className="rounded-2xl border border-white/[0.06] flex flex-col flex-1" style={{ background: '#0c1120' }}>
 
-        {/* Header */}
-        <div className="flex items-center gap-3 px-5 pt-5 pb-3 flex-shrink-0">
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: isLiveMode ? 'rgba(52,211,153,0.1)' : 'rgba(33,107,228,0.1)' }}>
-            {isLiveMode ? <FiPhone className="w-5 h-5 text-emerald-400" /> : <FiPlay className="w-5 h-5 text-[#216BE4]" />}
+        {/* Center: Phone input + Dial Pad — fills space, centered */}
+        <div className="flex-1 flex flex-col items-center justify-center px-5 py-3">
+          {/* Title */}
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: isLiveMode ? 'rgba(52,211,153,0.1)' : 'rgba(33,107,228,0.1)' }}>
+              {isLiveMode ? <FiPhone className="w-4 h-4 text-emerald-400" /> : <FiPlay className="w-4 h-4 text-[#216BE4]" />}
+            </div>
+            <div>
+              <h3 className="text-[13px] font-semibold text-white/70" style={{ fontFamily: "'Instrument Serif', serif" }}>
+                {isLiveMode ? 'Start a Sales Call' : 'Run Demo Simulation'}
+              </h3>
+              <p className="text-[10px] text-white/20">{isLiveMode ? 'Twilio + Deepgram' : 'Simulated with AI agents'}</p>
+            </div>
           </div>
-          <div>
-            <h3 className="text-[15px] font-semibold text-white/80" style={{ fontFamily: "'Instrument Serif', serif" }}>
-              {isLiveMode ? 'Start a Sales Call' : 'Run Demo Simulation'}
-            </h3>
-            <p className="text-[11px] text-white/25">{isLiveMode ? 'Real call via Twilio + Deepgram' : 'Simulated conversation with AI agents'}</p>
-          </div>
-        </div>
 
-        {/* Center: Phone input + Dial Pad — fills remaining space */}
-        <div className="flex-1 flex flex-col items-center justify-center px-5 py-4">
-          {/* Phone number display */}
-          <div className="w-full max-w-xs mb-4">
+          {/* Phone number input */}
+          <div className="w-full max-w-[240px] mb-3">
             <Input
               value={phoneNumber}
               onChange={(e) => onPhoneNumberChange(e.target.value)}
               placeholder={isLiveMode ? '+1 (555) 123-4567' : '+971 55 123 4567'}
-              className="h-12 text-center text-lg font-mono tracking-wider bg-white/[0.03] border-white/[0.08] rounded-xl"
+              className="h-10 text-center text-sm font-mono tracking-wider bg-white/[0.03] border-white/[0.08] rounded-xl"
               onKeyDown={(e) => { if (e.key === 'Enter') handleDial() }}
             />
           </div>
 
-          {/* Dial pad — centered, larger buttons */}
-          <div className="grid grid-cols-3 gap-2 w-full max-w-xs">
+          {/* Dial pad — compact */}
+          <div className="grid grid-cols-3 gap-1.5 w-full max-w-[240px]">
             {['1','2','3','4','5','6','7','8','9','+','0','#'].map(d => (
               <button
                 key={d}
                 onClick={() => onPhoneNumberChange(phoneNumber + d)}
-                className="h-14 rounded-2xl text-base font-mono font-semibold transition-all hover:bg-white/[0.06] active:bg-white/[0.1] active:scale-95"
+                className="h-10 rounded-xl text-sm font-mono font-semibold transition-all hover:bg-white/[0.06] active:bg-white/[0.1] active:scale-95"
                 style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.06)' }}
               >
                 {d}
@@ -915,35 +915,29 @@ function LiveCallDashboardInner({
           <button
             onClick={handleDial}
             disabled={!phoneNumber.trim() || dialingLive}
-            className="mt-5 w-full max-w-xs h-12 rounded-2xl flex items-center justify-center gap-2 text-sm font-semibold text-white transition-all hover:shadow-lg disabled:opacity-40 active:scale-[0.98]"
-            style={{ background: isLiveMode ? 'linear-gradient(135deg, #059669, #047857)' : 'linear-gradient(135deg, #216BE4, #1a5bc7)', boxShadow: isLiveMode ? '0 4px 20px rgba(5,150,105,0.25)' : '0 4px 20px rgba(33,107,228,0.25)' }}
+            className="mt-3 w-full max-w-[240px] h-10 rounded-xl flex items-center justify-center gap-2 text-[13px] font-semibold text-white transition-all hover:shadow-lg disabled:opacity-40 active:scale-[0.98]"
+            style={{ background: isLiveMode ? 'linear-gradient(135deg, #059669, #047857)' : 'linear-gradient(135deg, #216BE4, #1a5bc7)', boxShadow: isLiveMode ? '0 4px 16px rgba(5,150,105,0.2)' : '0 4px 16px rgba(33,107,228,0.2)' }}
           >
-            {dialingLive ? (
-              <FiRefreshCw className="w-4 h-4 animate-spin" />
-            ) : isLiveMode ? (
-              <><FiPhone className="w-4 h-4" /> Dial Number</>
-            ) : (
-              <><FiPlay className="w-4 h-4" /> Start Demo Call</>
-            )}
+            {dialingLive ? <FiRefreshCw className="w-4 h-4 animate-spin" /> : isLiveMode ? <><FiPhone className="w-3.5 h-3.5" /> Dial Number</> : <><FiPlay className="w-3.5 h-3.5" /> Start Demo Call</>}
           </button>
 
           {/* Error */}
           {liveCallError && (
-            <div className="mt-3 w-full max-w-xs rounded-xl p-3 flex items-start gap-2.5" style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.15)' }}>
-              <FiAlertCircle className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
-              <p className="text-[11px] text-red-400 leading-relaxed">{liveCallError}</p>
+            <div className="mt-2 w-full max-w-[240px] rounded-xl p-2.5 flex items-start gap-2" style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.15)' }}>
+              <FiAlertCircle className="w-3.5 h-3.5 text-red-400 flex-shrink-0 mt-0.5" />
+              <p className="text-[10px] text-red-400 leading-relaxed">{liveCallError}</p>
             </div>
           )}
         </div>
 
         {/* Mode bar — bottom */}
-        <div className="flex items-center justify-between px-5 py-3 border-t border-white/[0.06] flex-shrink-0">
-          <div className="flex items-center gap-2">
-            <span className={`w-[6px] h-[6px] rounded-full ${isLiveMode ? 'bg-emerald-400' : 'bg-[#216BE4]'}`} />
-            <span className="text-[11px] text-white/25 font-medium">{isLiveMode ? 'Live Mode (Twilio + Deepgram)' : 'Demo Simulation Mode'}</span>
+        <div className="flex items-center justify-between px-4 py-2 border-t border-white/[0.06] flex-shrink-0">
+          <div className="flex items-center gap-1.5">
+            <span className={`w-[5px] h-[5px] rounded-full ${isLiveMode ? 'bg-emerald-400' : 'bg-[#216BE4]'}`} />
+            <span className="text-[10px] text-white/20 font-medium">{isLiveMode ? 'Live Mode' : 'Demo Mode'}</span>
           </div>
-          <Button variant="ghost" size="sm" className="h-6 text-[10px] gap-1 px-2 text-white/20 hover:text-white/40" onClick={onNavigateToConfig}>
-            <FiSettings className="w-3 h-3" /> Configure
+          <Button variant="ghost" size="sm" className="h-5 text-[9px] gap-1 px-1.5 text-white/15 hover:text-white/30" onClick={onNavigateToConfig}>
+            <FiSettings className="w-2.5 h-2.5" /> Configure
           </Button>
         </div>
       </div>
