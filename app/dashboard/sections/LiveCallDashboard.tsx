@@ -830,127 +830,90 @@ function LiveCallDashboardInner({
     setDetectedEntities({ companies: [], people: [] })
   }
 
-  // --- Pre-Call State: Dialer Interface ---
+  // --- Pre-Call State: Compact Dialer ---
   if (!callActive) {
     return (
-      <div className="h-[calc(100vh-80px)] flex flex-col">
-        {/* Dialer */}
-        <div className="flex-1 flex items-center justify-center">
-          <div className="w-full max-w-2xl">
-            <Card className="border border-border shadow-sm">
-              <CardHeader className="py-5 px-5 text-center space-y-2">
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-1">
-                  {isLiveMode
-                    ? <FiPhone className="w-7 h-7 text-primary" />
-                    : <FiPlay className="w-7 h-7 text-primary" />
-                  }
+      <div className="w-full space-y-3">
+        <div className="rounded-2xl border border-white/[0.06] p-5 md:p-6" style={{ background: '#0c1120' }}>
+          <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
+            {/* Left: info */}
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: isLiveMode ? 'rgba(52,211,153,0.1)' : 'rgba(33,107,228,0.1)' }}>
+                  {isLiveMode ? <FiPhone className="w-5 h-5 text-emerald-400" /> : <FiPlay className="w-5 h-5 text-[#216BE4]" />}
                 </div>
-                <CardTitle className="text-lg font-semibold">
-                  {isLiveMode ? 'Start a Sales Call' : 'Run Demo Simulation'}
-                </CardTitle>
-                <p className="text-xs text-muted-foreground leading-relaxed max-w-sm mx-auto">
-                  {isLiveMode
-                    ? 'Enter a phone number to dial. AI will transcribe the live conversation and provide real-time coaching.'
-                    : 'Enter any number and click Start to run a simulated sales call. A pre-recorded demo conversation will play while AI agents analyze it in real time.'
-                  }
-                </p>
-              </CardHeader>
-              <Separator />
-              <CardContent className="p-5 space-y-4">
-                {/* Mode Notice */}
-                {isLiveMode ? (
-                  <div className="bg-green-50 border border-green-200 rounded-lg p-3 flex items-start gap-2.5">
-                    <FiPhone className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-xs text-green-800 font-semibold">Live Mode Active</p>
-                      <p className="text-[11px] text-green-700 mt-0.5 leading-relaxed">
-                        {repPhone
-                          ? <>Your phone <strong>({repPhone})</strong> will ring first — pick up, then Twilio bridges you to the prospect.</>
-                          : <><strong>Add your phone number in Configuration</strong> so Twilio can ring you and connect the prospect.</>}
-                      </p>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 flex items-start gap-2.5">
-                    <FiInfo className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-xs text-amber-800 font-semibold">Demo Mode</p>
-                      <p className="text-[11px] text-amber-700 mt-0.5 leading-relaxed">
-                        No real call will be placed. This runs a simulated conversation to demonstrate AI coaching during a live sales call.
-                      </p>
-                    </div>
-                  </div>
-                )}
-
-                {/* Phone Number Input */}
                 <div>
-                  <label className="text-[11px] text-muted-foreground uppercase font-semibold tracking-wide block mb-1.5">
-                    {isLiveMode ? 'Phone Number to Dial' : 'Phone Number (for demo reference)'}
-                  </label>
-                  <Input
-                    value={phoneNumber}
-                    onChange={(e) => onPhoneNumberChange(e.target.value)}
-                    placeholder={isLiveMode ? '+1 (555) 123-4567' : 'Enter any number, e.g. +971 55 123 4567'}
-                    className="h-11 text-sm font-mono"
-                    onKeyDown={(e) => { if (e.key === 'Enter') handleDial() }}
-                  />
+                  <h3 className="text-base font-semibold" style={{ fontFamily: "'Instrument Serif', serif" }}>
+                    {isLiveMode ? 'Start a Sales Call' : 'Run Demo Simulation'}
+                  </h3>
+                  <p className="text-[11px] text-white/30">
+                    {isLiveMode ? 'Real call via Twilio + Deepgram transcription' : 'Simulated conversation with AI agents'}
+                  </p>
                 </div>
+              </div>
 
-                {/* Dial Pad */}
-                <div className="grid grid-cols-3 gap-2">
-                  {['1','2','3','4','5','6','7','8','9','*','0','#'].map(function(d) {
-                    return (
-                      <button
-                        key={d}
-                        onClick={() => onPhoneNumberChange(phoneNumber + d)}
-                        className="h-11 rounded-lg border border-border bg-card hover:bg-muted active:bg-muted/80 text-sm font-mono font-medium transition-colors"
-                      >
-                        {d}
-                      </button>
-                    )
-                  })}
-                </div>
-
-                {/* Live Call Error Display */}
-                {liveCallError && (
-                  <div className="bg-red-50 border border-red-200 rounded-lg p-3 flex items-start gap-2.5">
-                    <FiAlertCircle className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-xs text-red-700 font-semibold">Call Failed</p>
-                      <p className="text-[11px] text-red-600 mt-0.5 leading-relaxed">{liveCallError}</p>
-                    </div>
-                  </div>
-                )}
-
-                {/* Call Button */}
+              {/* Phone input + dial button inline */}
+              <div className="flex gap-2">
+                <Input
+                  value={phoneNumber}
+                  onChange={(e) => onPhoneNumberChange(e.target.value)}
+                  placeholder={isLiveMode ? '+1 (555) 123-4567' : '+971 55 123 4567'}
+                  className="flex-1 h-11 text-sm font-mono bg-white/[0.03] border-white/[0.08]"
+                  onKeyDown={(e) => { if (e.key === 'Enter') handleDial() }}
+                />
                 <Button
                   onClick={handleDial}
                   disabled={!phoneNumber.trim() || dialingLive}
-                  className="w-full h-12 gap-2 text-sm font-semibold bg-green-600 hover:bg-green-700 text-white rounded-lg shadow-sm"
+                  className="h-11 px-6 gap-2 text-sm font-semibold rounded-xl shadow-lg"
+                  style={{ background: isLiveMode ? '#059669' : '#216BE4' }}
                 >
                   {dialingLive ? (
-                    <><FiRefreshCw className="w-4 h-4 animate-spin" /> Placing call via Twilio...</>
+                    <FiRefreshCw className="w-4 h-4 animate-spin" />
                   ) : isLiveMode ? (
-                    <><FiPhone className="w-4 h-4" /> Dial {phoneNumber || 'Number'}</>
+                    <><FiPhone className="w-4 h-4" /> Dial</>
                   ) : (
-                    <><FiPlay className="w-4 h-4" /> Start Demo Call Simulation</>
+                    <><FiPlay className="w-4 h-4" /> Start</>
                   )}
                 </Button>
+              </div>
 
-                {/* Mode Indicator */}
-                <div className="flex items-center justify-between bg-muted/50 rounded-lg px-3 py-2.5">
-                  <div className="flex items-center gap-2">
-                    <FiRadio className="w-3.5 h-3.5 text-muted-foreground" />
-                    <span className="text-[11px] text-muted-foreground font-medium">
-                      {isLiveMode ? 'Live Mode (Twilio + Deepgram)' : 'Demo Simulation Mode'}
-                    </span>
-                  </div>
-                  <Button variant="ghost" size="sm" className="h-6 text-[11px] gap-1.5 px-2" onClick={onNavigateToConfig}>
-                    <FiSettings className="w-3 h-3" /> Configure
-                  </Button>
+              {/* Error */}
+              {liveCallError && (
+                <div className="mt-3 rounded-xl p-3 flex items-start gap-2.5" style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.15)' }}>
+                  <FiAlertCircle className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
+                  <p className="text-[11px] text-red-400 leading-relaxed">{liveCallError}</p>
                 </div>
-              </CardContent>
-            </Card>
+              )}
+            </div>
+
+            {/* Right: compact dial pad */}
+            <div className="grid grid-cols-3 gap-1.5 w-full md:w-48 flex-shrink-0">
+              {['1','2','3','4','5','6','7','8','9','*','0','#'].map(function(d) {
+                return (
+                  <button
+                    key={d}
+                    onClick={() => onPhoneNumberChange(phoneNumber + d)}
+                    className="h-9 rounded-lg text-sm font-mono font-medium transition-all hover:bg-white/[0.06] active:bg-white/[0.1]"
+                    style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}
+                  >
+                    {d}
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* Mode bar */}
+          <div className="flex items-center justify-between mt-4 pt-3 border-t border-white/[0.06]">
+            <div className="flex items-center gap-2">
+              <span className={`w-[6px] h-[6px] rounded-full ${isLiveMode ? 'bg-emerald-400' : 'bg-[#216BE4]'}`} />
+              <span className="text-[11px] text-white/25 font-medium">
+                {isLiveMode ? 'Live Mode (Twilio + Deepgram)' : 'Demo Simulation Mode'}
+              </span>
+            </div>
+            <Button variant="ghost" size="sm" className="h-6 text-[10px] gap-1 px-2 text-white/20 hover:text-white/40" onClick={onNavigateToConfig}>
+              <FiSettings className="w-3 h-3" /> Configure
+            </Button>
           </div>
         </div>
       </div>
@@ -959,7 +922,7 @@ function LiveCallDashboardInner({
 
   // --- Active Call State: 4-Panel Real-time Dashboard ---
   return (
-    <div className="h-[calc(100vh-80px)] flex gap-3">
+    <div className="flex gap-3" style={{ height: 'calc(100vh - 120px)' }}>
       {/* Main dashboard area */}
       <div className={'flex flex-col gap-3 min-w-0 transition-all duration-300 ' + (chatOpen ? 'flex-1' : 'flex-1')}>
       {/* Call Control Bar */}
