@@ -834,8 +834,8 @@ function LiveCallDashboardInner({
   if (!callActive) {
     return (
       <div className="w-full space-y-3">
-        <div className="rounded-2xl border border-white/[0.06] p-5 md:p-6" style={{ background: '#0c1120' }}>
-          <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
+        <div className="rounded-2xl border border-white/[0.06] p-5 md:p-6 min-h-[420px] flex flex-col" style={{ background: '#0c1120' }}>
+          <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-6 flex-1">
             {/* Left: info */}
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-3 mb-3">
@@ -854,13 +854,21 @@ function LiveCallDashboardInner({
 
               {/* Phone input + dial button inline */}
               <div className="flex gap-2">
-                <Input
-                  value={phoneNumber}
-                  onChange={(e) => onPhoneNumberChange(e.target.value)}
-                  placeholder={isLiveMode ? '+1 (555) 123-4567' : '+971 55 123 4567'}
-                  className="flex-1 h-11 text-sm font-mono bg-white/[0.03] border-white/[0.08]"
-                  onKeyDown={(e) => { if (e.key === 'Enter') handleDial() }}
-                />
+                <div className="flex-1 flex gap-1.5">
+                  <button
+                    onClick={() => { if (!phoneNumber.startsWith('+')) onPhoneNumberChange('+' + phoneNumber) }}
+                    className="h-11 w-11 rounded-xl flex items-center justify-center text-lg font-mono font-bold flex-shrink-0 transition-all hover:bg-white/[0.06]"
+                    style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', color: '#216BE4' }}
+                    title="Add + prefix"
+                  >+</button>
+                  <Input
+                    value={phoneNumber}
+                    onChange={(e) => onPhoneNumberChange(e.target.value)}
+                    placeholder={isLiveMode ? '+1 (555) 123-4567' : '+971 55 123 4567'}
+                    className="flex-1 h-11 text-sm font-mono bg-white/[0.03] border-white/[0.08]"
+                    onKeyDown={(e) => { if (e.key === 'Enter') handleDial() }}
+                  />
+                </div>
                 <Button
                   onClick={handleDial}
                   disabled={!phoneNumber.trim() || dialingLive}
@@ -887,13 +895,13 @@ function LiveCallDashboardInner({
             </div>
 
             {/* Right: compact dial pad */}
-            <div className="grid grid-cols-3 gap-1.5 w-full md:w-48 flex-shrink-0">
+            <div className="grid grid-cols-3 gap-1.5 w-full md:w-52 flex-shrink-0">
               {['1','2','3','4','5','6','7','8','9','*','0','#'].map(function(d) {
                 return (
                   <button
                     key={d}
                     onClick={() => onPhoneNumberChange(phoneNumber + d)}
-                    className="h-9 rounded-lg text-sm font-mono font-medium transition-all hover:bg-white/[0.06] active:bg-white/[0.1]"
+                    className="h-11 rounded-xl text-sm font-mono font-medium transition-all hover:bg-white/[0.06] active:bg-white/[0.1]"
                     style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}
                   >
                     {d}

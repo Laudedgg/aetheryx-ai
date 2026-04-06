@@ -144,25 +144,22 @@ export default function Page() {
   return (
     <div className="h-screen flex overflow-hidden" style={{ background: '#060a14', color: '#dde1ea' }}>
 
-      {/* ══════ LEFT SIDEBAR ══════ */}
-      <aside className="hidden md:flex flex-col w-[240px] flex-shrink-0 p-3 gap-2.5 overflow-y-auto" style={{ background: panelBg }}>
+      {/* ══════ LEFT SIDEBAR — FIXED, NO SCROLL ══════ */}
+      <aside className="hidden md:flex flex-col w-[220px] flex-shrink-0 p-2 gap-2 overflow-hidden" style={{ background: panelBg }}>
 
-        {/* Logo */}
-        <div className={C + ' p-3.5 flex items-center gap-3'} style={{ background: cardBg }}>
-          <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-[#216BE4]/20" style={{ background: 'linear-gradient(135deg, #216BE4, #1a5bc7)' }}>
-            <svg className="w-[18px] h-[18px] text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        {/* Logo — fixed top */}
+        <div className={C + ' px-3 py-2.5 flex items-center gap-2.5 flex-shrink-0'} style={{ background: cardBg }}>
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg shadow-[#216BE4]/20" style={{ background: 'linear-gradient(135deg, #216BE4, #1a5bc7)' }}>
+            <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           </div>
-          <div>
-            <p className="text-[14px] font-bold tracking-wide leading-tight" style={{ fontFamily: "'Instrument Serif', serif" }}>Aetheryx AI</p>
-            <p className="text-[10px] text-white/25 leading-tight">Sales Intelligence</p>
+          <div className="min-w-0">
+            <p className="text-[13px] font-bold tracking-wide leading-tight truncate" style={{ fontFamily: "'Instrument Serif', serif" }}>Aetheryx AI</p>
+            <p className="text-[9px] text-white/25 leading-tight">Sales Intelligence</p>
           </div>
-          <button onClick={() => setDarkMode(!darkMode)} className="ml-auto text-white/15 hover:text-white/40 transition-colors p-1">
-            {darkMode ? <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/></svg> : <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>}
-          </button>
         </div>
 
-        {/* Navigation */}
-        <div className={C + ' p-2'} style={{ background: cardBg }}>
+        {/* Navigation — fixed */}
+        <div className={C + ' p-1.5 flex-shrink-0'} style={{ background: cardBg }}>
           {[
             { key: 'live-call' as Section, label: 'Live Call', icon: '📞' },
             { key: 'call-history' as Section, label: 'Call History', icon: '📋' },
@@ -170,89 +167,87 @@ export default function Page() {
             { key: 'configuration' as Section, label: 'Settings', icon: '⚙️' },
           ].map(item => (
             <button key={item.key} onClick={() => setActiveSection(item.key)} className={cn(
-              'w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-medium transition-all duration-200 mb-0.5',
+              'w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-[12px] font-medium transition-all duration-200',
               activeSection === item.key
-                ? 'text-white shadow-lg shadow-[#216BE4]/20'
+                ? 'text-white shadow-md shadow-[#216BE4]/20'
                 : 'text-white/35 hover:text-white/60 hover:bg-white/[0.03]'
             )} style={activeSection === item.key ? { background: 'linear-gradient(135deg, #216BE4, #1a5bc7)' } : {}}>
-              <span className="text-[15px]">{item.icon}</span>
+              <span className="text-[14px]">{item.icon}</span>
               <span>{item.label}</span>
             </button>
           ))}
           {showPostCallNav && (
             <button onClick={() => setActiveSection('post-call-review')} className={cn(
-              'w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-medium transition-all duration-200',
-              activeSection === 'post-call-review' ? 'text-white shadow-lg shadow-[#216BE4]/20' : 'text-white/35 hover:text-white/60 hover:bg-white/[0.03]'
+              'w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-[12px] font-medium transition-all duration-200',
+              activeSection === 'post-call-review' ? 'text-white shadow-md shadow-[#216BE4]/20' : 'text-white/35 hover:text-white/60 hover:bg-white/[0.03]'
             )} style={activeSection === 'post-call-review' ? { background: 'linear-gradient(135deg, #216BE4, #1a5bc7)' } : {}}>
-              <span className="text-[15px]">📄</span><span>Post-Call</span>
+              <span className="text-[14px]">📄</span><span>Post-Call</span>
             </button>
           )}
         </div>
 
-        {/* Agent Status */}
-        <div className={C + ' p-3.5'} style={{ background: cardBg }}>
-          <p className="text-[10px] font-bold text-white/20 uppercase tracking-[0.15em] mb-3">Agents</p>
-          <div className="space-y-2">
+        {/* Agents — fixed, compact */}
+        <div className={C + ' px-3 py-2.5 flex-shrink-0'} style={{ background: cardBg }}>
+          <p className="text-[9px] font-bold text-white/20 uppercase tracking-[0.15em] mb-2">Agents</p>
+          <div className="space-y-1">
             {AGENTS.map(a => (
-              <div key={a.id} className={cn('flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg transition-all',
-                activeAgentId === a.id ? 'bg-emerald-500/[0.06]' : ''
-              )}>
-                <span className={cn('w-[7px] h-[7px] rounded-full flex-shrink-0 transition-all',
-                  activeAgentId === a.id ? 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)] animate-pulse' : 'bg-white/[0.08]'
+              <div key={a.id} className="flex items-center gap-2 py-0.5">
+                <span className={cn('w-[6px] h-[6px] rounded-full flex-shrink-0',
+                  activeAgentId === a.id ? 'bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.5)] animate-pulse' : 'bg-white/[0.08]'
                 )} />
-                <span className="text-[13px]">{a.icon}</span>
-                <span className={cn('text-[12px] truncate', activeAgentId === a.id ? 'text-emerald-400 font-medium' : 'text-white/30')}>{a.name}</span>
+                <span className="text-[12px]">{a.icon}</span>
+                <span className={cn('text-[11px] truncate', activeAgentId === a.id ? 'text-emerald-400 font-medium' : 'text-white/25')}>{a.name}</span>
               </div>
             ))}
           </div>
           {callActive && (
-            <div className="mt-3 pt-3 border-t border-white/[0.06] flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className="w-[7px] h-[7px] rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.5)]" />
-                <span className="text-[11px] text-emerald-400 font-semibold">Call Active</span>
+            <div className="mt-2 pt-2 border-t border-white/[0.06] flex items-center justify-between">
+              <div className="flex items-center gap-1.5">
+                <span className="w-[6px] h-[6px] rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-[10px] text-emerald-400 font-semibold">Active</span>
               </div>
-              <span className="text-[12px] text-emerald-400 font-mono tabular-nums font-semibold">
+              <span className="text-[11px] text-emerald-400 font-mono tabular-nums font-semibold">
                 {String(Math.floor(callDuration / 60)).padStart(2, '0')}:{String(callDuration % 60).padStart(2, '0')}
               </span>
             </div>
           )}
         </div>
 
-        {/* Recent Calls */}
-        {callHistory.length > 0 && (
-          <div className={C + ' p-3.5'} style={{ background: cardBg }}>
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-[10px] font-bold text-white/20 uppercase tracking-[0.15em]">Recent Calls</p>
-              <span className="text-[10px] text-white/15">{totalCalls}</span>
-            </div>
-            <div className="space-y-1">
-              {callHistory.slice(0, 4).map(call => (
-                <button key={call.id} onClick={() => handleViewCall(call)} className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg hover:bg-white/[0.03] transition-all text-left group">
-                  <span className={cn('w-[6px] h-[6px] rounded-full flex-shrink-0',
-                    call.status === 'synced' ? 'bg-[#216BE4]' : call.status === 'completed' ? 'bg-amber-400' : 'bg-white/10'
+        {/* Recent Calls — fixed, show 2 + "View all" */}
+        <div className={C + ' px-3 py-2.5 flex-shrink-0'} style={{ background: cardBg }}>
+          <div className="flex items-center justify-between mb-2">
+            <p className="text-[9px] font-bold text-white/20 uppercase tracking-[0.15em]">Recent</p>
+            <span className="text-[9px] text-white/15 font-mono">{totalCalls}</span>
+          </div>
+          {callHistory.length > 0 ? (
+            <>
+              {callHistory.slice(0, 2).map(call => (
+                <button key={call.id} onClick={() => handleViewCall(call)} className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-white/[0.03] transition-all text-left">
+                  <span className={cn('w-[5px] h-[5px] rounded-full flex-shrink-0',
+                    call.status === 'synced' ? 'bg-[#216BE4]' : 'bg-amber-400'
                   )} />
-                  <div className="flex-1 min-w-0">
-                    <p className="text-[11px] text-white/40 group-hover:text-white/60 truncate transition-colors">{call.phoneNumber || 'Demo Call'}</p>
-                  </div>
-                  <span className="text-[10px] text-white/15 font-mono tabular-nums">
-                    {call.duration ? Math.floor(call.duration / 60) + ':' + String(call.duration % 60).padStart(2, '0') : '--'}
-                  </span>
+                  <span className="text-[10px] text-white/35 truncate flex-1">{call.phoneNumber || 'Demo'}</span>
+                  <span className="text-[9px] text-white/15 font-mono">{call.duration ? Math.floor(call.duration / 60) + ':' + String(call.duration % 60).padStart(2, '0') : '--'}</span>
                 </button>
               ))}
-            </div>
-          </div>
-        )}
+              {callHistory.length > 2 && (
+                <button onClick={() => setActiveSection('call-history')} className="w-full text-[10px] text-[#216BE4]/60 hover:text-[#216BE4] text-center py-1 mt-1 transition-colors">
+                  View all {totalCalls} calls →
+                </button>
+              )}
+            </>
+          ) : (
+            <p className="text-[10px] text-white/15 text-center py-1">No calls yet</p>
+          )}
+        </div>
 
-        {/* User Profile (bottom) */}
-        <div className="mt-auto">
-          <div className={C + ' p-3 flex items-center gap-2.5'} style={{ background: cardBg }}>
-            <div className="w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold text-white" style={{ background: 'linear-gradient(135deg, #216BE4, #6366f1)' }}>A</div>
-            <div className="flex-1 min-w-0">
-              <p className="text-[11px] text-white/50 font-medium truncate">Aetheryx User</p>
-              <p className="text-[9px] text-white/20 truncate">Pro Plan</p>
-            </div>
-            <span className="text-white/10 text-[10px]">•••</span>
-          </div>
+        {/* User — fixed bottom */}
+        <div className={C + ' px-3 py-2 flex items-center gap-2 mt-auto flex-shrink-0'} style={{ background: cardBg }}>
+          <div className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold text-white flex-shrink-0" style={{ background: 'linear-gradient(135deg, #216BE4, #6366f1)' }}>A</div>
+          <p className="text-[10px] text-white/40 truncate flex-1">Aetheryx User</p>
+          <button onClick={() => setDarkMode(!darkMode)} className="text-white/15 hover:text-white/40 transition-colors p-0.5 flex-shrink-0">
+            {darkMode ? <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="5"/></svg> : <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>}
+          </button>
         </div>
       </aside>
 
