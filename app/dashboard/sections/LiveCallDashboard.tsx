@@ -715,31 +715,66 @@ function LiveCallDashboardInner({
     } catch (_e) { /* ignore — remote transcription is best-effort */ }
   }, [deepgramKey, onAddTranscript])
 
-  // --- Live Mode: Initialize Twilio Device (WebRTC) ---
+  // --- Live Mode: Initialize Twilio Device (WebRTC) + auto-refresh token ---
   useEffect(() => {
     if (!isLiveMode || !twilioSid) return
     let device: any = null
+    let refreshTimer: ReturnType<typeof setTimeout> | null = null
 
-    async function initDevice() {
+    async function getToken(): Promise<string | null> {
       try {
         const res = await fetchWrapper('/api/twilio/token', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ accountSid: twilioSid }),
         })
-        if (!res) return
+        if (!res) return null
         const data = await res.json()
-        if (!data.success || !data.token) {
-          setLiveCallError('Failed to get Twilio access token: ' + (data.error || 'Unknown error'))
+        if (!data.success || !data.token) return null
+        return data.token
+      } catch { return null }
+    }
+
+    async function initDevice() {
+      try {
+        const token = await getToken()
+        if (!token) {
+          setLiveCallError('Failed to get Twilio access token')
           return
         }
         const { Device } = await import('@twilio/voice-sdk')
-        device = new Device(data.token, { logLevel: 1 })
+        device = new Device(token, { logLevel: 1 })
+
+        // Auto-refresh token before it expires (every 50 minutes)
+        device.on('tokenWillExpire', async () => {
+          const newToken = await getToken()
+          if (newToken && device) {
+            device.updateToken(newToken)
+          }
+        })
+
         device.on('error', (err: any) => {
+          // If token expired, silently refresh instead of showing error
+          if (err?.code === 20104 || err?.message?.includes('expired')) {
+            getToken().then(newToken => {
+              if (newToken && device) device.updateToken(newToken)
+            })
+            return
+          }
           setLiveCallError('Twilio Device error: ' + (err?.message || 'Unknown'))
         })
+
         await device.register()
         twilioDeviceRef.current = device
+
+        // Backup: refresh token every 50 minutes in case tokenWillExpire doesn't fire
+        refreshTimer = setInterval(async () => {
+          const newToken = await getToken()
+          if (newToken && twilioDeviceRef.current) {
+            try { twilioDeviceRef.current.updateToken(newToken) } catch {}
+          }
+        }, 50 * 60 * 1000)
+
       } catch (err: any) {
         setLiveCallError('Failed to initialize voice device: ' + (err?.message || 'Unknown error'))
       }
@@ -747,7 +782,8 @@ function LiveCallDashboardInner({
 
     initDevice()
     return () => {
-      if (device) { try { device.destroy() } catch (_e) { /* ignore */ } }
+      if (refreshTimer) clearInterval(refreshTimer)
+      if (device) { try { device.destroy() } catch {} }
       twilioDeviceRef.current = null
     }
   }, [isLiveMode, twilioSid])
