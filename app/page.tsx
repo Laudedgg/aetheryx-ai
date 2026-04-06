@@ -36,26 +36,91 @@ function Chip({ label, value }: { label: string; value: string }) {
 
 function DashboardMockup() {
   return (
-    <div className="rounded-lg sm:rounded-xl overflow-hidden" style={{ background: "#080d18" }}>
-      <div className="flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 border-b border-white/[0.06]" style={{ background: "#0a1020" }}>
+    <div className="rounded-xl sm:rounded-2xl overflow-hidden" style={{ background: '#060a14' }}>
+      {/* Window chrome */}
+      <div className="flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 border-b border-white/[0.06]" style={{ background: '#080d18' }}>
         <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-red-500/60" /><div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-yellow-500/60" /><div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-green-500/60" />
-        <span className="ml-auto text-[8px] sm:text-[10px] text-white/20 font-mono hidden sm:block">Live Call Dashboard — Aetheryx AI</span>
+        <span className="ml-auto text-[8px] sm:text-[10px] text-white/15 font-mono hidden sm:block">Aetheryx AI — Live Call Dashboard</span>
       </div>
-      <div className="grid grid-cols-3 min-h-[220px] sm:min-h-[280px] md:min-h-[320px]">
-        <div className="p-2.5 sm:p-4 border-r border-white/[0.04] flex flex-col gap-1.5 sm:gap-2 overflow-hidden">
-          <div className="flex items-center gap-1.5 mb-0.5"><span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" /><span className="text-[8px] sm:text-[9px] font-semibold text-red-400 uppercase tracking-wider">Live</span></div>
-          <p className="text-[8px] sm:text-[9px] text-white/20 uppercase tracking-wider font-semibold">Transcript</p>
-          <div><span className="text-[8px] sm:text-[9px] font-bold text-[#216BE4]">REP</span><p className="text-[9px] sm:text-[10px] text-white/40 bg-white/[0.02] rounded p-1 sm:p-1.5 mt-0.5">How are your tools handling pipeline?</p></div>
-          <div><span className="text-[8px] sm:text-[9px] font-bold text-pink-400">PROSPECT</span><p className="text-[9px] sm:text-[10px] text-white/40 bg-white/[0.02] rounded p-1 sm:p-1.5 mt-0.5 border-l-2 border-[#216BE4]/40">It&apos;s a mess. Nobody uses HubSpot...</p></div>
+      <div className="flex min-h-[200px] sm:min-h-[280px] md:min-h-[320px]">
+        {/* Mini sidebar */}
+        <div className="hidden sm:flex flex-col w-[120px] md:w-[140px] border-r border-white/[0.06] p-2 gap-1.5 flex-shrink-0" style={{ background: '#080d18' }}>
+          <div className="flex items-center gap-1.5 mb-1">
+            <div className="w-5 h-5 rounded-md flex items-center justify-center" style={{ background: 'linear-gradient(135deg,#216BE4,#1a5bc7)' }}>
+              <svg className="w-2.5 h-2.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <span className="text-[8px] font-bold text-white/50" style={{ fontFamily: "'Instrument Serif', serif" }}>Aetheryx</span>
+          </div>
+          {[{l:'Live Call',active:true},{l:'Call History',active:false},{l:'Analytics',active:false}].map(n=>(
+            <div key={n.l} className="flex items-center gap-1.5 px-1.5 py-1 rounded-md text-[8px]" style={n.active?{background:'linear-gradient(135deg,#216BE4,#1a5bc7)',color:'#fff'}:{color:'rgba(255,255,255,0.25)'}}>
+              <span className="w-1 h-1 rounded-full" style={{background:n.active?'#fff':'rgba(255,255,255,0.15)'}}/>{n.l}
+            </div>
+          ))}
+          <div className="mt-auto">
+            <p className="text-[7px] text-white/15 uppercase tracking-wider font-bold mb-1">Agents</p>
+            {['🔍 Research','🎯 Strategy','📊 Post-Call','🔗 CRM'].map((a,i)=>(
+              <div key={a} className="flex items-center gap-1 py-0.5">
+                <span className={`w-1 h-1 rounded-full ${i===0?'bg-emerald-400 animate-pulse':'bg-white/10'}`}/>
+                <span className={`text-[7px] ${i===0?'text-emerald-400':'text-white/20'}`}>{a}</span>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="p-2.5 sm:p-4 border-r border-white/[0.04] flex flex-col gap-1.5 sm:gap-2 overflow-hidden">
-          <p className="text-[8px] sm:text-[9px] text-white/20 uppercase tracking-wider font-semibold">Intelligence</p>
-          <div className="rounded-md p-2 bg-[#216BE4]/[0.06] border border-[#216BE4]/10"><p className="text-[8px] text-[#216BE4] font-semibold">Company</p><p className="text-[9px] sm:text-[10px] text-white/60 font-semibold">Acme Corp · Series B</p></div>
-          <div className="rounded-md p-2 bg-[#216BE4]/[0.06] border border-[#216BE4]/10"><p className="text-[8px] text-[#216BE4] font-semibold">Stack</p><div className="flex flex-wrap gap-0.5 mt-0.5">{["HubSpot","Salesforce","Slack"].map(t=><span key={t} className="text-[8px] px-1 py-0.5 rounded bg-[#216BE4]/10 text-[#216BE4]/70">{t}</span>)}</div></div>
-        </div>
-        <div className="p-2.5 sm:p-4 flex flex-col gap-1.5 sm:gap-2 overflow-hidden">
-          <div className="rounded-md p-2 bg-white/[0.02] border border-white/[0.04]"><p className="text-[8px] text-white/20 uppercase font-semibold">Probability</p><p className="text-lg sm:text-2xl font-bold text-green-400 mt-0.5">74%</p><div className="h-0.5 sm:h-1 bg-white/[0.06] rounded-full mt-1.5"><div className="h-full w-[74%] rounded-full bg-gradient-to-r from-[#216BE4] to-green-400"/></div></div>
-          <div className="rounded-md p-1.5 bg-white/[0.02] border border-white/[0.04]"><p className="text-[7px] font-bold text-[#216BE4] uppercase mb-0.5">💡 Whisper</p><p className="text-[8px] sm:text-[10px] text-white/40">&quot;Onboarding gets teams live in 2 weeks.&quot;</p></div>
+
+        {/* Main 3-panel area */}
+        <div className="flex-1 grid grid-cols-3">
+          {/* Transcript */}
+          <div className="p-2.5 sm:p-3 border-r border-white/[0.04] flex flex-col gap-1.5 overflow-hidden">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"/><span className="text-[7px] sm:text-[8px] font-bold text-emerald-400 uppercase">Live</span></div>
+              <span className="text-[7px] text-white/15">4 lines</span>
+            </div>
+            <p className="text-[7px] sm:text-[8px] text-white/15 uppercase tracking-wider font-bold">Transcript</p>
+            <div className="space-y-1.5">
+              <div><span className="text-[7px] sm:text-[8px] font-bold text-[#216BE4]">REP</span><p className="text-[8px] sm:text-[9px] text-white/35 rounded-lg p-1.5 mt-0.5" style={{background:'rgba(255,255,255,0.02)'}}>How are your tools handling pipeline reporting?</p></div>
+              <div><span className="text-[7px] sm:text-[8px] font-bold text-pink-400">PROSPECT</span><p className="text-[8px] sm:text-[9px] text-white/35 rounded-lg p-1.5 mt-0.5 border-l-2 border-[#216BE4]/30" style={{background:'rgba(255,255,255,0.02)'}}>It&apos;s a mess. Nobody uses HubSpot properly...</p></div>
+              <div><span className="text-[7px] sm:text-[8px] font-bold text-pink-400">PROSPECT</span><p className="text-[8px] sm:text-[9px] text-white/35 rounded-lg p-1.5 mt-0.5 border-l-2 border-[#216BE4]/30" style={{background:'rgba(255,255,255,0.02)'}}>Our CFO is asking about budget for a solution.</p></div>
+            </div>
+          </div>
+
+          {/* Research */}
+          <div className="p-2.5 sm:p-3 border-r border-white/[0.04] flex flex-col gap-1.5 overflow-hidden">
+            <p className="text-[7px] sm:text-[8px] text-white/15 uppercase tracking-wider font-bold">Research Agent</p>
+            <div className="rounded-xl p-2" style={{background:'rgba(33,107,228,0.05)',border:'1px solid rgba(33,107,228,0.1)'}}>
+              <p className="text-[7px] text-[#216BE4] font-bold mb-0.5">Company</p>
+              <p className="text-[8px] sm:text-[9px] text-white/50 font-semibold">Acme Corp · Series B</p>
+              <p className="text-[7px] text-white/25">$12M raised · 320 employees</p>
+            </div>
+            <div className="rounded-xl p-2" style={{background:'rgba(33,107,228,0.05)',border:'1px solid rgba(33,107,228,0.1)'}}>
+              <p className="text-[7px] text-[#216BE4] font-bold mb-0.5">Tech Stack</p>
+              <div className="flex flex-wrap gap-0.5 mt-0.5">{["HubSpot","Salesforce","Slack","Zapier"].map(t=><span key={t} className="text-[7px] px-1.5 py-0.5 rounded-full" style={{background:'rgba(33,107,228,0.08)',color:'rgba(33,107,228,0.6)'}}>{t}</span>)}</div>
+            </div>
+            <div className="rounded-xl p-2" style={{background:'rgba(33,107,228,0.05)',border:'1px solid rgba(33,107,228,0.1)'}}>
+              <p className="text-[7px] text-[#216BE4] font-bold mb-0.5">Recent News</p>
+              <p className="text-[7px] text-white/30">↗ Hired VP Sales. Expanding EMEA Q2.</p>
+            </div>
+          </div>
+
+          {/* Probability + Whisper */}
+          <div className="p-2.5 sm:p-3 flex flex-col gap-1.5 overflow-hidden">
+            <div className="rounded-xl p-2.5" style={{background:'rgba(255,255,255,0.02)',border:'1px solid rgba(255,255,255,0.04)'}}>
+              <p className="text-[7px] text-white/15 uppercase font-bold">Deal Probability</p>
+              <p className="text-xl sm:text-2xl font-bold mt-0.5" style={{color:'#34d399',fontFamily:"'Instrument Serif', serif"}}>74%</p>
+              <div className="h-1 rounded-full mt-2" style={{background:'rgba(255,255,255,0.06)'}}>
+                <div className="h-full rounded-full" style={{width:'74%',background:'linear-gradient(90deg,#216BE4,#34d399)'}}/>
+              </div>
+              <div className="flex gap-1 mt-1.5">{["Budget","Pain","DM"].map(s=><span key={s} className="text-[7px] px-1.5 py-0.5 rounded-full" style={{background:'rgba(52,211,153,0.08)',color:'#6ee7b7'}}>{`✓ ${s}`}</span>)}</div>
+            </div>
+            <p className="text-[7px] text-white/15 uppercase font-bold mt-0.5">AI Whisper</p>
+            <div className="rounded-xl p-2" style={{background:'rgba(255,255,255,0.02)',border:'1px solid rgba(255,255,255,0.04)'}}>
+              <p className="text-[7px] font-bold text-[#216BE4] uppercase mb-0.5">💡 Objection Handler</p>
+              <p className="text-[8px] text-white/30">&quot;Our onboarding gets teams live in 2 weeks.&quot;</p>
+            </div>
+            <div className="rounded-xl p-2" style={{background:'rgba(255,255,255,0.02)',border:'1px solid rgba(255,255,255,0.04)'}}>
+              <p className="text-[7px] font-bold text-[#216BE4] uppercase mb-0.5">❓ Next Question</p>
+              <p className="text-[8px] text-white/30">&quot;When does your CFO need the decision by?&quot;</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
