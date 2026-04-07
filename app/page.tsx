@@ -44,7 +44,7 @@ function DashboardMockup() {
         <div className="w-2 h-2 rounded-full bg-red-500/60" /><div className="w-2 h-2 rounded-full bg-yellow-500/60" /><div className="w-2 h-2 rounded-full bg-green-500/60" />
         <span className="ml-auto text-[8px] text-white/15 font-mono hidden sm:block">Aetheryx AI Dashboard</span>
       </div>
-      <div className="flex" style={{ minHeight: 280 }}>
+      <div className="flex" style={{ minHeight: 380 }}>
 
         {/* Left Sidebar */}
         <div className="hidden sm:flex flex-col w-[110px] md:w-[130px] flex-shrink-0 p-1.5 gap-1" style={{ background: '#080d18' }}>
