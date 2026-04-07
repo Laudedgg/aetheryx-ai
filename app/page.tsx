@@ -35,90 +35,135 @@ function Chip({ label, value }: { label: string; value: string }) {
 }
 
 function DashboardMockup() {
+  const cb = '#0c1120'
+  const bdr = '1px solid rgba(255,255,255,0.06)'
   return (
     <div className="rounded-xl sm:rounded-2xl overflow-hidden" style={{ background: '#060a14' }}>
       {/* Window chrome */}
-      <div className="flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 border-b border-white/[0.06]" style={{ background: '#080d18' }}>
-        <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-red-500/60" /><div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-yellow-500/60" /><div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-green-500/60" />
-        <span className="ml-auto text-[8px] sm:text-[10px] text-white/15 font-mono hidden sm:block">Aetheryx AI — Live Call Dashboard</span>
+      <div className="flex items-center gap-2 px-3 sm:px-4 py-2" style={{ background: '#080d18', borderBottom: bdr }}>
+        <div className="w-2 h-2 rounded-full bg-red-500/60" /><div className="w-2 h-2 rounded-full bg-yellow-500/60" /><div className="w-2 h-2 rounded-full bg-green-500/60" />
+        <span className="ml-auto text-[8px] text-white/15 font-mono hidden sm:block">Aetheryx AI Dashboard</span>
       </div>
-      <div className="flex min-h-[200px] sm:min-h-[280px] md:min-h-[320px]">
-        {/* Mini sidebar */}
-        <div className="hidden sm:flex flex-col w-[120px] md:w-[140px] border-r border-white/[0.06] p-2 gap-1.5 flex-shrink-0" style={{ background: '#080d18' }}>
-          <div className="flex items-center gap-1.5 mb-1">
-            <div className="w-5 h-5 rounded-md flex items-center justify-center" style={{ background: 'linear-gradient(135deg,#216BE4,#1a5bc7)' }}>
-              <svg className="w-2.5 h-2.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      <div className="flex" style={{ minHeight: 280 }}>
+
+        {/* Left Sidebar */}
+        <div className="hidden sm:flex flex-col w-[110px] md:w-[130px] flex-shrink-0 p-1.5 gap-1" style={{ background: '#080d18' }}>
+          {/* Logo */}
+          <div className="rounded-lg px-2 py-1.5 flex items-center gap-1.5" style={{ background: cb, border: bdr }}>
+            <div className="w-4 h-4 rounded flex items-center justify-center" style={{ background: 'linear-gradient(135deg,#216BE4,#1a5bc7)' }}>
+              <svg className="w-2 h-2 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
             </div>
-            <span className="text-[8px] font-bold text-white/50" style={{ fontFamily: "'Instrument Serif', serif" }}>Aetheryx</span>
+            <span className="text-[7px] font-bold text-white/50" style={{ fontFamily: "'Instrument Serif', serif" }}>Aetheryx AI</span>
           </div>
-          {[{l:'Live Call',active:true},{l:'Call History',active:false},{l:'Analytics',active:false}].map(n=>(
-            <div key={n.l} className="flex items-center gap-1.5 px-1.5 py-1 rounded-md text-[8px]" style={n.active?{background:'linear-gradient(135deg,#216BE4,#1a5bc7)',color:'#fff'}:{color:'rgba(255,255,255,0.25)'}}>
-              <span className="w-1 h-1 rounded-full" style={{background:n.active?'#fff':'rgba(255,255,255,0.15)'}}/>{n.l}
-            </div>
-          ))}
-          <div className="mt-auto">
-            <p className="text-[7px] text-white/15 uppercase tracking-wider font-bold mb-1">Agents</p>
-            {['🔍 Research','🎯 Strategy','📊 Post-Call','🔗 CRM'].map((a,i)=>(
-              <div key={a} className="flex items-center gap-1 py-0.5">
-                <span className={`w-1 h-1 rounded-full ${i===0?'bg-emerald-400 animate-pulse':'bg-white/10'}`}/>
-                <span className={`text-[7px] ${i===0?'text-emerald-400':'text-white/20'}`}>{a}</span>
+          {/* Nav */}
+          <div className="rounded-lg p-1" style={{ background: cb, border: bdr }}>
+            {[{l:'📞 Live Call',a:true},{l:'📋 Call History',a:false},{l:'📊 Analytics',a:false},{l:'⚙️ Settings',a:false}].map(n=>(
+              <div key={n.l} className="flex items-center gap-1 px-1.5 py-1 rounded-md text-[7px] mb-0.5" style={n.a?{background:'linear-gradient(135deg,#216BE4,#1a5bc7)',color:'#fff'}:{color:'rgba(255,255,255,0.25)'}}>
+                {n.l}
               </div>
             ))}
           </div>
+          {/* Agents */}
+          <div className="rounded-lg px-2 py-1.5" style={{ background: cb, border: bdr }}>
+            <p className="text-[6px] text-white/15 uppercase tracking-wider font-bold mb-1">Agents</p>
+            {['🔍 Research','🎯 Strategy','📊 Post-Call','🔗 CRM'].map((a,i)=>(
+              <div key={a} className="flex items-center gap-1 py-0.5">
+                <span className={`w-1 h-1 rounded-full ${i===0?'bg-emerald-400':'bg-white/10'}`}/>
+                <span className={`text-[6px] ${i===0?'text-emerald-400':'text-white/20'}`}>{a}</span>
+              </div>
+            ))}
+          </div>
+          {/* Recent */}
+          <div className="rounded-lg px-2 py-1.5 mt-auto" style={{ background: cb, border: bdr }}>
+            <p className="text-[6px] text-white/15 uppercase tracking-wider font-bold mb-1">Recent</p>
+            <div className="flex items-center gap-1 py-0.5"><span className="w-1 h-1 rounded-full bg-amber-400"/><span className="text-[6px] text-white/25">+971521201808</span></div>
+            <div className="flex items-center gap-1 py-0.5"><span className="w-1 h-1 rounded-full bg-[#216BE4]"/><span className="text-[6px] text-white/25">+971507587246</span></div>
+          </div>
         </div>
 
-        {/* Main 3-panel area */}
-        <div className="flex-1 grid grid-cols-3">
-          {/* Transcript */}
-          <div className="p-2.5 sm:p-3 border-r border-white/[0.04] flex flex-col gap-1.5 overflow-hidden">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"/><span className="text-[7px] sm:text-[8px] font-bold text-emerald-400 uppercase">Live</span></div>
-              <span className="text-[7px] text-white/15">4 lines</span>
-            </div>
-            <p className="text-[7px] sm:text-[8px] text-white/15 uppercase tracking-wider font-bold">Transcript</p>
-            <div className="space-y-1.5">
-              <div><span className="text-[7px] sm:text-[8px] font-bold text-[#216BE4]">REP</span><p className="text-[8px] sm:text-[9px] text-white/35 rounded-lg p-1.5 mt-0.5" style={{background:'rgba(255,255,255,0.02)'}}>How are your tools handling pipeline reporting?</p></div>
-              <div><span className="text-[7px] sm:text-[8px] font-bold text-pink-400">PROSPECT</span><p className="text-[8px] sm:text-[9px] text-white/35 rounded-lg p-1.5 mt-0.5 border-l-2 border-[#216BE4]/30" style={{background:'rgba(255,255,255,0.02)'}}>It&apos;s a mess. Nobody uses HubSpot properly...</p></div>
-              <div><span className="text-[7px] sm:text-[8px] font-bold text-pink-400">PROSPECT</span><p className="text-[8px] sm:text-[9px] text-white/35 rounded-lg p-1.5 mt-0.5 border-l-2 border-[#216BE4]/30" style={{background:'rgba(255,255,255,0.02)'}}>Our CFO is asking about budget for a solution.</p></div>
-            </div>
-          </div>
-
-          {/* Research */}
-          <div className="p-2.5 sm:p-3 border-r border-white/[0.04] flex flex-col gap-1.5 overflow-hidden">
-            <p className="text-[7px] sm:text-[8px] text-white/15 uppercase tracking-wider font-bold">Research Agent</p>
-            <div className="rounded-xl p-2" style={{background:'rgba(33,107,228,0.05)',border:'1px solid rgba(33,107,228,0.1)'}}>
-              <p className="text-[7px] text-[#216BE4] font-bold mb-0.5">Company</p>
-              <p className="text-[8px] sm:text-[9px] text-white/50 font-semibold">Acme Corp · Series B</p>
-              <p className="text-[7px] text-white/25">$12M raised · 320 employees</p>
-            </div>
-            <div className="rounded-xl p-2" style={{background:'rgba(33,107,228,0.05)',border:'1px solid rgba(33,107,228,0.1)'}}>
-              <p className="text-[7px] text-[#216BE4] font-bold mb-0.5">Tech Stack</p>
-              <div className="flex flex-wrap gap-0.5 mt-0.5">{["HubSpot","Salesforce","Slack","Zapier"].map(t=><span key={t} className="text-[7px] px-1.5 py-0.5 rounded-full" style={{background:'rgba(33,107,228,0.08)',color:'rgba(33,107,228,0.6)'}}>{t}</span>)}</div>
-            </div>
-            <div className="rounded-xl p-2" style={{background:'rgba(33,107,228,0.05)',border:'1px solid rgba(33,107,228,0.1)'}}>
-              <p className="text-[7px] text-[#216BE4] font-bold mb-0.5">Recent News</p>
-              <p className="text-[7px] text-white/30">↗ Hired VP Sales. Expanding EMEA Q2.</p>
+        {/* Center Content */}
+        <div className="flex-1 flex flex-col p-1.5 sm:p-2 gap-1.5 min-w-0" style={{ borderRight: bdr }}>
+          {/* Welcome banner mini */}
+          <div className="rounded-lg relative overflow-hidden px-3 py-2" style={{ background: 'linear-gradient(135deg,#0c1a35,#0f1d3a)' }}>
+            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[6px] font-medium mb-1" style={{ background: 'rgba(33,107,228,0.15)', color: '#5b9cf5' }}>
+              <svg className="w-2 h-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              Welcome to Aetheryx AI
+            </span>
+            <p className="text-[8px] font-bold text-white/70" style={{ fontFamily: "'Instrument Serif', serif" }}>Your AI Sales Co-Pilot</p>
+            <p className="text-[6px] text-white/30 mt-0.5">Real-time call intelligence, prospect research, objection handling.</p>
+            <div className="flex gap-1 mt-1.5">
+              <span className="px-2 py-0.5 rounded-md text-[6px] font-semibold text-white" style={{ background: 'linear-gradient(135deg,#216BE4,#1a5bc7)' }}>Start a Call</span>
+              <span className="px-2 py-0.5 rounded-md text-[6px] text-white/30" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>View Analytics</span>
             </div>
           </div>
-
-          {/* Probability + Whisper */}
-          <div className="p-2.5 sm:p-3 flex flex-col gap-1.5 overflow-hidden">
-            <div className="rounded-xl p-2.5" style={{background:'rgba(255,255,255,0.02)',border:'1px solid rgba(255,255,255,0.04)'}}>
-              <p className="text-[7px] text-white/15 uppercase font-bold">Deal Probability</p>
-              <p className="text-xl sm:text-2xl font-bold mt-0.5" style={{color:'#34d399',fontFamily:"'Instrument Serif', serif"}}>74%</p>
-              <div className="h-1 rounded-full mt-2" style={{background:'rgba(255,255,255,0.06)'}}>
-                <div className="h-full rounded-full" style={{width:'74%',background:'linear-gradient(90deg,#216BE4,#34d399)'}}/>
+          {/* Dialer */}
+          <div className="flex-1 rounded-lg flex flex-col items-center justify-center" style={{ background: cb, border: bdr }}>
+            <div className="flex items-center gap-1.5 mb-2">
+              <div className="w-5 h-5 rounded-md flex items-center justify-center" style={{ background: 'rgba(52,211,153,0.1)' }}>
+                <svg className="w-2.5 h-2.5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72"/></svg>
               </div>
-              <div className="flex gap-1 mt-1.5">{["Budget","Pain","DM"].map(s=><span key={s} className="text-[7px] px-1.5 py-0.5 rounded-full" style={{background:'rgba(52,211,153,0.08)',color:'#6ee7b7'}}>{`✓ ${s}`}</span>)}</div>
+              <div>
+                <p className="text-[8px] font-semibold text-white/60" style={{ fontFamily: "'Instrument Serif', serif" }}>Start a Sales Call</p>
+                <p className="text-[6px] text-white/20">Twilio + Deepgram</p>
+              </div>
             </div>
-            <p className="text-[7px] text-white/15 uppercase font-bold mt-0.5">AI Whisper</p>
-            <div className="rounded-xl p-2" style={{background:'rgba(255,255,255,0.02)',border:'1px solid rgba(255,255,255,0.04)'}}>
-              <p className="text-[7px] font-bold text-[#216BE4] uppercase mb-0.5">💡 Objection Handler</p>
-              <p className="text-[8px] text-white/30">&quot;Our onboarding gets teams live in 2 weeks.&quot;</p>
+            {/* Phone input */}
+            <div className="w-32 h-5 rounded-md mb-1.5 flex items-center justify-center text-[7px] text-white/30 font-mono" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>+1 (555) 123-4567</div>
+            {/* Mini dial pad */}
+            <div className="grid grid-cols-3 gap-0.5 w-32">
+              {['1','2','3','4','5','6','7','8','9','+','0','#'].map(d=>(
+                <div key={d} className="h-4 rounded flex items-center justify-center text-[7px] font-mono text-white/30" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>{d}</div>
+              ))}
             </div>
-            <div className="rounded-xl p-2" style={{background:'rgba(255,255,255,0.02)',border:'1px solid rgba(255,255,255,0.04)'}}>
-              <p className="text-[7px] font-bold text-[#216BE4] uppercase mb-0.5">❓ Next Question</p>
-              <p className="text-[8px] text-white/30">&quot;When does your CFO need the decision by?&quot;</p>
+            {/* Dial button */}
+            <div className="w-32 h-5 rounded-md mt-1.5 flex items-center justify-center gap-1 text-[7px] font-semibold text-white" style={{ background: 'linear-gradient(135deg,#059669,#047857)' }}>
+              <svg className="w-2 h-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07"/></svg>
+              Dial Number
+            </div>
+            {/* Mode */}
+            <div className="flex items-center gap-1 mt-2">
+              <span className="w-1 h-1 rounded-full bg-emerald-400"/>
+              <span className="text-[6px] text-white/15">Live Mode</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Panel */}
+        <div className="hidden md:flex flex-col w-[140px] flex-shrink-0 p-1.5 gap-1">
+          {/* Agent Pulse */}
+          <div className="rounded-lg px-2 py-1.5" style={{ background: cb, border: bdr }}>
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-[8px] font-bold text-white/50" style={{ fontFamily: "'Instrument Serif', serif" }}>Agent Pulse</span>
+              <span className="text-[6px] px-1.5 py-0.5 rounded-full font-semibold" style={{ background: 'rgba(52,211,153,0.08)', color: '#34d399' }}>● Live</span>
+            </div>
+            <div className="grid grid-cols-2 gap-1">
+              {[{i:'📞',v:'21',l:'Calls'},{i:'🔗',v:'0',l:'Synced'},{i:'⏱️',v:'0:14',l:'Avg'},{i:'📧',v:'0',l:'Emails'}].map(s=>(
+                <div key={s.l} className="rounded-md px-1.5 py-1" style={{ background: 'rgba(255,255,255,0.015)', border: '1px solid rgba(255,255,255,0.04)' }}>
+                  <p className="text-[9px] font-bold text-white/60" style={{ fontFamily: "'Instrument Serif', serif" }}>{s.v}</p>
+                  <p className="text-[5px] text-white/20">{s.l}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* AI Chat */}
+          <div className="rounded-lg flex-1 flex flex-col" style={{ background: cb, border: bdr }}>
+            <div className="flex items-center justify-between px-2 py-1.5" style={{ borderBottom: 'rgba(255,255,255,0.04)' }}>
+              <div className="flex items-center gap-1">
+                <span className="text-[6px]" style={{ color: '#216BE4' }}>✦</span>
+                <span className="text-[7px] font-semibold text-white/50" style={{ fontFamily: "'Instrument Serif', serif" }}>AI Assistant</span>
+              </div>
+              <span className="text-[5px] text-white/15">Always On</span>
+            </div>
+            <div className="flex-1 flex flex-col items-center justify-center px-2 py-2">
+              <span className="text-[14px] text-white/5 mb-1">✦</span>
+              <p className="text-[6px] text-white/20 text-center">Your AI sales assistant</p>
+              <p className="text-[5px] text-white/10 text-center mt-0.5">Ask about calls or coaching</p>
+            </div>
+            <div className="px-1.5 py-1" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+              <div className="flex items-center rounded-md px-1.5 h-4" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
+                <span className="text-[6px] text-white/15 flex-1">Ask the AI...</span>
+                <span className="text-[7px]" style={{ color: '#216BE4' }}>↗</span>
+              </div>
             </div>
           </div>
         </div>
