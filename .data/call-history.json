@@ -1,5 +1,501 @@
 [
   {
+    "id": "call-1775639161045",
+    "startTime": "2026-04-08T09:06:01.045Z",
+    "endTime": "2026-04-08T09:06:48.554Z",
+    "transcript": [
+      {
+        "id": "live-1775639177143-epkb",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "01:06:17 PM"
+      },
+      {
+        "id": "live-1775639177883-s1hb",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "01:06:17 PM"
+      },
+      {
+        "id": "live-1775639178076-b8q3",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "01:06:18 PM"
+      },
+      {
+        "id": "live-1775639181984-megd",
+        "speaker": "rep",
+        "text": "No.",
+        "timestamp": "01:06:21 PM"
+      },
+      {
+        "id": "live-1775639182017-qvl8",
+        "speaker": "rep",
+        "text": "No.",
+        "timestamp": "01:06:22 PM"
+      },
+      {
+        "id": "live-1775639182155-w1ee",
+        "speaker": "prospect",
+        "text": "No.",
+        "timestamp": "01:06:22 PM"
+      },
+      {
+        "id": "live-1775639183447-cb73",
+        "speaker": "prospect",
+        "text": "Okay. Yeah. Yeah. Actually,",
+        "timestamp": "01:06:23 PM"
+      },
+      {
+        "id": "live-1775639183528-h847",
+        "speaker": "prospect",
+        "text": "I can hear you actually.",
+        "timestamp": "01:06:23 PM"
+      },
+      {
+        "id": "live-1775639183548-ffti",
+        "speaker": "rep",
+        "text": "At the end, you actually",
+        "timestamp": "01:06:23 PM"
+      },
+      {
+        "id": "live-1775639188075-syxw",
+        "speaker": "rep",
+        "text": "but",
+        "timestamp": "01:06:28 PM"
+      },
+      {
+        "id": "live-1775639188250-5i5k",
+        "speaker": "prospect",
+        "text": "but",
+        "timestamp": "01:06:28 PM"
+      },
+      {
+        "id": "live-1775639188250-vo7a",
+        "speaker": "prospect",
+        "text": "But",
+        "timestamp": "01:06:28 PM"
+      },
+      {
+        "id": "live-1775639191640-72sg",
+        "speaker": "rep",
+        "text": "0",
+        "timestamp": "01:06:31 PM"
+      },
+      {
+        "id": "live-1775639193169-8x5x",
+        "speaker": "rep",
+        "text": "1 second. Sorry.",
+        "timestamp": "01:06:33 PM"
+      },
+      {
+        "id": "live-1775639193240-t3d9",
+        "speaker": "prospect",
+        "text": "1 second. Sorry.",
+        "timestamp": "01:06:33 PM"
+      },
+      {
+        "id": "live-1775639193334-mqto",
+        "speaker": "rep",
+        "text": "1 second. Sorry.",
+        "timestamp": "01:06:33 PM"
+      }
+    ],
+    "researchData": {
+      "success": false,
+      "data": null,
+      "error": "No valid JSON found in the response",
+      "rawJson": null
+    },
+    "strategyData": {
+      "objection_handlers": [
+        "It sounds like there might have been some technical issues at the start. Would it be helpful if I quickly recap why I called, or is now still a good time to talk?",
+        "I want to make sure I’m not interrupting. If now isn’t ideal, we can schedule a better time."
+      ],
+      "next_questions": [
+        "Can you hear me clearly now?",
+        "Is this still a good time for us to connect, or would you prefer to reschedule?",
+        "Would you like a quick summary of why I reached out?"
+      ],
+      "pitch_angles": [
+        "Acknowledge and empathize with the technical issues to build rapport.",
+        "Re-establish the purpose of the call briefly and respectfully.",
+        "Offer to accommodate their schedule to show flexibility and professionalism."
+      ],
+      "engagement_level": "Low – The conversation is disjointed due to connection issues and repeated interruptions. The prospect has not yet engaged with the topic of the call.",
+      "deal_signals": "None yet. The prospect has not expressed interest or asked questions related to the offering.",
+      "closing_probability": "10% – The call has not meaningfully started due to technical difficulties. Engagement and qualification have not occurred. Immediate focus should be on re-establishing connection and rapport before proceeding."
+    },
+    "status": "completed",
+    "phoneNumber": "+971501715226",
+    "duration": 47,
+    "postCallData": {
+      "summary": {
+        "client_name": "Not identified",
+        "company": "Not identified",
+        "call_outcome": "Unsuccessful - Technical difficulties, no meaningful conversation",
+        "key_points": [
+          "Multiple attempts to establish audio connection",
+          "Both parties experienced communication issues",
+          "No business discussion took place"
+        ],
+        "pain_points": [
+          "Audio/connection issues prevented conversation"
+        ],
+        "next_steps": [
+          "Reschedule the call with the prospect",
+          "Test audio and connection prior to next meeting"
+        ]
+      },
+      "deal_probability": {
+        "score": 0,
+        "positive_signals": [
+          "Prospect attempted to engage once audio was working"
+        ],
+        "negative_signals": [
+          "No business discussion occurred",
+          "Technical issues prevented any progress"
+        ],
+        "risk_factors": [
+          "Potential frustration due to wasted time",
+          "No rapport or value established"
+        ]
+      },
+      "follow_up_email": {
+        "subject": "Apologies for Earlier Call – Let's Reschedule",
+        "body": "Hi,\n\nI apologize for the technical difficulties during our recent call. I appreciate your patience and would like to reschedule at your convenience. Please let me know a time that works for you, and I'll ensure everything is set up correctly on my end.\n\nThank you for your understanding.\n\nBest regards,\n[Your Name]",
+        "recipient_suggestion": "Prospect (name/email not captured in call)"
+      }
+    }
+  },
+  {
+    "id": "call-1775639079746",
+    "startTime": "2026-04-08T09:04:39.746Z",
+    "endTime": "2026-04-08T09:05:51.621Z",
+    "transcript": [
+      {
+        "id": "live-1775639079890-dk9r",
+        "speaker": "rep",
+        "text": "this agent if it's seen both of us",
+        "timestamp": "01:04:39 PM"
+      },
+      {
+        "id": "live-1775639081164-1z2s",
+        "speaker": "rep",
+        "text": "but",
+        "timestamp": "01:04:41 PM"
+      },
+      {
+        "id": "live-1775639082842-wpu0",
+        "speaker": "rep",
+        "text": "Okay.",
+        "timestamp": "01:04:42 PM"
+      },
+      {
+        "id": "live-1775639082958-qvz3",
+        "speaker": "rep",
+        "text": "Okay.",
+        "timestamp": "01:04:42 PM"
+      },
+      {
+        "id": "live-1775639103572-rtce",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "01:05:03 PM"
+      },
+      {
+        "id": "live-1775639103670-iu12",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "01:05:03 PM"
+      },
+      {
+        "id": "live-1775639104439-gmhc",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "01:05:04 PM"
+      },
+      {
+        "id": "live-1775639106911-zv65",
+        "speaker": "rep",
+        "text": "Can you hear me?",
+        "timestamp": "01:05:06 PM"
+      },
+      {
+        "id": "live-1775639109358-3ada",
+        "speaker": "rep",
+        "text": "Is that phone on speaker?",
+        "timestamp": "01:05:09 PM"
+      },
+      {
+        "id": "live-1775639109508-ll2p",
+        "speaker": "prospect",
+        "text": "Is that phone on speaker?",
+        "timestamp": "01:05:09 PM"
+      },
+      {
+        "id": "live-1775639114318-ccjx",
+        "speaker": "prospect",
+        "text": "Hello?",
+        "timestamp": "01:05:14 PM"
+      },
+      {
+        "id": "live-1775639114421-7se2",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "01:05:14 PM"
+      },
+      {
+        "id": "live-1775639119299-pmal",
+        "speaker": "rep",
+        "text": "No.",
+        "timestamp": "01:05:19 PM"
+      },
+      {
+        "id": "live-1775639119458-26dc",
+        "speaker": "rep",
+        "text": "No.",
+        "timestamp": "01:05:19 PM"
+      },
+      {
+        "id": "live-1775639120062-mhxc",
+        "speaker": "rep",
+        "text": "I can hear you well.",
+        "timestamp": "01:05:20 PM"
+      },
+      {
+        "id": "live-1775639120213-t8y7",
+        "speaker": "prospect",
+        "text": "I can hear you well.",
+        "timestamp": "01:05:20 PM"
+      },
+      {
+        "id": "live-1775639121495-fkx9",
+        "speaker": "prospect",
+        "text": "It's not showing",
+        "timestamp": "01:05:21 PM"
+      },
+      {
+        "id": "live-1775639121611-z4k8",
+        "speaker": "rep",
+        "text": "It's not showing",
+        "timestamp": "01:05:21 PM"
+      },
+      {
+        "id": "live-1775639129427-5uha",
+        "speaker": "prospect",
+        "text": "Hello?",
+        "timestamp": "01:05:29 PM"
+      },
+      {
+        "id": "live-1775639129532-jb0b",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "01:05:29 PM"
+      },
+      {
+        "id": "live-1775639132856-utzi",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "01:05:32 PM"
+      },
+      {
+        "id": "live-1775639133023-r2j8",
+        "speaker": "prospect",
+        "text": "Hello?",
+        "timestamp": "01:05:33 PM"
+      },
+      {
+        "id": "live-1775639133780-ma8j",
+        "speaker": "rep",
+        "text": "Yes.",
+        "timestamp": "01:05:33 PM"
+      },
+      {
+        "id": "live-1775639133882-j3li",
+        "speaker": "rep",
+        "text": "Yes.",
+        "timestamp": "01:05:33 PM"
+      },
+      {
+        "id": "live-1775639142131-u5mi",
+        "speaker": "rep",
+        "text": "I think 1 sec. Don't worry. You know what? Stevie you. I just Stevie you. Let me love this.",
+        "timestamp": "01:05:42 PM"
+      },
+      {
+        "id": "live-1775639142252-104l",
+        "speaker": "prospect",
+        "text": "I think 1 sec. Don't worry. You know what? Stevia you. I just savia you. Let me go upstairs.",
+        "timestamp": "01:05:42 PM"
+      },
+      {
+        "id": "live-1775639145080-fw8e",
+        "speaker": "prospect",
+        "text": "Because I feel like the voice is too intense, so I'm not sure.",
+        "timestamp": "01:05:45 PM"
+      },
+      {
+        "id": "live-1775639145195-4gz7",
+        "speaker": "rep",
+        "text": "Because I feel like the voice is still in that frame, so I'm not sure.",
+        "timestamp": "01:05:45 PM"
+      },
+      {
+        "id": "live-1775639146848-m9t3",
+        "speaker": "prospect",
+        "text": "What is what.",
+        "timestamp": "01:05:46 PM"
+      },
+      {
+        "id": "live-1775639146958-jfiv",
+        "speaker": "rep",
+        "text": "What is what.",
+        "timestamp": "01:05:46 PM"
+      }
+    ],
+    "researchData": {
+      "success": false,
+      "data": null,
+      "error": "No valid JSON found in the response",
+      "rawJson": null
+    },
+    "strategyData": {
+      "objection_handlers": [
+        "It sounds like there may be a technical issue. Let me double-check my connection and make sure we’re both coming through clearly.",
+        "Sometimes there’s a delay or echo on calls—can we try disconnecting and reconnecting to see if that helps?",
+        "If it’s easier, I can also follow up via email or another channel to ensure we’re able to communicate effectively."
+      ],
+      "next_questions": [
+        "Can you confirm if you’re able to see or hear me clearly now?",
+        "Would you prefer to switch to another line or platform to continue our conversation?",
+        "Is there anyone else on your end who might be able to assist with the connection?"
+      ],
+      "pitch_angles": [
+        "Emphasize responsiveness and flexibility: 'We’re committed to making this as smooth as possible for you, even if it means switching channels.'",
+        "Highlight customer support: 'Aetheryx AI prides itself on reliable communication—let’s make sure we get this right from the start.'"
+      ],
+      "engagement_level": "Low – The conversation is currently dominated by technical difficulties and repeated attempts to establish a connection. There is little to no substantive engagement on the actual sales topic yet.",
+      "deal_signals": [],
+      "closing_probability": "10% – At this stage, there are no buying signals and the call is stalled by technical issues. The probability can increase rapidly if communication is restored and the conversation moves to value discovery."
+    },
+    "status": "completed",
+    "phoneNumber": "+971501715226",
+    "duration": 71,
+    "postCallData": {
+      "summary": {
+        "client_name": "Unknown (Prospect's name not captured)",
+        "company": "Unknown (Company not mentioned)",
+        "call_outcome": "Unsuccessful - Technical difficulties prevented conversation",
+        "key_points": [
+          "Repeated attempts by both parties to establish a clear audio connection.",
+          "Both parties experienced audio issues (echo, unclear sound, possible speakerphone interference).",
+          "No business discussion or discovery questions occurred due to technical issues."
+        ],
+        "pain_points": [
+          "Significant audio/connection problems.",
+          "Inability to start or progress the sales conversation."
+        ],
+        "next_steps": [
+          "Reschedule the call with the prospect.",
+          "Test audio and connection beforehand to ensure clear communication.",
+          "Confirm the best contact number and preferred device for the prospect."
+        ]
+      },
+      "deal_probability": {
+        "score": 10,
+        "positive_signals": [
+          "Prospect attempted to troubleshoot and stay on the call.",
+          "Both parties expressed willingness to resolve the technical issue."
+        ],
+        "negative_signals": [
+          "No business discussion occurred.",
+          "Technical issues dominated the call.",
+          "No rapport or needs assessment achieved."
+        ],
+        "risk_factors": [
+          "Potential frustration from the prospect due to wasted time.",
+          "Risk of losing momentum or interest if not followed up promptly."
+        ]
+      },
+      "follow_up_email": {
+        "subject": "Apologies for Technical Difficulties – Let’s Reschedule Our Call",
+        "body": "Hi,\n\nI wanted to reach out and apologize for the technical difficulties we experienced during our recent call. I value your time and am eager to reconnect to discuss how we can support your needs.\n\nWould you be available for a quick call later this week? Please let me know a time that works best for you, and I’ll make sure everything is set up for a smooth conversation.\n\nThank you for your patience, and I look forward to speaking with you soon!\n\nBest regards,\n[Your Name]",
+        "recipient_suggestion": "Prospect's email (once confirmed)"
+      }
+    }
+  },
+  {
+    "id": "call-1775639057424",
+    "startTime": "2026-04-08T09:04:17.424Z",
+    "endTime": "2026-04-08T09:04:17.424Z",
+    "transcript": [],
+    "researchData": null,
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+97150171526",
+    "duration": 0,
+    "postCallData": {
+      "summary": {
+        "client_name": "Unknown",
+        "company": "Unknown",
+        "call_outcome": "No substantive conversation occurred.",
+        "key_points": [],
+        "pain_points": [],
+        "next_steps": "No follow-up required due to lack of engagement."
+      },
+      "deal_probability": {
+        "score": 0,
+        "positive_signals": [],
+        "negative_signals": [
+          "No client engagement",
+          "No information exchanged",
+          "No needs or interest identified"
+        ],
+        "risk_factors": [
+          "No conversation",
+          "No rapport established",
+          "No opportunity discussed"
+        ]
+      },
+      "follow_up_email": {
+        "subject": "Following Up on Our Recent Call",
+        "body": "Hello,\n\nI wanted to follow up regarding our recent call. It seems we weren't able to connect properly. Please let me know if there's a better time for us to discuss your needs and how we might be able to assist you.\n\nLooking forward to your response.\n\nBest regards,\n[Your Name]",
+        "recipient_suggestion": "Main client contact or scheduling coordinator"
+      }
+    }
+  },
+  {
+    "id": "call-1775639052816",
+    "startTime": "2026-04-08T09:04:12.816Z",
+    "endTime": "2026-04-08T09:05:51.621Z",
+    "transcript": [
+      {
+        "id": "live-1775639058879-1oo3",
+        "speaker": "rep",
+        "text": "Something.",
+        "timestamp": "01:04:18 PM"
+      },
+      {
+        "id": "live-1775639065289-k4vn",
+        "speaker": "rep",
+        "text": "That's Dana.",
+        "timestamp": "01:04:25 PM"
+      },
+      {
+        "id": "live-1775639077328-8g82",
+        "speaker": "rep",
+        "text": "17154226. I want to test",
+        "timestamp": "01:04:37 PM"
+      }
+    ],
+    "researchData": null,
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+971501715226",
+    "duration": 4
+  },
+  {
     "id": "call-1775396627624",
     "startTime": "2026-04-05T13:43:47.624Z",
     "endTime": "2026-04-05T13:43:47.624Z",

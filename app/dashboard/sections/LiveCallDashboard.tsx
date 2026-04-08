@@ -510,8 +510,9 @@ function LiveCallDashboardInner({
   const startDeepgramTranscription = useCallback(async () => {
     try {
       // Request microphone access
+      // Disable echo cancellation so mic picks up both sides for diarization
       const stream = await navigator.mediaDevices.getUserMedia({
-        audio: { sampleRate: 16000, channelCount: 1, echoCancellation: true, noiseSuppression: true }
+        audio: { sampleRate: 16000, channelCount: 1, echoCancellation: false, noiseSuppression: true, autoGainControl: true }
       })
       mediaStreamRef.current = stream
 
@@ -821,7 +822,9 @@ function LiveCallDashboardInner({
 
       call.on('accept', () => {
         // Start transcribing the prospect's side once WebRTC is established
-        startRemoteTranscription(call)
+        // Remote transcription disabled — using single mic + Deepgram diarization
+        // to distinguish rep (speaker 0) from prospect (speaker 1)
+        // startRemoteTranscription(call)
       })
       call.on('disconnect', () => {
         activeCallRef.current = null
