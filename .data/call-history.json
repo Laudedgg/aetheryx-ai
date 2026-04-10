@@ -1,5 +1,58 @@
 [
   {
+    "id": "call-1775828935766",
+    "startTime": "2026-04-10T13:48:55.766Z",
+    "endTime": "2026-04-10T13:48:55.766Z",
+    "transcript": [],
+    "researchData": null,
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+971501715226",
+    "duration": 0,
+    "postCallData": {
+      "summary": {
+        "client_name": "Unknown",
+        "company": "Unknown",
+        "call_outcome": "No meaningful engagement",
+        "key_points": [
+          "Sales rep initiated the call and attempted to engage.",
+          "Prospect responded briefly but did not provide their name.",
+          "No business needs, interests, or context were discussed."
+        ],
+        "pain_points": [
+          "No clear communication from the prospect.",
+          "Unable to identify prospect's needs or interests."
+        ],
+        "next_steps": [
+          "Attempt to re-engage the prospect via email or another call.",
+          "Prepare a more structured opening to encourage participation.",
+          "Gather more information about the prospect prior to next contact."
+        ]
+      },
+      "deal_probability": {
+        "score": 5,
+        "positive_signals": [
+          "Prospect answered the call."
+        ],
+        "negative_signals": [
+          "Prospect did not share their name.",
+          "No discussion of needs, challenges, or solutions.",
+          "Minimal engagement from prospect."
+        ],
+        "risk_factors": [
+          "Lack of information about the prospect.",
+          "No established rapport or business context.",
+          "Unclear if prospect is a decision maker or has interest."
+        ]
+      },
+      "follow_up_email": {
+        "subject": "Following Up on Our Recent Call",
+        "body": "Hi,\n\nThank you for taking the time to connect earlier. I noticed we weren't able to fully introduce ourselves or discuss your needs. I'd love to learn more about you and how we might be able to help. Please let me know a convenient time for a quick call, or feel free to reply to this email with any questions or information about your current priorities.\n\nLooking forward to connecting!\n\nBest regards,\n[Your Name]",
+        "recipient_suggestion": "Prospect's email address (if available)"
+      }
+    }
+  },
+  {
     "id": "call-1775649757938",
     "startTime": "2026-04-08T12:02:37.938Z",
     "endTime": "2026-04-08T12:03:54.122Z",

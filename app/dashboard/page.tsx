@@ -100,8 +100,20 @@ export default function Page() {
   useEffect(() => {
     if (!mounted || !callHistory.length) return
     try { localStorage.setItem('salesmaster_call_history', JSON.stringify(callHistory)) } catch {}
-    // Sync to server
     fetch('/api/calls', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ calls: callHistory }) }).catch(() => {})
+    // Pre-populate agent data from last call if currently empty
+    if (!researchData && !callActive) {
+      const last = callHistory.find(c => c.researchData)
+      if (last?.researchData) setResearchData(last.researchData)
+    }
+    if (!strategyData && !callActive) {
+      const last = callHistory.find(c => c.strategyData)
+      if (last?.strategyData) setStrategyData(last.strategyData)
+    }
+    if (!postCallData && !callActive) {
+      const last = callHistory.find(c => c.postCallData)
+      if (last?.postCallData) setPostCallData(last.postCallData)
+    }
   }, [callHistory, mounted])
   useEffect(() => { if (callActive && callStartTime) { durationTimerRef.current = setInterval(() => setCallDuration(Math.floor((Date.now() - callStartTime) / 1000)), 1000) } else { if (durationTimerRef.current) { clearInterval(durationTimerRef.current); durationTimerRef.current = null } } return () => { if (durationTimerRef.current) clearInterval(durationTimerRef.current) } }, [callActive, callStartTime])
 
@@ -297,7 +309,7 @@ export default function Page() {
 
           {/* Active section */}
           <React.Suspense fallback={<SectionFallback />}>
-            {activeSection === 'live-call' && <LiveCallDashboard callActive={callActive} transcript={transcript} researchData={researchData} strategyData={strategyData} onStartCall={handleStartCall} onEndCall={handleEndCall} onAddTranscript={handleAddTranscript} onResearchData={setResearchData} onStrategyData={setStrategyData} activeAgentId={activeAgentId} setActiveAgentId={setActiveAgentId} useSampleData={useSampleData} callDuration={callDuration} callStatus={callStatus} phoneNumber={phoneNumber} onPhoneNumberChange={setPhoneNumber} twilioSid={config.twilioSid} twilioAuth={config.twilioAuth} fromNumber={config.fromNumber} deepgramKey={config.deepgramKey} repPhone={config.repPhone} onNavigateToConfig={() => setActiveSection('configuration')} />}
+            {activeSection === 'live-call' && <LiveCallDashboard callActive={callActive} transcript={transcript} researchData={researchData} strategyData={strategyData} onStartCall={handleStartCall} onEndCall={handleEndCall} onAddTranscript={handleAddTranscript} onResearchData={setResearchData} onStrategyData={setStrategyData} activeAgentId={activeAgentId} setActiveAgentId={setActiveAgentId} useSampleData={useSampleData} callDuration={callDuration} callStatus={callStatus} phoneNumber={phoneNumber} onPhoneNumberChange={setPhoneNumber} twilioSid={config.twilioSid} twilioAuth={config.twilioAuth} fromNumber={config.fromNumber} deepgramKey={config.deepgramKey} repPhone={config.repPhone} onNavigateToConfig={() => setActiveSection('configuration')} callHistory={callHistory} />}
             {activeSection === 'post-call-review' && <PostCallReview transcript={transcript} postCallData={postCallData} syncData={syncData} onPostCallData={handlePostCallData} onSyncData={handleSyncData} activeAgentId={activeAgentId} setActiveAgentId={setActiveAgentId} useSampleData={useSampleData} autoTrigger={autoTriggerPostCall} />}
             {activeSection === 'call-history' && <CallHistory callHistory={callHistory} onViewCall={handleViewCall} callsLoaded={callsLoaded} />}
             {activeSection === 'analytics' && <AnalyticsDashboard callHistory={callHistory} useSampleData={useSampleData} callsLoaded={callsLoaded} />}
