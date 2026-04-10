@@ -50,9 +50,7 @@ function DashboardMockup() {
         <div className="hidden sm:flex flex-col w-[110px] md:w-[130px] flex-shrink-0 p-1.5 gap-1" style={{ background: '#080d18' }}>
           {/* Logo */}
           <div className="rounded-lg px-2 py-1.5 flex items-center gap-1.5" style={{ background: cb, border: bdr }}>
-            <div className="w-4 h-4 rounded flex items-center justify-center" style={{ background: 'linear-gradient(135deg,#216BE4,#1a5bc7)' }}>
-              <svg className="w-2 h-2 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-            </div>
+            <img src="/logo-icon.jpeg" alt="" className="w-4 h-4 rounded object-cover" />
             <span className="text-[7px] font-bold text-white/50" style={{ fontFamily: "'Instrument Serif', serif" }}>Aetheryx AI</span>
           </div>
           {/* Nav */}
@@ -196,7 +194,10 @@ export default function LandingPage() {
 
         <nav className="relative z-10 border-b border-white/[0.06]">
           <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3 sm:py-5 max-w-[90rem] mx-auto">
-            <a href="#" className="text-lg sm:text-2xl tracking-tight" style={serif}>Aetheryx<sup className="text-[9px] sm:text-[10px] ml-0.5 text-[#216BE4]">AI</sup></a>
+            <a href="#" className="flex items-center gap-2">
+              <img src="/logo-icon.jpeg" alt="Aetheryx" className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg object-cover" />
+              <span className="text-lg sm:text-2xl tracking-tight" style={serif}>Aetheryx<sup className="text-[9px] sm:text-[10px] ml-0.5 text-[#216BE4]">AI</sup></span>
+            </a>
             <ul className="items-center gap-8" style={{display:'none'}} data-nav-cta>{["Features","Agents","Platform","Integrations","Pricing"].map(i=><li key={i}><a href={`#${i.toLowerCase()}`} className="text-sm text-[#b3b3b3] hover:text-white transition-colors">{i}</a></li>)}</ul>
             <div className="flex gap-2 items-center">
               <a href="#pricing" className="btn-ghost-blink text-sm" style={{display:'none'}} data-nav-cta>See Pricing</a>
@@ -258,7 +259,7 @@ export default function LandingPage() {
       <section id="pricing" className="py-20 sm:py-32 px-4 sm:px-6 text-center section-glow"><div className="max-w-3xl mx-auto"><h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-normal mb-4 leading-[0.95]" style={serif}>Your agents are waiting.{" "}<span className="text-[#216BE4]">Tell them what to do.</span></h2><p className="text-[#b3b3b3] text-sm sm:text-lg mb-8 sm:mb-12 max-w-xl mx-auto">Join sales teams using Aetheryx AI to close more deals with real-time intelligence.</p><div className="flex flex-col sm:flex-row justify-center gap-3 px-4 sm:px-0"><Link href={APP_URL} className="btn-blink text-sm sm:text-base px-8 sm:px-10 py-3 sm:py-4 w-full sm:w-auto text-center">Get my first agent →</Link><Link href={APP_URL} className="btn-ghost-blink text-sm sm:text-base px-8 sm:px-10 py-3 sm:py-4 w-full sm:w-auto text-center">Book a Demo</Link></div></div></section>
 
       {/* FOOTER */}
-      <footer className="border-t border-white/[0.06] py-10 sm:py-16 px-4 sm:px-6"><div className="max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-8 mb-8 sm:mb-12"><div className="col-span-2 sm:col-span-1"><a href="#" className="text-lg sm:text-xl tracking-tight" style={serif}>Aetheryx<sup className="text-[8px] text-[#216BE4] ml-0.5">AI</sup></a><p className="text-xs text-white/30 mt-3 leading-relaxed max-w-[200px]">Real-time sales intelligence. Transcribe, research, whisper, summarize, sync.</p></div>{[{t:"Product",l:["Dashboard","Post-Call","History","Analytics","Pricing"]},{t:"Integrations",l:["HubSpot","Gmail","Deepgram","AssemblyAI","Supabase"]},{t:"Company",l:["About","Blog","Careers","Privacy","Terms"]}].map(c=><div key={c.t}><h4 className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-white/30 mb-3 sm:mb-5">{c.t}</h4><ul className="space-y-2 sm:space-y-3">{c.l.map(x=><li key={x}><a href="#" className="text-xs sm:text-sm text-white/25 hover:text-white/60 transition-colors">{x}</a></li>)}</ul></div>)}</div><div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 pt-6 border-t border-white/[0.06] text-[10px] sm:text-xs text-white/20"><span>© 2026 Aetheryx AI</span><div className="flex gap-4 sm:gap-6"><a href="#" className="hover:text-white/40">Privacy</a><a href="#" className="hover:text-white/40">Terms</a><a href="#" className="hover:text-white/40">Contact</a></div></div></footer>
+      <footer className="border-t border-white/[0.06] py-10 sm:py-16 px-4 sm:px-6"><div className="max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-8 mb-8 sm:mb-12"><div className="col-span-2 sm:col-span-1"><a href="#" className="flex items-center gap-2"><img src="/logo-icon.jpeg" alt="Aetheryx" className="w-6 h-6 rounded-md object-cover" /><span className="text-lg sm:text-xl tracking-tight" style={serif}>Aetheryx<sup className="text-[8px] text-[#216BE4] ml-0.5">AI</sup></span></a><p className="text-xs text-white/30 mt-3 leading-relaxed max-w-[200px]">Real-time sales intelligence. Transcribe, research, whisper, summarize, sync.</p></div>{[{t:"Product",l:["Dashboard","Post-Call","History","Analytics","Pricing"]},{t:"Integrations",l:["HubSpot","Gmail","Deepgram","AssemblyAI","Supabase"]},{t:"Company",l:["About","Blog","Careers","Privacy","Terms"]}].map(c=><div key={c.t}><h4 className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-white/30 mb-3 sm:mb-5">{c.t}</h4><ul className="space-y-2 sm:space-y-3">{c.l.map(x=><li key={x}><a href="#" className="text-xs sm:text-sm text-white/25 hover:text-white/60 transition-colors">{x}</a></li>)}</ul></div>)}</div><div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 pt-6 border-t border-white/[0.06] text-[10px] sm:text-xs text-white/20"><span>© 2026 Aetheryx AI</span><div className="flex gap-4 sm:gap-6"><a href="#" className="hover:text-white/40">Privacy</a><a href="#" className="hover:text-white/40">Terms</a><a href="#" className="hover:text-white/40">Contact</a></div></div></footer>
     </div>
   )
 }

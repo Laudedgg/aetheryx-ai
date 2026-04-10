@@ -1,5 +1,657 @@
 [
   {
+    "id": "call-1775649757938",
+    "startTime": "2026-04-08T12:02:37.938Z",
+    "endTime": "2026-04-08T12:03:54.122Z",
+    "transcript": [
+      {
+        "id": "live-1775649758553-81sr",
+        "speaker": "rep",
+        "text": "I think once we if we come here,",
+        "timestamp": "04:02:38 PM"
+      },
+      {
+        "id": "live-1775649763479-yhe7",
+        "speaker": "rep",
+        "text": "if we visit like this and so you're saying this this",
+        "timestamp": "04:02:43 PM"
+      },
+      {
+        "id": "live-1775649766761-620h",
+        "speaker": "rep",
+        "text": "interfaces now should be much more broader. Yes.",
+        "timestamp": "04:02:46 PM"
+      },
+      {
+        "id": "live-1775649766793-8u7a",
+        "speaker": "rep",
+        "text": "Should be much more yes.",
+        "timestamp": "04:02:46 PM"
+      },
+      {
+        "id": "live-1775649768803-6o0v",
+        "speaker": "rep",
+        "text": "And each of like this,",
+        "timestamp": "04:02:48 PM"
+      },
+      {
+        "id": "live-1775649769302-j110",
+        "speaker": "rep",
+        "text": "And each of like this",
+        "timestamp": "04:02:49 PM"
+      },
+      {
+        "id": "live-1775649775222-ygyp",
+        "speaker": "rep",
+        "text": "no. No. No need to be. No need to be. Yeah. So",
+        "timestamp": "04:02:55 PM"
+      },
+      {
+        "id": "live-1775649775454-smmc",
+        "speaker": "rep",
+        "text": "So",
+        "timestamp": "04:02:55 PM"
+      },
+      {
+        "id": "live-1775649780410-ornr",
+        "speaker": "rep",
+        "text": "is this live? Yeah. It is live. Okay. So I understand you. My name is",
+        "timestamp": "04:03:00 PM"
+      },
+      {
+        "id": "live-1775649780826-srug",
+        "speaker": "rep",
+        "text": "Aman Gulani.",
+        "timestamp": "04:03:00 PM"
+      },
+      {
+        "id": "live-1775649781190-ogc1",
+        "speaker": "rep",
+        "text": "Is this live? Yeah. This is live. Super. Okay. So I I understand you. My name is",
+        "timestamp": "04:03:01 PM"
+      },
+      {
+        "id": "live-1775649781520-ywia",
+        "speaker": "rep",
+        "text": "Aman Gulani.",
+        "timestamp": "04:03:01 PM"
+      },
+      {
+        "id": "live-1775649786755-lknz",
+        "speaker": "rep",
+        "text": "Now I should be calling on the rest of my list. Amber, this is speaking",
+        "timestamp": "04:03:06 PM"
+      },
+      {
+        "id": "live-1775649786769-dw6t",
+        "speaker": "rep",
+        "text": "Now I should be coming to the rest of my list. But this is speaking",
+        "timestamp": "04:03:06 PM"
+      },
+      {
+        "id": "live-1775649791802-mfqv",
+        "speaker": "rep",
+        "text": "the voice of me, not your phone, because you haven't fixed it.",
+        "timestamp": "04:03:11 PM"
+      },
+      {
+        "id": "live-1775649791879-j9et",
+        "speaker": "rep",
+        "text": "the voice of me, not your phone, because you haven't picked I",
+        "timestamp": "04:03:11 PM"
+      },
+      {
+        "id": "live-1775649793855-vioc",
+        "speaker": "rep",
+        "text": "Hi. My name is Aman Galani.",
+        "timestamp": "04:03:13 PM"
+      },
+      {
+        "id": "live-1775649793895-t1k5",
+        "speaker": "rep",
+        "text": "Hi. My name is Aman Galani.",
+        "timestamp": "04:03:13 PM"
+      },
+      {
+        "id": "live-1775649800820-7b73",
+        "speaker": "rep",
+        "text": "Can you find Can you find my company profile, Yodie? So",
+        "timestamp": "04:03:20 PM"
+      },
+      {
+        "id": "live-1775649802263-ky4p",
+        "speaker": "rep",
+        "text": "Can you find my company company profile, Adi.",
+        "timestamp": "04:03:22 PM"
+      },
+      {
+        "id": "live-1775649807157-zp6c",
+        "speaker": "rep",
+        "text": "1 sec.",
+        "timestamp": "04:03:27 PM"
+      },
+      {
+        "id": "live-1775649807253-3r7x",
+        "speaker": "rep",
+        "text": "1 sec.",
+        "timestamp": "04:03:27 PM"
+      },
+      {
+        "id": "live-1775649817757-rl5i",
+        "speaker": "rep",
+        "text": "And that's for the research agent. Right? Yes. Yeah.",
+        "timestamp": "04:03:37 PM"
+      },
+      {
+        "id": "live-1775649817918-ak95",
+        "speaker": "rep",
+        "text": "And that's for the research agent. Right? Yes. Yes.",
+        "timestamp": "04:03:37 PM"
+      },
+      {
+        "id": "live-1775649824155-ysza",
+        "speaker": "rep",
+        "text": "And that's what I told you, before,",
+        "timestamp": "04:03:44 PM"
+      },
+      {
+        "id": "live-1775649824370-id2l",
+        "speaker": "rep",
+        "text": "And that's what I told you, before,",
+        "timestamp": "04:03:44 PM"
+      },
+      {
+        "id": "live-1775649827268-d6xi",
+        "speaker": "rep",
+        "text": "we started that your research agent is unable to work while we're on local host.",
+        "timestamp": "04:03:47 PM"
+      },
+      {
+        "id": "live-1775649827402-3o55",
+        "speaker": "rep",
+        "text": "that your research agent is unable to work while we are on local host.",
+        "timestamp": "04:03:47 PM"
+      },
+      {
+        "id": "live-1775649831483-a31b",
+        "speaker": "rep",
+        "text": "Yeah. Until we deploy on the main domain.",
+        "timestamp": "04:03:51 PM"
+      },
+      {
+        "id": "live-1775649831570-79g7",
+        "speaker": "rep",
+        "text": "And it yeah. Until we deploy on the main domain.",
+        "timestamp": "04:03:51 PM"
+      },
+      {
+        "id": "live-1775649832780-vo2g",
+        "speaker": "rep",
+        "text": "Is the thermostat.ai. Because",
+        "timestamp": "04:03:52 PM"
+      },
+      {
+        "id": "live-1775649832822-n940",
+        "speaker": "rep",
+        "text": "Which is the error. Because",
+        "timestamp": "04:03:52 PM"
+      }
+    ],
+    "researchData": {
+      "company_profile": {
+        "name": "None identified",
+        "industry": "None identified",
+        "size": "None identified",
+        "headquarters": "None identified",
+        "description": "No prospect company or individual could be extracted from the provided transcript due to its fragmentary nature and lack of identifiable names, companies, or specific details. The transcript appears to discuss sales interfaces but contains no clear references to a prospect.",
+        "key_products": "None identified"
+      },
+      "funding": {
+        "total_raised": "None identified",
+        "latest_round": "None identified",
+        "key_investors": "None identified",
+        "financial_health": "None identified"
+      },
+      "tech_stack": {
+        "technologies": "None identified",
+        "infrastructure": "None identified",
+        "tools": "None identified"
+      },
+      "recent_news": "None identified",
+      "pitch_angles": "None identified",
+      "pain_points": "None identified"
+    },
+    "strategyData": {
+      "objection_handlers": [
+        "If the prospect seems confused or hesitant about the interface or process, clarify by saying: 'I understand there might be some confusion—let me walk you through how our research agent works and how it can help streamline your workflow.'",
+        "If the prospect is unsure about the product being live or functional, reassure them: 'Yes, this is a live demonstration. If you'd like, I can show you specific features or answer any questions as we go along.'"
+      ],
+      "next_questions": [
+        "What specific research challenges are you currently facing in your workflow?",
+        "How are you currently handling company profile lookups or data gathering?",
+        "What would an ideal research solution look like for your team?",
+        "Would you like a quick walkthrough of how our research agent can address your needs?"
+      ],
+      "pitch_angles": [
+        "Emphasize the real-time capabilities of the research agent and its ability to access and summarize company profiles instantly.",
+        "Highlight the ease of integration into existing workflows and the minimal setup required.",
+        "Position the tool as a way to save time and reduce manual research, allowing the team to focus on higher-value tasks."
+      ],
+      "engagement_level": "Low to Moderate. The conversation appears disjointed and the prospect has not yet engaged deeply. There are signs of confusion or uncertainty, and the rep is repeating information.",
+      "deal_signals": [
+        "The prospect is asking about the research agent and company profile lookup, which indicates some level of interest in functionality.",
+        "They are confirming if the product is live, suggesting they want to see real capabilities."
+      ],
+      "closing_probability": "30%. The prospect is mildly interested but not yet engaged in a meaningful discussion about needs or solutions. Immediate next step is to clarify value, engage with targeted questions, and demonstrate the product to increase buy-in."
+    },
+    "status": "completed",
+    "phoneNumber": "+971554978474",
+    "duration": 76,
+    "postCallData": {
+      "summary": {
+        "client_name": "Amber (last name not provided)",
+        "company": "Yodie (possibly Adi, but Yodie is mentioned first and more clearly)",
+        "call_outcome": "Technical clarification and troubleshooting; no final decision, but next steps identified.",
+        "key_points": [
+          "Sales rep Aman Gulani clarified that the interface should be broader.",
+          "The call was a live demo or troubleshooting session.",
+          "Client confirmed the demo was live.",
+          "Discussion centered on the research agent functionality.",
+          "Client noted the research agent does not work on localhost.",
+          "Sales rep confirmed it needs to be deployed on the main domain for full functionality.",
+          "Error with 'thermostat.ai' domain was mentioned."
+        ],
+        "pain_points": [
+          "Research agent does not function on localhost.",
+          "Client unable to test full capabilities without deployment.",
+          "Possible confusion about company profile or naming (Yodie/Adi)."
+        ],
+        "next_steps": [
+          "Deploy the research agent to the main domain (thermostat.ai).",
+          "Follow up with Amber after deployment to confirm functionality.",
+          "Clarify company profile details if needed."
+        ]
+      },
+      "deal_probability": {
+        "score": 60,
+        "positive_signals": [
+          "Client is engaged in live troubleshooting and testing.",
+          "Client is interested in seeing the product work.",
+          "Clear technical next steps identified."
+        ],
+        "negative_signals": [
+          "Product does not currently work in client's testing environment.",
+          "Some confusion or repetition in communication.",
+          "Unresolved technical error with domain."
+        ],
+        "risk_factors": [
+          "Technical deployment is a blocker to further progress.",
+          "Potential for client frustration if issues persist.",
+          "Unclear company profile may indicate misalignment or lack of preparation."
+        ]
+      },
+      "follow_up_email": {
+        "subject": "Next Steps: Deploying Research Agent to Main Domain",
+        "body": "Hi Amber,\n\nThank you for your time today and for walking through the research agent demo with me. As discussed, the research agent requires deployment on the main domain (thermostat.ai) to function properly, as it cannot operate on localhost.\n\nOur next step will be to deploy the agent to the main domain. Once this is complete, I will reach out to confirm everything is working as expected and to address any additional questions you may have.\n\nIf you have any further details about your company profile or specific requirements, please let me know so we can ensure the deployment aligns with your needs.\n\nBest regards,\nAman Gulani",
+        "recipient_suggestion": "Amber (Yodie)"
+      }
+    }
+  },
+  {
+    "id": "call-1775649201448",
+    "startTime": "2026-04-08T11:53:21.448Z",
+    "endTime": "2026-04-08T11:53:21.448Z",
+    "transcript": [],
+    "researchData": null,
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+971554978474",
+    "duration": 0,
+    "postCallData": {
+      "summary": {
+        "client_name": "Victor",
+        "company": "Unknown (potentially Victor's daughter's company, but not clarified)",
+        "call_outcome": "Unsuccessful/Unqualified",
+        "key_points": [
+          "Sales rep attempted to initiate conversation with Victor, but there was confusion regarding the purpose of the call.",
+          "Victor asked about the sales rep's name and role, and whether the rep was contacting the right person.",
+          "Sales rep appeared unclear about Victor's role and the intended recipient of the call.",
+          "Discussion became disjointed, with both parties unsure about the buying/selling context.",
+          "Call ended without establishing a clear business opportunity or next steps."
+        ],
+        "pain_points": [
+          "Lack of clarity on the intended contact and their role.",
+          "Confusion about the purpose of the call (buying vs. selling).",
+          "Poor call preparation and lack of relevant information about the prospect."
+        ],
+        "next_steps": [
+          "Research and confirm the correct contact and their role before next outreach.",
+          "Prepare a clear call agenda and value proposition.",
+          "If appropriate, reach out to Victor or his daughter with a personalized introduction and clarify the business context."
+        ]
+      },
+      "deal_probability": {
+        "score": 5,
+        "positive_signals": [
+          "Prospect was polite and engaged in initial greetings."
+        ],
+        "negative_signals": [
+          "No clear business need identified.",
+          "Prospect and sales rep confused about each other's roles.",
+          "No product or service interest established.",
+          "Call ended without agreement on next steps."
+        ],
+        "risk_factors": [
+          "Unqualified lead.",
+          "Poor call preparation.",
+          "Potential wrong contact."
+        ]
+      },
+      "follow_up_email": {
+        "subject": "Clarifying Our Recent Conversation and Next Steps",
+        "body": "Hi Victor,\n\nThank you for taking the time to speak with me earlier. I apologize for any confusion during our call. I would like to ensure that I am reaching the right person and provide you with information relevant to your business needs.\n\nCould you please confirm if you are the main contact for [Company Name], or if there is someone else I should connect with? Additionally, I would appreciate learning more about your current priorities and how we might be able to assist.\n\nLooking forward to your response.\n\nBest regards,\n[Your Name]",
+        "recipient_suggestion": "Victor (and/or his daughter if she is the main contact)"
+      }
+    }
+  },
+  {
+    "id": "call-1775649128750",
+    "startTime": "2026-04-08T11:52:08.750Z",
+    "endTime": "2026-04-08T12:03:54.121Z",
+    "transcript": [
+      {
+        "id": "live-1775639177143-epkb",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "01:06:17 PM"
+      },
+      {
+        "id": "live-1775639177883-s1hb",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "01:06:17 PM"
+      },
+      {
+        "id": "live-1775639178076-b8q3",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "01:06:18 PM"
+      },
+      {
+        "id": "live-1775639181984-megd",
+        "speaker": "rep",
+        "text": "No.",
+        "timestamp": "01:06:21 PM"
+      },
+      {
+        "id": "live-1775639182017-qvl8",
+        "speaker": "rep",
+        "text": "No.",
+        "timestamp": "01:06:22 PM"
+      },
+      {
+        "id": "live-1775639182155-w1ee",
+        "speaker": "prospect",
+        "text": "No.",
+        "timestamp": "01:06:22 PM"
+      },
+      {
+        "id": "live-1775639183447-cb73",
+        "speaker": "prospect",
+        "text": "Okay. Yeah. Yeah. Actually,",
+        "timestamp": "01:06:23 PM"
+      },
+      {
+        "id": "live-1775639183528-h847",
+        "speaker": "prospect",
+        "text": "I can hear you actually.",
+        "timestamp": "01:06:23 PM"
+      },
+      {
+        "id": "live-1775639183548-ffti",
+        "speaker": "rep",
+        "text": "At the end, you actually",
+        "timestamp": "01:06:23 PM"
+      },
+      {
+        "id": "live-1775639188075-syxw",
+        "speaker": "rep",
+        "text": "but",
+        "timestamp": "01:06:28 PM"
+      },
+      {
+        "id": "live-1775639188250-5i5k",
+        "speaker": "prospect",
+        "text": "but",
+        "timestamp": "01:06:28 PM"
+      },
+      {
+        "id": "live-1775639188250-vo7a",
+        "speaker": "prospect",
+        "text": "But",
+        "timestamp": "01:06:28 PM"
+      },
+      {
+        "id": "live-1775639191640-72sg",
+        "speaker": "rep",
+        "text": "0",
+        "timestamp": "01:06:31 PM"
+      },
+      {
+        "id": "live-1775639193169-8x5x",
+        "speaker": "rep",
+        "text": "1 second. Sorry.",
+        "timestamp": "01:06:33 PM"
+      },
+      {
+        "id": "live-1775639193240-t3d9",
+        "speaker": "prospect",
+        "text": "1 second. Sorry.",
+        "timestamp": "01:06:33 PM"
+      },
+      {
+        "id": "live-1775639193334-mqto",
+        "speaker": "rep",
+        "text": "1 second. Sorry.",
+        "timestamp": "01:06:33 PM"
+      },
+      {
+        "id": "live-1775649268286-x8nw",
+        "speaker": "rep",
+        "text": "I'm sure he just crashed.",
+        "timestamp": "03:54:28 PM"
+      },
+      {
+        "id": "live-1775649271878-d5nt",
+        "speaker": "prospect",
+        "text": "I was sleeping. Woah. Fuck. Sorry.",
+        "timestamp": "03:54:31 PM"
+      },
+      {
+        "id": "live-1775649275520-45t7",
+        "speaker": "prospect",
+        "text": "Hibernate. We'll hibernate.",
+        "timestamp": "03:54:35 PM"
+      },
+      {
+        "id": "live-1775649280346-nqml",
+        "speaker": "prospect",
+        "text": "Hibernation.",
+        "timestamp": "03:54:40 PM"
+      },
+      {
+        "id": "live-1775649305704-ta6z",
+        "speaker": "prospect",
+        "text": "No. No. No. No. It's friends. But, bro, I don't go smoke. But, bro, this",
+        "timestamp": "03:55:05 PM"
+      },
+      {
+        "id": "live-1775649306952-62ws",
+        "speaker": "prospect",
+        "text": "unique.",
+        "timestamp": "03:55:06 PM"
+      },
+      {
+        "id": "live-1775649319518-11rn",
+        "speaker": "prospect",
+        "text": "K. So even my laptop is charging.",
+        "timestamp": "03:55:19 PM"
+      },
+      {
+        "id": "live-1775649328947-hiju",
+        "speaker": "rep",
+        "text": "Yeah.",
+        "timestamp": "03:55:28 PM"
+      },
+      {
+        "id": "live-1775649390927-oo1e",
+        "speaker": "prospect",
+        "text": "Yeah.",
+        "timestamp": "03:56:30 PM"
+      },
+      {
+        "id": "live-1775649423969-4q1v",
+        "speaker": "rep",
+        "text": "Think there's there's another 1.",
+        "timestamp": "03:57:03 PM"
+      },
+      {
+        "id": "live-1775649423971-6zln",
+        "speaker": "rep",
+        "text": "There's another 1. Is this yours?",
+        "timestamp": "03:57:03 PM"
+      },
+      {
+        "id": "live-1775649427008-m0jl",
+        "speaker": "rep",
+        "text": "No. There's 1 that I use personally.",
+        "timestamp": "03:57:07 PM"
+      },
+      {
+        "id": "live-1775649431129-gdbw",
+        "speaker": "rep",
+        "text": "This 1. Yeah.",
+        "timestamp": "03:57:11 PM"
+      },
+      {
+        "id": "live-1775649432676-wkzy",
+        "speaker": "prospect",
+        "text": "You can use that also if you",
+        "timestamp": "03:57:12 PM"
+      },
+      {
+        "id": "live-1775649454272-dyzz",
+        "speaker": "rep",
+        "text": "And does it feel like",
+        "timestamp": "03:57:34 PM"
+      },
+      {
+        "id": "live-1775649455471-e2mj",
+        "speaker": "rep",
+        "text": "as",
+        "timestamp": "03:57:35 PM"
+      },
+      {
+        "id": "live-1775649507981-bydk",
+        "speaker": "rep",
+        "text": "I was saying yesterday was, Nadeen's birthday. Yes.",
+        "timestamp": "03:58:27 PM"
+      },
+      {
+        "id": "live-1775649517894-iiit",
+        "speaker": "prospect",
+        "text": "Hello?",
+        "timestamp": "03:58:37 PM"
+      },
+      {
+        "id": "live-1775649521031-io64",
+        "speaker": "prospect",
+        "text": "Oh, gee. Rash, I I show you it's the group also or just using it?",
+        "timestamp": "03:58:41 PM"
+      },
+      {
+        "id": "live-1775649541283-6cba",
+        "speaker": "rep",
+        "text": "I still I don't I don't wanna add I don't wanna add too many people to this 1.",
+        "timestamp": "03:59:01 PM"
+      },
+      {
+        "id": "live-1775649541283-tqqs",
+        "speaker": "rep",
+        "text": "I had trouble or no? Does he put his",
+        "timestamp": "03:59:01 PM"
+      },
+      {
+        "id": "live-1775649713783-erho",
+        "speaker": "rep",
+        "text": "So this dashboard this dashboard you're showing me,",
+        "timestamp": "04:01:53 PM"
+      },
+      {
+        "id": "live-1775649718653-csy3",
+        "speaker": "rep",
+        "text": "1 sec.",
+        "timestamp": "04:01:58 PM"
+      },
+      {
+        "id": "live-1775649720687-qqg4",
+        "speaker": "rep",
+        "text": "So look with,",
+        "timestamp": "04:02:00 PM"
+      },
+      {
+        "id": "live-1775649744543-vx0g",
+        "speaker": "rep",
+        "text": "this this staff was on the call. Right? Yeah. This happens during the this is live.",
+        "timestamp": "04:02:24 PM"
+      },
+      {
+        "id": "live-1775649749136-1x3s",
+        "speaker": "rep",
+        "text": "Right? Yeah. So this like, when you when when when when I said your your you when you said your",
+        "timestamp": "04:02:29 PM"
+      },
+      {
+        "id": "live-1775649752976-l5ux",
+        "speaker": "rep",
+        "text": "name, I say my name, it should come up straight. You should be able to check my LinkedIn. You will immediately come up.",
+        "timestamp": "04:02:32 PM"
+      }
+    ],
+    "researchData": {
+      "success": false,
+      "data": null,
+      "error": "No valid JSON found in the response",
+      "rawJson": null
+    },
+    "strategyData": {
+      "objection_handlers": [
+        {
+          "prospect_statement": "What is your role? Your daughter company the main contact, or what is this? Why is it asking for top",
+          "suggested_response": "Great question, Victor. I’m calling from Aetheryx AI, and my role is to connect with organizations like yours to explore how our solutions can help. I noticed your company was listed as a potential fit for our platform, and I wanted to make sure I’m speaking with the right person. Could you clarify your role or direct me to the person who typically handles technology decisions?"
+        }
+      ],
+      "next_questions": [
+        "Can you tell me more about your current responsibilities and if you’re involved in technology or software decisions?",
+        "Is there someone else on your team who would be best suited to discuss potential solutions for your company?",
+        "What challenges are you currently facing that prompted your interest today?"
+      ],
+      "pitch_angles": [
+        "Position Aetheryx AI as a solution provider looking to understand their unique needs rather than just selling a product.",
+        "Emphasize the value of connecting with the right person to avoid wasting their time.",
+        "Highlight that you’re here to help streamline or improve processes relevant to their business."
+      ],
+      "engagement_level": "Low to Moderate. The prospect is polite and responsive but seems confused about the purpose of the call and is seeking clarity before proceeding.",
+      "deal_signals": [
+        "Prospect is asking clarifying questions about your identity and purpose, indicating some level of interest or at least willingness to engage if properly addressed."
+      ],
+      "closing_probability": "15%. The conversation is still in the qualification phase, and the prospect’s confusion about your role and the call’s purpose needs to be resolved before meaningful progress can be made. Immediate focus should be on clarifying intent and establishing relevance."
+    },
+    "status": "completed",
+    "phoneNumber": "+971554978474",
+    "duration": 72
+  },
+  {
     "id": "call-1775639161045",
     "startTime": "2026-04-08T09:06:01.045Z",
     "endTime": "2026-04-08T09:06:48.554Z",

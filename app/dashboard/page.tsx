@@ -149,9 +149,7 @@ export default function Page() {
 
         {/* Logo — fixed top */}
         <div className={C + ' px-3 py-2.5 flex items-center gap-2.5 flex-shrink-0'} style={{ background: cardBg }}>
-          <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg shadow-[#216BE4]/20" style={{ background: 'linear-gradient(135deg, #216BE4, #1a5bc7)' }}>
-            <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
+          <img src="/logo-icon.jpeg" alt="Aetheryx" className="w-8 h-8 rounded-lg object-cover flex-shrink-0 shadow-lg shadow-[#216BE4]/20" />
           <div className="min-w-0">
             <p className="text-[13px] font-bold tracking-wide leading-tight truncate" style={{ fontFamily: "'Instrument Serif', serif" }}>Aetheryx AI</p>
             <p className="text-[9px] text-white/25 leading-tight">Sales Intelligence</p>
@@ -263,7 +261,7 @@ export default function Page() {
               <div className="absolute inset-0 opacity-20" style={{ background: 'radial-gradient(ellipse at 30% 50%, rgba(33,107,228,0.3) 0%, transparent 70%)' }} />
               <div className="relative p-5 md:p-6">
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-medium mb-3" style={{ background: 'rgba(33,107,228,0.15)', color: '#5b9cf5', border: '1px solid rgba(33,107,228,0.2)' }}>
-                  <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                  <img src="/logo-icon.jpeg" alt="" className="w-3.5 h-3.5 rounded object-cover" />
                   Welcome to Aetheryx AI
                 </span>
                 <h2 className="text-lg md:text-xl font-bold mb-1" style={{ fontFamily: "'Instrument Serif', serif" }}>Your AI Sales Co-Pilot</h2>
@@ -279,9 +277,7 @@ export default function Page() {
           {/* Section header */}
           <div className="flex items-center justify-between mb-3 md:mb-4">
             <div className="flex items-center gap-3">
-              <div className="md:hidden w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: 'linear-gradient(135deg, #216BE4, #1a5bc7)' }}>
-                <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-              </div>
+              <img src="/logo-icon.jpeg" alt="Aetheryx" className="md:hidden w-7 h-7 rounded-lg object-cover flex-shrink-0" />
               <h1 className="text-[15px] md:text-base font-semibold" style={{ fontFamily: "'Instrument Serif', serif" }}>
                 {{ 'live-call': 'Live Call Dashboard', 'call-history': 'Call History', 'analytics': 'Analytics', 'post-call-review': 'Post-Call Review', 'configuration': 'Configuration' }[activeSection]}
               </h1>
