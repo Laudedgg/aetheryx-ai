@@ -516,9 +516,9 @@ function LiveCallDashboardInner({
   const startDeepgramTranscription = useCallback(async () => {
     try {
       // Request microphone access
-      // Disable echo cancellation so mic picks up both sides for diarization
+      // Echo cancellation ON to avoid duplicate transcription of your own voice
       const stream = await navigator.mediaDevices.getUserMedia({
-        audio: { sampleRate: 16000, channelCount: 1, echoCancellation: false, noiseSuppression: true, autoGainControl: true }
+        audio: { sampleRate: 16000, channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true }
       })
       mediaStreamRef.current = stream
 
@@ -828,9 +828,8 @@ function LiveCallDashboardInner({
 
       call.on('accept', () => {
         // Start transcribing the prospect's side once WebRTC is established
-        // Remote transcription disabled — using single mic + Deepgram diarization
-        // to distinguish rep (speaker 0) from prospect (speaker 1)
-        // startRemoteTranscription(call)
+        // Capture prospect's voice from the Twilio WebRTC remote stream
+        startRemoteTranscription(call)
       })
       call.on('disconnect', () => {
         activeCallRef.current = null
@@ -875,15 +874,10 @@ function LiveCallDashboardInner({
     setDetectedEntities({ companies: [], people: [] })
   }
 
-  // --- Pre-Call State: Dialer + Last Call Agent Panels ---
+  // --- Pre-Call State: Dialer ---
   if (!callActive) {
-    const lastCall = safeHistory.length > 0 ? safeHistory[0] : null
-    const lastTranscript = lastCall?.transcript?.slice(-5) || []
-
     return (
-      <div className="flex flex-col gap-2 flex-1">
-      {/* Dialer */}
-      <div className="rounded-2xl border border-white/[0.06] flex flex-col" style={{ background: '#0c1120', minHeight: 200 }}>
+      <div className="rounded-2xl border border-white/[0.06] flex flex-col flex-1" style={{ background: '#0c1120' }}>
 
         {/* Center: Phone input + Dial Pad — fills space, centered */}
         <div className="flex-1 flex flex-col items-center justify-center px-5 py-3">
@@ -956,77 +950,6 @@ function LiveCallDashboardInner({
         </div>
       </div>
 
-      {/* Agent panels showing last call data */}
-      {(displayResearch || displayStrategy) && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 flex-1 min-h-0">
-          {/* Last Research */}
-          <div className="rounded-2xl overflow-hidden flex flex-col" style={{ background: '#0c1120', border: '1px solid rgba(255,255,255,0.06)' }}>
-            <div className="flex items-center justify-between px-4 py-2.5 flex-shrink-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-              <div className="flex items-center gap-2">
-                <span className="text-[13px]">🔍</span>
-                <span className="text-[12px] font-semibold text-white/60" style={{ fontFamily: "'Instrument Serif', serif" }}>Research Agent</span>
-              </div>
-              <span className="text-[9px] px-2 py-0.5 rounded-full font-semibold" style={{ background: 'rgba(33,107,228,0.08)', color: '#5b9cf5', border: '1px solid rgba(33,107,228,0.12)' }}>
-                {isShowingLastCall ? 'Last call' : 'Ready'}
-              </span>
-            </div>
-            <div className="flex-1 overflow-y-auto px-3 py-2 space-y-1.5">
-              {displayResearch?.company_profile?.name && (
-                <div className="rounded-xl p-2.5" style={{ background: 'rgba(33,107,228,0.04)', border: '1px solid rgba(33,107,228,0.08)' }}>
-                  <p className="text-[13px] font-bold text-white/70">{safeText(displayResearch.company_profile.name)}</p>
-                  <p className="text-[10px] text-white/30">{safeText(displayResearch.company_profile.industry, '')} · {safeText(displayResearch.company_profile.size, '')}</p>
-                </div>
-              )}
-              {displayResearch?.funding?.total_raised && (
-                <div className="rounded-xl p-2" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
-                  <p className="text-[9px] text-white/20 uppercase font-bold mb-0.5">Funding</p>
-                  <p className="text-[11px] text-white/50">{safeText(displayResearch.funding.total_raised)}</p>
-                </div>
-              )}
-              {displayResearch?.pitch_angles && (
-                <div className="rounded-xl p-2" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
-                  <p className="text-[9px] text-white/20 uppercase font-bold mb-0.5">Pitch Angles</p>
-                  <p className="text-[11px] text-white/40 leading-relaxed">{safeText(displayResearch.pitch_angles).substring(0, 200)}</p>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Last Strategy */}
-          <div className="rounded-2xl overflow-hidden flex flex-col" style={{ background: '#0c1120', border: '1px solid rgba(255,255,255,0.06)' }}>
-            <div className="flex items-center justify-between px-4 py-2.5 flex-shrink-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-              <div className="flex items-center gap-2">
-                <span className="text-[13px]">🎯</span>
-                <span className="text-[12px] font-semibold text-white/60" style={{ fontFamily: "'Instrument Serif', serif" }}>Sales Strategy</span>
-              </div>
-              <span className="text-[9px] px-2 py-0.5 rounded-full font-semibold" style={{ background: 'rgba(33,107,228,0.08)', color: '#5b9cf5', border: '1px solid rgba(33,107,228,0.12)' }}>
-                {!strategyData && displayStrategy ? 'Last call' : displayStrategy ? 'Ready' : 'Waiting'}
-              </span>
-            </div>
-            <div className="flex-1 overflow-y-auto px-3 py-2 space-y-1.5">
-              {displayStrategy?.closing_probability && (
-                <div className="rounded-xl p-2.5 text-center" style={{ background: 'rgba(33,107,228,0.04)', border: '1px solid rgba(33,107,228,0.08)' }}>
-                  <p className="text-[9px] text-white/20 uppercase font-bold mb-0.5">Closing Probability</p>
-                  <p className="text-xl font-bold" style={{ color: '#216BE4', fontFamily: "'Instrument Serif', serif" }}>{safeText(displayStrategy.closing_probability)}</p>
-                </div>
-              )}
-              {displayStrategy?.deal_signals && (
-                <div className="rounded-xl p-2" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
-                  <p className="text-[9px] text-white/20 uppercase font-bold mb-0.5">Deal Signals</p>
-                  <p className="text-[11px] text-white/40 leading-relaxed">{safeText(displayStrategy.deal_signals).substring(0, 200)}</p>
-                </div>
-              )}
-              {displayStrategy?.next_questions && (
-                <div className="rounded-xl p-2" style={{ background: 'rgba(52,211,153,0.03)', border: '1px solid rgba(52,211,153,0.08)' }}>
-                  <p className="text-[9px] text-emerald-400/60 uppercase font-bold mb-0.5">Next Questions</p>
-                  <p className="text-[11px] text-white/40 leading-relaxed">{safeText(displayStrategy.next_questions).substring(0, 200)}</p>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-      </div>
     )
   }
 
