@@ -1,5 +1,61 @@
 [
   {
+    "id": "call-1775835733839",
+    "startTime": "2026-04-10T15:42:13.839Z",
+    "endTime": "2026-04-10T15:42:13.839Z",
+    "transcript": [],
+    "researchData": {
+      "company_profile": {
+        "name": "None identified",
+        "industry": "None identified",
+        "size": "None identified",
+        "headquarters": "None identified",
+        "description": "No prospect company or individual could be extracted from the provided transcript due to its fragmentary nature and lack of identifiable names, companies, or specific details. The transcript appears to discuss sales interfaces but contains no clear references to a prospect.",
+        "key_products": "None identified"
+      },
+      "funding": {
+        "total_raised": "None identified",
+        "latest_round": "None identified",
+        "key_investors": "None identified",
+        "financial_health": "None identified"
+      },
+      "tech_stack": {
+        "technologies": "None identified",
+        "infrastructure": "None identified",
+        "tools": "None identified"
+      },
+      "recent_news": "None identified",
+      "pitch_angles": "None identified",
+      "pain_points": "None identified"
+    },
+    "strategyData": {
+      "objection_handlers": [
+        "If the prospect seems confused or hesitant about the interface or process, clarify by saying: 'I understand there might be some confusion—let me walk you through how our research agent works and how it can help streamline your workflow.'",
+        "If the prospect is unsure about the product being live or functional, reassure them: 'Yes, this is a live demonstration. If you'd like, I can show you specific features or answer any questions as we go along.'"
+      ],
+      "next_questions": [
+        "What specific research challenges are you currently facing in your workflow?",
+        "How are you currently handling company profile lookups or data gathering?",
+        "What would an ideal research solution look like for your team?",
+        "Would you like a quick walkthrough of how our research agent can address your needs?"
+      ],
+      "pitch_angles": [
+        "Emphasize the real-time capabilities of the research agent and its ability to access and summarize company profiles instantly.",
+        "Highlight the ease of integration into existing workflows and the minimal setup required.",
+        "Position the tool as a way to save time and reduce manual research, allowing the team to focus on higher-value tasks."
+      ],
+      "engagement_level": "Low to Moderate. The conversation appears disjointed and the prospect has not yet engaged deeply. There are signs of confusion or uncertainty, and the rep is repeating information.",
+      "deal_signals": [
+        "The prospect is asking about the research agent and company profile lookup, which indicates some level of interest in functionality.",
+        "They are confirming if the product is live, suggesting they want to see real capabilities."
+      ],
+      "closing_probability": "30%. The prospect is mildly interested but not yet engaged in a meaningful discussion about needs or solutions. Immediate next step is to clarify value, engage with targeted questions, and demonstrate the product to increase buy-in."
+    },
+    "status": "completed",
+    "phoneNumber": "+971501715226",
+    "duration": 0
+  },
+  {
     "id": "call-1775828935766",
     "startTime": "2026-04-10T13:48:55.766Z",
     "endTime": "2026-04-10T13:48:55.766Z",

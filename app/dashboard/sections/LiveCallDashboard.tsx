@@ -1127,133 +1127,114 @@ function LiveCallDashboardInner({
         </div>
       )}
 
-      {/* Main 4-Panel Grid — reference: Transcript | Client Intelligence | Director | Agent Runtime */}
+      {/* Main 3-Panel Grid */}
       <div className="grid grid-cols-12 gap-2 flex-1 min-h-0">
-        {/* Panel 1: TRANSCRIPT — Live conversation stream */}
+        {/* Panel 1: TRANSCRIPT */}
         <div className="col-span-4 flex flex-col min-h-0">
           <div className="flex-1 flex flex-col rounded-2xl overflow-hidden" style={{ background: '#0c1120', border: '1px solid rgba(255,255,255,0.06)' }}>
-            <div className="flex items-center justify-between px-4 py-3 flex-shrink-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-              <div>
-                <p className="text-[9px] text-white/20 uppercase tracking-[0.15em] font-bold">Transcript</p>
-                <h3 className="text-[15px] font-bold text-white/80" style={{ fontFamily: "'Instrument Serif', serif" }}>Live conversation stream</h3>
+            <div className="flex items-center justify-between px-3 py-2.5 flex-shrink-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <h3 className="text-[13px] font-bold text-white/70" style={{ fontFamily: "'Instrument Serif', serif" }}>Live Transcript</h3>
               </div>
-              <span className="text-[10px] px-2.5 py-1 rounded-full font-semibold" style={{ background: isLiveMode ? 'rgba(52,211,153,0.08)' : 'rgba(245,158,11,0.08)', color: isLiveMode ? '#34d399' : '#f59e0b', border: `1px solid ${isLiveMode ? 'rgba(52,211,153,0.15)' : 'rgba(245,158,11,0.15)'}` }}>
-                {isLiveMode ? 'Deepgram-style runtime' : 'Simulation'}
-              </span>
+              <span className="text-[9px] text-white/20 font-mono">{safeTranscript.length} lines</span>
             </div>
-            <div ref={scrollRef} className="flex-1 overflow-y-auto p-3 space-y-2">
+            <div ref={scrollRef} className="flex-1 overflow-y-auto p-2.5 space-y-1.5">
               {safeTranscript.length === 0 && (
                 <div className="flex flex-col items-center justify-center py-10">
-                  <FiMic className="w-8 h-8 text-white/5 mb-3" />
-                  <p className="text-[13px] text-white/30 text-center font-medium">{isLiveMode ? 'Waiting for conversation to begin...' : 'Loading simulated conversation...'}</p>
-                  <p className="text-[11px] text-white/15 text-center mt-1">{isLiveMode ? 'Audio is being streamed and transcribed automatically' : 'A pre-recorded demo conversation will stream shortly'}</p>
+                  <FiMic className="w-6 h-6 text-white/5 mb-2" />
+                  <p className="text-[12px] text-white/25 text-center font-medium">Waiting for conversation...</p>
                 </div>
               )}
               {safeTranscript.map((line) => (
-                <div key={line?.id ?? Math.random()} className="rounded-xl p-3" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
-                  <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-[12px] font-bold" style={{ color: line?.speaker === 'rep' ? '#216BE4' : '#f472b6' }}>
+                <div key={line?.id ?? Math.random()} className="rounded-lg px-3 py-2" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.03)' }}>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-[11px] font-bold" style={{ color: line?.speaker === 'rep' ? '#216BE4' : '#f472b6' }}>
                       {line?.speaker === 'rep' ? 'Rep' : 'Prospect'}
                     </span>
-                    <span className="text-[10px] text-white/20 font-mono">{safeText(line?.timestamp, '')}</span>
+                    <span className="text-[9px] text-white/15 font-mono">{safeText(line?.timestamp, '')}</span>
                   </div>
-                  <p className="text-[13px] text-white/70 leading-relaxed font-medium">{safeText(line?.text, '')}</p>
+                  <p className="text-[12px] text-white/65 leading-relaxed">{safeText(line?.text, '')}</p>
                 </div>
               ))}
               {callActive && safeTranscript.length > 0 && (
-                <div className="flex items-center gap-2 py-1">
-                  <span className={'w-2 h-2 rounded-full animate-pulse ' + (isLiveMode ? 'bg-emerald-400' : 'bg-amber-400')} />
-                  <span className="text-[11px] text-white/25">{isLiveMode ? 'Listening...' : 'Streaming...'}</span>
+                <div className="flex items-center gap-1.5 py-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="text-[10px] text-white/20">Listening...</span>
                 </div>
               )}
             </div>
           </div>
         </div>
 
-        {/* Panel 2: CLIENT INTELLIGENCE — Research and CRM packet */}
-        <div className="col-span-3 flex flex-col min-h-0">
+        {/* Panel 2: RESEARCH AGENT */}
+        <div className="col-span-4 flex flex-col min-h-0">
           <div className="flex-1 flex flex-col rounded-2xl overflow-hidden" style={{ background: '#0c1120', border: '1px solid rgba(255,255,255,0.06)' }}>
-            <div className="flex items-center justify-between px-4 py-3 flex-shrink-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-              <div>
-                <p className="text-[9px] text-white/20 uppercase tracking-[0.15em] font-bold">Client Intelligence</p>
-                <h3 className="text-[15px] font-bold text-white/80" style={{ fontFamily: "'Instrument Serif', serif" }}>Research and CRM packet</h3>
+            <div className="flex items-center justify-between px-3 py-2.5 flex-shrink-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+              <div className="flex items-center gap-2">
+                <span className="text-[12px]">🔍</span>
+                <h3 className="text-[13px] font-bold text-white/70" style={{ fontFamily: "'Instrument Serif', serif" }}>Research Agent</h3>
               </div>
-              <span className="text-[10px] px-2.5 py-1 rounded-full font-semibold" style={{ background: researchLoading ? 'rgba(33,107,228,0.08)' : displayResearch ? 'rgba(52,211,153,0.08)' : 'rgba(255,255,255,0.03)', color: researchLoading ? '#216BE4' : displayResearch ? '#34d399' : 'rgba(255,255,255,0.2)', border: `1px solid ${researchLoading ? 'rgba(33,107,228,0.15)' : displayResearch ? 'rgba(52,211,153,0.15)' : 'rgba(255,255,255,0.06)'}` }}>
-                {researchLoading ? '🔍 Researching...' : researchData ? 'Research ready' : isShowingLastCall ? 'Last call' : 'Waiting'}
+              <span className="text-[9px] px-2 py-0.5 rounded-full font-semibold" style={{ background: researchLoading ? 'rgba(33,107,228,0.08)' : displayResearch ? 'rgba(52,211,153,0.08)' : 'rgba(255,255,255,0.03)', color: researchLoading ? '#216BE4' : displayResearch ? '#34d399' : 'rgba(255,255,255,0.2)' }}>
+                {researchLoading ? 'Researching...' : researchData ? 'Complete' : isShowingLastCall ? 'Previous' : 'Standby'}
               </span>
             </div>
-            <div className="flex-1 overflow-y-auto px-3 pb-3">
-              {researchError ? (
-                <p className="text-xs text-destructive flex items-center gap-1.5 py-2"><FiAlertCircle className="w-3.5 h-3.5" /> {researchError}</p>
-              ) : null}
-              {researchLoading && !displayResearch ? <LoadingPlaceholder count={3} /> : null}
+            <div className="flex-1 overflow-y-auto p-2.5 space-y-1.5">
+              {researchError && <p className="text-[10px] text-red-400 py-1">{researchError}</p>}
+              {researchLoading && !displayResearch && <LoadingPlaceholder count={3} />}
               {displayResearch ? (
-                <div className="space-y-2 pt-2">
-                  <div className="border border-border rounded-lg p-2.5">
-                    <h4 className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Company Profile</h4>
-                    <p className="text-xs font-semibold">{safeText(displayResearch?.company_profile?.name)}</p>
-                    <div className="flex flex-wrap gap-1 mt-1.5">
-                      {displayResearch?.company_profile?.industry ? <Badge variant="secondary" className="text-[10px] h-5">{safeText(displayResearch.company_profile.industry)}</Badge> : null}
-                      {displayResearch?.company_profile?.size ? <Badge variant="outline" className="text-[10px] h-5">{safeText(displayResearch.company_profile.size)}</Badge> : null}
+                <>
+                  {/* Company card */}
+                  <div className="rounded-xl p-2.5" style={{ background: 'rgba(33,107,228,0.04)', border: '1px solid rgba(33,107,228,0.08)' }}>
+                    <p className="text-[9px] text-[#216BE4] uppercase font-bold tracking-wider mb-1">Company</p>
+                    <p className="text-[13px] font-bold text-white/70">{safeText(displayResearch?.company_profile?.name, 'Unknown')}</p>
+                    <div className="flex flex-wrap gap-1 mt-1">
+                      {displayResearch?.company_profile?.industry && <span className="text-[9px] px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(33,107,228,0.06)', color: 'rgba(33,107,228,0.6)' }}>{safeText(displayResearch.company_profile.industry)}</span>}
+                      {displayResearch?.company_profile?.size && <span className="text-[9px] px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(255,255,255,0.03)', color: 'rgba(255,255,255,0.3)' }}>{safeText(displayResearch.company_profile.size)}</span>}
                     </div>
-                    {displayResearch?.company_profile?.headquarters ? <p className="text-[11px] text-muted-foreground mt-1.5">{safeText(displayResearch.company_profile.headquarters)}</p> : null}
-                    {displayResearch?.company_profile?.description ? <p className="text-[11px] text-muted-foreground mt-1">{safeText(displayResearch.company_profile.description)}</p> : null}
-                    {displayResearch?.company_profile?.key_products ? <p className="text-[11px] mt-1"><span className="font-semibold">Products:</span> {safeText(displayResearch.company_profile.key_products)}</p> : null}
+                    {displayResearch?.company_profile?.headquarters && <p className="text-[10px] text-white/25 mt-1">{safeText(displayResearch.company_profile.headquarters)}</p>}
                   </div>
-                  <div className="border border-border rounded-lg p-2.5">
-                    <h4 className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Funding</h4>
-                    {displayResearch?.funding?.total_raised ? <Badge variant="default" className="text-[10px] h-5 mb-1">{safeText(displayResearch.funding.total_raised)}</Badge> : null}
-                    {displayResearch?.funding?.latest_round ? <p className="text-[11px]">{safeText(displayResearch.funding.latest_round)}</p> : null}
-                    {displayResearch?.funding?.key_investors ? <p className="text-[11px] text-muted-foreground">{safeText(displayResearch.funding.key_investors)}</p> : null}
-                    {displayResearch?.funding?.financial_health ? <p className="text-[11px] text-green-600 font-semibold mt-0.5">{safeText(displayResearch.funding.financial_health)}</p> : null}
+                  {/* Funding */}
+                  <div className="rounded-xl p-2.5" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
+                    <p className="text-[9px] text-white/20 uppercase font-bold tracking-wider mb-1">Funding</p>
+                    {displayResearch?.funding?.total_raised && <p className="text-[11px] text-white/50 font-semibold">{safeText(displayResearch.funding.total_raised)}</p>}
+                    {displayResearch?.funding?.latest_round && <p className="text-[10px] text-white/30">{safeText(displayResearch.funding.latest_round)}</p>}
                   </div>
-                  <div className="border border-border rounded-lg p-2.5">
-                    <h4 className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Tech Stack</h4>
-                    {displayResearch?.tech_stack?.technologies ? <p className="text-[11px]"><span className="font-semibold">Tech:</span> {safeText(displayResearch.tech_stack.technologies)}</p> : null}
-                    {displayResearch?.tech_stack?.infrastructure ? <p className="text-[11px]"><span className="font-semibold">Infra:</span> {safeText(displayResearch.tech_stack.infrastructure)}</p> : null}
-                    {displayResearch?.tech_stack?.tools ? <p className="text-[11px]"><span className="font-semibold">Tools:</span> {safeText(displayResearch.tech_stack.tools)}</p> : null}
+                  {/* Tech Stack */}
+                  <div className="rounded-xl p-2.5" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
+                    <p className="text-[9px] text-white/20 uppercase font-bold tracking-wider mb-1">Tech Stack</p>
+                    <div className="flex flex-wrap gap-1">
+                      {safeText(displayResearch?.tech_stack?.technologies, '').split(',').filter(Boolean).slice(0,6).map((t: string,i: number) => <span key={i} className="text-[9px] px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(33,107,228,0.06)', color: 'rgba(33,107,228,0.5)' }}>{t.trim()}</span>)}
+                    </div>
                   </div>
-                  {displayResearch?.recent_news ? (
-                    <div className="border border-border rounded-lg p-2.5">
-                      <h4 className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Recent News</h4>
-                      {renderLines(displayResearch.recent_news)}
+                  {/* Pitch Angles */}
+                  {displayResearch?.pitch_angles && (
+                    <div className="rounded-xl p-2.5" style={{ background: 'rgba(52,211,153,0.03)', border: '1px solid rgba(52,211,153,0.06)' }}>
+                      <p className="text-[9px] text-emerald-400/50 uppercase font-bold tracking-wider mb-1">Pitch Angles</p>
+                      <p className="text-[10px] text-white/35 leading-relaxed">{safeText(displayResearch.pitch_angles).substring(0, 250)}</p>
                     </div>
-                  ) : null}
-                  {displayResearch?.pitch_angles ? (
-                    <div className="border border-border rounded-lg p-2.5">
-                      <h4 className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Pitch Angles</h4>
-                      {renderLines(displayResearch.pitch_angles)}
-                    </div>
-                  ) : null}
-                  {displayResearch?.pain_points ? (
-                    <div className="border border-border rounded-lg p-2.5">
-                      <h4 className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Pain Points</h4>
-                      {renderLines(displayResearch.pain_points)}
-                    </div>
-                  ) : null}
-                </div>
-              ) : null}
-              {!researchLoading && !displayResearch && !researchError ? (
-                <div className="flex flex-col items-center justify-center py-10">
-                  <FiSearch className="w-8 h-8 text-muted-foreground/20 mb-3" />
-                  <p className="text-xs text-muted-foreground text-center font-medium">Waiting for entity detection...</p>
-                  <p className="text-[11px] text-muted-foreground/70 text-center mt-1">Research triggers automatically when names are detected in the conversation</p>
+                  )}
+                </>
+              ) : !researchLoading && !researchError ? (
+                <div className="flex flex-col items-center justify-center py-8">
+                  <FiSearch className="w-6 h-6 text-white/5 mb-2" />
+                  <p className="text-[11px] text-white/20 text-center">Auto-triggers on entity detection</p>
                 </div>
               ) : null}
             </div>
           </div>
         </div>
 
-        {/* Panel 3: DIRECTOR — Runtime guidance and whisper cards */}
-        <div className="col-span-5 flex flex-col min-h-0">
+        {/* Panel 3: STRATEGY AGENT */}
+        <div className="col-span-4 flex flex-col min-h-0">
           <div className="flex-1 flex flex-col rounded-2xl overflow-hidden" style={{ background: '#0c1120', border: '1px solid rgba(255,255,255,0.06)' }}>
-            <div className="flex items-center justify-between px-4 py-3 flex-shrink-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-              <div>
-                <p className="text-[9px] text-white/20 uppercase tracking-[0.15em] font-bold">Director</p>
-                <h3 className="text-[15px] font-bold text-white/80" style={{ fontFamily: "'Instrument Serif', serif" }}>Runtime guidance and whisper cards</h3>
+            <div className="flex items-center justify-between px-3 py-2.5 flex-shrink-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+              <div className="flex items-center gap-2">
+                <span className="text-[12px]">🎯</span>
+                <h3 className="text-[13px] font-bold text-white/70" style={{ fontFamily: "'Instrument Serif', serif" }}>Sales Strategy</h3>
               </div>
-              <span className="text-[10px] px-2.5 py-1 rounded-full font-semibold" style={{ background: strategyLoading ? 'rgba(33,107,228,0.08)' : displayStrategy ? 'rgba(52,211,153,0.08)' : 'rgba(255,255,255,0.03)', color: strategyLoading ? '#216BE4' : displayStrategy ? '#34d399' : 'rgba(255,255,255,0.2)', border: `1px solid ${strategyLoading ? 'rgba(33,107,228,0.15)' : displayStrategy ? 'rgba(52,211,153,0.15)' : 'rgba(255,255,255,0.06)'}` }}>
-                {strategyLoading ? '⚡ Processing...' : strategyData ? 'Call ready to close' : (displayStrategy && !strategyData) ? 'Last call' : 'Waiting'}
+              <span className="text-[9px] px-2 py-0.5 rounded-full font-semibold" style={{ background: strategyLoading ? 'rgba(33,107,228,0.08)' : displayStrategy ? 'rgba(52,211,153,0.08)' : 'rgba(255,255,255,0.03)', color: strategyLoading ? '#216BE4' : displayStrategy ? '#34d399' : 'rgba(255,255,255,0.2)' }}>
+                {strategyLoading ? 'Processing...' : strategyData ? 'Complete' : (displayStrategy && !strategyData) ? 'Previous' : 'Standby'}
               </span>
             </div>
             <div className="flex-1 overflow-y-auto px-3 pb-3">
@@ -1321,105 +1302,7 @@ function LiveCallDashboardInner({
       </div>{/* end grid */}
       </div>{/* end main dashboard area */}
 
-      {/* AI Chat Toggle Button (when closed) */}
-      {!chatOpen && (
-        <button
-          onClick={function() { setChatOpen(true) }}
-          className="flex-shrink-0 w-10 h-full bg-card border border-border rounded-lg flex flex-col items-center justify-center gap-2 hover:bg-muted transition-colors cursor-pointer"
-          title="Chat with AI"
-        >
-          <FiZap className="w-4 h-4 text-primary" />
-          <span className="text-[9px] text-muted-foreground font-semibold [writing-mode:vertical-rl] rotate-180">AI Chat</span>
-        </button>
-      )}
-
-      {/* AI Chat Panel (when open) */}
-      {chatOpen && (
-        <div className="flex-shrink-0 w-80 flex flex-col border border-border rounded-lg bg-card overflow-hidden">
-          {/* Chat Header */}
-          <div className="flex items-center justify-between px-3 py-2.5 border-b border-border flex-shrink-0">
-            <div className="flex items-center gap-2">
-              <FiZap className="w-4 h-4 text-primary" />
-              <span className="text-sm font-semibold">AI Assistant</span>
-            </div>
-            <button onClick={function() { setChatOpen(false) }} className="text-muted-foreground hover:text-foreground p-1 rounded hover:bg-muted transition-colors">
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            </button>
-          </div>
-
-          {/* Chat Messages */}
-          <div ref={chatScrollRef} className="flex-1 overflow-y-auto p-3 space-y-3">
-            {chatMessages.length === 0 && (
-              <div className="flex flex-col items-center justify-center py-8 px-2">
-                <FiZap className="w-8 h-8 text-muted-foreground/20 mb-3" />
-                <p className="text-xs text-muted-foreground text-center font-medium">Ask me anything during the call</p>
-                <p className="text-[11px] text-muted-foreground/60 text-center mt-1.5 leading-relaxed">
-                  I have full context of the live transcript. Ask for advice, objection handling, or quick research.
-                </p>
-                <div className="flex flex-wrap gap-1.5 mt-3 justify-center">
-                  {['What should I ask next?', 'How to handle pricing objection?', 'Summarize the call so far'].map(function(q) {
-                    return (
-                      <button
-                        key={q}
-                        onClick={function() { setChatInput(q) }}
-                        className="text-[10px] px-2 py-1 rounded-full border border-border text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-                      >
-                        {q}
-                      </button>
-                    )
-                  })}
-                </div>
-              </div>
-            )}
-            {chatMessages.map(function(msg) {
-              return (
-                <div key={msg.id} className={'flex ' + (msg.role === 'user' ? 'justify-end' : 'justify-start')}>
-                  <div className={'max-w-[90%] px-3 py-2 rounded-lg text-xs leading-relaxed ' + (
-                    msg.role === 'user'
-                      ? 'bg-primary text-primary-foreground rounded-br-sm'
-                      : 'bg-muted text-foreground rounded-bl-sm'
-                  )}>
-                    <p className="whitespace-pre-wrap">{msg.text}</p>
-                  </div>
-                </div>
-              )
-            })}
-            {chatLoading && (
-              <div className="flex justify-start">
-                <div className="bg-muted rounded-lg px-3 py-2 rounded-bl-sm">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse [animation-delay:0.2s]" />
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse [animation-delay:0.4s]" />
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Chat Input */}
-          <div className="border-t border-border p-2 flex-shrink-0">
-            <div className="flex gap-2">
-              <Input
-                value={chatInput}
-                onChange={function(e) { setChatInput(e.target.value) }}
-                onKeyDown={function(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleChatSend() } }}
-                placeholder="Ask the AI..."
-                className="flex-1 h-9 text-xs bg-muted/50 border-border"
-                disabled={chatLoading}
-              />
-              <Button
-                onClick={handleChatSend}
-                disabled={!chatInput.trim() || chatLoading}
-                size="sm"
-                className="h-9 w-9 p-0 flex-shrink-0"
-              >
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* AI Chat removed — using right panel AI Assistant instead */}
     </div>
   )
 }
