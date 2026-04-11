@@ -1,5 +1,3210 @@
 [
   {
+    "id": "call-1775910637468",
+    "startTime": "2026-04-11T12:30:37.468Z",
+    "endTime": "2026-04-11T12:33:04.097Z",
+    "transcript": [
+      {
+        "id": "live-1775910638525-off7",
+        "speaker": "rep",
+        "text": "Let's call",
+        "timestamp": "04:30:38 PM"
+      },
+      {
+        "id": "live-1775910638544-4npl",
+        "speaker": "prospect",
+        "text": "Let's call",
+        "timestamp": "04:30:38 PM"
+      },
+      {
+        "id": "live-1775910638633-ixhh",
+        "speaker": "prospect",
+        "text": "Let's call",
+        "timestamp": "04:30:38 PM"
+      },
+      {
+        "id": "live-1775910658258-qgb0",
+        "speaker": "rep",
+        "text": "Hi. I'll",
+        "timestamp": "04:30:58 PM"
+      },
+      {
+        "id": "live-1775910658273-t0ta",
+        "speaker": "prospect",
+        "text": "Hi. I'll",
+        "timestamp": "04:30:58 PM"
+      },
+      {
+        "id": "live-1775910658323-qnzg",
+        "speaker": "prospect",
+        "text": "Hi. I'll",
+        "timestamp": "04:30:58 PM"
+      },
+      {
+        "id": "live-1775910658359-tigf",
+        "speaker": "rep",
+        "text": "Hi. I'll",
+        "timestamp": "04:30:58 PM"
+      },
+      {
+        "id": "live-1775910658427-dzhf",
+        "speaker": "rep",
+        "text": "Hi. I'll",
+        "timestamp": "04:30:58 PM"
+      },
+      {
+        "id": "live-1775910659292-4p6o",
+        "speaker": "rep",
+        "text": "how are you?",
+        "timestamp": "04:30:59 PM"
+      },
+      {
+        "id": "live-1775910659305-2qvh",
+        "speaker": "prospect",
+        "text": "how are you?",
+        "timestamp": "04:30:59 PM"
+      },
+      {
+        "id": "live-1775910659347-zfa2",
+        "speaker": "prospect",
+        "text": "how are you?",
+        "timestamp": "04:30:59 PM"
+      },
+      {
+        "id": "live-1775910659401-to1n",
+        "speaker": "rep",
+        "text": "how are you?",
+        "timestamp": "04:30:59 PM"
+      },
+      {
+        "id": "live-1775910659470-ui32",
+        "speaker": "rep",
+        "text": "how are you?",
+        "timestamp": "04:30:59 PM"
+      },
+      {
+        "id": "live-1775910664013-5aea",
+        "speaker": "prospect",
+        "text": "My name is Victor Ogishina.",
+        "timestamp": "04:31:04 PM"
+      },
+      {
+        "id": "live-1775910664157-fa8h",
+        "speaker": "prospect",
+        "text": "My name is Victor Obishina.",
+        "timestamp": "04:31:04 PM"
+      },
+      {
+        "id": "live-1775910664188-bjts",
+        "speaker": "rep",
+        "text": "My name is Victor Obishina.",
+        "timestamp": "04:31:04 PM"
+      },
+      {
+        "id": "live-1775910664227-qn8v",
+        "speaker": "rep",
+        "text": "My name is Victor Obishina.",
+        "timestamp": "04:31:04 PM"
+      },
+      {
+        "id": "live-1775910664348-4q0m",
+        "speaker": "prospect",
+        "text": "My name is Victor Obishina.",
+        "timestamp": "04:31:04 PM"
+      },
+      {
+        "id": "live-1775910675215-r0n2",
+        "speaker": "rep",
+        "text": "So",
+        "timestamp": "04:31:15 PM"
+      },
+      {
+        "id": "live-1775910675283-ynrs",
+        "speaker": "rep",
+        "text": "So",
+        "timestamp": "04:31:15 PM"
+      },
+      {
+        "id": "live-1775910675333-f6i3",
+        "speaker": "rep",
+        "text": "So",
+        "timestamp": "04:31:15 PM"
+      },
+      {
+        "id": "live-1775910675359-fbd7",
+        "speaker": "prospect",
+        "text": "So",
+        "timestamp": "04:31:15 PM"
+      },
+      {
+        "id": "live-1775910683966-0w6a",
+        "speaker": "prospect",
+        "text": "It should stop.",
+        "timestamp": "04:31:23 PM"
+      },
+      {
+        "id": "live-1775910687462-0gv3",
+        "speaker": "rep",
+        "text": "Aman Gulani.",
+        "timestamp": "04:31:27 PM"
+      },
+      {
+        "id": "live-1775910687823-hw8j",
+        "speaker": "prospect",
+        "text": "Aman Gulani.",
+        "timestamp": "04:31:27 PM"
+      },
+      {
+        "id": "live-1775910687839-9ffe",
+        "speaker": "rep",
+        "text": "Aman Gulani.",
+        "timestamp": "04:31:27 PM"
+      },
+      {
+        "id": "live-1775910687897-k9y7",
+        "speaker": "prospect",
+        "text": "Aman Gulani.",
+        "timestamp": "04:31:27 PM"
+      },
+      {
+        "id": "live-1775910692851-y8to",
+        "speaker": "rep",
+        "text": "And will you you will",
+        "timestamp": "04:31:32 PM"
+      },
+      {
+        "id": "live-1775910692852-3xia",
+        "speaker": "prospect",
+        "text": "And will you you will",
+        "timestamp": "04:31:32 PM"
+      },
+      {
+        "id": "live-1775910692870-r2rl",
+        "speaker": "prospect",
+        "text": "And will you you will",
+        "timestamp": "04:31:32 PM"
+      },
+      {
+        "id": "live-1775910692910-5sr6",
+        "speaker": "rep",
+        "text": "And what do you you",
+        "timestamp": "04:31:32 PM"
+      },
+      {
+        "id": "live-1775910693005-3fik",
+        "speaker": "rep",
+        "text": "And will you you will",
+        "timestamp": "04:31:33 PM"
+      },
+      {
+        "id": "live-1775910701094-t39a",
+        "speaker": "rep",
+        "text": "But but but but but it was you. It said prospect.",
+        "timestamp": "04:31:41 PM"
+      },
+      {
+        "id": "live-1775910701218-lyty",
+        "speaker": "rep",
+        "text": "But but but but but it was you. It said prospect.",
+        "timestamp": "04:31:41 PM"
+      },
+      {
+        "id": "live-1775910701708-0x3z",
+        "speaker": "prospect",
+        "text": "But but but but but it was you. It said prospect.",
+        "timestamp": "04:31:41 PM"
+      },
+      {
+        "id": "live-1775910702389-owtu",
+        "speaker": "rep",
+        "text": "But but but but but it was you. It said prospect.",
+        "timestamp": "04:31:42 PM"
+      },
+      {
+        "id": "live-1775910702499-n5z7",
+        "speaker": "prospect",
+        "text": "But but but but but it was you. It said prospect.",
+        "timestamp": "04:31:42 PM"
+      },
+      {
+        "id": "live-1775910702603-o3pe",
+        "speaker": "prospect",
+        "text": "Said your money will go to prospect.",
+        "timestamp": "04:31:42 PM"
+      },
+      {
+        "id": "live-1775910702942-gxkb",
+        "speaker": "rep",
+        "text": "Said you might even look to prospect.",
+        "timestamp": "04:31:42 PM"
+      },
+      {
+        "id": "live-1775910703012-6i1m",
+        "speaker": "rep",
+        "text": "Said your money will go to prospect.",
+        "timestamp": "04:31:43 PM"
+      },
+      {
+        "id": "live-1775910703436-isik",
+        "speaker": "rep",
+        "text": "Said your money will go to prospect.",
+        "timestamp": "04:31:43 PM"
+      },
+      {
+        "id": "live-1775910703845-ktqr",
+        "speaker": "prospect",
+        "text": "Said your money will go to prospect.",
+        "timestamp": "04:31:43 PM"
+      },
+      {
+        "id": "live-1775910705314-87se",
+        "speaker": "prospect",
+        "text": "It's you. No. It read this because",
+        "timestamp": "04:31:45 PM"
+      },
+      {
+        "id": "live-1775910705486-4rwq",
+        "speaker": "rep",
+        "text": "It's you. No. It read this because",
+        "timestamp": "04:31:45 PM"
+      },
+      {
+        "id": "live-1775910705730-p3ib",
+        "speaker": "prospect",
+        "text": "It's you. No. It read this because",
+        "timestamp": "04:31:45 PM"
+      },
+      {
+        "id": "live-1775910705765-5f7e",
+        "speaker": "rep",
+        "text": "It's you. No. It read this because",
+        "timestamp": "04:31:45 PM"
+      },
+      {
+        "id": "live-1775910706012-q7gr",
+        "speaker": "rep",
+        "text": "It's you. No. It read this because",
+        "timestamp": "04:31:46 PM"
+      },
+      {
+        "id": "live-1775910710128-r445",
+        "speaker": "rep",
+        "text": "of, like, this 1 was yeah. It's coming here at least, but it's not coming up in those searches.",
+        "timestamp": "04:31:50 PM"
+      },
+      {
+        "id": "live-1775910710303-82er",
+        "speaker": "prospect",
+        "text": "of, like, this 1 was yeah. It's coming here at least, but it's not coming up in those searches.",
+        "timestamp": "04:31:50 PM"
+      },
+      {
+        "id": "live-1775910710358-s4im",
+        "speaker": "rep",
+        "text": "of, like, this 1 was yeah. It's coming here at least, but it's not coming up in those searches.",
+        "timestamp": "04:31:50 PM"
+      },
+      {
+        "id": "live-1775910710614-f9y3",
+        "speaker": "rep",
+        "text": "of, like, this 1 was yeah. It's coming here at least, but it's not coming up in those searches.",
+        "timestamp": "04:31:50 PM"
+      },
+      {
+        "id": "live-1775910711149-qu5s",
+        "speaker": "rep",
+        "text": "of, like, this 1 was yeah. It's coming here at least, but it's not coming up in those searches.",
+        "timestamp": "04:31:51 PM"
+      },
+      {
+        "id": "live-1775910714643-nbif",
+        "speaker": "rep",
+        "text": "No. I don't know if you understand. But what is happening right now is because this phone is",
+        "timestamp": "04:31:54 PM"
+      },
+      {
+        "id": "live-1775910714724-en7u",
+        "speaker": "rep",
+        "text": "No. I don't know if you understand. But what is happening right now is because this phone is",
+        "timestamp": "04:31:54 PM"
+      },
+      {
+        "id": "live-1775910714794-y2ue",
+        "speaker": "prospect",
+        "text": "No. I don't know if you understand. But what is happening right now is because this phone is",
+        "timestamp": "04:31:54 PM"
+      },
+      {
+        "id": "live-1775910714890-c3cs",
+        "speaker": "prospect",
+        "text": "No. I don't know if you understand. But what is happening right now is because this phone is",
+        "timestamp": "04:31:54 PM"
+      },
+      {
+        "id": "live-1775910715271-7jik",
+        "speaker": "prospect",
+        "text": "No. I don't know if you understand. But what is happening right now is because this phone is",
+        "timestamp": "04:31:55 PM"
+      },
+      {
+        "id": "live-1775910715655-v3uj",
+        "speaker": "rep",
+        "text": "close to this",
+        "timestamp": "04:31:55 PM"
+      },
+      {
+        "id": "live-1775910715682-hw71",
+        "speaker": "rep",
+        "text": "close to this",
+        "timestamp": "04:31:55 PM"
+      },
+      {
+        "id": "live-1775910715775-fufq",
+        "speaker": "prospect",
+        "text": "close to this",
+        "timestamp": "04:31:55 PM"
+      },
+      {
+        "id": "live-1775910715820-fzgu",
+        "speaker": "prospect",
+        "text": "close to this",
+        "timestamp": "04:31:55 PM"
+      },
+      {
+        "id": "live-1775910715912-mt82",
+        "speaker": "prospect",
+        "text": "close to this",
+        "timestamp": "04:31:55 PM"
+      },
+      {
+        "id": "live-1775910717708-pb8j",
+        "speaker": "prospect",
+        "text": "mic, this laptop speaker.",
+        "timestamp": "04:31:57 PM"
+      },
+      {
+        "id": "live-1775910717717-inec",
+        "speaker": "rep",
+        "text": "mic, this laptop speaker.",
+        "timestamp": "04:31:57 PM"
+      },
+      {
+        "id": "live-1775910717828-ok47",
+        "speaker": "prospect",
+        "text": "mic, this laptop speaker.",
+        "timestamp": "04:31:57 PM"
+      },
+      {
+        "id": "live-1775910717869-wzwk",
+        "speaker": "prospect",
+        "text": "mic, this laptop speaker.",
+        "timestamp": "04:31:57 PM"
+      },
+      {
+        "id": "live-1775910718455-269h",
+        "speaker": "rep",
+        "text": "mic, this laptop speaker.",
+        "timestamp": "04:31:58 PM"
+      },
+      {
+        "id": "live-1775910721334-ba02",
+        "speaker": "rep",
+        "text": "If I was far away, this call transcript is not reading",
+        "timestamp": "04:32:01 PM"
+      },
+      {
+        "id": "live-1775910721394-c0qg",
+        "speaker": "prospect",
+        "text": "If I was far away, this call transcript is not reading",
+        "timestamp": "04:32:01 PM"
+      },
+      {
+        "id": "live-1775910721397-ykej",
+        "speaker": "rep",
+        "text": "If I was far away, this call transcript is not reading",
+        "timestamp": "04:32:01 PM"
+      },
+      {
+        "id": "live-1775910721590-qpi4",
+        "speaker": "prospect",
+        "text": "If I was far away, this call transcript is not reading",
+        "timestamp": "04:32:01 PM"
+      },
+      {
+        "id": "live-1775910722684-glj3",
+        "speaker": "prospect",
+        "text": "next person's",
+        "timestamp": "04:32:02 PM"
+      },
+      {
+        "id": "live-1775910723321-qgnr",
+        "speaker": "prospect",
+        "text": "If I was far away, this call transcript is not reading",
+        "timestamp": "04:32:03 PM"
+      },
+      {
+        "id": "live-1775910725151-w632",
+        "speaker": "prospect",
+        "text": "this next person's voice. I understand. Yeah. But it's still",
+        "timestamp": "04:32:05 PM"
+      },
+      {
+        "id": "live-1775910725167-wips",
+        "speaker": "rep",
+        "text": "this next person's voice. I understand. Yeah. But it's still",
+        "timestamp": "04:32:05 PM"
+      },
+      {
+        "id": "live-1775910725180-xwx4",
+        "speaker": "rep",
+        "text": "this next person's voice. I understand. Yeah. But it's still",
+        "timestamp": "04:32:05 PM"
+      },
+      {
+        "id": "live-1775910725186-q40x",
+        "speaker": "prospect",
+        "text": "voice. I understand. Yeah. But it's still",
+        "timestamp": "04:32:05 PM"
+      },
+      {
+        "id": "live-1775910725458-1nyv",
+        "speaker": "prospect",
+        "text": "this next person's voice. I understand. Yeah. But it's still",
+        "timestamp": "04:32:05 PM"
+      },
+      {
+        "id": "live-1775910729525-dxq3",
+        "speaker": "prospect",
+        "text": "it's still separated it twice. Right? So it should still search for you because it's prospect.",
+        "timestamp": "04:32:09 PM"
+      },
+      {
+        "id": "live-1775910729540-hdym",
+        "speaker": "rep",
+        "text": "it's still separated it twice. Right? So it should still search for you because this prospect",
+        "timestamp": "04:32:09 PM"
+      },
+      {
+        "id": "live-1775910729545-6bdx",
+        "speaker": "prospect",
+        "text": "it's still separated it twice. Right? So it should still search for you because it's prospect.",
+        "timestamp": "04:32:09 PM"
+      },
+      {
+        "id": "live-1775910729628-3xl2",
+        "speaker": "rep",
+        "text": "it's still separated it twice. Right? So it should still search for you because this prospect.",
+        "timestamp": "04:32:09 PM"
+      },
+      {
+        "id": "live-1775910729778-pcz1",
+        "speaker": "rep",
+        "text": "it's still separated it twice. Right? So it should still search for you because it's prospect.",
+        "timestamp": "04:32:09 PM"
+      },
+      {
+        "id": "live-1775910730918-emte",
+        "speaker": "rep",
+        "text": "It should still search for you.",
+        "timestamp": "04:32:10 PM"
+      },
+      {
+        "id": "live-1775910731039-zt5u",
+        "speaker": "rep",
+        "text": "It should still search for you.",
+        "timestamp": "04:32:11 PM"
+      },
+      {
+        "id": "live-1775910731051-3eha",
+        "speaker": "prospect",
+        "text": "It should still search for you.",
+        "timestamp": "04:32:11 PM"
+      },
+      {
+        "id": "live-1775910731071-dw30",
+        "speaker": "rep",
+        "text": "it should still search for you.",
+        "timestamp": "04:32:11 PM"
+      },
+      {
+        "id": "live-1775910731084-t6mn",
+        "speaker": "prospect",
+        "text": "It should still search for you.",
+        "timestamp": "04:32:11 PM"
+      },
+      {
+        "id": "live-1775910737471-lrj8",
+        "speaker": "prospect",
+        "text": "No. No. I don't think so. Yeah. Because, look, prospect is you.",
+        "timestamp": "04:32:17 PM"
+      },
+      {
+        "id": "live-1775910737877-kgzw",
+        "speaker": "prospect",
+        "text": "No. I don't think so. Yeah. Because, look, prospect is you. That's the and rep is the sales guy.",
+        "timestamp": "04:32:17 PM"
+      },
+      {
+        "id": "live-1775910737953-z99o",
+        "speaker": "prospect",
+        "text": "No. I don't think so. Yeah. Because, look, prospect is you. That's the and rep is the sales guy.",
+        "timestamp": "04:32:17 PM"
+      },
+      {
+        "id": "live-1775910737969-t6gm",
+        "speaker": "rep",
+        "text": "No. I don't think so. Yeah. Because, look, prospect is you. That's the and rep is the sales guy.",
+        "timestamp": "04:32:17 PM"
+      },
+      {
+        "id": "live-1775910737998-1guo",
+        "speaker": "rep",
+        "text": "No. I don't think so. Yeah. Because, look, prospect is you. That's the and rep is the sales guy.",
+        "timestamp": "04:32:17 PM"
+      },
+      {
+        "id": "live-1775910740550-ikm2",
+        "speaker": "rep",
+        "text": "That's the rep is the sales guy. So it's searching the prospect.",
+        "timestamp": "04:32:20 PM"
+      },
+      {
+        "id": "live-1775910742571-qift",
+        "speaker": "prospect",
+        "text": "So it's searching the prospect, and you said your name. Yeah. And it still didn't come up.",
+        "timestamp": "04:32:22 PM"
+      },
+      {
+        "id": "live-1775910742620-k9m1",
+        "speaker": "prospect",
+        "text": "So it's searching the prospect, and you said your name. Yeah. And it still didn't come up.",
+        "timestamp": "04:32:22 PM"
+      },
+      {
+        "id": "live-1775910742739-bkrw",
+        "speaker": "rep",
+        "text": "So it's searching the prospect, and you said your name. Yeah. And it still didn't come up.",
+        "timestamp": "04:32:22 PM"
+      },
+      {
+        "id": "live-1775910742751-sia6",
+        "speaker": "rep",
+        "text": "It's searching the prospect, and you said your name. Yeah. And they still didn't come up.",
+        "timestamp": "04:32:22 PM"
+      },
+      {
+        "id": "live-1775910743326-ellh",
+        "speaker": "prospect",
+        "text": "Says client came up here with your name.",
+        "timestamp": "04:32:23 PM"
+      },
+      {
+        "id": "live-1775910743423-ubst",
+        "speaker": "prospect",
+        "text": "Says client came up here with your name.",
+        "timestamp": "04:32:23 PM"
+      },
+      {
+        "id": "live-1775910743427-xja9",
+        "speaker": "rep",
+        "text": "You said your name. Yeah. And it still didn't come up. So this client came up here with your name.",
+        "timestamp": "04:32:23 PM"
+      },
+      {
+        "id": "live-1775910743487-qimq",
+        "speaker": "rep",
+        "text": "Says client came up here with your name.",
+        "timestamp": "04:32:23 PM"
+      },
+      {
+        "id": "live-1775910743610-dezp",
+        "speaker": "rep",
+        "text": "Says client came up here with your name.",
+        "timestamp": "04:32:23 PM"
+      },
+      {
+        "id": "live-1775910748872-xt71",
+        "speaker": "rep",
+        "text": "But when the research agent wasn't showing, it wasn't, like, going to a LinkedIn or whatever. I I I know why",
+        "timestamp": "04:32:28 PM"
+      },
+      {
+        "id": "live-1775910748941-b20o",
+        "speaker": "rep",
+        "text": "But when the research agent wasn't showing, it wasn't, like, going to a LinkedIn or whatever. I I I know why",
+        "timestamp": "04:32:28 PM"
+      },
+      {
+        "id": "live-1775910748971-h8bj",
+        "speaker": "prospect",
+        "text": "But when the research agent wasn't showing, it wasn't, like, going to a LinkedIn or whatever. I I I know why",
+        "timestamp": "04:32:28 PM"
+      },
+      {
+        "id": "live-1775910749009-w8x9",
+        "speaker": "prospect",
+        "text": "But when the research agent wasn't showing, it wasn't, like, going to a LinkedIn or whatever. I I I know why",
+        "timestamp": "04:32:29 PM"
+      },
+      {
+        "id": "live-1775910750295-ofea",
+        "speaker": "rep",
+        "text": "But when the research wasn't showing, it wasn't like going to a LinkedIn whatever. I I I know why that's what I'm saying. I know why this",
+        "timestamp": "04:32:30 PM"
+      },
+      {
+        "id": "live-1775910750414-vfsu",
+        "speaker": "prospect",
+        "text": "that 1 since I know why this",
+        "timestamp": "04:32:30 PM"
+      },
+      {
+        "id": "live-1775910750505-cah9",
+        "speaker": "prospect",
+        "text": "that 1 since I know why this",
+        "timestamp": "04:32:30 PM"
+      },
+      {
+        "id": "live-1775910750509-e605",
+        "speaker": "rep",
+        "text": "that 1 since I know why this",
+        "timestamp": "04:32:30 PM"
+      },
+      {
+        "id": "live-1775910750514-w3u8",
+        "speaker": "rep",
+        "text": "that 1 since I know why this",
+        "timestamp": "04:32:30 PM"
+      },
+      {
+        "id": "live-1775910752989-ey3d",
+        "speaker": "prospect",
+        "text": "is, like, acting like it's it's because if I move",
+        "timestamp": "04:32:32 PM"
+      },
+      {
+        "id": "live-1775910753048-zfsb",
+        "speaker": "prospect",
+        "text": "is, like, acting like it's it's because if I move",
+        "timestamp": "04:32:33 PM"
+      },
+      {
+        "id": "live-1775910753069-w0sr",
+        "speaker": "rep",
+        "text": "is, like, acting like it's it's because if I move",
+        "timestamp": "04:32:33 PM"
+      },
+      {
+        "id": "live-1775910753139-ofte",
+        "speaker": "rep",
+        "text": "is, like, acting like it's it's because if I move",
+        "timestamp": "04:32:33 PM"
+      },
+      {
+        "id": "live-1775910753157-3xoy",
+        "speaker": "prospect",
+        "text": "is, like, acting like it's it's because if I move",
+        "timestamp": "04:32:33 PM"
+      },
+      {
+        "id": "live-1775910753709-miv9",
+        "speaker": "prospect",
+        "text": "like,",
+        "timestamp": "04:32:33 PM"
+      },
+      {
+        "id": "live-1775910753821-kkke",
+        "speaker": "prospect",
+        "text": "like,",
+        "timestamp": "04:32:33 PM"
+      }
+    ],
+    "researchData": {
+      "company_profile": {
+        "name": null,
+        "industry": null,
+        "size": null,
+        "headquarters": null,
+        "description": null,
+        "key_products": null
+      },
+      "funding": {
+        "total_raised": null,
+        "latest_round": null,
+        "key_investors": null,
+        "financial_health": null
+      },
+      "tech_stack": {
+        "technologies": null,
+        "infrastructure": null,
+        "tools": null
+      },
+      "recent_news": null,
+      "pitch_angles": null,
+      "pain_points": null
+    },
+    "strategyData": {
+      "objection_handlers": [
+        "If the prospect seems confused or frustrated by the repetition, acknowledge it: 'It looks like we're having some technical difficulties here—let's reset and make sure we're both on the same page.'",
+        "If the prospect says 'It should stop,' respond with: 'Absolutely, let's start fresh. I want to make sure this conversation is productive for you.'"
+      ],
+      "next_questions": [
+        "Victor, can you confirm if you're able to hear me clearly now?",
+        "Would you like to restart the call, or should we proceed from here?",
+        "Just to clarify, are you looking to discuss our solutions today, or is there something specific on your mind?"
+      ],
+      "pitch_angles": [
+        "Emphasize professionalism and technical reliability: 'We strive to make every conversation seamless. Thank you for your patience—let's get started.'",
+        "Show empathy: 'I know tech glitches can be frustrating. Let's make sure your time is well spent.'"
+      ],
+      "engagement_level": "Low. The conversation is stuck in a loop of repeated phrases and introductions, likely due to technical issues or confusion. No substantive engagement or discovery has occurred yet.",
+      "deal_signals": [],
+      "closing_probability": "5%. Reasoning: The conversation has not progressed beyond introductions, and technical issues are preventing meaningful engagement. No discovery or buying signals detected yet.",
+      "recommendation": "Acknowledge the confusion, reset the conversation, and confirm that both parties are ready to proceed. Move quickly to establish rapport and clarify the purpose of the call."
+    },
+    "status": "completed",
+    "phoneNumber": "+971501715226",
+    "duration": 58,
+    "postCallData": {
+      "summary": {
+        "client_name": "Unknown (Prospect not identified)",
+        "company": "Unknown",
+        "call_outcome": "Unsuccessful - No meaningful conversation",
+        "key_points": [
+          "Significant repetition and confusion at the start of the call.",
+          "Both parties repeatedly echoed each other's phrases.",
+          "No clear agenda, needs, or solutions discussed.",
+          "No business context or product/service mentioned."
+        ],
+        "pain_points": [
+          "Communication breakdown.",
+          "Possible technical issues (echo, cross-talk, or connection problems)."
+        ],
+        "next_steps": [
+          "Verify contact information for both parties.",
+          "Test call quality and connection before next attempt.",
+          "Reschedule call with clear agenda and introductions."
+        ]
+      },
+      "deal_probability": {
+        "score": 0,
+        "positive_signals": [],
+        "negative_signals": [
+          "No business discussion occurred.",
+          "Significant communication issues.",
+          "No identification of client or company."
+        ],
+        "risk_factors": [
+          "Technical difficulties.",
+          "Potential lack of interest or confusion."
+        ]
+      },
+      "follow_up_email": {
+        "subject": "Let's Reschedule Our Call – Ensuring a Smooth Connection",
+        "body": "Hi,\n\nI apologize for the technical difficulties during our recent call. It seems we experienced some connection issues that prevented us from having a productive conversation. \n\nI'd like to ensure we have a clear and effective discussion about your needs. Could we please reschedule at a time that works for you? Additionally, please let me know the best number to reach you and if there are any preferred platforms for our call.\n\nLooking forward to connecting soon.\n\nBest regards,\n[Your Name]",
+        "recipient_suggestion": "Prospect's email (if available); otherwise, confirm contact details before sending."
+      }
+    }
+  },
+  {
+    "id": "call-1775910485464",
+    "startTime": "2026-04-11T12:28:05.464Z",
+    "endTime": "2026-04-11T12:29:26.825Z",
+    "transcript": [
+      {
+        "id": "live-1775910495573-ef4d",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "04:28:15 PM"
+      },
+      {
+        "id": "live-1775910495597-phrv",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "04:28:15 PM"
+      },
+      {
+        "id": "live-1775910495643-0sm2",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "04:28:15 PM"
+      },
+      {
+        "id": "live-1775910495727-k1ai",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "04:28:15 PM"
+      },
+      {
+        "id": "live-1775910497651-pi7t",
+        "speaker": "prospect",
+        "text": "Hi. How are you doing?",
+        "timestamp": "04:28:17 PM"
+      },
+      {
+        "id": "live-1775910497652-y1l7",
+        "speaker": "rep",
+        "text": "Hi. How are you doing?",
+        "timestamp": "04:28:17 PM"
+      },
+      {
+        "id": "live-1775910497692-tlfc",
+        "speaker": "rep",
+        "text": "Hi. How are you doing?",
+        "timestamp": "04:28:17 PM"
+      },
+      {
+        "id": "live-1775910497751-s2ps",
+        "speaker": "rep",
+        "text": "Hi. How are you doing?",
+        "timestamp": "04:28:17 PM"
+      },
+      {
+        "id": "live-1775910501377-9r1w",
+        "speaker": "rep",
+        "text": "Good. Good. Good. What is your name, sir?",
+        "timestamp": "04:28:21 PM"
+      },
+      {
+        "id": "live-1775910501479-yfv6",
+        "speaker": "prospect",
+        "text": "Good. Good. Good. What is your name, sir?",
+        "timestamp": "04:28:21 PM"
+      },
+      {
+        "id": "live-1775910501505-rgtw",
+        "speaker": "rep",
+        "text": "Good. Good. Good. What is your name, sir?",
+        "timestamp": "04:28:21 PM"
+      },
+      {
+        "id": "live-1775910501543-dkig",
+        "speaker": "rep",
+        "text": "Good. Good. Good. What is your name, sir?",
+        "timestamp": "04:28:21 PM"
+      },
+      {
+        "id": "live-1775910504749-scyd",
+        "speaker": "prospect",
+        "text": "Okay.",
+        "timestamp": "04:28:24 PM"
+      },
+      {
+        "id": "live-1775910504877-5gls",
+        "speaker": "rep",
+        "text": "Okay.",
+        "timestamp": "04:28:24 PM"
+      },
+      {
+        "id": "live-1775910504910-e9cn",
+        "speaker": "rep",
+        "text": "Okay.",
+        "timestamp": "04:28:24 PM"
+      },
+      {
+        "id": "live-1775910505112-h9hg",
+        "speaker": "rep",
+        "text": "Okay.",
+        "timestamp": "04:28:25 PM"
+      },
+      {
+        "id": "live-1775910506391-lwws",
+        "speaker": "rep",
+        "text": "Very nice.",
+        "timestamp": "04:28:26 PM"
+      },
+      {
+        "id": "live-1775910506398-7koe",
+        "speaker": "prospect",
+        "text": "Very nice.",
+        "timestamp": "04:28:26 PM"
+      },
+      {
+        "id": "live-1775910506433-fk82",
+        "speaker": "rep",
+        "text": "Very nice.",
+        "timestamp": "04:28:26 PM"
+      },
+      {
+        "id": "live-1775910506539-76x9",
+        "speaker": "rep",
+        "text": "Very nice.",
+        "timestamp": "04:28:26 PM"
+      },
+      {
+        "id": "live-1775910512026-czqj",
+        "speaker": "rep",
+        "text": "Okay.",
+        "timestamp": "04:28:32 PM"
+      },
+      {
+        "id": "live-1775910512064-ze9p",
+        "speaker": "rep",
+        "text": "Okay.",
+        "timestamp": "04:28:32 PM"
+      },
+      {
+        "id": "live-1775910512171-zaqq",
+        "speaker": "rep",
+        "text": "Okay.",
+        "timestamp": "04:28:32 PM"
+      },
+      {
+        "id": "live-1775910513816-66bz",
+        "speaker": "prospect",
+        "text": "Hello?",
+        "timestamp": "04:28:33 PM"
+      },
+      {
+        "id": "live-1775910513832-bk9l",
+        "speaker": "rep",
+        "text": "Okay. Hello?",
+        "timestamp": "04:28:33 PM"
+      },
+      {
+        "id": "live-1775910513845-cx9r",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "04:28:33 PM"
+      },
+      {
+        "id": "live-1775910513956-58ct",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "04:28:33 PM"
+      },
+      {
+        "id": "live-1775910515783-p4rd",
+        "speaker": "rep",
+        "text": "Hi. Good. Good. How are you, sir?",
+        "timestamp": "04:28:35 PM"
+      },
+      {
+        "id": "live-1775910515856-vxaw",
+        "speaker": "rep",
+        "text": "Hi. Good. Good. How are you, sir?",
+        "timestamp": "04:28:35 PM"
+      },
+      {
+        "id": "live-1775910515878-5tsj",
+        "speaker": "prospect",
+        "text": "Hi. Good. Good. How are you, sir?",
+        "timestamp": "04:28:35 PM"
+      },
+      {
+        "id": "live-1775910515913-e77e",
+        "speaker": "rep",
+        "text": "Hi. Good. Good. How are you, sir?",
+        "timestamp": "04:28:35 PM"
+      },
+      {
+        "id": "live-1775910519882-a9w0",
+        "speaker": "rep",
+        "text": "What what is your name, sir?",
+        "timestamp": "04:28:39 PM"
+      },
+      {
+        "id": "live-1775910519963-rz8q",
+        "speaker": "rep",
+        "text": "What what is your name, sir?",
+        "timestamp": "04:28:39 PM"
+      },
+      {
+        "id": "live-1775910520001-gm9b",
+        "speaker": "prospect",
+        "text": "What what is your name, sir?",
+        "timestamp": "04:28:40 PM"
+      },
+      {
+        "id": "live-1775910520018-g413",
+        "speaker": "rep",
+        "text": "What what is your name, sir?",
+        "timestamp": "04:28:40 PM"
+      },
+      {
+        "id": "live-1775910524338-yprd",
+        "speaker": "rep",
+        "text": "Okay. Okay. Okay.",
+        "timestamp": "04:28:44 PM"
+      },
+      {
+        "id": "live-1775910524350-hdy1",
+        "speaker": "rep",
+        "text": "Okay. Okay. Okay.",
+        "timestamp": "04:28:44 PM"
+      },
+      {
+        "id": "live-1775910524380-arvz",
+        "speaker": "rep",
+        "text": "Okay. Okay. Okay.",
+        "timestamp": "04:28:44 PM"
+      },
+      {
+        "id": "live-1775910524489-erp3",
+        "speaker": "prospect",
+        "text": "Okay. Okay. Okay.",
+        "timestamp": "04:28:44 PM"
+      },
+      {
+        "id": "live-1775910529084-cl7e",
+        "speaker": "rep",
+        "text": "Very nice. I I wanted to, send you some some some, houses in Dubai Hills.",
+        "timestamp": "04:28:49 PM"
+      },
+      {
+        "id": "live-1775910529192-ihph",
+        "speaker": "rep",
+        "text": "Very nice. I I wanted to, send you some some some, houses in Dubai Hills.",
+        "timestamp": "04:28:49 PM"
+      },
+      {
+        "id": "live-1775910529220-camd",
+        "speaker": "prospect",
+        "text": "Very nice. I I wanted to, send you some some some, houses in Dubai Hills.",
+        "timestamp": "04:28:49 PM"
+      },
+      {
+        "id": "live-1775910529253-skju",
+        "speaker": "rep",
+        "text": "Very nice. I I wanted to, send you some some some, houses in Dubai Hills.",
+        "timestamp": "04:28:49 PM"
+      },
+      {
+        "id": "live-1775910530709-46h1",
+        "speaker": "rep",
+        "text": "Would that be interesting",
+        "timestamp": "04:28:50 PM"
+      },
+      {
+        "id": "live-1775910530746-7l13",
+        "speaker": "prospect",
+        "text": "Would that be interesting",
+        "timestamp": "04:28:50 PM"
+      },
+      {
+        "id": "live-1775910530773-9ay0",
+        "speaker": "rep",
+        "text": "Would that be interesting",
+        "timestamp": "04:28:50 PM"
+      },
+      {
+        "id": "live-1775910530898-dmt2",
+        "speaker": "rep",
+        "text": "Would that be interesting",
+        "timestamp": "04:28:50 PM"
+      },
+      {
+        "id": "live-1775910533594-ldgj",
+        "speaker": "rep",
+        "text": "Yeah.",
+        "timestamp": "04:28:53 PM"
+      },
+      {
+        "id": "live-1775910533699-0zhh",
+        "speaker": "prospect",
+        "text": "Yeah.",
+        "timestamp": "04:28:53 PM"
+      },
+      {
+        "id": "live-1775910533779-e53e",
+        "speaker": "rep",
+        "text": "Yeah.",
+        "timestamp": "04:28:53 PM"
+      },
+      {
+        "id": "live-1775910533804-1etl",
+        "speaker": "rep",
+        "text": "Yeah.",
+        "timestamp": "04:28:53 PM"
+      },
+      {
+        "id": "live-1775910539717-z1j0",
+        "speaker": "prospect",
+        "text": "Okay. Okay. Okay. Perfect. I will I will I will I will send you some some some things,",
+        "timestamp": "04:28:59 PM"
+      },
+      {
+        "id": "live-1775910539731-lirp",
+        "speaker": "rep",
+        "text": "Okay. Okay. Okay. Perfect. I will I will I will I will send you some some some things,",
+        "timestamp": "04:28:59 PM"
+      },
+      {
+        "id": "live-1775910539756-00j6",
+        "speaker": "rep",
+        "text": "Okay. Okay. Okay. Perfect. I will I will I will I will send you some some some things,",
+        "timestamp": "04:28:59 PM"
+      },
+      {
+        "id": "live-1775910539873-5ow1",
+        "speaker": "rep",
+        "text": "Okay. Okay. Okay. Perfect. I will I will I will I will send you some some some things,",
+        "timestamp": "04:28:59 PM"
+      },
+      {
+        "id": "live-1775910542532-ml3k",
+        "speaker": "rep",
+        "text": "via email. If you can give me your email, please.",
+        "timestamp": "04:29:02 PM"
+      },
+      {
+        "id": "live-1775910542544-qhcu",
+        "speaker": "prospect",
+        "text": "via email. If you can give me your email, please.",
+        "timestamp": "04:29:02 PM"
+      },
+      {
+        "id": "live-1775910542566-c8cm",
+        "speaker": "prospect",
+        "text": "via email. If you can give me your email, please.",
+        "timestamp": "04:29:02 PM"
+      },
+      {
+        "id": "live-1775910542700-a2ik",
+        "speaker": "rep",
+        "text": "via email. If you can give me your email, please.",
+        "timestamp": "04:29:02 PM"
+      },
+      {
+        "id": "live-1775910549656-k5x2",
+        "speaker": "prospect",
+        "text": "The villas.",
+        "timestamp": "04:29:09 PM"
+      },
+      {
+        "id": "live-1775910549663-mg7g",
+        "speaker": "rep",
+        "text": "The villas.",
+        "timestamp": "04:29:09 PM"
+      },
+      {
+        "id": "live-1775910549731-e3cv",
+        "speaker": "prospect",
+        "text": "The villas.",
+        "timestamp": "04:29:09 PM"
+      },
+      {
+        "id": "live-1775910549818-epjy",
+        "speaker": "rep",
+        "text": "The villas.",
+        "timestamp": "04:29:09 PM"
+      },
+      {
+        "id": "live-1775910553760-d4su",
+        "speaker": "prospect",
+        "text": "Yeah. Okay. Okay. Can I what's your email?",
+        "timestamp": "04:29:13 PM"
+      },
+      {
+        "id": "live-1775910553775-1ufm",
+        "speaker": "rep",
+        "text": "Yeah. Okay. Okay. Can I what's your email?",
+        "timestamp": "04:29:13 PM"
+      },
+      {
+        "id": "live-1775910553806-8f12",
+        "speaker": "prospect",
+        "text": "Yeah. Okay. Okay. Can I what's your email?",
+        "timestamp": "04:29:13 PM"
+      },
+      {
+        "id": "live-1775910553931-lctx",
+        "speaker": "rep",
+        "text": "Yeah. Okay. Okay. Can I what's your email?",
+        "timestamp": "04:29:13 PM"
+      },
+      {
+        "id": "live-1775910561332-1gj1",
+        "speaker": "rep",
+        "text": "Okay. Okay. Perfect. Perfect.",
+        "timestamp": "04:29:21 PM"
+      },
+      {
+        "id": "live-1775910561434-mu1y",
+        "speaker": "prospect",
+        "text": "Okay. Okay. Perfect. Perfect.",
+        "timestamp": "04:29:21 PM"
+      },
+      {
+        "id": "live-1775910561445-mrim",
+        "speaker": "rep",
+        "text": "Okay. Okay. Perfect. Perfect.",
+        "timestamp": "04:29:21 PM"
+      },
+      {
+        "id": "live-1775910561516-rau8",
+        "speaker": "prospect",
+        "text": "Okay. Okay. Perfect. Perfect.",
+        "timestamp": "04:29:21 PM"
+      },
+      {
+        "id": "live-1775910563234-9550",
+        "speaker": "prospect",
+        "text": "You, sir. I'll be in contact with you.",
+        "timestamp": "04:29:23 PM"
+      },
+      {
+        "id": "live-1775910563253-mp8b",
+        "speaker": "rep",
+        "text": "You, sir. I'll be in contact with you.",
+        "timestamp": "04:29:23 PM"
+      },
+      {
+        "id": "live-1775910563283-lebp",
+        "speaker": "prospect",
+        "text": "You, sir. I'll be in contact with you.",
+        "timestamp": "04:29:23 PM"
+      },
+      {
+        "id": "live-1775910563389-gpxx",
+        "speaker": "rep",
+        "text": "You, sir. I'll be in contact with you.",
+        "timestamp": "04:29:23 PM"
+      },
+      {
+        "id": "live-1775910564002-kn8m",
+        "speaker": "rep",
+        "text": "I'll",
+        "timestamp": "04:29:24 PM"
+      },
+      {
+        "id": "live-1775910564061-4ilq",
+        "speaker": "rep",
+        "text": "I'll",
+        "timestamp": "04:29:24 PM"
+      },
+      {
+        "id": "live-1775910564172-uyef",
+        "speaker": "prospect",
+        "text": "I'll",
+        "timestamp": "04:29:24 PM"
+      },
+      {
+        "id": "live-1775910564270-a2b6",
+        "speaker": "rep",
+        "text": "I'll",
+        "timestamp": "04:29:24 PM"
+      },
+      {
+        "id": "live-1775910566570-l679",
+        "speaker": "prospect",
+        "text": "see you. See you. Bye bye. Bye bye.",
+        "timestamp": "04:29:26 PM"
+      },
+      {
+        "id": "live-1775910566607-dpjr",
+        "speaker": "rep",
+        "text": "see you. See you. Bye bye. Bye bye.",
+        "timestamp": "04:29:26 PM"
+      },
+      {
+        "id": "live-1775910566624-gmok",
+        "speaker": "prospect",
+        "text": "see you. See you. Bye bye. Bye bye.",
+        "timestamp": "04:29:26 PM"
+      },
+      {
+        "id": "live-1775910566761-cq33",
+        "speaker": "rep",
+        "text": "see you. See you. Bye bye. Bye bye.",
+        "timestamp": "04:29:26 PM"
+      }
+    ],
+    "researchData": {
+      "success": false,
+      "data": null,
+      "error": "No valid JSON found in the response",
+      "rawJson": null
+    },
+    "strategyData": {
+      "objection_handlers": [
+        {
+          "objection": "Prospect is mirroring or repeating rep's words, possibly out of confusion or uncertainty.",
+          "response": "I noticed we're repeating each other—just to clarify, are you interested in receiving information about villas in Dubai Hills, or do you have a specific type of property in mind?"
+        },
+        {
+          "objection": "Prospect gives minimal or unclear responses (e.g., 'Okay', 'The villas').",
+          "response": "Great, thank you for clarifying. To make sure I send you the most relevant options, could you tell me what features or budget range you're looking for in a villa?"
+        }
+      ],
+      "next_questions": [
+        "Can I confirm the best email address to send you the villa options?",
+        "Are you looking to buy for investment or personal use?",
+        "What is your preferred budget range for villas in Dubai Hills?",
+        "How soon are you looking to move or invest?",
+        "Are there any specific amenities or requirements you have in mind?"
+      ],
+      "pitch_angles": [
+        "Highlight the exclusivity and investment potential of Dubai Hills villas.",
+        "Emphasize the lifestyle benefits—green spaces, amenities, and community feel.",
+        "Offer to send a curated shortlist tailored to the prospect's preferences.",
+        "Mention recent trends in Dubai Hills property value appreciation."
+      ],
+      "engagement_level": "Low to moderate. The conversation is repetitive and mirroring, indicating possible confusion or lack of genuine engagement. However, the prospect did express interest ('Yeah', 'The villas'), which is a positive sign.",
+      "deal_signals": [
+        "Prospect agreed to receive information ('Yeah', 'The villas').",
+        "Did not object to being contacted via email.",
+        "Expressed a preference for villas."
+      ],
+      "closing_probability": "30%. While the prospect showed some interest by agreeing to receive information and specifying 'the villas', the repetitive and mirrored responses suggest limited engagement or possible misunderstanding. The next best action is to clarify intent, confirm contact details, and ask qualifying questions to assess seriousness and move the conversation forward."
+    },
+    "status": "completed",
+    "phoneNumber": "+971507587246",
+    "duration": 81,
+    "postCallData": {
+      "summary": {
+        "client_name": "Unknown (not provided in call)",
+        "company": "Unknown (not provided in call)",
+        "call_outcome": "Initial contact established; prospect expressed interest in receiving information about villas in Dubai Hills via email.",
+        "key_points": [
+          "Sales rep attempted multiple times to establish connection due to initial communication issues.",
+          "Prospect and sales rep had repetitive exchanges, possibly due to call quality or language barriers.",
+          "Sales rep offered to send information about houses/villas in Dubai Hills.",
+          "Prospect showed interest and agreed to receive information via email.",
+          "Contact information exchange was attempted, but it is unclear if email addresses were successfully shared."
+        ],
+        "pain_points": [
+          "Communication difficulties (repetitive phrases, unclear responses).",
+          "Unclear if contact details (email) were successfully exchanged.",
+          "No specific requirements or preferences from the prospect were discussed."
+        ],
+        "next_steps": [
+          "Follow up via email with information about available villas in Dubai Hills.",
+          "Confirm prospect’s email address if not already obtained.",
+          "Clarify prospect’s specific requirements and preferences in the next communication.",
+          "Attempt to schedule a follow-up call or meeting to discuss options in detail."
+        ]
+      },
+      "deal_probability": {
+        "score": 30,
+        "positive_signals": [
+          "Prospect agreed to receive information about villas.",
+          "Prospect indicated willingness to be in contact."
+        ],
+        "negative_signals": [
+          "No clear exchange of contact details.",
+          "No discussion of budget, timeline, or specific needs.",
+          "Communication barriers present."
+        ],
+        "risk_factors": [
+          "Unclear if prospect’s contact information was captured.",
+          "Prospect’s level of engagement and seriousness is uncertain.",
+          "Potential language or communication challenges."
+        ]
+      },
+      "follow_up_email": {
+        "subject": "Information on Villas in Dubai Hills",
+        "body": "Dear Sir,\n\nThank you for your time earlier today. As discussed, I am sending you information about available villas in Dubai Hills. Please find attached a selection of properties that may be of interest to you.\n\nIf you have any specific requirements or preferences, please let me know so I can tailor the options accordingly. I would also be happy to arrange a call or meeting to discuss further.\n\nCould you please confirm your preferred email address for future correspondence?\n\nLooking forward to your reply.\n\nBest regards,\n[Your Name]\n[Your Company]\n[Your Contact Information]",
+        "recipient_suggestion": "Send to the prospect if their email is available; if not, attempt to reach out via phone or other available contact method to confirm email."
+      }
+    }
+  },
+  {
+    "id": "call-1775910460049",
+    "startTime": "2026-04-11T12:27:40.050Z",
+    "endTime": "2026-04-11T12:29:26.824Z",
+    "transcript": [
+      {
+        "id": "live-1775910468575-rbox",
+        "speaker": "rep",
+        "text": "Hamid.",
+        "timestamp": "04:27:48 PM"
+      },
+      {
+        "id": "live-1775910475095-rwcj",
+        "speaker": "rep",
+        "text": "It's busy because he ain't here. Don't worry. Just call my number. I think maybe he's on",
+        "timestamp": "04:27:55 PM"
+      },
+      {
+        "id": "live-1775910475122-lqnw",
+        "speaker": "rep",
+        "text": "It's busy because he ain't here. Don't worry. Just call my number. I think maybe he's on",
+        "timestamp": "04:27:55 PM"
+      },
+      {
+        "id": "live-1775910475273-mudx",
+        "speaker": "prospect",
+        "text": "It's busy in the car. It's him. Yeah. Don't worry. Just call my number. I think maybe he's on the conversation",
+        "timestamp": "04:27:55 PM"
+      }
+    ],
+    "researchData": {
+      "company_profile": {
+        "name": "No identifiable company",
+        "industry": "Unknown",
+        "size": "Unknown",
+        "headquarters": "Unknown",
+        "description": "The provided transcript snippet is too brief and fragmented to reliably extract or infer the prospect's name or company. It appears to contain speech-to-text errors (e.g., 'I'll break call through' may be a garbled phrase like 'I'll take the call through' or similar), with no clear mentions of names, companies, or details. Search results consist solely of generic sales call script examples and do not reference any specific prospect or company matching the transcript.",
+        "key_products": "None identified"
+      },
+      "funding": {
+        "total_raised": "N/A",
+        "latest_round": "N/A",
+        "key_investors": "N/A",
+        "financial_health": "N/A"
+      },
+      "tech_stack": {
+        "technologies": "N/A",
+        "infrastructure": "N/A",
+        "tools": "N/A"
+      },
+      "recent_news": "No relevant news found; transcript lacks identifiable entities.",
+      "pitch_angles": "Unable to generate due to lack of prospect details.",
+      "pain_points": "Unable to identify due to insufficient information in transcript."
+    },
+    "strategyData": {
+      "objection_handlers": [
+        "If the prospect seems unsure about what they're looking for, try: 'No problem at all—many clients start with just a general interest. Would you like me to share some options based on both investment and end-user benefits?'",
+        "If the prospect hesitates or says they're just browsing, respond with: 'That's perfectly fine. I can provide you with some information to help you make a decision when you're ready. Is there a particular type of property or location you're curious about?'"
+      ],
+      "next_questions": [
+        "Can you share what specifically caught your attention in our campaign?",
+        "Are you looking for immediate investment opportunities, or is this more of a long-term plan?",
+        "Do you have a preferred location or type of property in mind?",
+        "Would you like to hear about our most popular projects for investors or end users?"
+      ],
+      "pitch_angles": [
+        "Highlight the flexibility of Imar Properties' offerings—tailored solutions for both investors and end users.",
+        "Emphasize the strong ROI and growth potential for investors.",
+        "For end users, underline the lifestyle benefits, amenities, and community aspects of Imar Properties.",
+        "Mention any exclusive offers or incentives currently available for new inquiries."
+      ],
+      "engagement_level": "Medium. The prospect is responsive, conversational, and has confirmed their identity, but has not yet shared specific needs or intent.",
+      "deal_signals": [
+        "The prospect confirmed their identity and acknowledged responding to a campaign.",
+        "They are engaging in a friendly, open manner."
+      ],
+      "closing_probability": "40%. The prospect is engaged and has interacted with your campaign, which is a good sign, but has not yet expressed clear buying intent or specific requirements. The next step is to uncover their needs and motivations to increase the probability."
+    },
+    "status": "completed",
+    "phoneNumber": "+971507587246",
+    "duration": 9
+  },
+  {
+    "id": "call-1775910443566",
+    "startTime": "2026-04-11T12:27:23.566Z",
+    "endTime": "2026-04-11T12:27:49.380Z",
+    "transcript": [
+      {
+        "id": "live-1775910444942-n0n1",
+        "speaker": "rep",
+        "text": "Follow me again.",
+        "timestamp": "04:27:24 PM"
+      },
+      {
+        "id": "live-1775910457193-zuvy",
+        "speaker": "rep",
+        "text": "Oh, maybe it's it's in his phone on DND. So",
+        "timestamp": "04:27:37 PM"
+      },
+      {
+        "id": "live-1775910457951-dzh8",
+        "speaker": "rep",
+        "text": "good.",
+        "timestamp": "04:27:37 PM"
+      },
+      {
+        "id": "live-1775910458209-m1h3",
+        "speaker": "rep",
+        "text": "Oh, maybe it's it's in his phone on DND or something. All good.",
+        "timestamp": "04:27:38 PM"
+      }
+    ],
+    "researchData": {
+      "company_profile": {
+        "name": "No identifiable company",
+        "industry": "Unknown",
+        "size": "Unknown",
+        "headquarters": "Unknown",
+        "description": "The provided transcript snippet is too brief and fragmented to reliably extract or infer the prospect's name or company. It appears to contain speech-to-text errors (e.g., 'I'll break call through' may be a garbled phrase like 'I'll take the call through' or similar), with no clear mentions of names, companies, or details. Search results consist solely of generic sales call script examples and do not reference any specific prospect or company matching the transcript.",
+        "key_products": "None identified"
+      },
+      "funding": {
+        "total_raised": "N/A",
+        "latest_round": "N/A",
+        "key_investors": "N/A",
+        "financial_health": "N/A"
+      },
+      "tech_stack": {
+        "technologies": "N/A",
+        "infrastructure": "N/A",
+        "tools": "N/A"
+      },
+      "recent_news": "No relevant news found; transcript lacks identifiable entities.",
+      "pitch_angles": "Unable to generate due to lack of prospect details.",
+      "pain_points": "Unable to identify due to insufficient information in transcript."
+    },
+    "strategyData": {
+      "objection_handlers": [
+        "If the prospect seems unsure about what they're looking for, try: 'No problem at all—many clients start with just a general interest. Would you like me to share some options based on both investment and end-user benefits?'",
+        "If the prospect hesitates or says they're just browsing, respond with: 'That's perfectly fine. I can provide you with some information to help you make a decision when you're ready. Is there a particular type of property or location you're curious about?'"
+      ],
+      "next_questions": [
+        "Can you share what specifically caught your attention in our campaign?",
+        "Are you looking for immediate investment opportunities, or is this more of a long-term plan?",
+        "Do you have a preferred location or type of property in mind?",
+        "Would you like to hear about our most popular projects for investors or end users?"
+      ],
+      "pitch_angles": [
+        "Highlight the flexibility of Imar Properties' offerings—tailored solutions for both investors and end users.",
+        "Emphasize the strong ROI and growth potential for investors.",
+        "For end users, underline the lifestyle benefits, amenities, and community aspects of Imar Properties.",
+        "Mention any exclusive offers or incentives currently available for new inquiries."
+      ],
+      "engagement_level": "Medium. The prospect is responsive, conversational, and has confirmed their identity, but has not yet shared specific needs or intent.",
+      "deal_signals": [
+        "The prospect confirmed their identity and acknowledged responding to a campaign.",
+        "They are engaging in a friendly, open manner."
+      ],
+      "closing_probability": "40%. The prospect is engaged and has interacted with your campaign, which is a good sign, but has not yet expressed clear buying intent or specific requirements. The next step is to uncover their needs and motivations to increase the probability."
+    },
+    "status": "completed",
+    "phoneNumber": "+971507587246",
+    "duration": 7,
+    "postCallData": {
+      "summary": {
+        "client_name": "Not specified",
+        "company": "Not specified",
+        "call_outcome": "Insufficient data to determine outcome",
+        "key_points": [
+          "Sales representative Hamid was on the call."
+        ],
+        "pain_points": [
+          "No transcript provided; unable to identify client pain points."
+        ],
+        "next_steps": [
+          "Obtain and review the full call transcript for detailed analysis."
+        ]
+      },
+      "deal_probability": {
+        "score": "0%",
+        "positive_signals": [
+          "Sales rep Hamid initiated a call."
+        ],
+        "negative_signals": [
+          "No information about client, needs, or engagement."
+        ],
+        "risk_factors": [
+          "No transcript provided; unable to assess deal status."
+        ]
+      },
+      "follow_up_email": {
+        "subject": "Request for Complete Call Transcript: Hamid's Sales Call",
+        "body": "Hello,\n\nCould you please provide the full transcript of Hamid's recent sales call? This will allow us to generate a comprehensive post-call intelligence report and actionable next steps.\n\nThank you,\nAetheryx AI Post-Call Intelligence Team",
+        "recipient_suggestion": "Internal sales operations or Hamid"
+      }
+    }
+  },
+  {
+    "id": "call-1775910435841",
+    "startTime": "2026-04-11T12:27:15.841Z",
+    "endTime": "2026-04-11T12:27:15.841Z",
+    "transcript": [],
+    "researchData": {
+      "company_profile": {
+        "name": "No identifiable company",
+        "industry": "Unknown",
+        "size": "Unknown",
+        "headquarters": "Unknown",
+        "description": "The provided transcript snippet is too brief and fragmented to reliably extract or infer the prospect's name or company. It appears to contain speech-to-text errors (e.g., 'I'll break call through' may be a garbled phrase like 'I'll take the call through' or similar), with no clear mentions of names, companies, or details. Search results consist solely of generic sales call script examples and do not reference any specific prospect or company matching the transcript.",
+        "key_products": "None identified"
+      },
+      "funding": {
+        "total_raised": "N/A",
+        "latest_round": "N/A",
+        "key_investors": "N/A",
+        "financial_health": "N/A"
+      },
+      "tech_stack": {
+        "technologies": "N/A",
+        "infrastructure": "N/A",
+        "tools": "N/A"
+      },
+      "recent_news": "No relevant news found; transcript lacks identifiable entities.",
+      "pitch_angles": "Unable to generate due to lack of prospect details.",
+      "pain_points": "Unable to identify due to insufficient information in transcript."
+    },
+    "strategyData": {
+      "objection_handlers": [
+        "If the prospect seems unsure about what they're looking for, try: 'No problem at all—many clients start with just a general interest. Would you like me to share some options based on both investment and end-user benefits?'",
+        "If the prospect hesitates or says they're just browsing, respond with: 'That's perfectly fine. I can provide you with some information to help you make a decision when you're ready. Is there a particular type of property or location you're curious about?'"
+      ],
+      "next_questions": [
+        "Can you share what specifically caught your attention in our campaign?",
+        "Are you looking for immediate investment opportunities, or is this more of a long-term plan?",
+        "Do you have a preferred location or type of property in mind?",
+        "Would you like to hear about our most popular projects for investors or end users?"
+      ],
+      "pitch_angles": [
+        "Highlight the flexibility of Imar Properties' offerings—tailored solutions for both investors and end users.",
+        "Emphasize the strong ROI and growth potential for investors.",
+        "For end users, underline the lifestyle benefits, amenities, and community aspects of Imar Properties.",
+        "Mention any exclusive offers or incentives currently available for new inquiries."
+      ],
+      "engagement_level": "Medium. The prospect is responsive, conversational, and has confirmed their identity, but has not yet shared specific needs or intent.",
+      "deal_signals": [
+        "The prospect confirmed their identity and acknowledged responding to a campaign.",
+        "They are engaging in a friendly, open manner."
+      ],
+      "closing_probability": "40%. The prospect is engaged and has interacted with your campaign, which is a good sign, but has not yet expressed clear buying intent or specific requirements. The next step is to uncover their needs and motivations to increase the probability."
+    },
+    "status": "completed",
+    "phoneNumber": "+971507587246",
+    "duration": 0,
+    "postCallData": {
+      "summary": {
+        "client_name": "Not specified",
+        "company": "Not specified",
+        "call_outcome": "Incomplete - insufficient information to determine outcome.",
+        "key_points": [
+          "Sales representative mentioned working on the UI."
+        ],
+        "pain_points": [
+          "Insufficient transcript to identify any client pain points."
+        ],
+        "next_steps": [
+          "Obtain the full call transcript for accurate analysis.",
+          "Reach out to the sales representative or client to clarify discussion points."
+        ]
+      },
+      "deal_probability": {
+        "score": "0%",
+        "positive_signals": [
+          "Sales rep began discussing product features."
+        ],
+        "negative_signals": [
+          "No client engagement or feedback present.",
+          "No clear needs, interest, or next steps identified."
+        ],
+        "risk_factors": [
+          "Transcript is incomplete.",
+          "No information about client or company."
+        ]
+      },
+      "follow_up_email": {
+        "subject": "Follow-up Needed: Incomplete Call Transcript",
+        "body": "Hello,\n\nIt appears that the transcript for the recent sales call is incomplete. To provide a thorough post-call analysis and actionable next steps, could you please provide the full transcript or additional context regarding the client and the discussion?\n\nThank you,\nAetheryx AI Post-Call Intelligence Team",
+        "recipient_suggestion": "Sales representative or call organizer"
+      }
+    }
+  },
+  {
+    "id": "call-1775910425423",
+    "startTime": "2026-04-11T12:27:05.423Z",
+    "endTime": "2026-04-11T12:27:30.877Z",
+    "transcript": [
+      {
+        "id": "live-1775910432634-fyet",
+        "speaker": "rep",
+        "text": "And, also, I've worked on this UI of",
+        "timestamp": "04:27:12 PM"
+      },
+      {
+        "id": "live-1775910436231-915p",
+        "speaker": "rep",
+        "text": "they are much more compact. And, also, once the once this ties",
+        "timestamp": "04:27:16 PM"
+      },
+      {
+        "id": "live-1775910437008-lkwk",
+        "speaker": "rep",
+        "text": "this is much more bigger than what",
+        "timestamp": "04:27:17 PM"
+      },
+      {
+        "id": "live-1775910440089-s1fl",
+        "speaker": "rep",
+        "text": "Hello? I think maybe you ended the call.",
+        "timestamp": "04:27:20 PM"
+      }
+    ],
+    "researchData": {
+      "company_profile": {
+        "name": "No identifiable company",
+        "industry": "Unknown",
+        "size": "Unknown",
+        "headquarters": "Unknown",
+        "description": "The provided transcript snippet is too brief and fragmented to reliably extract or infer the prospect's name or company. It appears to contain speech-to-text errors (e.g., 'I'll break call through' may be a garbled phrase like 'I'll take the call through' or similar), with no clear mentions of names, companies, or details. Search results consist solely of generic sales call script examples and do not reference any specific prospect or company matching the transcript.",
+        "key_products": "None identified"
+      },
+      "funding": {
+        "total_raised": "N/A",
+        "latest_round": "N/A",
+        "key_investors": "N/A",
+        "financial_health": "N/A"
+      },
+      "tech_stack": {
+        "technologies": "N/A",
+        "infrastructure": "N/A",
+        "tools": "N/A"
+      },
+      "recent_news": "No relevant news found; transcript lacks identifiable entities.",
+      "pitch_angles": "Unable to generate due to lack of prospect details.",
+      "pain_points": "Unable to identify due to insufficient information in transcript."
+    },
+    "strategyData": {
+      "objection_handlers": [
+        "If the prospect seems unsure about what they're looking for, try: 'No problem at all—many clients start with just a general interest. Would you like me to share some options based on both investment and end-user benefits?'",
+        "If the prospect hesitates or says they're just browsing, respond with: 'That's perfectly fine. I can provide you with some information to help you make a decision when you're ready. Is there a particular type of property or location you're curious about?'"
+      ],
+      "next_questions": [
+        "Can you share what specifically caught your attention in our campaign?",
+        "Are you looking for immediate investment opportunities, or is this more of a long-term plan?",
+        "Do you have a preferred location or type of property in mind?",
+        "Would you like to hear about our most popular projects for investors or end users?"
+      ],
+      "pitch_angles": [
+        "Highlight the flexibility of Imar Properties' offerings—tailored solutions for both investors and end users.",
+        "Emphasize the strong ROI and growth potential for investors.",
+        "For end users, underline the lifestyle benefits, amenities, and community aspects of Imar Properties.",
+        "Mention any exclusive offers or incentives currently available for new inquiries."
+      ],
+      "engagement_level": "Medium. The prospect is responsive, conversational, and has confirmed their identity, but has not yet shared specific needs or intent.",
+      "deal_signals": [
+        "The prospect confirmed their identity and acknowledged responding to a campaign.",
+        "They are engaging in a friendly, open manner."
+      ],
+      "closing_probability": "40%. The prospect is engaged and has interacted with your campaign, which is a good sign, but has not yet expressed clear buying intent or specific requirements. The next step is to uncover their needs and motivations to increase the probability."
+    },
+    "status": "completed",
+    "phoneNumber": "+971507587246",
+    "duration": 10,
+    "postCallData": {
+      "summary": {
+        "client_name": "N/A",
+        "company": "N/A",
+        "call_outcome": "No substantive conversation occurred.",
+        "key_points": [
+          "Sales rep asked the other party to follow them again."
+        ],
+        "pain_points": [],
+        "next_steps": [
+          "Reconnect with the client to initiate a proper discovery conversation.",
+          "Ensure that the call has a clear agenda and objective next time."
+        ]
+      },
+      "deal_probability": {
+        "score": 0,
+        "positive_signals": [],
+        "negative_signals": [
+          "No engagement from client.",
+          "No information exchanged."
+        ],
+        "risk_factors": [
+          "No rapport or needs established.",
+          "No discussion of product or service."
+        ]
+      },
+      "follow_up_email": {
+        "subject": "Let's Reschedule Our Call to Discuss Your Needs",
+        "body": "Hi,\n\nI noticed we weren't able to connect meaningfully on our last call. I'd love to learn more about your needs and how we can help. Please let me know a convenient time for us to have a proper conversation.\n\nLooking forward to connecting soon!\n\nBest regards,\n[Your Name]",
+        "recipient_suggestion": "Primary client contact or meeting participant"
+      }
+    }
+  },
+  {
+    "id": "call-1775861793530",
+    "startTime": "2026-04-10T22:56:33.530Z",
+    "endTime": "2026-04-10T23:00:30.936Z",
+    "transcript": [
+      {
+        "id": "live-1775861794537-2e0b",
+        "speaker": "rep",
+        "text": "Okay. We can test it now. Yeah. So I recall through",
+        "timestamp": "02:56:34 AM"
+      },
+      {
+        "id": "live-1775861794554-y7a4",
+        "speaker": "prospect",
+        "text": "Okay. We can test now. Yeah. So I'll break call through",
+        "timestamp": "02:56:34 AM"
+      },
+      {
+        "id": "live-1775861796565-93eq",
+        "speaker": "rep",
+        "text": "Again Yes.",
+        "timestamp": "02:56:36 AM"
+      },
+      {
+        "id": "live-1775861802862-874k",
+        "speaker": "rep",
+        "text": "Hello.",
+        "timestamp": "02:56:42 AM"
+      },
+      {
+        "id": "live-1775861802955-8ap0",
+        "speaker": "rep",
+        "text": "Hello.",
+        "timestamp": "02:56:42 AM"
+      },
+      {
+        "id": "live-1775861802975-owwj",
+        "speaker": "prospect",
+        "text": "Hello.",
+        "timestamp": "02:56:42 AM"
+      },
+      {
+        "id": "live-1775861805170-ljqz",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "02:56:45 AM"
+      },
+      {
+        "id": "live-1775861805689-h3sy",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "02:56:45 AM"
+      },
+      {
+        "id": "live-1775861805769-pv2b",
+        "speaker": "prospect",
+        "text": "Hello?",
+        "timestamp": "02:56:45 AM"
+      },
+      {
+        "id": "live-1775861805791-cxei",
+        "speaker": "prospect",
+        "text": "Hello?",
+        "timestamp": "02:56:45 AM"
+      },
+      {
+        "id": "live-1775861806204-bydh",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "02:56:46 AM"
+      },
+      {
+        "id": "live-1775861806311-4dgf",
+        "speaker": "prospect",
+        "text": "Hello?",
+        "timestamp": "02:56:46 AM"
+      },
+      {
+        "id": "live-1775861806804-t382",
+        "speaker": "prospect",
+        "text": "Hello?",
+        "timestamp": "02:56:46 AM"
+      },
+      {
+        "id": "live-1775861808753-afs1",
+        "speaker": "prospect",
+        "text": "Yeah. Brother, how are you?",
+        "timestamp": "02:56:48 AM"
+      },
+      {
+        "id": "live-1775861808848-kiqg",
+        "speaker": "prospect",
+        "text": "Yeah. Brother, how are you?",
+        "timestamp": "02:56:48 AM"
+      },
+      {
+        "id": "live-1775861808863-gyjc",
+        "speaker": "prospect",
+        "text": "Yeah. Brother, how are you?",
+        "timestamp": "02:56:48 AM"
+      },
+      {
+        "id": "live-1775861813128-u3um",
+        "speaker": "prospect",
+        "text": "I'm blessed too, brother. Blessed.",
+        "timestamp": "02:56:53 AM"
+      },
+      {
+        "id": "live-1775861813210-sjjb",
+        "speaker": "prospect",
+        "text": "I'm blessed too, brother. Blessed.",
+        "timestamp": "02:56:53 AM"
+      },
+      {
+        "id": "live-1775861813265-ofry",
+        "speaker": "prospect",
+        "text": "I'm blessed too, brother. Blessed.",
+        "timestamp": "02:56:53 AM"
+      },
+      {
+        "id": "live-1775861815508-kd94",
+        "speaker": "prospect",
+        "text": "You know?",
+        "timestamp": "02:56:55 AM"
+      },
+      {
+        "id": "live-1775861816198-zfub",
+        "speaker": "prospect",
+        "text": "You know? So",
+        "timestamp": "02:56:56 AM"
+      },
+      {
+        "id": "live-1775861816264-0rx9",
+        "speaker": "prospect",
+        "text": "So",
+        "timestamp": "02:56:56 AM"
+      },
+      {
+        "id": "live-1775861816304-09nl",
+        "speaker": "prospect",
+        "text": "You know? So",
+        "timestamp": "02:56:56 AM"
+      },
+      {
+        "id": "live-1775861820065-8yo8",
+        "speaker": "prospect",
+        "text": "this is, Naveen speaking from,",
+        "timestamp": "02:57:00 AM"
+      },
+      {
+        "id": "live-1775861820147-irg7",
+        "speaker": "prospect",
+        "text": "this is, Naveen speaking from,",
+        "timestamp": "02:57:00 AM"
+      },
+      {
+        "id": "live-1775861820169-a80j",
+        "speaker": "prospect",
+        "text": "this is, Naveen speaking from,",
+        "timestamp": "02:57:00 AM"
+      },
+      {
+        "id": "live-1775861822354-pw11",
+        "speaker": "prospect",
+        "text": "Imar Properties.",
+        "timestamp": "02:57:02 AM"
+      },
+      {
+        "id": "live-1775861822419-y2on",
+        "speaker": "prospect",
+        "text": "Imar Properties.",
+        "timestamp": "02:57:02 AM"
+      },
+      {
+        "id": "live-1775861822462-2qrq",
+        "speaker": "prospect",
+        "text": "Imar Properties.",
+        "timestamp": "02:57:02 AM"
+      },
+      {
+        "id": "live-1775861825931-isim",
+        "speaker": "prospect",
+        "text": "I actually got your interest",
+        "timestamp": "02:57:05 AM"
+      },
+      {
+        "id": "live-1775861826029-2nkq",
+        "speaker": "prospect",
+        "text": "I actually got your interest",
+        "timestamp": "02:57:06 AM"
+      },
+      {
+        "id": "live-1775861826263-podp",
+        "speaker": "prospect",
+        "text": "I actually got your interest",
+        "timestamp": "02:57:06 AM"
+      },
+      {
+        "id": "live-1775861828475-v5hh",
+        "speaker": "prospect",
+        "text": "So I was calling and checking",
+        "timestamp": "02:57:08 AM"
+      },
+      {
+        "id": "live-1775861828562-4qfw",
+        "speaker": "prospect",
+        "text": "So I was calling and checking",
+        "timestamp": "02:57:08 AM"
+      },
+      {
+        "id": "live-1775861828614-xn3t",
+        "speaker": "prospect",
+        "text": "So I was calling and checking",
+        "timestamp": "02:57:08 AM"
+      },
+      {
+        "id": "live-1775861831139-4af0",
+        "speaker": "prospect",
+        "text": "because you clicked on 1 of our campaigns",
+        "timestamp": "02:57:11 AM"
+      },
+      {
+        "id": "live-1775861831215-dy6k",
+        "speaker": "prospect",
+        "text": "because you clicked on 1 of our campaigns.",
+        "timestamp": "02:57:11 AM"
+      },
+      {
+        "id": "live-1775861831323-4n7x",
+        "speaker": "prospect",
+        "text": "because you clicked on 1 of our campaigns.",
+        "timestamp": "02:57:11 AM"
+      },
+      {
+        "id": "live-1775861833624-61t5",
+        "speaker": "prospect",
+        "text": "So I just wanted to understand more about",
+        "timestamp": "02:57:13 AM"
+      },
+      {
+        "id": "live-1775861833709-kie8",
+        "speaker": "prospect",
+        "text": "So I just wanted to understand more about",
+        "timestamp": "02:57:13 AM"
+      },
+      {
+        "id": "live-1775861833740-w7ft",
+        "speaker": "prospect",
+        "text": "So I just wanted to understand more about",
+        "timestamp": "02:57:13 AM"
+      },
+      {
+        "id": "live-1775861836194-85ke",
+        "speaker": "prospect",
+        "text": "you're trying to do at the moment. Are you trying to invest?",
+        "timestamp": "02:57:16 AM"
+      },
+      {
+        "id": "live-1775861836288-rrp3",
+        "speaker": "prospect",
+        "text": "you're trying to do at the moment. Are you trying to invest?",
+        "timestamp": "02:57:16 AM"
+      },
+      {
+        "id": "live-1775861838758-vnac",
+        "speaker": "prospect",
+        "text": "Are you are you look are you a end user?",
+        "timestamp": "02:57:18 AM"
+      },
+      {
+        "id": "live-1775861838838-obgn",
+        "speaker": "prospect",
+        "text": "you're trying to do at the moment. Are you trying to invest? Are you are you look are you a end user?",
+        "timestamp": "02:57:18 AM"
+      },
+      {
+        "id": "live-1775861838859-e3t9",
+        "speaker": "prospect",
+        "text": "Are you are you look are you a end user?",
+        "timestamp": "02:57:18 AM"
+      },
+      {
+        "id": "live-1775861851376-gqnu",
+        "speaker": "rep",
+        "text": "Okay. Were you observing, like, well Yeah. Yeah. I was observing, bro.",
+        "timestamp": "02:57:31 AM"
+      },
+      {
+        "id": "live-1775861851420-ur0q",
+        "speaker": "prospect",
+        "text": "Okay. Were you observing, like, well Yeah. Yeah. I was observing, bro.",
+        "timestamp": "02:57:31 AM"
+      },
+      {
+        "id": "live-1775861851544-63qh",
+        "speaker": "rep",
+        "text": "Okay. When you look something like well Yeah. Yeah. I was observing brokering.",
+        "timestamp": "02:57:31 AM"
+      },
+      {
+        "id": "live-1775861856170-1geo",
+        "speaker": "prospect",
+        "text": "See the score, bro. Okay. Okay. Okay. Where is the score? The conversation was supposed to be around sales. Right?",
+        "timestamp": "02:57:36 AM"
+      },
+      {
+        "id": "live-1775861856265-mu2j",
+        "speaker": "prospect",
+        "text": "See the score, bro. Okay. Okay. Okay. Where is the score? Conversation was supposed to be around sales. Right?",
+        "timestamp": "02:57:36 AM"
+      },
+      {
+        "id": "live-1775861856335-ga2v",
+        "speaker": "prospect",
+        "text": "See the score, bro. Okay. Okay. Okay. Where is the score? The conversation was supposed to be around sales. Right?",
+        "timestamp": "02:57:36 AM"
+      },
+      {
+        "id": "live-1775861856750-b1k0",
+        "speaker": "rep",
+        "text": "Yeah.",
+        "timestamp": "02:57:36 AM"
+      },
+      {
+        "id": "live-1775861856777-xm35",
+        "speaker": "prospect",
+        "text": "Yeah.",
+        "timestamp": "02:57:36 AM"
+      },
+      {
+        "id": "live-1775861856905-33wd",
+        "speaker": "rep",
+        "text": "Yeah.",
+        "timestamp": "02:57:36 AM"
+      },
+      {
+        "id": "live-1775861860342-4fmj",
+        "speaker": "rep",
+        "text": "Okay. So this is the",
+        "timestamp": "02:57:40 AM"
+      },
+      {
+        "id": "live-1775861860369-6lz1",
+        "speaker": "rep",
+        "text": "Okay. So this is the",
+        "timestamp": "02:57:40 AM"
+      },
+      {
+        "id": "live-1775861861787-1e6y",
+        "speaker": "rep",
+        "text": "Okay. So this is the call transcript. Yep.",
+        "timestamp": "02:57:41 AM"
+      },
+      {
+        "id": "live-1775861861870-7mfp",
+        "speaker": "rep",
+        "text": "call transcript. Yeah.",
+        "timestamp": "02:57:41 AM"
+      },
+      {
+        "id": "live-1775861861911-86ar",
+        "speaker": "rep",
+        "text": "call transcript. Yeah.",
+        "timestamp": "02:57:41 AM"
+      },
+      {
+        "id": "live-1775861864083-uazb",
+        "speaker": "rep",
+        "text": "You can see this, conversation.",
+        "timestamp": "02:57:44 AM"
+      },
+      {
+        "id": "live-1775861864169-nsho",
+        "speaker": "rep",
+        "text": "You can see this, conversation.",
+        "timestamp": "02:57:44 AM"
+      },
+      {
+        "id": "live-1775861864193-q19z",
+        "speaker": "rep",
+        "text": "You can see this conversation.",
+        "timestamp": "02:57:44 AM"
+      },
+      {
+        "id": "live-1775861865113-nl4c",
+        "speaker": "prospect",
+        "text": "Wow.",
+        "timestamp": "02:57:45 AM"
+      },
+      {
+        "id": "live-1775861865208-lqfh",
+        "speaker": "rep",
+        "text": "Wow.",
+        "timestamp": "02:57:45 AM"
+      },
+      {
+        "id": "live-1775861865212-e14s",
+        "speaker": "prospect",
+        "text": "Wow.",
+        "timestamp": "02:57:45 AM"
+      },
+      {
+        "id": "live-1775861866382-86fe",
+        "speaker": "rep",
+        "text": "Then",
+        "timestamp": "02:57:46 AM"
+      },
+      {
+        "id": "live-1775861866459-h42h",
+        "speaker": "rep",
+        "text": "Then",
+        "timestamp": "02:57:46 AM"
+      },
+      {
+        "id": "live-1775861866489-aih5",
+        "speaker": "rep",
+        "text": "Then",
+        "timestamp": "02:57:46 AM"
+      },
+      {
+        "id": "live-1775861868413-171z",
+        "speaker": "rep",
+        "text": "the call summary",
+        "timestamp": "02:57:48 AM"
+      },
+      {
+        "id": "live-1775861868515-qafo",
+        "speaker": "rep",
+        "text": "the call summary",
+        "timestamp": "02:57:48 AM"
+      },
+      {
+        "id": "live-1775861868561-ziq9",
+        "speaker": "rep",
+        "text": "the call summary",
+        "timestamp": "02:57:48 AM"
+      },
+      {
+        "id": "live-1775861873392-m9qn",
+        "speaker": "rep",
+        "text": "said I'm Navin from Ima property reached out",
+        "timestamp": "02:57:53 AM"
+      },
+      {
+        "id": "live-1775861873463-jjvk",
+        "speaker": "rep",
+        "text": "said I'm Navin from Ima property reached out to",
+        "timestamp": "02:57:53 AM"
+      },
+      {
+        "id": "live-1775861873556-3kqe",
+        "speaker": "rep",
+        "text": "said I'm Navin from Ima property reached out to",
+        "timestamp": "02:57:53 AM"
+      },
+      {
+        "id": "live-1775861877254-den1",
+        "speaker": "rep",
+        "text": "to follow-up on a campaign, clicked the purpose of to qualify the sales rep in intense investment.",
+        "timestamp": "02:57:57 AM"
+      },
+      {
+        "id": "live-1775861877312-zn36",
+        "speaker": "rep",
+        "text": "follow-up on a campaign. Clicked the purpose of to qualify the sales rep in intense investment. Does",
+        "timestamp": "02:57:57 AM"
+      },
+      {
+        "id": "live-1775861877419-bz9n",
+        "speaker": "rep",
+        "text": "follow-up on a campaign. Clicked the purpose to qualify the sales rep in intense investment.",
+        "timestamp": "02:57:57 AM"
+      },
+      {
+        "id": "live-1775861882108-9uvc",
+        "speaker": "rep",
+        "text": "User, blah blah blah. Then the deal probability is turned, and there's a follow-up",
+        "timestamp": "02:58:02 AM"
+      },
+      {
+        "id": "live-1775861882404-fs5h",
+        "speaker": "rep",
+        "text": "user, blah blah blah. Then the due probabilities, and then there's a follow-up",
+        "timestamp": "02:58:02 AM"
+      },
+      {
+        "id": "live-1775861882602-2b4v",
+        "speaker": "rep",
+        "text": "email.",
+        "timestamp": "02:58:02 AM"
+      },
+      {
+        "id": "live-1775861882620-etlh",
+        "speaker": "rep",
+        "text": "email.",
+        "timestamp": "02:58:02 AM"
+      },
+      {
+        "id": "live-1775861882779-9c8g",
+        "speaker": "rep",
+        "text": "Versus end user, blah blah blah. Then the deal probability is 10, then it's a follow-up email.",
+        "timestamp": "02:58:02 AM"
+      },
+      {
+        "id": "live-1775861887414-uwy3",
+        "speaker": "rep",
+        "text": "Recipient to tell if you did not win. Let's schedule a call to discuss your interest, blah blah blah.",
+        "timestamp": "02:58:07 AM"
+      },
+      {
+        "id": "live-1775861887489-g35v",
+        "speaker": "rep",
+        "text": "Recipient to 33 did not win. Let's schedule a call to discuss your interest, blah blah blah.",
+        "timestamp": "02:58:07 AM"
+      },
+      {
+        "id": "live-1775861887534-jo0r",
+        "speaker": "rep",
+        "text": "Recipient to tell if you did not win. Let's schedule a call to discuss your interest, blah blah blah.",
+        "timestamp": "02:58:07 AM"
+      },
+      {
+        "id": "live-1775861889194-pvps",
+        "speaker": "rep",
+        "text": "So this is based off the",
+        "timestamp": "02:58:09 AM"
+      },
+      {
+        "id": "live-1775861889258-dc7w",
+        "speaker": "rep",
+        "text": "So this is based off the",
+        "timestamp": "02:58:09 AM"
+      },
+      {
+        "id": "live-1775861889301-dwsh",
+        "speaker": "rep",
+        "text": "So this is based off the",
+        "timestamp": "02:58:09 AM"
+      },
+      {
+        "id": "live-1775861893073-u8ut",
+        "speaker": "rep",
+        "text": "call Wow. You know. So and you can click 1 button, send an email to",
+        "timestamp": "02:58:13 AM"
+      },
+      {
+        "id": "live-1775861893121-27h7",
+        "speaker": "rep",
+        "text": "call Wow. You know. So and you can click 1 button, send an email to",
+        "timestamp": "02:58:13 AM"
+      },
+      {
+        "id": "live-1775861893218-i7lc",
+        "speaker": "rep",
+        "text": "call Wow. You know. So and you can click 1 button, send an email to",
+        "timestamp": "02:58:13 AM"
+      },
+      {
+        "id": "live-1775861895919-yhw1",
+        "speaker": "rep",
+        "text": "people. Very nice. I saw all of this. Now where are the scoring",
+        "timestamp": "02:58:15 AM"
+      },
+      {
+        "id": "live-1775861895982-hgnx",
+        "speaker": "rep",
+        "text": "people. Very nice. I saw all of this. Now where are the scoring",
+        "timestamp": "02:58:15 AM"
+      },
+      {
+        "id": "live-1775861896105-8jhd",
+        "speaker": "rep",
+        "text": "people. Very nice. I saw all of this. Now where are the scoring",
+        "timestamp": "02:58:16 AM"
+      },
+      {
+        "id": "live-1775861898229-d4wm",
+        "speaker": "rep",
+        "text": "Where is the scoring? This is the scoring year 10.",
+        "timestamp": "02:58:18 AM"
+      },
+      {
+        "id": "live-1775861900985-24bc",
+        "speaker": "rep",
+        "text": "What is the scoring? This is scoring here at 10. 10. So, like, when you say 10, what's the probability?",
+        "timestamp": "02:58:20 AM"
+      },
+      {
+        "id": "live-1775861901123-v54u",
+        "speaker": "rep",
+        "text": "Where is the scoring? This is the scoring here at 10. 10. So, like, when you say 10, what's the probability?",
+        "timestamp": "02:58:21 AM"
+      },
+      {
+        "id": "live-1775861903378-e5vt",
+        "speaker": "rep",
+        "text": "10. So, like, when you say 10, what's the The prob yeah. Because we kind of conversation",
+        "timestamp": "02:58:23 AM"
+      },
+      {
+        "id": "live-1775861903528-tgzi",
+        "speaker": "prospect",
+        "text": "The probable Yeah. Because the kind of conversation that we had is",
+        "timestamp": "02:58:23 AM"
+      },
+      {
+        "id": "live-1775861903596-685l",
+        "speaker": "rep",
+        "text": "that we have is,",
+        "timestamp": "02:58:23 AM"
+      },
+      {
+        "id": "live-1775861903647-k0ot",
+        "speaker": "prospect",
+        "text": "They probably Yeah. Because the kind of conversation that we had is",
+        "timestamp": "02:58:23 AM"
+      },
+      {
+        "id": "live-1775861905040-99rh",
+        "speaker": "rep",
+        "text": "very shallow. So that's why.",
+        "timestamp": "02:58:25 AM"
+      },
+      {
+        "id": "live-1775861905139-9so6",
+        "speaker": "rep",
+        "text": "very shallow, so that's why.",
+        "timestamp": "02:58:25 AM"
+      },
+      {
+        "id": "live-1775861907113-o7vk",
+        "speaker": "rep",
+        "text": "10%. So it's a good 1 or a no?",
+        "timestamp": "02:58:27 AM"
+      },
+      {
+        "id": "live-1775861907204-8p80",
+        "speaker": "rep",
+        "text": "10%. So it's a good 1 or a no?",
+        "timestamp": "02:58:27 AM"
+      },
+      {
+        "id": "live-1775861907253-5yzg",
+        "speaker": "rep",
+        "text": "very shallow, so that's why I put you on 10%. Is it a good 1 or no?",
+        "timestamp": "02:58:27 AM"
+      },
+      {
+        "id": "live-1775861910796-u0j7",
+        "speaker": "rep",
+        "text": "It's a bad 1. It's a bad 1. We didn't have any sales conversation. Okay. Okay. Fine.",
+        "timestamp": "02:58:30 AM"
+      },
+      {
+        "id": "live-1775861910808-qvyk",
+        "speaker": "rep",
+        "text": "It's a bad 1. It's a bad 1. We didn't have any sales conversation. Okay. Okay. Fine.",
+        "timestamp": "02:58:30 AM"
+      },
+      {
+        "id": "live-1775861910970-bfst",
+        "speaker": "rep",
+        "text": "It's a bad 1. It's a bad 1. We have very serious conversation. Okay. Okay. Fine.",
+        "timestamp": "02:58:30 AM"
+      },
+      {
+        "id": "live-1775861911270-e5ji",
+        "speaker": "rep",
+        "text": "Fine.",
+        "timestamp": "02:58:31 AM"
+      },
+      {
+        "id": "live-1775861911313-u8ch",
+        "speaker": "rep",
+        "text": "Fine.",
+        "timestamp": "02:58:31 AM"
+      },
+      {
+        "id": "live-1775861915058-0iw9",
+        "speaker": "rep",
+        "text": "It's only purely if there's sales Let's add 1 on the call.",
+        "timestamp": "02:58:35 AM"
+      },
+      {
+        "id": "live-1775861915129-26gd",
+        "speaker": "prospect",
+        "text": "It's only purely if there's sales Let's add 1 on the call.",
+        "timestamp": "02:58:35 AM"
+      },
+      {
+        "id": "live-1775861915170-q86j",
+        "speaker": "prospect",
+        "text": "It's only purely if there's sales Let's add on the call.",
+        "timestamp": "02:58:35 AM"
+      }
+    ],
+    "researchData": {
+      "company_profile": {
+        "name": "No identifiable company",
+        "industry": "Unknown",
+        "size": "Unknown",
+        "headquarters": "Unknown",
+        "description": "The provided transcript snippet is too brief and fragmented to reliably extract or infer the prospect's name or company. It appears to contain speech-to-text errors (e.g., 'I'll break call through' may be a garbled phrase like 'I'll take the call through' or similar), with no clear mentions of names, companies, or details. Search results consist solely of generic sales call script examples and do not reference any specific prospect or company matching the transcript.",
+        "key_products": "None identified"
+      },
+      "funding": {
+        "total_raised": "N/A",
+        "latest_round": "N/A",
+        "key_investors": "N/A",
+        "financial_health": "N/A"
+      },
+      "tech_stack": {
+        "technologies": "N/A",
+        "infrastructure": "N/A",
+        "tools": "N/A"
+      },
+      "recent_news": "No relevant news found; transcript lacks identifiable entities.",
+      "pitch_angles": "Unable to generate due to lack of prospect details.",
+      "pain_points": "Unable to identify due to insufficient information in transcript."
+    },
+    "strategyData": {
+      "objection_handlers": [
+        "If the prospect seems unsure about what they're looking for, try: 'No problem at all—many clients start with just a general interest. Would you like me to share some options based on both investment and end-user benefits?'",
+        "If the prospect hesitates or says they're just browsing, respond with: 'That's perfectly fine. I can provide you with some information to help you make a decision when you're ready. Is there a particular type of property or location you're curious about?'"
+      ],
+      "next_questions": [
+        "Can you share what specifically caught your attention in our campaign?",
+        "Are you looking for immediate investment opportunities, or is this more of a long-term plan?",
+        "Do you have a preferred location or type of property in mind?",
+        "Would you like to hear about our most popular projects for investors or end users?"
+      ],
+      "pitch_angles": [
+        "Highlight the flexibility of Imar Properties' offerings—tailored solutions for both investors and end users.",
+        "Emphasize the strong ROI and growth potential for investors.",
+        "For end users, underline the lifestyle benefits, amenities, and community aspects of Imar Properties.",
+        "Mention any exclusive offers or incentives currently available for new inquiries."
+      ],
+      "engagement_level": "Medium. The prospect is responsive, conversational, and has confirmed their identity, but has not yet shared specific needs or intent.",
+      "deal_signals": [
+        "The prospect confirmed their identity and acknowledged responding to a campaign.",
+        "They are engaging in a friendly, open manner."
+      ],
+      "closing_probability": "40%. The prospect is engaged and has interacted with your campaign, which is a good sign, but has not yet expressed clear buying intent or specific requirements. The next step is to uncover their needs and motivations to increase the probability."
+    },
+    "status": "completed",
+    "phoneNumber": "+971561118752",
+    "duration": 51,
+    "postCallData": {
+      "summary": {
+        "client_name": "Divine (also referred to as Naveen/Levin in transcript, but Divine is most repeated)",
+        "company": "Not specified",
+        "call_outcome": "Prospect agreed to receive shortlisted property investment options and continue the conversation after reviewing them.",
+        "key_points": [
+          "Prospect responded to a campaign about property investment.",
+          "Discussion centered on investment property options: villas (lower ROI) vs. off-plan apartments (higher ROI).",
+          "Prospect was informed that off-plan apartments could yield ~8% net ROI vs. 5.5% for villas.",
+          "Sales rep asked about budget, cash available, and payment preferences (cash vs. mortgage).",
+          "Prospect did not specify budget or payment structure but agreed to review options.",
+          "Next step is for the sales rep to send shortlisted property options for review."
+        ],
+        "pain_points": [
+          "Prospect's budget and payment structure are not confirmed.",
+          "No clear indication of urgency or immediate purchase intent.",
+          "Uncertainty about prospect's readiness or available funds."
+        ],
+        "next_steps": [
+          "Send a follow-up email with shortlisted property options tailored to the prospect's investment goals.",
+          "Request confirmation of budget and payment preferences in the follow-up.",
+          "Schedule a follow-up call after the prospect reviews the options."
+        ]
+      },
+      "deal_probability": {
+        "score": 60,
+        "positive_signals": [
+          "Prospect engaged and asked detailed questions about ROI and payment structure.",
+          "Prospect agreed to receive and review property options.",
+          "Willingness to continue the conversation after reviewing the options."
+        ],
+        "negative_signals": [
+          "No commitment or timeline for next steps from the prospect.",
+          "Budget and payment structure not confirmed.",
+          "No explicit statement of urgency or intent to purchase."
+        ],
+        "risk_factors": [
+          "Prospect may not follow up after reviewing options.",
+          "Unclear if the prospect has sufficient funds or is ready to proceed.",
+          "No clear indication of urgency or purchase intent."
+        ]
+      },
+      "follow_up_email": {
+        "subject": "Your Tailored Property Investment Options – Next Steps",
+        "body": "Hi Divine,\n\nThank you for your time on the call today. Based on our conversation, I’ve shortlisted several property investment options that align with your interest in maximizing ROI, particularly in off-plan apartments (which can yield up to 8% net annually compared to villas at 5.5%).\n\nPlease find the attached options for your review. To help us further refine the recommendations, could you please confirm your budget range and let us know if you prefer a cash purchase or mortgage financing?\n\nOnce you’ve had a chance to review, let me know a convenient time for a follow-up call to discuss any questions or next steps.\n\nLooking forward to your feedback.\n\nBest regards,\nVictor",
+        "recipient_suggestion": "Divine (prospect's email, if available)"
+      }
+    }
+  },
+  {
+    "id": "call-1775861757006",
+    "startTime": "2026-04-10T22:55:57.006Z",
+    "endTime": "2026-04-10T22:57:25.394Z",
+    "transcript": [
+      {
+        "id": "live-1775861759937-6zlu",
+        "speaker": "rep",
+        "text": "Don't I don't need you, bud.",
+        "timestamp": "02:55:59 AM"
+      },
+      {
+        "id": "live-1775861760007-r05s",
+        "speaker": "rep",
+        "text": "And he said, like, I I I don't I I don't need you more than",
+        "timestamp": "02:56:00 AM"
+      },
+      {
+        "id": "live-1775861763293-nlfw",
+        "speaker": "rep",
+        "text": "But I want you because I need your advice.",
+        "timestamp": "02:56:03 AM"
+      },
+      {
+        "id": "live-1775861763351-e08n",
+        "speaker": "rep",
+        "text": "but I want you because I need your advice.",
+        "timestamp": "02:56:03 AM"
+      },
+      {
+        "id": "live-1775861765066-c8rq",
+        "speaker": "rep",
+        "text": "Why I don't give for the money. That's what I",
+        "timestamp": "02:56:05 AM"
+      },
+      {
+        "id": "live-1775861765353-5eh2",
+        "speaker": "rep",
+        "text": "Why I don't give for the money. That's what I",
+        "timestamp": "02:56:05 AM"
+      },
+      {
+        "id": "live-1775861766860-tjpb",
+        "speaker": "prospect",
+        "text": "You don't give you the money then.",
+        "timestamp": "02:56:06 AM"
+      },
+      {
+        "id": "live-1775861766902-eq5s",
+        "speaker": "rep",
+        "text": "Perfect. You don't give you the money that",
+        "timestamp": "02:56:06 AM"
+      },
+      {
+        "id": "live-1775861771761-9al4",
+        "speaker": "rep",
+        "text": "No. You can't. I'll make you fair the valuation. Okay. Bye.",
+        "timestamp": "02:56:11 AM"
+      },
+      {
+        "id": "live-1775861771791-rs93",
+        "speaker": "rep",
+        "text": "No. You pick someone up. I'll make you fair the valuation. Okay. Bye.",
+        "timestamp": "02:56:11 AM"
+      },
+      {
+        "id": "live-1775861776870-hd7k",
+        "speaker": "rep",
+        "text": "And then I I've got the advice. Anyway, what if you bring in sales to get, you get better",
+        "timestamp": "02:56:16 AM"
+      },
+      {
+        "id": "live-1775861776882-50un",
+        "speaker": "rep",
+        "text": "And then I I've got the advice. Anyway, what if you bring in sales to get, you get better",
+        "timestamp": "02:56:16 AM"
+      },
+      {
+        "id": "live-1775861777655-hj7o",
+        "speaker": "rep",
+        "text": "that's without a doubt.",
+        "timestamp": "02:56:17 AM"
+      },
+      {
+        "id": "live-1775861777675-zgwh",
+        "speaker": "rep",
+        "text": "that's without a doubt.",
+        "timestamp": "02:56:17 AM"
+      },
+      {
+        "id": "live-1775861779939-hd5y",
+        "speaker": "prospect",
+        "text": "Let me come back to you with an offer. Okay?",
+        "timestamp": "02:56:19 AM"
+      },
+      {
+        "id": "live-1775861779960-mazp",
+        "speaker": "prospect",
+        "text": "Let me come back to you with an offer. Okay?",
+        "timestamp": "02:56:19 AM"
+      },
+      {
+        "id": "live-1775861784842-d1xp",
+        "speaker": "prospect",
+        "text": "Then you tell me as well. No. No. But my why is it? No. No. No. I'm telling you right now with I'll do nothing with an offer.",
+        "timestamp": "02:56:24 AM"
+      },
+      {
+        "id": "live-1775861784870-thnw",
+        "speaker": "prospect",
+        "text": "Then you tell me as well. No. No. But my why is it? No. No. No. I'm telling you right now with I'll tell you with an offer.",
+        "timestamp": "02:56:24 AM"
+      },
+      {
+        "id": "live-1775861787616-2bea",
+        "speaker": "rep",
+        "text": "Okay.",
+        "timestamp": "02:56:27 AM"
+      },
+      {
+        "id": "live-1775861788709-l7qd",
+        "speaker": "prospect",
+        "text": "Come back to you with an offer.",
+        "timestamp": "02:56:28 AM"
+      },
+      {
+        "id": "live-1775861788906-ib43",
+        "speaker": "prospect",
+        "text": "Come back to you with an offer.",
+        "timestamp": "02:56:28 AM"
+      },
+      {
+        "id": "live-1775861789391-x949",
+        "speaker": "rep",
+        "text": "That's it.",
+        "timestamp": "02:56:29 AM"
+      },
+      {
+        "id": "live-1775861789445-v338",
+        "speaker": "prospect",
+        "text": "That's it.",
+        "timestamp": "02:56:29 AM"
+      },
+      {
+        "id": "live-1775861790168-0y5e",
+        "speaker": "prospect",
+        "text": "Okay?",
+        "timestamp": "02:56:30 AM"
+      },
+      {
+        "id": "live-1775861790205-84tx",
+        "speaker": "prospect",
+        "text": "Okay?",
+        "timestamp": "02:56:30 AM"
+      }
+    ],
+    "researchData": {
+      "company_profile": {
+        "name": null,
+        "industry": null,
+        "size": null,
+        "headquarters": null,
+        "description": null,
+        "key_products": null
+      },
+      "funding": {
+        "total_raised": null,
+        "latest_round": null,
+        "key_investors": null,
+        "financial_health": null
+      },
+      "tech_stack": {
+        "technologies": null,
+        "infrastructure": null,
+        "tools": null
+      },
+      "recent_news": null,
+      "pitch_angles": null,
+      "pain_points": null
+    },
+    "strategyData": {
+      "objection_handlers": [
+        "I understand that budget is a concern. Can we explore what kind of value or ROI would make this investment worthwhile for you?",
+        "If money isn't the main issue, could you share what your top priorities are when considering a new solution?",
+        "It sounds like you're looking for advice more than a transaction—can we discuss your current challenges to see if we can offer some valuable insights?"
+      ],
+      "next_questions": [
+        "Can you tell me more about what specific advice or expertise you're looking for?",
+        "What are the main goals you're hoping to achieve in the next quarter?",
+        "If budget was not a constraint, what would the ideal solution look like for you?"
+      ],
+      "pitch_angles": [
+        "Position yourself as a trusted advisor rather than a vendor—focus on consultative selling.",
+        "Highlight case studies or examples where your advice led to measurable results for similar clients.",
+        "Emphasize flexibility in your engagement model—perhaps starting with a pilot or advisory session."
+      ],
+      "engagement_level": "Low. The conversation is disjointed, lacks rapport, and the prospect seems confused or disengaged.",
+      "deal_signals": [
+        "Prospect expressed some interest in advice, indicating openness to expertise.",
+        "No clear buying signals regarding budget or decision-making authority."
+      ],
+      "closing_probability": "10%. The conversation lacks clear direction, rapport, and mutual understanding. The prospect is not engaged and the sales rep is not addressing objections or exploring needs. Immediate course correction is required to salvage the opportunity."
+    },
+    "status": "completed",
+    "phoneNumber": "+971561118752",
+    "duration": 19,
+    "postCallData": {
+      "summary": {
+        "client_name": "Naveen",
+        "company": "Imar Properties",
+        "call_outcome": "Incomplete/Initial Qualification",
+        "key_points": [
+          "Naveen from Imar Properties reached out to follow up on a campaign click.",
+          "The purpose was to qualify the sales rep’s intent (investment vs. end-user).",
+          "The sales rep did not provide clear answers; the conversation was disrupted by repeated greetings and technical issues."
+        ],
+        "pain_points": [
+          "Technical difficulties and repeated greetings prevented a productive conversation.",
+          "No information was gathered regarding the sales rep’s needs or buying intent."
+        ],
+        "next_steps": [
+          "Schedule a follow-up call to properly qualify the lead.",
+          "Ensure both parties have a stable connection before the next call.",
+          "Prepare specific questions to identify whether the prospect is an investor or end-user."
+        ]
+      },
+      "deal_probability": {
+        "score": 10,
+        "positive_signals": [
+          "Prospect (Naveen) proactively reached out based on campaign interest."
+        ],
+        "negative_signals": [
+          "No qualification or needs assessment completed.",
+          "Technical issues dominated the call.",
+          "No next steps or commitments established."
+        ],
+        "risk_factors": [
+          "Poor communication may lead to loss of interest.",
+          "Lack of information about the prospect’s intent."
+        ]
+      },
+      "follow_up_email": {
+        "subject": "Let's Reschedule Our Call to Discuss Your Interest with Imar Properties",
+        "body": "Hi Naveen,\n\nThank you for your time earlier. It seems we had some technical difficulties connecting, and I’d love to ensure we have a clear conversation to understand your needs.\n\nCould we reschedule our call at a time that works for you? I’d like to learn more about whether you’re looking to invest or purchase for personal use, and how Imar Properties can best assist you.\n\nPlease let me know your availability, or feel free to suggest a preferred time.\n\nLooking forward to speaking with you soon!\n\nBest regards,\n[Your Name]\n[Your Position]\n[Your Company]",
+        "recipient_suggestion": "Naveen (Imar Properties)"
+      }
+    }
+  },
+  {
+    "id": "call-1775861744477",
+    "startTime": "2026-04-10T22:55:44.478Z",
+    "endTime": "2026-04-10T22:55:44.478Z",
+    "transcript": [],
+    "researchData": {
+      "company_profile": {
+        "name": "None identified",
+        "industry": "None identified",
+        "size": "None identified",
+        "headquarters": "None identified",
+        "description": "No prospect company or individual could be extracted from the provided transcript due to its fragmentary nature and lack of identifiable names, companies, or specific details. The transcript appears to discuss sales interfaces but contains no clear references to a prospect.",
+        "key_products": "None identified"
+      },
+      "funding": {
+        "total_raised": "None identified",
+        "latest_round": "None identified",
+        "key_investors": "None identified",
+        "financial_health": "None identified"
+      },
+      "tech_stack": {
+        "technologies": "None identified",
+        "infrastructure": "None identified",
+        "tools": "None identified"
+      },
+      "recent_news": "None identified",
+      "pitch_angles": "None identified",
+      "pain_points": "None identified"
+    },
+    "strategyData": {
+      "objection_handlers": [
+        "If the prospect seems confused or hesitant about the interface or process, clarify by saying: 'I understand there might be some confusion—let me walk you through how our research agent works and how it can help streamline your workflow.'",
+        "If the prospect is unsure about the product being live or functional, reassure them: 'Yes, this is a live demonstration. If you'd like, I can show you specific features or answer any questions as we go along.'"
+      ],
+      "next_questions": [
+        "What specific research challenges are you currently facing in your workflow?",
+        "How are you currently handling company profile lookups or data gathering?",
+        "What would an ideal research solution look like for your team?",
+        "Would you like a quick walkthrough of how our research agent can address your needs?"
+      ],
+      "pitch_angles": [
+        "Emphasize the real-time capabilities of the research agent and its ability to access and summarize company profiles instantly.",
+        "Highlight the ease of integration into existing workflows and the minimal setup required.",
+        "Position the tool as a way to save time and reduce manual research, allowing the team to focus on higher-value tasks."
+      ],
+      "engagement_level": "Low to Moderate. The conversation appears disjointed and the prospect has not yet engaged deeply. There are signs of confusion or uncertainty, and the rep is repeating information.",
+      "deal_signals": [
+        "The prospect is asking about the research agent and company profile lookup, which indicates some level of interest in functionality.",
+        "They are confirming if the product is live, suggesting they want to see real capabilities."
+      ],
+      "closing_probability": "30%. The prospect is mildly interested but not yet engaged in a meaningful discussion about needs or solutions. Immediate next step is to clarify value, engage with targeted questions, and demonstrate the product to increase buy-in."
+    },
+    "status": "completed",
+    "phoneNumber": "+971561118752",
+    "duration": 0
+  },
+  {
+    "id": "call-1775861738501",
+    "startTime": "2026-04-10T22:55:38.501Z",
+    "endTime": "2026-04-10T22:56:17.012Z",
+    "transcript": [
+      {
+        "id": "live-1775861740509-67en",
+        "speaker": "rep",
+        "text": "Want you",
+        "timestamp": "02:55:40 AM"
+      },
+      {
+        "id": "live-1775861744378-ihel",
+        "speaker": "rep",
+        "text": "to I'm a I'm a man of my word.",
+        "timestamp": "02:55:44 AM"
+      },
+      {
+        "id": "live-1775861752870-np3d",
+        "speaker": "prospect",
+        "text": "But this is what I'm telling you. I would love to come through. So this but but this is my start, bro. Because I",
+        "timestamp": "02:55:52 AM"
+      },
+      {
+        "id": "live-1775861753603-dnhj",
+        "speaker": "rep",
+        "text": "I don't wanna book my father in the beginning.",
+        "timestamp": "02:55:53 AM"
+      },
+      {
+        "id": "live-1775861756199-rynh",
+        "speaker": "rep",
+        "text": "And I have now, so I have unlimited",
+        "timestamp": "02:55:56 AM"
+      }
+    ],
+    "researchData": {
+      "company_profile": {
+        "name": "None identified",
+        "industry": "None identified",
+        "size": "None identified",
+        "headquarters": "None identified",
+        "description": "No prospect company or individual could be extracted from the provided transcript due to its fragmentary nature and lack of identifiable names, companies, or specific details. The transcript appears to discuss sales interfaces but contains no clear references to a prospect.",
+        "key_products": "None identified"
+      },
+      "funding": {
+        "total_raised": "None identified",
+        "latest_round": "None identified",
+        "key_investors": "None identified",
+        "financial_health": "None identified"
+      },
+      "tech_stack": {
+        "technologies": "None identified",
+        "infrastructure": "None identified",
+        "tools": "None identified"
+      },
+      "recent_news": "None identified",
+      "pitch_angles": "None identified",
+      "pain_points": "None identified"
+    },
+    "strategyData": {
+      "objection_handlers": [
+        "If the prospect seems confused or hesitant about the interface or process, clarify by saying: 'I understand there might be some confusion—let me walk you through how our research agent works and how it can help streamline your workflow.'",
+        "If the prospect is unsure about the product being live or functional, reassure them: 'Yes, this is a live demonstration. If you'd like, I can show you specific features or answer any questions as we go along.'"
+      ],
+      "next_questions": [
+        "What specific research challenges are you currently facing in your workflow?",
+        "How are you currently handling company profile lookups or data gathering?",
+        "What would an ideal research solution look like for your team?",
+        "Would you like a quick walkthrough of how our research agent can address your needs?"
+      ],
+      "pitch_angles": [
+        "Emphasize the real-time capabilities of the research agent and its ability to access and summarize company profiles instantly.",
+        "Highlight the ease of integration into existing workflows and the minimal setup required.",
+        "Position the tool as a way to save time and reduce manual research, allowing the team to focus on higher-value tasks."
+      ],
+      "engagement_level": "Low to Moderate. The conversation appears disjointed and the prospect has not yet engaged deeply. There are signs of confusion or uncertainty, and the rep is repeating information.",
+      "deal_signals": [
+        "The prospect is asking about the research agent and company profile lookup, which indicates some level of interest in functionality.",
+        "They are confirming if the product is live, suggesting they want to see real capabilities."
+      ],
+      "closing_probability": "30%. The prospect is mildly interested but not yet engaged in a meaningful discussion about needs or solutions. Immediate next step is to clarify value, engage with targeted questions, and demonstrate the product to increase buy-in."
+    },
+    "status": "completed",
+    "phoneNumber": "+971561118752",
+    "duration": 5,
+    "postCallData": {
+      "summary": {
+        "client_name": "Unknown (Prospect's name not provided)",
+        "company": "Unknown",
+        "call_outcome": "Unsuccessful/Unproductive",
+        "key_points": [
+          "Sales rep emphasized not needing the prospect, but wanting their advice.",
+          "Conversation was circular and unclear, with repeated statements.",
+          "Prospect questioned the sales rep's stance on money.",
+          "Sales rep mentioned making a fair valuation.",
+          "Sales rep suggested bringing in sales to improve outcomes."
+        ],
+        "pain_points": [
+          "Lack of clear communication and alignment between sales rep and prospect.",
+          "No clear value proposition or solution discussed.",
+          "Confusion around the topic of money and valuation."
+        ],
+        "next_steps": [
+          "Clarify the prospect's needs and expectations in a follow-up.",
+          "Re-establish rapport and provide a clear value proposition.",
+          "Schedule a structured call with a defined agenda."
+        ]
+      },
+      "deal_probability": {
+        "score": "10%",
+        "positive_signals": [
+          "Prospect engaged briefly about valuation and advice."
+        ],
+        "negative_signals": [
+          "Conversation was disjointed and ended abruptly.",
+          "No agreement or next meeting scheduled.",
+          "Prospect showed skepticism regarding money."
+        ],
+        "risk_factors": [
+          "Lack of trust and rapport.",
+          "No clear understanding of prospect's needs.",
+          "Potential misalignment on value and pricing."
+        ]
+      },
+      "follow_up_email": {
+        "subject": "Clarifying Next Steps and Value Proposition",
+        "body": "Hi,\n\nThank you for your time on our recent call. I realize our conversation was a bit unclear, and I'd like to ensure we address your needs and expectations more directly. If you're open to it, I'd appreciate the opportunity to better understand your priorities and discuss how we can provide value to your business.\n\nWould you be available for a brief follow-up call this week to clarify your goals and see if there's a fit?\n\nLooking forward to your response.\n\nBest regards,\n[Your Name]",
+        "recipient_suggestion": "Prospect (name/email to be filled in based on CRM records)"
+      }
+    }
+  },
+  {
+    "id": "call-1775840562163",
+    "startTime": "2026-04-10T17:02:42.163Z",
+    "endTime": "2026-04-10T17:02:42.163Z",
+    "transcript": [],
+    "researchData": {
+      "company_profile": {
+        "name": "None identified",
+        "industry": "None identified",
+        "size": "None identified",
+        "headquarters": "None identified",
+        "description": "No prospect company or individual could be extracted from the provided transcript due to its fragmentary nature and lack of identifiable names, companies, or specific details. The transcript appears to discuss sales interfaces but contains no clear references to a prospect.",
+        "key_products": "None identified"
+      },
+      "funding": {
+        "total_raised": "None identified",
+        "latest_round": "None identified",
+        "key_investors": "None identified",
+        "financial_health": "None identified"
+      },
+      "tech_stack": {
+        "technologies": "None identified",
+        "infrastructure": "None identified",
+        "tools": "None identified"
+      },
+      "recent_news": "None identified",
+      "pitch_angles": "None identified",
+      "pain_points": "None identified"
+    },
+    "strategyData": {
+      "objection_handlers": [
+        "If the prospect seems confused or hesitant about the interface or process, clarify by saying: 'I understand there might be some confusion—let me walk you through how our research agent works and how it can help streamline your workflow.'",
+        "If the prospect is unsure about the product being live or functional, reassure them: 'Yes, this is a live demonstration. If you'd like, I can show you specific features or answer any questions as we go along.'"
+      ],
+      "next_questions": [
+        "What specific research challenges are you currently facing in your workflow?",
+        "How are you currently handling company profile lookups or data gathering?",
+        "What would an ideal research solution look like for your team?",
+        "Would you like a quick walkthrough of how our research agent can address your needs?"
+      ],
+      "pitch_angles": [
+        "Emphasize the real-time capabilities of the research agent and its ability to access and summarize company profiles instantly.",
+        "Highlight the ease of integration into existing workflows and the minimal setup required.",
+        "Position the tool as a way to save time and reduce manual research, allowing the team to focus on higher-value tasks."
+      ],
+      "engagement_level": "Low to Moderate. The conversation appears disjointed and the prospect has not yet engaged deeply. There are signs of confusion or uncertainty, and the rep is repeating information.",
+      "deal_signals": [
+        "The prospect is asking about the research agent and company profile lookup, which indicates some level of interest in functionality.",
+        "They are confirming if the product is live, suggesting they want to see real capabilities."
+      ],
+      "closing_probability": "30%. The prospect is mildly interested but not yet engaged in a meaningful discussion about needs or solutions. Immediate next step is to clarify value, engage with targeted questions, and demonstrate the product to increase buy-in."
+    },
+    "status": "completed",
+    "phoneNumber": "+971561118752",
+    "duration": 0
+  },
+  {
+    "id": "call-1775840500503",
+    "startTime": "2026-04-10T17:01:40.503Z",
+    "endTime": "2026-04-10T17:02:42.163Z",
+    "transcript": [
+      {
+        "id": "live-1775840512413-9n4z",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "09:01:52 PM"
+      },
+      {
+        "id": "live-1775840517108-6b5q",
+        "speaker": "rep",
+        "text": "Hey, Aiden.",
+        "timestamp": "09:01:57 PM"
+      },
+      {
+        "id": "live-1775840531651-l6c8",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "09:02:11 PM"
+      },
+      {
+        "id": "live-1775840537255-vy2w",
+        "speaker": "rep",
+        "text": "Hello?",
+        "timestamp": "09:02:17 PM"
+      },
+      {
+        "id": "live-1775840542250-c6ql",
+        "speaker": "rep",
+        "text": "Check.",
+        "timestamp": "09:02:22 PM"
+      },
+      {
+        "id": "live-1775840550183-qx2v",
+        "speaker": "rep",
+        "text": "I see.",
+        "timestamp": "09:02:30 PM"
+      },
+      {
+        "id": "live-1775840553427-a7oy",
+        "speaker": "rep",
+        "text": "Nice.",
+        "timestamp": "09:02:33 PM"
+      }
+    ],
+    "researchData": {
+      "prospect": {
+        "name": "Aiden",
+        "company": "Aiden Technologies",
+        "details_from_transcript": "Addressed directly as 'Aiden' by the sales rep during the live sales call, indicating the prospect's name or a key representative from the company."
+      },
+      "company_profile": {
+        "name": "Aiden Technologies",
+        "industry": "Cybersecurity, AI automation, IT endpoint management",
+        "size": "24 employees",
+        "headquarters": "McKinney, Texas (moved from Plano in 2022); additional offices in NY and CA",
+        "description": "Aiden Technologies is an AI-driven hyperautomation platform for software deployment, patch management, and endpoint security in Microsoft Windows enterprise environments. It automates routine IT tasks to reduce vulnerabilities by 97%, cut help desk tickets by over 75%, and shorten patch application time from 102 days to under two weeks, allowing IT teams to focus on innovation.",
+        "key_products": "AI-bot for endpoint compliance, vulnerability mitigation, application packaging, and deployment integration with existing tools; supports Microsoft Modern Work and scales engineering across Windows environments."
+      },
+      "funding": {
+        "total_raised": "$2.95M",
+        "latest_round": "Not specified in available data (funding announced around 2021)",
+        "key_investors": "Top-tier investors (specific names not detailed)",
+        "financial_health": "Strong growth: Revenues grew over 5x in 2021, exceeded $1M ARR by 2022, on track for exponential growth; received a three-year grant from McKinney’s Innovation Fund for positive impact on DFW IT/cybersecurity ecosystem."
+      },
+      "tech_stack": {
+        "technologies": "AI-bot for hyperautomation, machine learning for patch management and compliance, integration with deployment tools, Microsoft Windows ecosystem, Microsoft for Startups community",
+        "infrastructure": "Scalable for enterprise Windows endpoints; offices optimized for DFW-area logistics",
+        "tools": "Software library for deployments, AI-powered application packaging service"
+      },
+      "recent_news": [
+        "June 2022: Moved HQ from Plano to McKinney, TX, into Serendipity Labs at Craig Ranch to leverage local growth opportunities[1].",
+        "2022: Demonstrated revenue growth and capital raise success to secure McKinney Innovation Fund grant[1].",
+        "Ongoing: Topped $1M ARR, targeting exponential growth; active in Microsoft for Startups[1][4]."
+      ],
+      "pitch_angles": [
+        "Tailor to IT pros frustrated with repetitive Windows endpoint management chaos, emphasizing automation of routine tasks to free teams for innovation[2][5].",
+        "Highlight 97% vulnerability reduction and 75%+ help desk ticket cuts for overloaded CIO/CTO/CISO teams[1].",
+        "Position as seamless integrator with existing deployment tools, ideal for Microsoft-centric enterprises scaling engineering[1][4].",
+        "Leverage company culture alignment (truth-sharing, challenging assumptions, nurturing brilliance) for DFW-area prospects[1]."
+      ],
+      "pain_points": [
+        "Routine device management and mounting security risks burden IT teams, diverting from innovation[2].",
+        "Repetitive monthly work like patching (average 102 days delay) across organizations[1][8].",
+        "Overloaded IT-security teams handling maintenance instead of strategic projects[1].",
+        "Scaling endpoint compliance and deployments without enterprise-scale overhead[2][4]."
+      ]
+    },
+    "strategyData": {
+      "objection_handlers": [
+        "If the prospect is not responding, try asking if this is still a good time or if they'd prefer to reschedule.",
+        "If there are technical difficulties, apologize for any issues and offer to reconnect via another channel (e.g., email or video call)."
+      ],
+      "next_questions": [
+        "Hi Aiden, can you hear me clearly now?",
+        "Is this still a good time to connect?",
+        "Would you prefer to reschedule or continue via email if the connection isn’t working?"
+      ],
+      "pitch_angles": [
+        "Express understanding and flexibility—show you're accommodating to their schedule or technical limitations.",
+        "Briefly remind them of the purpose of the call if they respond, to re-engage their interest."
+      ],
+      "engagement_level": "Very Low – The prospect has not responded at all, indicating possible technical issues or lack of availability.",
+      "deal_signals": [],
+      "closing_probability": "10% – With no engagement from the prospect and repeated attempts to connect, the likelihood of progressing the deal in this call is very low unless contact is established soon."
+    },
+    "status": "completed",
+    "phoneNumber": "+971561118752",
+    "duration": 61
+  },
+  {
     "id": "call-1775839464459",
     "startTime": "2026-04-10T16:44:24.459Z",
     "endTime": "2026-04-10T16:44:24.459Z",

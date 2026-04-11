@@ -371,9 +371,9 @@ function LiveCallDashboardInner({
       if (!companyName && !personName) return
       setResearchTriggered(true)
       handleAutoResearch(companyName, personName)
-    } else if (safeTranscript.length >= 3) {
-      // No entities detected by regex after 3 lines — send raw transcript to AI
-      // The AI agent is smarter at extracting names from garbled transcription
+    } else if (safeTranscript.length >= 2) {
+      // No entities detected by regex after 2 lines — send raw transcript to AI
+      // The AI agent is smarter at extracting names from conversational text
       setResearchTriggered(true)
       const rawText = safeTranscript.map(function(l) {
         return (l?.speaker === 'rep' ? 'Sales Rep' : 'Prospect') + ': ' + safeText(l?.text, '')
@@ -516,9 +516,10 @@ function LiveCallDashboardInner({
   const startDeepgramTranscription = useCallback(async () => {
     try {
       // Request microphone access
-      // Echo cancellation ON to avoid duplicate transcription of your own voice
+      // Echo cancellation OFF so mic picks up prospect's voice from speaker
+      // Diarization will separate Rep (speaker 0) from Prospect (speaker 1)
       const stream = await navigator.mediaDevices.getUserMedia({
-        audio: { sampleRate: 16000, channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true }
+        audio: { sampleRate: 16000, channelCount: 1, echoCancellation: false, noiseSuppression: true, autoGainControl: true }
       })
       mediaStreamRef.current = stream
 
@@ -563,6 +564,8 @@ function LiveCallDashboardInner({
       }
 
       let interimLineId: string | null = null
+      let lastTranscriptText = ''
+      let lastTranscriptTime = 0
 
       ws.onmessage = function(event: MessageEvent) {
         try {
@@ -580,8 +583,16 @@ function LiveCallDashboardInner({
             const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
 
             if (isFinal) {
-              // Remove interim line if it exists
               interimLineId = null
+
+              // Deduplicate: skip if same text within 3 seconds
+              const now = Date.now()
+              if (transcriptText === lastTranscriptText && (now - lastTranscriptTime) < 3000) {
+                return // Skip duplicate
+              }
+              lastTranscriptText = transcriptText
+              lastTranscriptTime = now
+
               const line: TranscriptLine = {
                 id: 'live-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6),
                 speaker: speakerLabel,
@@ -827,9 +838,8 @@ function LiveCallDashboardInner({
       onStartCall(phoneNumber)
 
       call.on('accept', () => {
-        // Start transcribing the prospect's side once WebRTC is established
-        // Capture prospect's voice from the Twilio WebRTC remote stream
-        startRemoteTranscription(call)
+        // Remote transcription disabled — mic with diarization handles both sides
+        // Remote stream was causing duplicate entries
       })
       call.on('disconnect', () => {
         activeCallRef.current = null
