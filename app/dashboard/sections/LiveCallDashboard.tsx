@@ -359,28 +359,34 @@ function LiveCallDashboardInner({
 
   // Auto-trigger Research Agent when entities detected OR after enough transcript lines
   useEffect(() => {
-    if (!callActive || researchTriggered || researchLoading) return
+    if (!callActive || researchLoading) return
     if (safeTranscript.length < 1) return
 
     const hasEntities = detectedEntities.companies.length > 0 || detectedEntities.people.length > 0
 
-    if (hasEntities) {
+    if (hasEntities && !researchTriggered) {
       // Entity found — trigger immediately with structured data
       const companyName = detectedEntities.companies[0] || ''
       const personName = detectedEntities.people[0] || ''
       if (!companyName && !personName) return
       setResearchTriggered(true)
       handleAutoResearch(companyName, personName)
-    } else if (safeTranscript.length >= 2) {
-      // No entities detected by regex after 2 lines — send raw transcript to AI
-      // The AI agent is smarter at extracting names from conversational text
+    } else if (!researchTriggered && safeTranscript.length >= 4) {
+      // No entities detected by regex after 4 lines — send raw transcript to AI
+      // Wait for enough context (not just "hello" "hello")
       setResearchTriggered(true)
       const rawText = safeTranscript.map(function(l) {
         return (l?.speaker === 'rep' ? 'Sales Rep' : 'Prospect') + ': ' + safeText(l?.text, '')
       }).join('\n')
       handleAutoResearchFromTranscript(rawText)
+    } else if (researchTriggered && !researchData && !researchLoading && safeTranscript.length >= 8 && autoResearchCount < 2) {
+      // First attempt returned nothing useful — retry with more context
+      const rawText = safeTranscript.map(function(l) {
+        return (l?.speaker === 'rep' ? 'Sales Rep' : 'Prospect') + ': ' + safeText(l?.text, '')
+      }).join('\n')
+      handleAutoResearchFromTranscript(rawText)
     }
-  }, [detectedEntities, callActive, researchTriggered, researchLoading, safeTranscript.length])
+  }, [detectedEntities, callActive, researchTriggered, researchLoading, researchData, safeTranscript.length, autoResearchCount])
 
   // Auto-trigger Strategy Agent periodically during call
   useEffect(() => {
