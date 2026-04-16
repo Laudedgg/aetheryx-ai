@@ -22,11 +22,28 @@ export default function LandingPage() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
-    <div className="min-h-screen" style={{ background: '#050505', color: '#f0f2f6', fontFamily: "'Manrope', 'Inter', system-ui, sans-serif" }}>
+    <div className="min-h-screen relative" style={{ background: 'linear-gradient(180deg, #0a0e1a 0%, #060a14 30%, #050510 60%, #030308 100%)', color: '#f0f2f6', fontFamily: "'Manrope', 'Inter', system-ui, sans-serif" }}>
 
       {/* ══ BLUE RADIAL GLOW ══ */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        <div style={{ position: 'absolute', top: '-15%', left: '50%', transform: 'translateX(-50%)', width: '120%', height: '600px', background: 'radial-gradient(ellipse 90% 70% at 50% 0%, rgba(0,101,255,0.18), transparent 58%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', top: '-20%', left: '50%', transform: 'translateX(-50%)', width: '140%', height: '800px', background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(30,60,140,0.35), rgba(10,30,80,0.15) 40%, transparent 65%)', pointerEvents: 'none' }} />
+      </div>
+
+      {/* ══ STAR FIELD ══ */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        {Array.from({ length: 120 }, (_, i) => (
+          <div key={i} style={{
+            position: 'absolute',
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            width: Math.random() > 0.9 ? '2px' : '1px',
+            height: Math.random() > 0.9 ? '2px' : '1px',
+            background: '#fff',
+            borderRadius: '50%',
+            opacity: 0.15 + Math.random() * 0.4,
+            animation: `twinkle ${2 + Math.random() * 4}s ease-in-out ${Math.random() * 3}s infinite alternate`,
+          }} />
+        ))}
       </div>
 
       {/* ══ NAV ══ */}
