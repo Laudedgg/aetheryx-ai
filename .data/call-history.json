@@ -1,5 +1,130 @@
 [
   {
+    "id": "call-1776341966348",
+    "startTime": "2026-04-16T12:19:26.348Z",
+    "endTime": "2026-04-16T12:19:26.348Z",
+    "transcript": [],
+    "researchData": {
+      "company_profile": {
+        "name": null,
+        "industry": null,
+        "size": null,
+        "headquarters": null,
+        "description": null,
+        "key_products": null
+      },
+      "funding": {
+        "total_raised": null,
+        "latest_round": null,
+        "key_investors": null,
+        "financial_health": null
+      },
+      "tech_stack": {
+        "technologies": null,
+        "infrastructure": null,
+        "tools": null
+      },
+      "recent_news": null,
+      "pitch_angles": null,
+      "pain_points": null
+    },
+    "strategyData": {
+      "objection_handlers": [
+        "If the prospect seems confused or frustrated by the repetition, acknowledge it: 'It looks like we're having some technical difficulties here—let's reset and make sure we're both on the same page.'",
+        "If the prospect says 'It should stop,' respond with: 'Absolutely, let's start fresh. I want to make sure this conversation is productive for you.'"
+      ],
+      "next_questions": [
+        "Victor, can you confirm if you're able to hear me clearly now?",
+        "Would you like to restart the call, or should we proceed from here?",
+        "Just to clarify, are you looking to discuss our solutions today, or is there something specific on your mind?"
+      ],
+      "pitch_angles": [
+        "Emphasize professionalism and technical reliability: 'We strive to make every conversation seamless. Thank you for your patience—let's get started.'",
+        "Show empathy: 'I know tech glitches can be frustrating. Let's make sure your time is well spent.'"
+      ],
+      "engagement_level": "Low. The conversation is stuck in a loop of repeated phrases and introductions, likely due to technical issues or confusion. No substantive engagement or discovery has occurred yet.",
+      "deal_signals": [],
+      "closing_probability": "5%. Reasoning: The conversation has not progressed beyond introductions, and technical issues are preventing meaningful engagement. No discovery or buying signals detected yet.",
+      "recommendation": "Acknowledge the confusion, reset the conversation, and confirm that both parties are ready to proceed. Move quickly to establish rapport and clarify the purpose of the call."
+    },
+    "status": "completed",
+    "phoneNumber": "+971501715226",
+    "duration": 0
+  },
+  {
+    "id": "call-1776341904911",
+    "startTime": "2026-04-16T12:18:24.911Z",
+    "endTime": "2026-04-16T12:19:26.349Z",
+    "transcript": [
+      {
+        "id": "live-1776341909258-zn38",
+        "speaker": "prospect",
+        "text": "Call now.",
+        "timestamp": "04:18:29 PM"
+      },
+      {
+        "id": "live-1776341924285-2o0y",
+        "speaker": "prospect",
+        "text": "Hello?",
+        "timestamp": "04:18:44 PM"
+      },
+      {
+        "id": "live-1776341928413-sf6l",
+        "speaker": "prospect",
+        "text": "How are you doing? My name is Victor.",
+        "timestamp": "04:18:48 PM"
+      },
+      {
+        "id": "live-1776341939942-j4p6",
+        "speaker": "prospect",
+        "text": "Hello?",
+        "timestamp": "04:18:59 PM"
+      },
+      {
+        "id": "live-1776341944885-ekm1",
+        "speaker": "prospect",
+        "text": "Hey, Arjun.",
+        "timestamp": "04:19:04 PM"
+      },
+      {
+        "id": "live-1776341948144-rz9i",
+        "speaker": "prospect",
+        "text": "Hello?",
+        "timestamp": "04:19:08 PM"
+      },
+      {
+        "id": "live-1776341956292-6x5k",
+        "speaker": "prospect",
+        "text": "Hey.",
+        "timestamp": "04:19:16 PM"
+      }
+    ],
+    "researchData": null,
+    "strategyData": {
+      "objection_handlers": [
+        "If the client seems impatient or confused due to lack of response, quickly apologize for any delay and reassure them you're present: 'Hi Victor, apologies for the delay. I'm here now—thanks for your patience.'"
+      ],
+      "next_questions": [
+        "Hi Victor, thanks for connecting. How can I help you today?",
+        "Is there a specific challenge or goal you're hoping to discuss on this call?",
+        "Can you tell me a bit about what prompted you to reach out today?"
+      ],
+      "pitch_angles": [
+        "Emphasize responsiveness: 'We're committed to fast, attentive support—let's make the most of your time.'",
+        "Express appreciation for their initiative: 'Thanks for reaching out directly—let's dive in.'"
+      ],
+      "engagement_level": "High — The client is actively trying to engage, repeating greetings and seeking attention. This suggests strong interest or urgency.",
+      "deal_signals": [
+        "Client is initiating and persisting in the conversation.",
+        "Client is using your name and making multiple attempts to connect."
+      ],
+      "closing_probability": "70% — The client's persistence and proactive outreach indicate a strong intent to engage. If the conversation is quickly recovered and directed, there is a high chance of moving forward."
+    },
+    "status": "completed",
+    "phoneNumber": "+971501715226",
+    "duration": 61
+  },
+  {
     "id": "call-1776340663971",
     "startTime": "2026-04-16T11:57:43.971Z",
     "endTime": "2026-04-16T11:57:43.971Z",

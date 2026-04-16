@@ -528,15 +528,16 @@ function LiveCallDashboardInner({
   const startDeepgramTranscription = useCallback(async () => {
     try {
       // Request microphone access
-      // Echo cancellation OFF so mic picks up prospect's voice from speaker
-      // Diarization will separate Rep (speaker 0) from Prospect (speaker 1)
+      // Echo cancellation ON — mic captures ONLY the Rep's voice
+      // Client's voice is captured separately via remote stream
       const stream = await navigator.mediaDevices.getUserMedia({
-        audio: { sampleRate: 16000, channelCount: 1, echoCancellation: false, noiseSuppression: true, autoGainControl: true }
+        audio: { sampleRate: 16000, channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true }
       })
       mediaStreamRef.current = stream
 
       // Connect to Deepgram WebSocket
-      const dgUrl = 'wss://api.deepgram.com/v1/listen?model=nova-2&encoding=linear16&sample_rate=16000&channels=1&punctuate=true&interim_results=true&utterance_end_ms=1500&vad_events=true&smart_format=true&diarize=true&language=en&filler_words=false&numerals=true'
+      // No diarization — this connection is mic-only (Rep). Client uses separate connection.
+      const dgUrl = 'wss://api.deepgram.com/v1/listen?model=nova-2&encoding=linear16&sample_rate=16000&channels=1&punctuate=true&interim_results=true&utterance_end_ms=1500&vad_events=true&smart_format=true&language=en&filler_words=false&numerals=true'
       const ws = new WebSocket(dgUrl, ['token', deepgramKey])
       deepgramWsRef.current = ws
 
@@ -589,12 +590,8 @@ function LiveCallDashboardInner({
             if (!transcriptText) return
 
             const isFinal = data.is_final
-            const speaker = data.channel?.alternatives?.[0]?.words?.[0]?.speaker
-            // Diarization: Speaker 0 = first voice detected. Since Twilio TTS
-            // ("Connecting your call now") plays through speaker first, Speaker 0
-            // is typically the remote/client side. Speaker 1 = you (Rep).
-            // If no diarization data, default to 'rep' (mic user)
-            const speakerLabel: 'rep' | 'prospect' = speaker === 0 ? 'prospect' : 'rep'
+            // This Deepgram connection is mic-only = always the Sales Rep
+            const speakerLabel: 'rep' | 'prospect' = 'rep'
             const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
 
             if (isFinal) {
@@ -853,8 +850,8 @@ function LiveCallDashboardInner({
       onStartCall(phoneNumber)
 
       call.on('accept', () => {
-        // Remote transcription disabled — mic with diarization handles both sides
-        // Remote stream was causing duplicate entries
+        // Capture Client's voice from Twilio WebRTC remote audio stream
+        startRemoteTranscription(call)
       })
       call.on('disconnect', () => {
         activeCallRef.current = null
