@@ -357,7 +357,7 @@ function LiveCallDashboardInner({
     } catch (_e) { /* ignore */ }
   }, [safeTranscript.length])
 
-  // Auto-trigger Research Agent when entities detected OR after enough transcript lines
+  // Auto-trigger Research Agent when entities detected OR after meaningful conversation
   useEffect(() => {
     if (!callActive || researchLoading) return
     if (safeTranscript.length < 1) return
@@ -365,24 +365,30 @@ function LiveCallDashboardInner({
     const hasEntities = detectedEntities.companies.length > 0 || detectedEntities.people.length > 0
 
     if (hasEntities && !researchTriggered) {
-      // Entity found — trigger immediately with structured data
+      // Entity found by regex — trigger immediately
       const companyName = detectedEntities.companies[0] || ''
       const personName = detectedEntities.people[0] || ''
       if (!companyName && !personName) return
       setResearchTriggered(true)
       handleAutoResearch(companyName, personName)
-    } else if (!researchTriggered && safeTranscript.length >= 4) {
-      // No entities detected by regex after 4 lines — send raw transcript to AI
-      // Wait for enough context (not just "hello" "hello")
-      setResearchTriggered(true)
+    } else if (!researchTriggered && safeTranscript.length >= 6) {
+      // No regex entities after 6 lines — check if there's meaningful content
+      // (not just greetings like "hello", "how are you", "I'm good")
+      const fullText = safeTranscript.map(l => safeText(l?.text, '')).join(' ')
+      const wordCount = fullText.split(/\s+/).length
+      const hasSubstance = wordCount > 30 // At least 30 words of real conversation
+
+      if (hasSubstance) {
+        setResearchTriggered(true)
+        const rawText = safeTranscript.map(function(l) {
+          return (l?.speaker === 'rep' ? 'Sales Rep' : 'Client') + ': ' + safeText(l?.text, '')
+        }).join('\n')
+        handleAutoResearchFromTranscript(rawText)
+      }
+    } else if (researchTriggered && !researchData && !researchLoading && safeTranscript.length >= 12 && autoResearchCount < 2) {
+      // First attempt returned nothing useful — retry with much more context
       const rawText = safeTranscript.map(function(l) {
-        return (l?.speaker === 'rep' ? 'Sales Rep' : 'Prospect') + ': ' + safeText(l?.text, '')
-      }).join('\n')
-      handleAutoResearchFromTranscript(rawText)
-    } else if (researchTriggered && !researchData && !researchLoading && safeTranscript.length >= 8 && autoResearchCount < 2) {
-      // First attempt returned nothing useful — retry with more context
-      const rawText = safeTranscript.map(function(l) {
-        return (l?.speaker === 'rep' ? 'Sales Rep' : 'Prospect') + ': ' + safeText(l?.text, '')
+        return (l?.speaker === 'rep' ? 'Sales Rep' : 'Client') + ': ' + safeText(l?.text, '')
       }).join('\n')
       handleAutoResearchFromTranscript(rawText)
     }
@@ -437,7 +443,7 @@ function LiveCallDashboardInner({
     setActiveAgentId(RESEARCH_AGENT_ID)
     setAutoResearchCount(function(c) { return c + 1 })
     try {
-      const query = 'You are listening to a live sales call. Extract the prospect\'s name, company, and any details from this transcript, then research them thoroughly. The transcript may have speech-to-text errors so infer the most likely real names/companies:\n\n' + rawTranscript
+      const query = 'You are listening to a live sales call transcript. IMPORTANT RULES:\n1. ONLY research people and companies that are EXPLICITLY mentioned by name in the transcript.\n2. If no specific person name or company name is mentioned yet, return a response with company_profile.name set to "Not yet identified" and explain you are waiting for the client to introduce themselves.\n3. DO NOT guess or hallucinate company/person names. Only use names that appear in the actual transcript text below.\n4. The transcript may have speech-to-text errors — try to identify the closest real name/company if something is mentioned.\n\nTranscript:\n' + rawTranscript
       const result = await callAIAgent(query, RESEARCH_AGENT_ID)
       if (result?.success) {
         onResearchData(result?.response?.result ?? {})
@@ -455,7 +461,7 @@ function LiveCallDashboardInner({
   const handleAutoStrategy = async () => {
     if (safeTranscript.length === 0) return
     const transcriptText = safeTranscript.map(function(l) {
-      return (l?.speaker === 'rep' ? 'Sales Rep' : 'Prospect') + ': ' + safeText(l?.text, '')
+      return (l?.speaker === 'rep' ? 'Sales Rep' : 'Client') + ': ' + safeText(l?.text, '')
     }).join('\n')
     if (!transcriptText.trim()) return
     setStrategyLoading(true)
@@ -494,7 +500,7 @@ function LiveCallDashboardInner({
     try {
       const transcriptContext = safeTranscript.length > 0
         ? '\n\nCurrent live call transcript:\n' + safeTranscript.map(function(l) {
-            return (l?.speaker === 'rep' ? 'Sales Rep' : 'Prospect') + ': ' + safeText(l?.text, '')
+            return (l?.speaker === 'rep' ? 'Sales Rep' : 'Client') + ': ' + safeText(l?.text, '')
           }).join('\n')
         : ''
       const query = 'You are an AI sales coach assisting a sales rep during a live call. Answer their question concisely and actionably.' + transcriptContext + '\n\nSales rep asks: ' + msg
@@ -584,8 +590,11 @@ function LiveCallDashboardInner({
 
             const isFinal = data.is_final
             const speaker = data.channel?.alternatives?.[0]?.words?.[0]?.speaker
-            // Speaker 0 = rep (user), Speaker 1 = prospect (other party)
-            const speakerLabel: 'rep' | 'prospect' = speaker === 1 ? 'prospect' : 'rep'
+            // Diarization: Speaker 0 = first voice detected. Since Twilio TTS
+            // ("Connecting your call now") plays through speaker first, Speaker 0
+            // is typically the remote/client side. Speaker 1 = you (Rep).
+            // If no diarization data, default to 'rep' (mic user)
+            const speakerLabel: 'rep' | 'prospect' = speaker === 0 ? 'prospect' : 'rep'
             const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
 
             if (isFinal) {
@@ -1089,7 +1098,7 @@ function LiveCallDashboardInner({
                 <div key={line?.id ?? Math.random()} className="rounded-lg px-3 py-2" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.03)' }}>
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-[11px] font-bold" style={{ color: line?.speaker === 'rep' ? '#216BE4' : '#f472b6' }}>
-                      {line?.speaker === 'rep' ? 'Rep' : 'Prospect'}
+                      {line?.speaker === 'rep' ? 'Rep' : 'Client'}
                     </span>
                     <span className="text-[9px] text-white/15 font-mono">{safeText(line?.timestamp, '')}</span>
                   </div>

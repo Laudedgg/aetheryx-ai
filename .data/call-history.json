@@ -1,5 +1,243 @@
 [
   {
+    "id": "call-1776340663971",
+    "startTime": "2026-04-16T11:57:43.971Z",
+    "endTime": "2026-04-16T11:57:43.971Z",
+    "transcript": [],
+    "researchData": {
+      "company_profile": {
+        "name": null,
+        "industry": null,
+        "size": null,
+        "headquarters": null,
+        "description": null,
+        "key_products": null
+      },
+      "funding": {
+        "total_raised": null,
+        "latest_round": null,
+        "key_investors": null,
+        "financial_health": null
+      },
+      "tech_stack": {
+        "technologies": null,
+        "infrastructure": null,
+        "tools": null
+      },
+      "recent_news": null,
+      "pitch_angles": null,
+      "pain_points": null
+    },
+    "strategyData": {
+      "objection_handlers": [
+        "If the prospect seems confused or frustrated by the repetition, acknowledge it: 'It looks like we're having some technical difficulties here—let's reset and make sure we're both on the same page.'",
+        "If the prospect says 'It should stop,' respond with: 'Absolutely, let's start fresh. I want to make sure this conversation is productive for you.'"
+      ],
+      "next_questions": [
+        "Victor, can you confirm if you're able to hear me clearly now?",
+        "Would you like to restart the call, or should we proceed from here?",
+        "Just to clarify, are you looking to discuss our solutions today, or is there something specific on your mind?"
+      ],
+      "pitch_angles": [
+        "Emphasize professionalism and technical reliability: 'We strive to make every conversation seamless. Thank you for your patience—let's get started.'",
+        "Show empathy: 'I know tech glitches can be frustrating. Let's make sure your time is well spent.'"
+      ],
+      "engagement_level": "Low. The conversation is stuck in a loop of repeated phrases and introductions, likely due to technical issues or confusion. No substantive engagement or discovery has occurred yet.",
+      "deal_signals": [],
+      "closing_probability": "5%. Reasoning: The conversation has not progressed beyond introductions, and technical issues are preventing meaningful engagement. No discovery or buying signals detected yet.",
+      "recommendation": "Acknowledge the confusion, reset the conversation, and confirm that both parties are ready to proceed. Move quickly to establish rapport and clarify the purpose of the call."
+    },
+    "status": "completed",
+    "phoneNumber": "+971501715226",
+    "duration": 0
+  },
+  {
+    "id": "call-1775913211749",
+    "startTime": "2026-04-11T13:13:31.750Z",
+    "endTime": "2026-04-11T13:13:44.512Z",
+    "transcript": [
+      {
+        "id": "live-1775913215746-aaek",
+        "speaker": "rep",
+        "text": "Okay. Are you sure?",
+        "timestamp": "05:13:35 PM"
+      },
+      {
+        "id": "live-1775913222447-w1xf",
+        "speaker": "rep",
+        "text": "I thought you said. Yeah. Now it's doing",
+        "timestamp": "05:13:42 PM"
+      },
+      {
+        "id": "live-1775913222686-5pr9",
+        "speaker": "prospect",
+        "text": "Then it was showing. Really? Yeah.",
+        "timestamp": "05:13:42 PM"
+      }
+    ],
+    "researchData": null,
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+971501715226",
+    "duration": 12,
+    "postCallData": {
+      "summary": {
+        "client_name": "Unknown (Prospect name not provided)",
+        "company": "Unknown (Company name not provided)",
+        "call_outcome": "Unclear/Incomplete - No clear outcome or next steps established",
+        "key_points": [
+          "Sales rep sought confirmation from the prospect.",
+          "Prospect mentioned something was showing, indicating a possible technical issue or demonstration.",
+          "Conversation was fragmented and lacked substantive discussion."
+        ],
+        "pain_points": [
+          "Possible technical issue or confusion during product demonstration.",
+          "Lack of clarity in communication between sales rep and prospect."
+        ],
+        "next_steps": [
+          "Follow up with the prospect to clarify the discussion and confirm if there were any technical issues.",
+          "Schedule a new call or demo to ensure the prospect fully understands the product/service."
+        ]
+      },
+      "deal_probability": {
+        "score": 10,
+        "positive_signals": [
+          "Prospect was engaged enough to respond."
+        ],
+        "negative_signals": [
+          "No clear interest or intent expressed by the prospect.",
+          "Technical confusion or issue unresolved.",
+          "No next steps or commitments."
+        ],
+        "risk_factors": [
+          "Lack of clarity in communication.",
+          "Potential technical issues with demonstration.",
+          "No relationship or rapport established."
+        ]
+      },
+      "follow_up_email": {
+        "subject": "Following Up on Our Recent Call – Clarification and Next Steps",
+        "body": "Hi,\n\nThank you for your time during our recent call. I noticed there may have been some confusion or technical issues during our discussion. I want to ensure you have a clear understanding of our product and address any questions you might have.\n\nWould you be available for a quick follow-up call or demo at your convenience? Please let me know what works best for you.\n\nLooking forward to your response.\n\nBest regards,\n[Your Name]",
+        "recipient_suggestion": "Prospect's email (unknown, to be filled in CRM)"
+      }
+    }
+  },
+  {
+    "id": "call-1775913138304",
+    "startTime": "2026-04-11T13:12:18.304Z",
+    "endTime": "2026-04-11T13:12:55.922Z",
+    "transcript": [],
+    "researchData": null,
+    "strategyData": null,
+    "status": "completed",
+    "phoneNumber": "+971501715226",
+    "duration": 37
+  },
+  {
+    "id": "call-1775913130204",
+    "startTime": "2026-04-11T13:12:10.204Z",
+    "endTime": "2026-04-11T13:12:10.204Z",
+    "transcript": [],
+    "researchData": {
+      "company_profile": {
+        "name": null,
+        "industry": null,
+        "size": null,
+        "headquarters": null,
+        "description": null,
+        "key_products": null
+      },
+      "funding": {
+        "total_raised": null,
+        "latest_round": null,
+        "key_investors": null,
+        "financial_health": null
+      },
+      "tech_stack": {
+        "technologies": null,
+        "infrastructure": null,
+        "tools": null
+      },
+      "recent_news": null,
+      "pitch_angles": null,
+      "pain_points": null
+    },
+    "strategyData": {
+      "objection_handlers": [
+        "If the prospect seems confused or frustrated by the repetition, acknowledge it: 'It looks like we're having some technical difficulties here—let's reset and make sure we're both on the same page.'",
+        "If the prospect says 'It should stop,' respond with: 'Absolutely, let's start fresh. I want to make sure this conversation is productive for you.'"
+      ],
+      "next_questions": [
+        "Victor, can you confirm if you're able to hear me clearly now?",
+        "Would you like to restart the call, or should we proceed from here?",
+        "Just to clarify, are you looking to discuss our solutions today, or is there something specific on your mind?"
+      ],
+      "pitch_angles": [
+        "Emphasize professionalism and technical reliability: 'We strive to make every conversation seamless. Thank you for your patience—let's get started.'",
+        "Show empathy: 'I know tech glitches can be frustrating. Let's make sure your time is well spent.'"
+      ],
+      "engagement_level": "Low. The conversation is stuck in a loop of repeated phrases and introductions, likely due to technical issues or confusion. No substantive engagement or discovery has occurred yet.",
+      "deal_signals": [],
+      "closing_probability": "5%. Reasoning: The conversation has not progressed beyond introductions, and technical issues are preventing meaningful engagement. No discovery or buying signals detected yet.",
+      "recommendation": "Acknowledge the confusion, reset the conversation, and confirm that both parties are ready to proceed. Move quickly to establish rapport and clarify the purpose of the call."
+    },
+    "status": "completed",
+    "phoneNumber": "+971501715226",
+    "duration": 0
+  },
+  {
+    "id": "call-1775913114322",
+    "startTime": "2026-04-11T13:11:54.322Z",
+    "endTime": "2026-04-11T13:12:55.922Z",
+    "transcript": [],
+    "researchData": {
+      "company_profile": {
+        "name": null,
+        "industry": null,
+        "size": null,
+        "headquarters": null,
+        "description": null,
+        "key_products": null
+      },
+      "funding": {
+        "total_raised": null,
+        "latest_round": null,
+        "key_investors": null,
+        "financial_health": null
+      },
+      "tech_stack": {
+        "technologies": null,
+        "infrastructure": null,
+        "tools": null
+      },
+      "recent_news": null,
+      "pitch_angles": null,
+      "pain_points": null
+    },
+    "strategyData": {
+      "objection_handlers": [
+        "If the prospect seems confused or frustrated by the repetition, acknowledge it: 'It looks like we're having some technical difficulties here—let's reset and make sure we're both on the same page.'",
+        "If the prospect says 'It should stop,' respond with: 'Absolutely, let's start fresh. I want to make sure this conversation is productive for you.'"
+      ],
+      "next_questions": [
+        "Victor, can you confirm if you're able to hear me clearly now?",
+        "Would you like to restart the call, or should we proceed from here?",
+        "Just to clarify, are you looking to discuss our solutions today, or is there something specific on your mind?"
+      ],
+      "pitch_angles": [
+        "Emphasize professionalism and technical reliability: 'We strive to make every conversation seamless. Thank you for your patience—let's get started.'",
+        "Show empathy: 'I know tech glitches can be frustrating. Let's make sure your time is well spent.'"
+      ],
+      "engagement_level": "Low. The conversation is stuck in a loop of repeated phrases and introductions, likely due to technical issues or confusion. No substantive engagement or discovery has occurred yet.",
+      "deal_signals": [],
+      "closing_probability": "5%. Reasoning: The conversation has not progressed beyond introductions, and technical issues are preventing meaningful engagement. No discovery or buying signals detected yet.",
+      "recommendation": "Acknowledge the confusion, reset the conversation, and confirm that both parties are ready to proceed. Move quickly to establish rapport and clarify the purpose of the call."
+    },
+    "status": "completed",
+    "phoneNumber": "+971501715226",
+    "duration": 15
+  },
+  {
     "id": "call-1775910637468",
     "startTime": "2026-04-11T12:30:37.468Z",
     "endTime": "2026-04-11T12:33:04.097Z",

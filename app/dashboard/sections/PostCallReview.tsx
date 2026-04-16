@@ -145,7 +145,7 @@ function PostCallReviewInner({
 
   const handleGenerateReport = async () => {
     const transcriptText = safeTranscript.map(function(l) {
-      return (l?.speaker === 'rep' ? 'Sales Rep' : 'Prospect') + ': ' + safeText(l?.text, '')
+      return (l?.speaker === 'rep' ? 'Sales Rep' : 'Client') + ': ' + safeText(l?.text, '')
     }).join('\n')
     if (!transcriptText.trim()) return
     setPostCallLoading(true)
@@ -231,7 +231,7 @@ function PostCallReviewInner({
             {safeTranscript.map((line, i) => (
               <div key={line?.id || i} className="flex gap-2.5 items-start">
                 <span className={`text-[10px] font-bold uppercase flex-shrink-0 w-16 pt-0.5 ${line?.speaker === 'rep' ? 'text-primary' : 'text-pink-400'}`}>
-                  {line?.speaker === 'rep' ? 'Rep' : 'Prospect'}
+                  {line?.speaker === 'rep' ? 'Rep' : 'Client'}
                 </span>
                 <p className="text-xs text-foreground/70 leading-relaxed">{safeText(line?.text, '')}</p>
                 <span className="text-[9px] text-muted-foreground/40 flex-shrink-0 ml-auto">{line?.timestamp || ''}</span>
