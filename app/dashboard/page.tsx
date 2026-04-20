@@ -30,7 +30,7 @@ function SectionFallback() {
 
 /* ── Shared card wrapper ── */
 const C = 'rounded-2xl border border-white/[0.06]'
-const cardBg = '#0c1120'
+const cardBg = 'rgba(12,17,32,0.75)'
 const panelBg = '#080d18'
 
 export default function Page() {
@@ -158,30 +158,26 @@ export default function Page() {
 
       {/* ══════ BACKGROUND LAYERS ══════ */}
       <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: '#030510' }} />
-      {/* AI Agent image — positioned right, recolored blue */}
+      {/* AI Agent image — positioned to fill screen, blue-tinted */}
       <div className="absolute inset-0 z-0 pointer-events-none" style={{
         backgroundImage: 'url(/dashboard-bg.jpg)',
         backgroundSize: 'cover',
-        backgroundPosition: 'center right',
+        backgroundPosition: 'center top',
         backgroundRepeat: 'no-repeat',
-        opacity: 0.35,
-        filter: 'hue-rotate(195deg) saturate(2.2) brightness(0.9) contrast(1.1)',
+        opacity: 1,
+        filter: 'hue-rotate(200deg) saturate(2.5) brightness(0.95) contrast(1.2)',
       }} />
-      {/* Blue gradient overlay to fully tint to theme */}
+      {/* Thin blue wash */}
       <div className="absolute inset-0 z-0 pointer-events-none" style={{
-        background: 'linear-gradient(120deg, rgba(3,5,16,0.92) 0%, rgba(6,10,28,0.82) 35%, rgba(10,18,45,0.55) 70%, rgba(15,28,70,0.4) 100%)',
+        background: 'linear-gradient(180deg, rgba(6,12,30,0.35) 0%, rgba(8,15,38,0.4) 50%, rgba(10,20,50,0.5) 100%)',
       }} />
       {/* Blue radial glow from top */}
       <div className="absolute inset-0 z-0 pointer-events-none" style={{
-        background: 'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,105,255,0.22), transparent 60%)',
-      }} />
-      {/* Subtle vignette for depth */}
-      <div className="absolute inset-0 z-0 pointer-events-none" style={{
-        background: 'radial-gradient(ellipse 100% 80% at 50% 50%, transparent 40%, rgba(0,0,0,0.5) 100%)',
+        background: 'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,105,255,0.2), transparent 60%)',
       }} />
 
       {/* ══════ LEFT SIDEBAR — FIXED, NO SCROLL ══════ */}
-      <aside className="hidden md:flex flex-col w-[220px] flex-shrink-0 p-2 gap-2 overflow-hidden relative z-10" style={{ background: 'rgba(8,13,24,0.7)', backdropFilter: 'blur(12px)' }}>
+      <aside className="hidden md:flex flex-col w-[220px] flex-shrink-0 p-2 gap-2 overflow-hidden relative z-10" style={{ background: 'rgba(8,13,24,0.55)', backdropFilter: 'blur(16px)' }}>
 
         {/* Logo — fixed top */}
         <div className={C + ' px-3 py-2.5 flex items-center gap-2.5 flex-shrink-0'} style={{ background: cardBg }}>
@@ -344,7 +340,7 @@ export default function Page() {
       </main>
 
       {/* ══════ RIGHT PANEL ══════ */}
-      <aside className="hidden xl:flex flex-col w-[340px] flex-shrink-0 p-3 gap-2.5 overflow-y-auto relative z-10" style={{ background: 'rgba(8,13,24,0.7)', backdropFilter: 'blur(12px)' }}>
+      <aside className="hidden xl:flex flex-col w-[340px] flex-shrink-0 p-3 gap-2.5 overflow-y-auto relative z-10" style={{ background: 'rgba(8,13,24,0.55)', backdropFilter: 'blur(16px)' }}>
 
         {/* Agent Pulse */}
         <div className={C + ' p-4'} style={{ background: cardBg }}>
