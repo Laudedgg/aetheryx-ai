@@ -266,7 +266,31 @@ async function executeTask(taskId: string) {
 
   try {
     const rawText = await callProvider(task.message, task.agent_id)
-    const parsed = parseLLMJson(rawText)
+
+    // Try direct JSON.parse first (providers should return valid JSON via response_format)
+    let parsed: any = null
+    try {
+      parsed = JSON.parse(rawText)
+    } catch {
+      // Fallback to tolerant parser (handles markdown fences, partial JSON, etc)
+      parsed = parseLLMJson(rawText)
+      // If parseLLMJson returned its failure shape, use the raw text as-is
+      if (parsed && typeof parsed === 'object' && parsed.success === false && parsed.data === null && parsed.rawJson === null) {
+        // Last resort: try to extract JSON from raw text by finding { ... }
+        const firstBrace = rawText.indexOf('{')
+        const lastBrace = rawText.lastIndexOf('}')
+        if (firstBrace !== -1 && lastBrace > firstBrace) {
+          try {
+            parsed = JSON.parse(rawText.slice(firstBrace, lastBrace + 1))
+          } catch {
+            parsed = { text: rawText }
+          }
+        } else {
+          parsed = { text: rawText }
+        }
+      }
+    }
+
     const normalized = normalizeResponse(parsed)
 
     completedTasks.set(taskId, {
