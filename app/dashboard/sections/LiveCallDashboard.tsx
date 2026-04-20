@@ -526,22 +526,27 @@ function LiveCallDashboardInner({
 
   // --- Live Mode: Connect to Deepgram for real-time transcription ---
   const startDeepgramTranscription = useCallback(async () => {
+    console.log('[Aetheryx] Starting Deepgram transcription. Key length:', deepgramKey?.length)
+    if (!deepgramKey || deepgramKey === 'server-managed' || deepgramKey.length < 10) {
+      console.error('[Aetheryx] Deepgram key not configured:', deepgramKey)
+      setLiveCallError('Deepgram key not configured — reload the page to sync keys')
+      return
+    }
     try {
-      // Request microphone access
-      // Echo cancellation ON — mic captures ONLY the Rep's voice
-      // Client's voice is captured separately via remote stream
+      console.log('[Aetheryx] Requesting microphone access...')
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: { sampleRate: 16000, channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true }
       })
+      console.log('[Aetheryx] Mic access granted. Tracks:', stream.getAudioTracks().length)
       mediaStreamRef.current = stream
 
-      // Connect to Deepgram WebSocket
-      // No diarization — this connection is mic-only (Rep). Client uses separate connection.
       const dgUrl = 'wss://api.deepgram.com/v1/listen?model=nova-2&encoding=linear16&sample_rate=16000&channels=1&punctuate=true&interim_results=true&utterance_end_ms=1500&vad_events=true&smart_format=true&language=en&filler_words=false&numerals=true'
+      console.log('[Aetheryx] Connecting to Deepgram WebSocket...')
       const ws = new WebSocket(dgUrl, ['token', deepgramKey])
       deepgramWsRef.current = ws
 
       ws.onopen = function() {
+        console.log('[Aetheryx] ✅ Deepgram WebSocket OPEN')
         setDeepgramConnected(true)
         setLiveCallError('')
 
@@ -597,10 +602,15 @@ function LiveCallDashboardInner({
             if (isFinal) {
               interimLineId = null
 
-              // Deduplicate: skip if same text within 3 seconds
+              // Aggressive deduplication: skip if same text within 8 seconds
+              // OR if new text is substring of last text (Deepgram sometimes sends partial repeats)
               const now = Date.now()
-              if (transcriptText === lastTranscriptText && (now - lastTranscriptTime) < 3000) {
-                return // Skip duplicate
+              const lt = lastTranscriptText.toLowerCase().trim()
+              const tt = transcriptText.toLowerCase().trim()
+              const isDuplicate = (tt === lt) || (lt.length > 0 && (lt.includes(tt) || tt.includes(lt)))
+              if (isDuplicate && (now - lastTranscriptTime) < 8000) {
+                console.log('[Aetheryx] Skipped duplicate:', transcriptText.substring(0, 40))
+                return
               }
               lastTranscriptText = transcriptText
               lastTranscriptTime = now
@@ -611,6 +621,7 @@ function LiveCallDashboardInner({
                 text: transcriptText,
                 timestamp: timestamp
               }
+              console.log('[Aetheryx] 📝 Transcript added (', speakerLabel, '):', transcriptText.substring(0, 60))
               onAddTranscript(line)
             }
             // We skip interim results in the transcript to avoid flicker
@@ -637,57 +648,77 @@ function LiveCallDashboardInner({
 
   // --- Live Mode: Transcribe prospect's voice (remote WebRTC audio) ---
   const startRemoteTranscription = useCallback(async (call: any) => {
-    // Retry loop — remote stream may not be available immediately after 'accept'
-    for (let attempt = 0; attempt < 10; attempt++) {
+    console.log('[Aetheryx] Starting remote transcription. Call object keys:', call ? Object.keys(call) : 'null')
+    for (let attempt = 0; attempt < 15; attempt++) {
       try {
         // Method 1: Twilio SDK v2 getRemoteStream()
         if (typeof call?.getRemoteStream === 'function') {
           const rs = call.getRemoteStream()
-          if (rs && rs.getAudioTracks().length > 0) {
-            console.log('[Aetheryx] Got remote stream via getRemoteStream() on attempt', attempt)
-            return startRemoteDgStream(rs)
+          if (rs) {
+            const tracks = rs.getAudioTracks()
+            console.log(`[Aetheryx] Attempt ${attempt}: getRemoteStream() returned stream with ${tracks.length} tracks`)
+            if (tracks.length > 0) {
+              console.log('[Aetheryx] ✅ Got remote stream via getRemoteStream()')
+              return startRemoteDgStream(rs)
+            }
+          } else {
+            console.log(`[Aetheryx] Attempt ${attempt}: getRemoteStream() returned null`)
           }
         }
 
         // Method 2: Internal _remoteStream
         const rs2 = call?._mediaHandler?._remoteStream
         if (rs2 && rs2.getAudioTracks().length > 0) {
-          console.log('[Aetheryx] Got remote stream via _mediaHandler._remoteStream on attempt', attempt)
+          console.log('[Aetheryx] ✅ Got remote stream via _mediaHandler._remoteStream')
           return startRemoteDgStream(rs2)
         }
 
         // Method 3: PeerConnection receivers
         const pc: RTCPeerConnection | undefined =
           call?._mediaHandler?.version?.pc ??
-          call?._mediaHandler?.peerConnection
+          call?._mediaHandler?.peerConnection ??
+          call?._mediaHandler?._pc
         if (pc) {
+          const receivers = pc.getReceivers()
+          console.log(`[Aetheryx] Attempt ${attempt}: PC has ${receivers.length} receivers`)
           const ms = new MediaStream()
-          pc.getReceivers().forEach((r: RTCRtpReceiver) => {
-            if (r.track?.kind === 'audio') ms.addTrack(r.track)
+          receivers.forEach((r: RTCRtpReceiver) => {
+            if (r.track?.kind === 'audio' && r.track.readyState === 'live') ms.addTrack(r.track)
           })
           if (ms.getAudioTracks().length > 0) {
-            console.log('[Aetheryx] Got remote stream via PeerConnection receivers on attempt', attempt)
+            console.log('[Aetheryx] ✅ Got remote stream via PeerConnection receivers')
             return startRemoteDgStream(ms)
           }
         }
 
         // Method 4: Capture from <audio> elements Twilio creates
-        if (attempt >= 3) {
+        if (attempt >= 2) {
           const audioEls = document.querySelectorAll('audio')
+          console.log(`[Aetheryx] Attempt ${attempt}: Found ${audioEls.length} audio elements in DOM`)
           for (const audio of audioEls) {
-            const cap = (audio as any).captureStream?.() || (audio as any).mozCaptureStream?.()
-            if (cap && cap.getAudioTracks().length > 0) {
-              console.log('[Aetheryx] Got remote stream via audio element capture on attempt', attempt)
-              return startRemoteDgStream(cap)
+            try {
+              const srcObj = (audio as HTMLAudioElement).srcObject as MediaStream | null
+              if (srcObj && srcObj.getAudioTracks().length > 0) {
+                console.log('[Aetheryx] ✅ Got remote stream via audio.srcObject')
+                return startRemoteDgStream(srcObj)
+              }
+              const cap = (audio as any).captureStream?.() || (audio as any).mozCaptureStream?.()
+              if (cap && cap.getAudioTracks().length > 0) {
+                console.log('[Aetheryx] ✅ Got remote stream via audio.captureStream()')
+                return startRemoteDgStream(cap)
+              }
+            } catch (e) {
+              console.log('[Aetheryx] audio element error:', e)
             }
           }
         }
-      } catch (_e) { /* retry */ }
+      } catch (e) {
+        console.log(`[Aetheryx] Attempt ${attempt} error:`, e)
+      }
 
-      // Wait before retrying — increasing delay
-      await new Promise(r => setTimeout(r, 500 + attempt * 300))
+      await new Promise(r => setTimeout(r, 600 + attempt * 300))
     }
-    console.log('[Aetheryx] Could not capture remote audio after 10 attempts')
+    console.error('[Aetheryx] ❌ Could not capture remote audio after 15 attempts')
   }, [deepgramKey, onAddTranscript])
 
   const startRemoteDgStream = useCallback(async (remoteStream: MediaStream) => {

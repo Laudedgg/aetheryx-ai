@@ -1,5 +1,211 @@
 [
   {
+    "id": "call-1776691216898",
+    "startTime": "2026-04-20T13:20:16.898Z",
+    "endTime": "2026-04-20T13:20:48.585Z",
+    "transcript": [
+      {
+        "id": "live-1776691233309-usce",
+        "speaker": "rep",
+        "text": "Hello. How are you doing, sir?",
+        "timestamp": "05:20:33 PM"
+      },
+      {
+        "id": "live-1776691233463-8chn",
+        "speaker": "rep",
+        "text": "Hello. How are you doing, sir?",
+        "timestamp": "05:20:33 PM"
+      },
+      {
+        "id": "live-1776691239442-ka8e",
+        "speaker": "rep",
+        "text": "Nice. Nice. What's your name, please?",
+        "timestamp": "05:20:39 PM"
+      },
+      {
+        "id": "live-1776691239540-16k5",
+        "speaker": "rep",
+        "text": "Nice. Nice. What's your name, please?",
+        "timestamp": "05:20:39 PM"
+      },
+      {
+        "id": "live-1776691240840-8ayx",
+        "speaker": "rep",
+        "text": "Jordan.",
+        "timestamp": "05:20:40 PM"
+      }
+    ],
+    "researchData": null,
+    "strategyData": {
+      "objection_handlers": [
+        "If the prospect seems disinterested or gives a short reply (e.g., 'Fine'), quickly pivot to a value-driven statement: 'Glad to hear! I wanted to connect because I believe we can help you [solve specific problem]. May I ask how you're currently handling [relevant process]?'",
+        "If the prospect responds with 'I'm busy' or 'Not a good time': 'I understand you’re busy. Is there a better time for a quick 2-minute call, or would you prefer I send some info over email?'"
+      ],
+      "next_questions": [
+        "What prompted you to take my call today?",
+        "Can you share a bit about your current priorities or challenges in [relevant area]?",
+        "How are you currently managing [specific problem your solution addresses]?"
+      ],
+      "pitch_angles": [
+        "Quickly establish relevance by referencing a common challenge or industry trend: 'Many leaders in your industry are seeing [challenge]. Is that something you’re experiencing as well?'",
+        "Position yourself as a problem-solver: 'I specialize in helping companies like yours streamline [process] and save [time/money]. Would you be open to exploring how this might work for you?'"
+      ],
+      "engagement_level": "Low. The conversation has not progressed past the initial greeting and has been repeated, which may signal nervousness or lack of direction.",
+      "deal_signals": [],
+      "closing_probability": "10%. The call has just begun, and there is no evidence of interest or engagement from the prospect yet. Immediate action is needed to establish rapport and uncover needs."
+    },
+    "status": "completed",
+    "phoneNumber": "+971507587246",
+    "duration": 31,
+    "postCallData": {
+      "summary": {
+        "client_name": "Jordan",
+        "company": null,
+        "call_outcome": "Incomplete - Introduction only",
+        "key_points": [
+          "Sales rep greeted the client.",
+          "Sales rep asked for the client's name.",
+          "Client's name is Jordan."
+        ],
+        "pain_points": [],
+        "next_steps": [
+          "Schedule a follow-up call to understand Jordan's needs and introduce the product/service.",
+          "Gather company information and pain points in the next conversation."
+        ]
+      },
+      "deal_probability": {
+        "score": 10,
+        "positive_signals": [
+          "Client responded to introduction and provided name."
+        ],
+        "negative_signals": [
+          "No business needs or interest discussed.",
+          "No information about company or requirements."
+        ],
+        "risk_factors": [
+          "Lack of engagement beyond introduction.",
+          "No qualification or discovery performed."
+        ]
+      },
+      "follow_up_email": {
+        "subject": "Great Connecting with You, Jordan – Next Steps",
+        "body": "Hi Jordan,\n\nThank you for taking the time to speak with me today. I would love to learn more about your business needs and see how we can help you achieve your goals. Are you available for a quick call this week to discuss further?\n\nLooking forward to your response.\n\nBest regards,\n[Your Name]\nAetheryx AI",
+        "recipient_suggestion": "Jordan"
+      }
+    }
+  },
+  {
+    "id": "call-1776691120845",
+    "startTime": "2026-04-20T13:18:40.845Z",
+    "endTime": "2026-04-20T13:18:40.845Z",
+    "transcript": [],
+    "researchData": {
+      "company_profile": {
+        "name": null,
+        "industry": null,
+        "size": null,
+        "headquarters": null,
+        "description": null,
+        "key_products": null
+      },
+      "funding": {
+        "total_raised": null,
+        "latest_round": null,
+        "key_investors": null,
+        "financial_health": null
+      },
+      "tech_stack": {
+        "technologies": null,
+        "infrastructure": null,
+        "tools": null
+      },
+      "recent_news": null,
+      "pitch_angles": null,
+      "pain_points": null
+    },
+    "strategyData": {
+      "objection_handlers": [
+        "If the prospect seems confused or frustrated by the repetition, acknowledge it: 'It looks like we're having some technical difficulties here—let's reset and make sure we're both on the same page.'",
+        "If the prospect says 'It should stop,' respond with: 'Absolutely, let's start fresh. I want to make sure this conversation is productive for you.'"
+      ],
+      "next_questions": [
+        "Victor, can you confirm if you're able to hear me clearly now?",
+        "Would you like to restart the call, or should we proceed from here?",
+        "Just to clarify, are you looking to discuss our solutions today, or is there something specific on your mind?"
+      ],
+      "pitch_angles": [
+        "Emphasize professionalism and technical reliability: 'We strive to make every conversation seamless. Thank you for your patience—let's get started.'",
+        "Show empathy: 'I know tech glitches can be frustrating. Let's make sure your time is well spent.'"
+      ],
+      "engagement_level": "Low. The conversation is stuck in a loop of repeated phrases and introductions, likely due to technical issues or confusion. No substantive engagement or discovery has occurred yet.",
+      "deal_signals": [],
+      "closing_probability": "5%. Reasoning: The conversation has not progressed beyond introductions, and technical issues are preventing meaningful engagement. No discovery or buying signals detected yet.",
+      "recommendation": "Acknowledge the confusion, reset the conversation, and confirm that both parties are ready to proceed. Move quickly to establish rapport and clarify the purpose of the call."
+    },
+    "status": "completed",
+    "phoneNumber": "+971507587246",
+    "duration": 0
+  },
+  {
+    "id": "call-1776691083465",
+    "startTime": "2026-04-20T13:18:03.465Z",
+    "endTime": "2026-04-20T13:18:40.846Z",
+    "transcript": [
+      {
+        "id": "live-1776691103077-pagx",
+        "speaker": "rep",
+        "text": "Hi. How are you doing, sir?",
+        "timestamp": "05:18:23 PM"
+      },
+      {
+        "id": "live-1776691108784-utnf",
+        "speaker": "rep",
+        "text": "Very good. Very good. Thank you. What do my name is Aman. What is your name, sir?",
+        "timestamp": "05:18:28 PM"
+      },
+      {
+        "id": "live-1776691113102-t016",
+        "speaker": "rep",
+        "text": "It's what? Sorry?",
+        "timestamp": "05:18:33 PM"
+      },
+      {
+        "id": "live-1776691117703-d8f5",
+        "speaker": "rep",
+        "text": "Okay. Thank you.",
+        "timestamp": "05:18:37 PM"
+      },
+      {
+        "id": "live-1776691119293-nn7d",
+        "speaker": "rep",
+        "text": "I can't register,",
+        "timestamp": "05:18:39 PM"
+      }
+    ],
+    "researchData": null,
+    "strategyData": {
+      "objection_handlers": [
+        "If the prospect seems hesitant to share their name, respond with: 'No worries if you prefer not to share right away. I’m here to help and make this conversation valuable for you.'"
+      ],
+      "next_questions": [
+        "May I ask what brought you to our call today?",
+        "What are you hoping to achieve or solve with our solutions?",
+        "Are you currently using any similar services or products?"
+      ],
+      "pitch_angles": [
+        "Build rapport by briefly introducing yourself and your role.",
+        "Mention a quick value statement about how Aetheryx AI helps clients in their industry.",
+        "Express genuine curiosity about the prospect’s needs."
+      ],
+      "engagement_level": "Low – The conversation is still in the introductory phase, and the prospect has not yet responded. No clear engagement yet.",
+      "deal_signals": [],
+      "closing_probability": "10% – It’s too early to assess closing probability as the prospect has not engaged or shared any information yet. Focus on building rapport and uncovering needs in the next steps."
+    },
+    "status": "completed",
+    "phoneNumber": "+971507587246",
+    "duration": 37
+  },
+  {
     "id": "call-1776341966348",
     "startTime": "2026-04-16T12:19:26.348Z",
     "endTime": "2026-04-16T12:19:26.348Z",
