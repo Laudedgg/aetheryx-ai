@@ -245,6 +245,7 @@ function LiveCallDashboardInner({
   const twilioDeviceRef = useRef<any>(null)
   const activeCallRef = useRef<any>(null)
   const remoteDeepgramWsRef = useRef<WebSocket | null>(null)
+  const sseRef = useRef<EventSource | null>(null)
 
   // AI Chat state
   const [chatOpen, setChatOpen] = useState(false)
@@ -524,7 +525,45 @@ function LiveCallDashboardInner({
     } catch (_e) { /* ignore */ }
   }
 
-  // --- Live Mode: Connect to Deepgram for real-time transcription ---
+  // --- Live Mode: Subscribe to media-bridge SSE for two-sided transcripts ---
+  const startMediaBridgeSSE = useCallback((callSid: string) => {
+    const bridgeHost = process.env.NEXT_PUBLIC_MEDIA_BRIDGE_HOST || 'aetheryx-media-bridge.fly.dev'
+    const url = `https://${bridgeHost}/events?callSid=${encodeURIComponent(callSid)}`
+    console.log('[Aetheryx] Subscribing to media-bridge:', url)
+
+    try {
+      const es = new EventSource(url)
+      sseRef.current = es
+      setDeepgramConnected(true)
+
+      es.onopen = () => console.log('[Aetheryx] ✅ Media-bridge SSE connected')
+      es.onerror = (e) => {
+        console.error('[Aetheryx] Media-bridge SSE error', e)
+        setDeepgramConnected(false)
+      }
+      es.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data)
+          if (!data.text) return
+          const speakerLabel: 'rep' | 'prospect' = data.speaker === 'rep' ? 'rep' : 'prospect'
+          const ts = new Date(data.timestamp || Date.now()).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+          onAddTranscript({
+            id: 'bridge-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6),
+            speaker: speakerLabel,
+            text: data.text,
+            timestamp: ts,
+          })
+          console.log('[Aetheryx] 📝 Transcript (', speakerLabel, '):', data.text.substring(0, 60))
+        } catch (e) {
+          console.error('[Aetheryx] SSE parse error', e)
+        }
+      }
+    } catch (e) {
+      console.error('[Aetheryx] Failed to subscribe to media-bridge', e)
+    }
+  }, [onAddTranscript])
+
+  // --- Legacy: In-browser Deepgram (kept as fallback if bridge fails) ---
   const startDeepgramTranscription = useCallback(async () => {
     console.log('[Aetheryx] Starting Deepgram transcription. Key length:', deepgramKey?.length)
     if (!deepgramKey || deepgramKey === 'server-managed' || deepgramKey.length < 10) {
@@ -881,20 +920,24 @@ function LiveCallDashboardInner({
       onStartCall(phoneNumber)
 
       call.on('accept', () => {
-        // Capture Client's voice from Twilio WebRTC remote audio stream
-        startRemoteTranscription(call)
+        // Connect to the media-bridge SSE stream for two-sided transcripts.
+        // The bridge receives Twilio Media Streams audio and forwards to Deepgram.
+        const callSid = call.parameters?.CallSid
+        if (callSid) {
+          startMediaBridgeSSE(callSid)
+        } else {
+          console.warn('[Aetheryx] No CallSid available for SSE subscription')
+        }
       })
       call.on('disconnect', () => {
         activeCallRef.current = null
+        if (sseRef.current) { try { sseRef.current.close() } catch {} sseRef.current = null }
         onEndCall()
       })
       call.on('error', (err: any) => {
         setLiveCallError('Call error: ' + (err?.message || 'Unknown'))
         setDialingLive(false)
       })
-
-      // Start Deepgram transcription in parallel
-      await startDeepgramTranscription()
     } catch (err: any) {
       setLiveCallError('Failed to connect call: ' + (err?.message || 'Unknown error'))
       setDialingLive(false)

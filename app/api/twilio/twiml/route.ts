@@ -27,9 +27,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Build the WebSocket URL for media streaming
-    const host = request.headers.get('host') || 'aetheryx-ai.vercel.app'
-    const protocol = host.includes('localhost') ? 'ws' : 'wss'
-    const streamUrl = `${protocol}://${host}/api/twilio/media-stream`
+    // Points to the Fly.io media-bridge service which handles Deepgram transcription
+    const bridgeHost = process.env.MEDIA_BRIDGE_HOST || 'aetheryx-media-bridge.fly.dev'
+    const streamUrl = `wss://${bridgeHost}/twilio`
 
     // If toNumber is a client identity (not a phone number), just connect
     const isPhoneNumber = toNumber.startsWith('+')
