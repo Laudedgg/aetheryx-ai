@@ -30,7 +30,7 @@ function SectionFallback() {
 
 /* ── Shared card wrapper ── */
 const C = 'rounded-2xl border border-white/[0.06]'
-const cardBg = 'rgba(12,17,32,0.75)'
+const cardBg = '#0c1120'
 const panelBg = '#080d18'
 
 export default function Page() {
@@ -156,28 +156,15 @@ export default function Page() {
   return (
     <div className="h-screen flex overflow-hidden relative" style={{ color: '#dde1ea' }}>
 
-      {/* ══════ BACKGROUND LAYERS ══════ */}
-      <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: '#030510' }} />
-      {/* AI Agent image — positioned to fill screen, blue-tinted */}
-      <div className="absolute inset-0 z-0 pointer-events-none" style={{
-        backgroundImage: 'url(/dashboard-bg.jpg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center top',
-        backgroundRepeat: 'no-repeat',
-        opacity: 1,
-        filter: 'hue-rotate(200deg) saturate(2.5) brightness(0.95) contrast(1.2)',
-      }} />
-      {/* Thin blue wash */}
-      <div className="absolute inset-0 z-0 pointer-events-none" style={{
-        background: 'linear-gradient(180deg, rgba(6,12,30,0.35) 0%, rgba(8,15,38,0.4) 50%, rgba(10,20,50,0.5) 100%)',
-      }} />
+      {/* ══════ BACKGROUND ══════ */}
+      <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: '#060a14' }} />
       {/* Blue radial glow from top */}
       <div className="absolute inset-0 z-0 pointer-events-none" style={{
-        background: 'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,105,255,0.2), transparent 60%)',
+        background: 'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,105,255,0.18), transparent 60%)',
       }} />
 
       {/* ══════ LEFT SIDEBAR — FIXED, NO SCROLL ══════ */}
-      <aside className="hidden md:flex flex-col w-[220px] flex-shrink-0 p-2 gap-2 overflow-hidden relative z-10" style={{ background: 'rgba(8,13,24,0.55)', backdropFilter: 'blur(16px)' }}>
+      <aside className="hidden md:flex flex-col w-[220px] flex-shrink-0 p-2 gap-2 overflow-hidden relative z-10" style={{ background: panelBg }}>
 
         {/* Logo — fixed top */}
         <div className={C + ' px-3 py-2.5 flex items-center gap-2.5 flex-shrink-0'} style={{ background: cardBg }}>
@@ -340,7 +327,7 @@ export default function Page() {
       </main>
 
       {/* ══════ RIGHT PANEL ══════ */}
-      <aside className="hidden xl:flex flex-col w-[340px] flex-shrink-0 p-3 gap-2.5 overflow-y-auto relative z-10" style={{ background: 'rgba(8,13,24,0.55)', backdropFilter: 'blur(16px)' }}>
+      <aside className="hidden xl:flex flex-col w-[340px] flex-shrink-0 p-3 gap-2.5 overflow-y-auto relative z-10" style={{ background: panelBg }}>
 
         {/* Agent Pulse */}
         <div className={C + ' p-4'} style={{ background: cardBg }}>
