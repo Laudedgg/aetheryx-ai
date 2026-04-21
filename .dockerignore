@@ -1,0 +1,15 @@
+node_modules
+.next
+.git
+.gitignore
+.env.local
+.env
+.DS_Store
+npm-debug.log
+*.log
+.vercel
+.vscode
+media-bridge
+README.md
+.dockerignore
+Dockerfile
