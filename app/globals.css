@@ -365,7 +365,7 @@ h1.head em { font-style: italic; background: linear-gradient(180deg, #E2D8FF 0%,
 }
 
 /* Mascot video — full bleed inside the wrap. No frame, no border, no rounded corners.
-   Left edge fades into the page background via a horizontal mask. */
+   Left and top edges fade into the page background so no visible cutoff line. */
 .mascot-frame {
   position: absolute;
   inset: 0;
@@ -374,8 +374,14 @@ h1.head em { font-style: italic; background: linear-gradient(180deg, #E2D8FF 0%,
   border: none;
   box-shadow: none;
   background: transparent;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 22%, #000 100%);
-          mask-image: linear-gradient(to right, transparent 0%, #000 22%, #000 100%);
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0%, #000 22%, #000 100%),
+    linear-gradient(to bottom, transparent 0%, #000 12%, #000 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent 0%, #000 22%, #000 100%),
+    linear-gradient(to bottom, transparent 0%, #000 12%, #000 100%);
+  mask-composite: intersect;
 }
 
 .mascot {
