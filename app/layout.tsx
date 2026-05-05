@@ -1,13 +1,14 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import Script from 'next/script'
+import type { Metadata, Viewport } from 'next'
+import { Inter, Manrope, Instrument_Serif } from 'next/font/google'
 import './globals.css'
 import { IframeLoggerInit } from '@/components/IframeLoggerInit'
 import ErrorBoundary from '@/components/ErrorBoundary'
 import { AgentInterceptorProvider } from '@/components/AgentInterceptorProvider'
 import { HydrationGuard } from '@/components/HydrationGuard'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
+const manrope = Manrope({ subsets: ['latin'], variable: '--font-manrope', weight: ['300', '400', '500', '600', '700'], display: 'swap' })
+const instrumentSerif = Instrument_Serif({ subsets: ['latin'], variable: '--font-instrument-serif', weight: ['400'], style: ['normal', 'italic'], display: 'swap' })
 
 export const metadata: Metadata = {
   title: 'Aetheryx AI — The Intelligence Layer for Modern Sales',
@@ -22,15 +23,21 @@ export const metadata: Metadata = {
   },
 }
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+  themeColor: '#05060A',
+}
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const isPaidUser = process.env.IS_PAID_USER === 'true'
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className} suppressHydrationWarning>
+    <html lang="en" className={`${manrope.variable} ${instrumentSerif.variable} ${inter.variable}`} suppressHydrationWarning>
+      <body suppressHydrationWarning>
         <IframeLoggerInit />
         <ErrorBoundary>
           <AgentInterceptorProvider>

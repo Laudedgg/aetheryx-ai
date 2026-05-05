@@ -6,7 +6,7 @@ import { FiPhone, FiTrendingUp, FiTarget, FiCalendar, FiBarChart2, FiClock } fro
 interface AnalyticsDashboardProps { callHistory: any[]; useSampleData: boolean; callsLoaded?: boolean }
 
 const serif: React.CSSProperties = { fontFamily: "'Instrument Serif', serif" }
-const cardStyle: React.CSSProperties = { background: '#0c1120', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16 }
+const cardStyle: React.CSSProperties = { background: '#0A0C14', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16 }
 
 function safeText(v: any, fb = 'N/A'): string { if (v == null) return fb; if (typeof v === 'string') return v; if (typeof v === 'number') return String(v); try { return JSON.stringify(v) } catch { return fb } }
 function safeDate(d: any): string { if (!d) return 'N/A'; try { const dt = new Date(d); return isNaN(dt.getTime()) ? 'N/A' : dt.toLocaleDateString() } catch { return 'N/A' } }
@@ -38,7 +38,7 @@ function Inner({ callHistory, useSampleData, callsLoaded }: AnalyticsDashboardPr
       const durs: number[] = []; calls.forEach(c => { try { if (typeof c?.duration==='number'&&c.duration>0) durs.push(c.duration) } catch {} })
       const avgDur = durs.length ? Math.round(durs.reduce((a,b)=>a+b,0)/durs.length) : 0
       const totalTime = durs.reduce((a,b)=>a+b,0)
-      const buckets = [{l:'0-20%',c:0,color:'#ef4444'},{l:'21-40%',c:0,color:'#f97316'},{l:'41-60%',c:0,color:'#eab308'},{l:'61-80%',c:0,color:'#216BE4'},{l:'81-100%',c:0,color:'#34d399'}]
+      const buckets = [{l:'0-20%',c:0,color:'#ef4444'},{l:'21-40%',c:0,color:'#f97316'},{l:'41-60%',c:0,color:'#eab308'},{l:'61-80%',c:0,color:'#8A6CFF'},{l:'81-100%',c:0,color:'#34d399'}]
       probs.forEach(v => { if(v<=20) buckets[0].c++; else if(v<=40) buckets[1].c++; else if(v<=60) buckets[2].c++; else if(v<=80) buckets[3].c++; else buckets[4].c++ })
       const maxB = Math.max(1,...buckets.map(b=>b.c))
       return { total, avgProb, conv, week, synced, buckets, maxB, avgDur, totalTime }
@@ -48,15 +48,15 @@ function Inner({ callHistory, useSampleData, callsLoaded }: AnalyticsDashboardPr
   const recent = Array.isArray(displayCalls) ? displayCalls.slice(0,5) : []
 
   if (!(Array.isArray(displayCalls)?displayCalls.length:0)) {
-    if (!callsLoaded) return <div className="flex flex-col items-center justify-center py-20"><div className="w-8 h-8 border-2 border-white/10 border-t-[#216BE4] rounded-full animate-spin mb-3"/><p className="text-xs text-white/30">Loading analytics...</p></div>
-    return <div className="flex flex-col items-center justify-center py-20"><div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4" style={{background:'rgba(33,107,228,0.06)'}}><FiBarChart2 className="w-6 h-6" style={{color:'rgba(33,107,228,0.3)'}}/></div><h2 className="text-base font-semibold text-white/60 mb-1" style={serif}>No analytics data yet</h2><p className="text-[11px] text-white/25 max-w-xs text-center">Complete sales calls to see analytics here.</p></div>
+    if (!callsLoaded) return <div className="flex flex-col items-center justify-center py-20"><div className="w-8 h-8 border-2 border-white/10 border-t-[#8A6CFF] rounded-full animate-spin mb-3"/><p className="text-xs text-white/30">Loading analytics...</p></div>
+    return <div className="flex flex-col items-center justify-center py-20"><div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4" style={{background:'rgba(138,108,255,0.06)'}}><FiBarChart2 className="w-6 h-6" style={{color:'rgba(138,108,255,0.3)'}}/></div><h2 className="text-base font-semibold text-white/60 mb-1" style={serif}>No analytics data yet</h2><p className="text-[11px] text-white/25 max-w-xs text-center">Complete sales calls to see analytics here.</p></div>
   }
 
   const kpis = [
-    { label: 'Total Calls', value: stats.total, icon: <FiPhone className="w-4 h-4"/>, color: '#216BE4' },
-    { label: 'Avg Duration', value: fmtDur(stats.avgDur)||'00:00', icon: <FiClock className="w-4 h-4"/>, color: '#216BE4', sub: `Total: ${fmtDur(stats.totalTime)||'00:00'}` },
+    { label: 'Total Calls', value: stats.total, icon: <FiPhone className="w-4 h-4"/>, color: '#8A6CFF' },
+    { label: 'Avg Duration', value: fmtDur(stats.avgDur)||'00:00', icon: <FiClock className="w-4 h-4"/>, color: '#8A6CFF', sub: `Total: ${fmtDur(stats.totalTime)||'00:00'}` },
     { label: 'Avg Probability', value: `${stats.avgProb}%`, icon: <FiTrendingUp className="w-4 h-4"/>, color: '#34d399' },
-    { label: 'Conversion', value: `${stats.conv}%`, icon: <FiTarget className="w-4 h-4"/>, color: '#216BE4' },
+    { label: 'Conversion', value: `${stats.conv}%`, icon: <FiTarget className="w-4 h-4"/>, color: '#8A6CFF' },
     { label: 'This Week', value: stats.week, icon: <FiCalendar className="w-4 h-4"/>, color: '#34d399' },
   ]
 
@@ -110,7 +110,7 @@ function Inner({ callHistory, useSampleData, callsLoaded }: AnalyticsDashboardPr
                 <div className="text-right flex items-center gap-3 flex-shrink-0">
                   {fmtDur(c?.duration) && <span className="text-[10px] font-mono text-white/20 tabular-nums">{fmtDur(c?.duration)}</span>}
                   <div>
-                    <p className="text-[13px] font-bold font-mono" style={{color:'#216BE4'}}>{safeText(c?.postCallData?.deal_probability?.score,'--')}</p>
+                    <p className="text-[13px] font-bold font-mono" style={{color:'#8A6CFF'}}>{safeText(c?.postCallData?.deal_probability?.score,'--')}</p>
                     <p className="text-[9px] text-white/20 truncate max-w-[100px]">{safeText(c?.postCallData?.summary?.call_outcome,'N/A')}</p>
                   </div>
                 </div>

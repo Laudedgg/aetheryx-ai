@@ -124,7 +124,15 @@ function PostCallReviewInner({
   const displayPostCall = useSampleData ? SAMPLE_POSTCALL : postCallData
   const displaySync = useSampleData ? SAMPLE_SYNC : syncData
 
-  // Auto-trigger report generation when navigating here after call ends
+  // Reset the auto-trigger latch + email init whenever the transcript changes
+  // (i.e. a different call is being viewed). Without this, viewing call B after call A
+  // sees autoTriggered=true and skips regeneration, leaving stale "Jordan"-style data.
+  useEffect(() => {
+    setAutoTriggered(false)
+    setEmailInitialized(false)
+  }, [safeTranscript.length === 0 ? '' : (safeTranscript[0]?.id || safeTranscript.length)])
+
+  // Auto-trigger report generation when navigating here after call ends OR viewing any call
   useEffect(() => {
     if (autoTrigger && !autoTriggered && !postCallData && !postCallLoading && safeTranscript.length > 0) {
       setAutoTriggered(true)

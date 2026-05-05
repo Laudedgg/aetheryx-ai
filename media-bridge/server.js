@@ -6,7 +6,9 @@
  * Flow per call:
  *   1. Twilio opens WS to /twilio and sends base64 µ-law audio frames (inbound + outbound tracks).
  *   2. For each track we open a Deepgram WebSocket transcription session.
- *   3. Deepgram returns final transcripts; we label them inbound="client" / outbound="rep".
+ *   3. Deepgram returns final transcripts; we label them inbound="rep" / outbound="client".
+ *      (Stream attaches to the WebRTC rep leg: inbound = rep's mic, outbound = audio TO rep
+ *       which during the bridged call is the prospect's voice.)
  *   4. Transcripts are pushed to every SSE subscriber watching /events?callSid=...
  *
  * Env: DEEPGRAM_API_KEY
@@ -105,7 +107,7 @@ wss.on('connection', (twilioWs) => {
   const dgSockets = {}
 
   function openDeepgram(track) {
-    const role = track === 'inbound' ? 'client' : 'rep'
+    const role = track === 'inbound' ? 'rep' : 'client'
     const url = `wss://api.deepgram.com/v1/listen?encoding=mulaw&sample_rate=8000&channels=1&punctuate=true&interim_results=false&endpointing=800&smart_format=true&model=nova-2&language=en`
     const ws = new WebSocket(url, { headers: { Authorization: `Token ${DEEPGRAM_API_KEY}` } })
 
@@ -146,7 +148,7 @@ wss.on('connection', (twilioWs) => {
     }
 
     if (msg.event === 'media') {
-      const track = msg.media?.track // 'inbound' (client) or 'outbound' (rep)
+      const track = msg.media?.track // 'inbound' (rep) or 'outbound' (client)
       const payload = msg.media?.payload // base64 µ-law 8kHz
       if (!track || !payload) return
       const dgWs = dgSockets[track]

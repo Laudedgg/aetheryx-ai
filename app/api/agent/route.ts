@@ -11,14 +11,109 @@ const OPENAI_API_KEY = process.env.OPENAI_API_KEY || ''
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || ''
 const PERPLEXITY_API_KEY = process.env.PERPLEXITY_API_KEY || ''
 
+// JSON schema the Research Agent must return — drives Perplexity's structured-output mode
+// and matches the keys the dashboard reads in LiveCallDashboard.tsx.
+const RESEARCH_SCHEMA = {
+  type: 'object',
+  properties: {
+    person_profile: {
+      type: 'object',
+      properties: {
+        full_name: { type: 'string' },
+        headline: { type: 'string' },
+        current_role: { type: 'string' },
+        current_company: { type: 'string' },
+        location: { type: 'string' },
+        background_summary: { type: 'string' },
+        linkedin_url: { type: 'string' },
+        twitter_url: { type: 'string' },
+        instagram_url: { type: 'string' },
+        github_url: { type: 'string' },
+        personal_website: { type: 'string' },
+        photo_url: { type: 'string' },
+        confidence: { type: 'string' },
+        other_profiles: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              label: { type: 'string' },
+              url: { type: 'string' },
+            },
+          },
+        },
+      },
+    },
+    company_profile: {
+      type: 'object',
+      properties: {
+        name: { type: 'string' },
+        industry: { type: 'string' },
+        size: { type: 'string' },
+        headquarters: { type: 'string' },
+        description: { type: 'string' },
+        key_products: { type: 'string' },
+        website: { type: 'string' },
+      },
+    },
+    funding: {
+      type: 'object',
+      properties: {
+        total_raised: { type: 'string' },
+        latest_round: { type: 'string' },
+        key_investors: { type: 'string' },
+        financial_health: { type: 'string' },
+      },
+    },
+    tech_stack: {
+      type: 'object',
+      properties: {
+        technologies: { type: 'string' },
+        infrastructure: { type: 'string' },
+        tools: { type: 'string' },
+      },
+    },
+    recent_news: { type: 'string' },
+    pitch_angles: { type: 'string' },
+    pain_points: { type: 'string' },
+  },
+}
+
 // Agent config from workflow_state
-const AGENT_CONFIG: Record<string, { provider: string; model: string; temperature: number; top_p: number; systemPrompt: string }> = {
+const AGENT_CONFIG: Record<string, { provider: string; model: string; temperature: number; top_p: number; systemPrompt: string; schema?: any }> = {
   '69b03c357b2057cc3ff92a2b': {
     provider: 'perplexity',
     model: 'sonar-pro',
-    temperature: 0.2,
+    temperature: 0,
     top_p: 1,
-    systemPrompt: `You are a Research Agent for Aetheryx AI. Research prospect and company information using web search. Return a JSON object with: company_profile (name, industry, size, headquarters, description, key_products), funding (total_raised, latest_round, key_investors, financial_health), tech_stack (technologies, infrastructure, tools), recent_news, pitch_angles, pain_points. Be thorough and factual.`,
+    systemPrompt: `You are a Research Agent for Aetheryx AI, supporting a live sales call. Perform real web searches and capture EVERY useful URL you find about this person — do not narrowly focus on only LinkedIn/X/GitHub, since those platforms often block search indexing.
+
+INPUT: a prospect name and/or company name extracted from a live call. Information is often sparse (sometimes just a first name).
+
+SEARCH STRATEGY:
+1. Run a broad open-web search for the name — collect ALL profile-like URLs that appear (any platform, any spelling variant).
+2. Try targeted searches: \`"<name>" linkedin\`, \`"<name>" twitter\`, \`"<name>" github\`, \`"<name>" founder OR CEO\`, \`"<name>" company\`, \`"<name>" interview OR podcast\`.
+3. From the collected URLs, populate fields:
+   - linkedin_url: any linkedin.com/in/ URL found
+   - twitter_url: any x.com or twitter.com URL found
+   - instagram_url: any instagram.com URL
+   - github_url: any github.com/<handle> URL
+   - personal_website: their own domain (handle spelling variants of the name, e.g. "Galani" vs "Gilani" — list as personal_website if it clearly belongs to them based on content)
+   - other_profiles: ARRAY of { label, url } for ANY OTHER public footprint — e.g. SoundCloud, Crunchbase, AngelList, Companies House (UK director registry), North Data, podcast appearances, conference speaker pages, Medium, Substack, university faculty pages. Capture as many as you find — these are GOLD for sales context.
+4. Photo URL: pick the most reliable hot-linkable image (GitHub avatar > Twitter/X avatar > personal site headshot). Direct image URL only on a known CDN (avatars.githubusercontent.com, pbs.twimg.com, gravatar.com). Leave empty string if none confirmed hot-linkable.
+5. Company: from search results, infer current_company, then research industry, size, headquarters, description, key_products, website, funding history, tech stack, recent news.
+
+CONFIDENCE wording:
+- "High — primary match: <reason>" when one strong unambiguous match
+- "Medium — best of N candidates: <reason>" when multiple plausible profiles exist
+- "Low — only <N> public references found, none confirmed" when search returned little
+
+DO NOT report empty fields as failure. If LinkedIn was not found but Companies House + SoundCloud were, that's still valuable — fill other_profiles with both. The goal is to give the rep ANY public context that helps the sales conversation.
+
+ALWAYS produce concrete pitch_angles (talking points for this person's role + company pain) and pain_points (problems Aetheryx-style sales-intelligence tooling solves for them) — even with sparse info, make educated B2B-relevant guesses.
+
+OUTPUT: ONLY a JSON object — no markdown, no preamble, no inline citations like [1]. URLs MUST be full https:// links if found, or empty string if not found. Use "Not publicly available" only as a last resort for individual non-URL sub-fields. Required top-level keys: person_profile, company_profile, funding, tech_stack, recent_news, pitch_angles, pain_points.`,
+    schema: RESEARCH_SCHEMA,
   },
   '69b03c36778bd73de86e5ffd': {
     provider: 'openai',
@@ -32,7 +127,24 @@ const AGENT_CONFIG: Record<string, { provider: string; model: string; temperatur
     model: 'gpt-4.1',
     temperature: 0.4,
     top_p: 0.95,
-    systemPrompt: `You are a Post-Call Intelligence Agent for Aetheryx AI. Process the complete call transcript. Return a JSON object with: summary (client_name, company, call_outcome, key_points, pain_points, next_steps), deal_probability (score as percentage, positive_signals, negative_signals, risk_factors), follow_up_email (subject, body, recipient_suggestion). Be specific and actionable.`,
+    systemPrompt: `You are a Post-Call Intelligence Agent for Aetheryx AI. Process the complete call transcript and return a JSON object.
+
+CRITICAL ANTI-HALLUCINATION RULES — read carefully:
+- ONLY use information that is EXPLICITLY stated in the transcript text. Never invent, guess, or "fill in" any name, company, role, number, or fact that wasn't said.
+- For client_name: extract a real proper-noun name (e.g. "Sarah", "Aman Galani", "Victor Machino") that the CLIENT said in introduction patterns like "My name is X", "I'm X", "this is X", "X here". The name must be a capitalized proper noun, NOT a generic noun like "the prospect" / "the client" / "speaker" / "someone". If no real proper-noun name was given, set client_name to "Not provided".
+- If company was never said, set "company" to "Not provided".
+- If pain_points were not discussed, return an empty array [], not invented points.
+- For follow_up_email recipient_suggestion: use the same proper-noun name as client_name. If client_name is "Not provided", use "Prospect".
+- For follow_up_email body: open with "Hi {client_name}," when client_name is a real proper-noun name. If client_name is "Not provided", open with "Hi there,". Never invent a name and never use a generic descriptor like "Hi the prospect,".
+
+REP introduces themselves often — that's the salesperson, NOT the client. Distinguish carefully.
+
+Required keys:
+- summary: { client_name, company, call_outcome, key_points (array of strings actually said), pain_points (array of points the CLIENT raised), next_steps (array of actions actually agreed) }
+- deal_probability: { score (percentage 0-100), positive_signals (array), negative_signals (array), risk_factors (array) }
+- follow_up_email: { subject, body, recipient_suggestion }
+
+Be specific and grounded — every field must trace back to the transcript.`,
   },
   '69b03c652f39e130540f1d49': {
     provider: 'openai',
@@ -129,18 +241,24 @@ async function callAnthropic(message: string, config: typeof AGENT_CONFIG[string
 }
 
 async function callPerplexity(message: string, config: typeof AGENT_CONFIG[string]): Promise<string> {
+  const body: any = {
+    model: config.model,
+    temperature: config.temperature,
+    top_p: config.top_p,
+    messages: [
+      { role: 'system', content: config.systemPrompt },
+      { role: 'user', content: message },
+    ],
+    // Force deeper web search — sonar-pro defaults to "low" which often skips profile lookups.
+    web_search_options: { search_context_size: 'high' },
+  }
+  if (config.schema) {
+    body.response_format = { type: 'json_schema', json_schema: { schema: config.schema } }
+  }
   const res = await fetch(PERPLEXITY_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${PERPLEXITY_API_KEY}` },
-    body: JSON.stringify({
-      model: config.model,
-      temperature: config.temperature,
-      top_p: config.top_p,
-      messages: [
-        { role: 'system', content: config.systemPrompt },
-        { role: 'user', content: message },
-      ],
-    }),
+    body: JSON.stringify(body),
   })
   if (!res.ok) {
     const err = await res.text()
@@ -148,6 +266,18 @@ async function callPerplexity(message: string, config: typeof AGENT_CONFIG[strin
   }
   const data = await res.json()
   return data.choices[0].message.content
+}
+
+// Recursively strip Perplexity's inline citation markers like [1], [2,3] from any string field.
+function stripCitations(value: any): any {
+  if (typeof value === 'string') return value.replace(/\s*\[\d+(?:,\s*\d+)*\]/g, '').trim()
+  if (Array.isArray(value)) return value.map(stripCitations)
+  if (value && typeof value === 'object') {
+    const out: Record<string, any> = {}
+    for (const k of Object.keys(value)) out[k] = stripCitations(value[k])
+    return out
+  }
+  return value
 }
 
 async function callProvider(message: string, agentId: string): Promise<string> {
@@ -267,21 +397,24 @@ async function executeTask(taskId: string) {
   try {
     const rawText = await callProvider(task.message, task.agent_id)
 
+    // Strip Perplexity's inline citation markers ([1], [2,3]) so JSON parses cleanly.
+    const cleanedText = rawText.replace(/(?<="[^"\n]*?)\s*\[\d+(?:,\s*\d+)*\](?=[^"\n]*")/g, '')
+
     // Try direct JSON.parse first (providers should return valid JSON via response_format)
     let parsed: any = null
     try {
-      parsed = JSON.parse(rawText)
+      parsed = JSON.parse(cleanedText)
     } catch {
       // Fallback to tolerant parser (handles markdown fences, partial JSON, etc)
-      parsed = parseLLMJson(rawText)
+      parsed = parseLLMJson(cleanedText)
       // If parseLLMJson returned its failure shape, use the raw text as-is
       if (parsed && typeof parsed === 'object' && parsed.success === false && parsed.data === null && parsed.rawJson === null) {
         // Last resort: try to extract JSON from raw text by finding { ... }
-        const firstBrace = rawText.indexOf('{')
-        const lastBrace = rawText.lastIndexOf('}')
+        const firstBrace = cleanedText.indexOf('{')
+        const lastBrace = cleanedText.lastIndexOf('}')
         if (firstBrace !== -1 && lastBrace > firstBrace) {
           try {
-            parsed = JSON.parse(rawText.slice(firstBrace, lastBrace + 1))
+            parsed = JSON.parse(cleanedText.slice(firstBrace, lastBrace + 1))
           } catch {
             parsed = { text: rawText }
           }
@@ -290,6 +423,9 @@ async function executeTask(taskId: string) {
         }
       }
     }
+
+    // Strip any leftover citation markers from string values across the parsed tree.
+    parsed = stripCitations(parsed)
 
     const normalized = normalizeResponse(parsed)
 

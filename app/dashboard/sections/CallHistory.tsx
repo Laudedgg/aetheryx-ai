@@ -7,7 +7,7 @@ import { FiClock, FiSearch, FiChevronDown, FiChevronUp, FiEye, FiPhone } from 'r
 interface CallHistoryProps { callHistory: any[]; onViewCall: (call: any) => void; callsLoaded?: boolean }
 
 const serif: React.CSSProperties = { fontFamily: "'Instrument Serif', serif" }
-const cardStyle: React.CSSProperties = { background: '#0c1120', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16 }
+const cardStyle: React.CSSProperties = { background: '#0A0C14', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16 }
 
 function safeText(val: any, fb = 'N/A'): string { if (val == null) return fb; if (typeof val === 'string') return val; if (typeof val === 'number') return String(val); try { return JSON.stringify(val) } catch { return fb } }
 function renderLines(text: any): React.ReactNode { const s = safeText(text, ''); if (!s) return null; return <div className="space-y-0.5">{s.split('\n').map((l: string, i: number) => { const t = l.trim(); if (!t) return null; if (t.startsWith('- ')||t.startsWith('* ')) return <li key={i} className="ml-3 list-disc text-[11px] text-white/40">{t.slice(2)}</li>; return <p key={i} className="text-[11px] text-white/40">{t}</p> })}</div> }
@@ -25,8 +25,8 @@ function Inner({ callHistory, onViewCall, callsLoaded }: CallHistoryProps) {
   const filtered = calls.filter(c => { try { const cn = safeText(c?.postCallData?.summary?.client_name,'').toLowerCase(); const co = safeText(c?.postCallData?.summary?.company,'').toLowerCase(); const q = search.toLowerCase(); const ms = !q || cn.includes(q) || co.includes(q); const oc = safeText(c?.postCallData?.summary?.call_outcome,'').toLowerCase(); const mf = filter === 'all' || oc.includes(filter); return ms && mf } catch { return true } })
 
   if (!calls.length) {
-    if (!callsLoaded) return <div className="flex flex-col items-center justify-center py-20"><div className="w-8 h-8 border-2 border-white/10 border-t-[#216BE4] rounded-full animate-spin mb-3"/><p className="text-xs text-white/30">Loading call history...</p></div>
-    return <div className="flex flex-col items-center justify-center py-20"><div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4" style={{background:'rgba(33,107,228,0.06)'}}><FiClock className="w-6 h-6" style={{color:'rgba(33,107,228,0.3)'}}/></div><h2 className="text-base font-semibold text-white/60 mb-1" style={serif}>No calls yet</h2><p className="text-[11px] text-white/25 max-w-xs text-center">Complete your first sales call to see it here.</p></div>
+    if (!callsLoaded) return <div className="flex flex-col items-center justify-center py-20"><div className="w-8 h-8 border-2 border-white/10 border-t-[#8A6CFF] rounded-full animate-spin mb-3"/><p className="text-xs text-white/30">Loading call history...</p></div>
+    return <div className="flex flex-col items-center justify-center py-20"><div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4" style={{background:'rgba(138,108,255,0.06)'}}><FiClock className="w-6 h-6" style={{color:'rgba(138,108,255,0.3)'}}/></div><h2 className="text-base font-semibold text-white/60 mb-1" style={serif}>No calls yet</h2><p className="text-[11px] text-white/25 max-w-xs text-center">Complete your first sales call to see it here.</p></div>
   }
 
   return (
@@ -60,7 +60,7 @@ function Inner({ callHistory, onViewCall, callsLoaded }: CallHistoryProps) {
           const score = safeText(call?.postCallData?.deal_probability?.score, '--')
           const st = safeText(call?.status, 'completed')
           const status = st === 'synced' ? 'Synced' : st === 'completed' ? 'Done' : 'Active'
-          const statusColor = st === 'synced' ? '#216BE4' : st === 'completed' ? '#f59e0b' : '#34d399'
+          const statusColor = st === 'synced' ? '#8A6CFF' : st === 'completed' ? '#f59e0b' : '#34d399'
           const phone = safeText(call?.phoneNumber, '')
           const dur = fmtDur(call?.duration)
           const transcriptArr = Array.isArray(call?.transcript) ? call.transcript : []
@@ -84,7 +84,7 @@ function Inner({ callHistory, onViewCall, callsLoaded }: CallHistoryProps) {
                   <div className="flex items-center gap-2.5 flex-shrink-0">
                     {dur && <span className="text-[11px] font-mono text-white/25 tabular-nums">{dur}</span>}
                     <span className="text-[9px] font-semibold px-2 py-0.5 rounded-full" style={{background:`${statusColor}15`,color:statusColor,border:`1px solid ${statusColor}25`}}>{status}</span>
-                    <span className="text-[13px] font-bold font-mono" style={{color:'#216BE4'}}>{score}</span>
+                    <span className="text-[13px] font-bold font-mono" style={{color:'#8A6CFF'}}>{score}</span>
                     {isExp ? <FiChevronUp className="w-3.5 h-3.5 text-white/20"/> : <FiChevronDown className="w-3.5 h-3.5 text-white/20"/>}
                   </div>
                 </div>
@@ -100,7 +100,7 @@ function Inner({ callHistory, onViewCall, callsLoaded }: CallHistoryProps) {
                       {!transcriptArr.length && <p className="text-[10px] text-white/15">No transcript.</p>}
                       {transcriptArr.map((l: any, li: number) => (
                         <div key={safeText(l?.id,'l-'+li)} className="flex gap-2 text-[11px]">
-                          <span className="font-semibold flex-shrink-0" style={{color: l?.speaker==='rep' ? '#216BE4' : '#f472b6'}}>{l?.speaker==='rep' ? 'Rep' : 'Prospect'}:</span>
+                          <span className="font-semibold flex-shrink-0" style={{color: l?.speaker==='rep' ? '#8A6CFF' : '#FF9CC2'}}>{l?.speaker==='rep' ? 'Rep' : 'Prospect'}:</span>
                           <span className="text-white/35">{safeText(l?.text,'')}</span>
                         </div>
                       ))}
@@ -121,10 +121,10 @@ function Inner({ callHistory, onViewCall, callsLoaded }: CallHistoryProps) {
                     {call?.postCallData?.deal_probability && (
                       <div className="flex items-center gap-2">
                         <span className="text-[10px] text-white/25">Deal Probability:</span>
-                        <span className="text-sm font-bold font-mono" style={{color:'#216BE4'}}>{safeText(call.postCallData.deal_probability?.score)}</span>
+                        <span className="text-sm font-bold font-mono" style={{color:'#8A6CFF'}}>{safeText(call.postCallData.deal_probability?.score)}</span>
                       </div>
                     )}
-                    <button onClick={e => { e.stopPropagation(); onViewCall(call) }} className="flex items-center gap-1.5 text-[11px] font-medium px-3 py-1.5 rounded-lg transition-all hover:shadow-md" style={{background:'linear-gradient(135deg,#216BE4,#1a5bc7)',color:'#fff'}}>
+                    <button onClick={e => { e.stopPropagation(); onViewCall(call) }} className="flex items-center gap-1.5 text-[11px] font-medium px-3 py-1.5 rounded-lg transition-all hover:shadow-md" style={{background:'linear-gradient(135deg,#8A6CFF,#5B6CFF)',color:'#fff'}}>
                       <FiEye className="w-3 h-3"/> View Details
                     </button>
                   </div>

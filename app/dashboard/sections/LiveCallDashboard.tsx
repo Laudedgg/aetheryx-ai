@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
-import { FiPhone, FiPhoneOff, FiCopy, FiCheck, FiAlertCircle, FiRefreshCw, FiUser, FiUsers, FiMic, FiMicOff, FiSettings, FiRadio, FiZap, FiSearch, FiActivity, FiInfo, FiPlay } from 'react-icons/fi'
+import { FiPhone, FiPhoneOff, FiCopy, FiCheck, FiAlertCircle, FiRefreshCw, FiUser, FiUsers, FiMic, FiMicOff, FiSettings, FiRadio, FiZap, FiSearch, FiActivity, FiInfo, FiPlay, FiDelete } from 'react-icons/fi'
 
 const RESEARCH_AGENT_ID = '69b03c357b2057cc3ff92a2b'
 const STRATEGY_AGENT_ID = '69b03c36778bd73de86e5ffd'
@@ -197,8 +197,230 @@ function extractEntities(text: string): { companies: string[]; people: string[] 
         }
       })
     }
+    // Single-name introductions: "My name is Victor", "I'm Sarah", "This is John"
+    const singleNamePatterns = text.match(/(?:my name is|name is|name's|I'm|I am|this is|speaking with|it's)\s+([A-Z][a-z]{2,15})(?![A-Za-z])/gi)
+    if (Array.isArray(singleNamePatterns)) {
+      singleNamePatterns.forEach(function(m) {
+        const parts = m.split(/\s+/)
+        const name = parts[parts.length - 1]
+        if (name && /^[A-Z][a-z]{2,15}$/.test(name) && !skipWords.has(name)
+          && !people.includes(name)
+          && !people.some(p => p.split(' ')[0] === name)) {
+          people.push(name)
+        }
+      })
+    }
   } catch (_e) { /* ignore */ }
   return { companies, people }
+}
+
+// ── ProspectCard ─────────────────────────────────────────────────────────────
+// Slick profile-style card with avatar (photo or initials fallback),
+// platform-coloured social icons, gradient cover, and entrance animation.
+
+// Filter out placeholder strings the LLM uses when it didn't find real info.
+function isRealValue(v: any): boolean {
+  if (v === null || v === undefined) return false
+  const s = String(v).toLowerCase().trim()
+  if (!s) return false
+  const placeholders = ['not publicly available', 'not yet identified', 'not provided', 'not specified', 'unknown', 'n/a', 'na', '-', 'null', 'undefined', 'not yet', 'no information']
+  return !placeholders.some(p => s === p || s.includes(p))
+}
+
+// "Still searching" card shown while research is loading and a section has no real data yet.
+// Replaces the empty placeholder card with active-feel UI.
+function LiveSearchingCard({ label, hint, accent }: { label: string; hint: string; accent: 'blue' | 'amber' | 'emerald' }) {
+  const colors = {
+    blue: { dot: '#8A6CFF', text: 'rgba(138,108,255,0.6)' },
+    amber: { dot: '#f59e0b', text: 'rgba(245,158,11,0.6)' },
+    emerald: { dot: '#34d399', text: 'rgba(52,211,153,0.6)' },
+  }[accent]
+  return (
+    <div className="rounded-xl p-2.5 relative overflow-hidden" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
+      <div className="flex items-center justify-between mb-1.5">
+        <p className="text-[9px] uppercase font-bold tracking-wider" style={{ color: 'rgba(255,255,255,0.3)' }}>{label}</p>
+        <span className="flex items-center gap-1">
+          <span className="w-1 h-1 rounded-full animate-pulse" style={{ background: colors.dot, animationDelay: '0ms' }} />
+          <span className="w-1 h-1 rounded-full animate-pulse" style={{ background: colors.dot, animationDelay: '180ms' }} />
+          <span className="w-1 h-1 rounded-full animate-pulse" style={{ background: colors.dot, animationDelay: '360ms' }} />
+        </span>
+      </div>
+      <p className="text-[10px] leading-relaxed italic" style={{ color: colors.text }}>
+        <FiSearch className="inline w-2.5 h-2.5 mr-1 -mt-0.5" />
+        {hint}
+      </p>
+    </div>
+  )
+}
+
+function getInitials(name: string): string {
+  if (!name) return '?'
+  const parts = name.trim().split(/\s+/).filter(Boolean)
+  if (parts.length === 0) return '?'
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase()
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+}
+
+function isUsableUrl(u: any): boolean {
+  return typeof u === 'string' && /^https?:\/\//.test(u)
+}
+
+function confidenceColors(confidence: string): { bg: string; color: string; border: string; label: string } {
+  const c = (confidence || '').toLowerCase()
+  if (c.startsWith('high')) return { bg: 'rgba(52,211,153,0.12)', color: '#34d399', border: 'rgba(52,211,153,0.3)', label: 'High' }
+  if (c.startsWith('medium')) return { bg: 'rgba(245,158,11,0.12)', color: '#f59e0b', border: 'rgba(245,158,11,0.3)', label: 'Medium' }
+  if (c.startsWith('low')) return { bg: 'rgba(239,68,68,0.10)', color: '#f87171', border: 'rgba(239,68,68,0.25)', label: 'Low' }
+  return { bg: 'rgba(255,255,255,0.04)', color: 'rgba(255,255,255,0.4)', border: 'rgba(255,255,255,0.08)', label: confidence ? confidence.split(' ')[0] : '—' }
+}
+
+const SocialIcon = ({ name }: { name: 'linkedin' | 'twitter' | 'instagram' | 'github' | 'website' }) => {
+  const common = { width: 14, height: 14, viewBox: '0 0 24 24', fill: 'currentColor' as const, 'aria-hidden': true }
+  switch (name) {
+    case 'linkedin':
+      return <svg {...common}><path d="M19 0H5a5 5 0 00-5 5v14a5 5 0 005 5h14a5 5 0 005-5V5a5 5 0 00-5-5zM8 19H5V8h3v11zM6.5 6.7a1.8 1.8 0 110-3.5 1.8 1.8 0 010 3.5zM20 19h-3v-5.6c0-3.4-4-3.1-4 0V19h-3V8h3v1.8c1.4-2.6 7-2.8 7 2.5V19z"/></svg>
+    case 'twitter':
+      return <svg {...common}><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    case 'instagram':
+      return <svg {...common}><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.05.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.05.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 01-1.38-.9 3.7 3.7 0 01-.9-1.38c-.16-.42-.36-1.05-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.05-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zm0 5.34a4.5 4.5 0 100 9 4.5 4.5 0 000-9zm0 7.42a2.92 2.92 0 110-5.84 2.92 2.92 0 010 5.84zm5.74-7.6a1.05 1.05 0 11-2.1 0 1.05 1.05 0 012.1 0z"/></svg>
+    case 'github':
+      return <svg {...common}><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.04c-3.34.73-4.04-1.42-4.04-1.42-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.31 1.23a11.5 11.5 0 016.02 0c2.3-1.55 3.31-1.23 3.31-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12.01 12.01 0 0024 12.5C24 5.87 18.63.5 12 .5z"/></svg>
+    case 'website':
+      return <svg {...common}><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.93 6h-2.95a15.7 15.7 0 00-1.38-3.56A8.03 8.03 0 0118.93 8zM12 4c.83 1.2 1.48 2.53 1.91 4h-3.82A14 14 0 0112 4zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38a16.5 16.5 0 000 4H4.26zm.81 2h2.95a15.7 15.7 0 001.38 3.56A8.03 8.03 0 015.07 16zM8.02 8H5.07a8.03 8.03 0 014.33-3.56A15.7 15.7 0 008.02 8zM12 20c-.83-1.2-1.48-2.53-1.91-4h3.82A14 14 0 0112 20zm2.34-6H9.66a14.5 14.5 0 010-4h4.68a14.5 14.5 0 010 4zm.27 5.56A15.7 15.7 0 0015.98 16h2.95a8.03 8.03 0 01-4.32 3.56zM16.36 14a16.5 16.5 0 000-4h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>
+  }
+}
+
+const SOCIAL_THEMES: Record<string, { bg: string; hoverBg: string; color: string }> = {
+  linkedin: { bg: 'rgba(10,102,194,0.12)', hoverBg: 'rgba(10,102,194,0.22)', color: '#4ea3ff' },
+  twitter: { bg: 'rgba(255,255,255,0.06)', hoverBg: 'rgba(255,255,255,0.14)', color: '#ffffff' },
+  instagram: { bg: 'rgba(225,48,108,0.12)', hoverBg: 'rgba(225,48,108,0.22)', color: '#e4407a' },
+  github: { bg: 'rgba(255,255,255,0.04)', hoverBg: 'rgba(255,255,255,0.12)', color: '#e6edf3' },
+  website: { bg: 'rgba(244,114,182,0.10)', hoverBg: 'rgba(244,114,182,0.20)', color: '#FF9CC2' },
+}
+
+function ProspectCard({ person }: { person: any }) {
+  const [imgFailed, setImgFailed] = useState(false)
+  const fullName = safeText(person?.full_name, '')
+  const initials = getInitials(fullName)
+  const photoUrl = safeText(person?.photo_url, '')
+  const showPhoto = isUsableUrl(photoUrl) && !imgFailed
+  const conf = confidenceColors(safeText(person?.confidence, ''))
+  const fullConfidence = safeText(person?.confidence, '')
+
+  const socials = [
+    { key: 'linkedin' as const, url: person?.linkedin_url, label: 'LinkedIn' },
+    { key: 'twitter' as const, url: person?.twitter_url, label: 'X' },
+    { key: 'instagram' as const, url: person?.instagram_url, label: 'Instagram' },
+    { key: 'github' as const, url: person?.github_url, label: 'GitHub' },
+    { key: 'website' as const, url: person?.personal_website, label: 'Website' },
+  ].filter(s => isUsableUrl(s.url))
+
+  return (
+    <div
+      className="rounded-xl overflow-hidden animate-fade-rise relative"
+      style={{ background: 'linear-gradient(180deg, rgba(244,114,182,0.06) 0%, rgba(244,114,182,0.02) 100%)', border: '1px solid rgba(244,114,182,0.15)' }}
+    >
+      {/* Cover gradient strip */}
+      <div className="h-9 relative" style={{ background: 'linear-gradient(135deg, #FF9CC2 0%, #a855f7 50%, #6366f1 100%)' }}>
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 80% 100% at 30% 100%, rgba(0,0,0,0.4), transparent 70%)' }} />
+        <div className="absolute top-1.5 left-2.5 flex items-center gap-1.5">
+          <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-white/90 drop-shadow">Prospect</span>
+          <span className="w-1 h-1 rounded-full bg-white/60 animate-pulse" />
+        </div>
+        {fullConfidence && (
+          <div className="absolute top-1.5 right-2 px-1.5 py-0.5 rounded-full text-[8px] font-bold flex items-center gap-1" style={{ background: conf.bg, color: conf.color, border: `1px solid ${conf.border}`, backdropFilter: 'blur(6px)' }} title={fullConfidence}>
+            <span className="w-1 h-1 rounded-full" style={{ background: conf.color }} />
+            {conf.label}
+          </div>
+        )}
+      </div>
+
+      {/* Avatar overlapping cover */}
+      <div className="px-3 pb-3 -mt-5">
+        <div className="flex items-end gap-2.5">
+          <div className="w-[52px] h-[52px] rounded-xl flex items-center justify-center overflow-hidden flex-shrink-0 ring-2 ring-[#0A0C14] shadow-lg" style={{ background: 'linear-gradient(135deg, #FF9CC2, #a855f7)' }}>
+            {showPhoto ? (
+              <img src={photoUrl} alt={fullName} referrerPolicy="no-referrer" onError={() => setImgFailed(true)} className="w-full h-full object-cover" />
+            ) : (
+              <span className="text-[18px] font-bold text-white tracking-tight">{initials}</span>
+            )}
+          </div>
+          <div className="min-w-0 pb-0.5 flex-1">
+            {fullName && <p className="text-[13px] font-bold text-white truncate" title={fullName}>{fullName}</p>}
+            {person?.headline && <p className="text-[10px] text-white/55 leading-snug line-clamp-2" title={safeText(person.headline)}>{safeText(person.headline)}</p>}
+          </div>
+        </div>
+
+        {(person?.current_role || person?.current_company || person?.location) && (
+          <div className="mt-2.5 space-y-0.5">
+            {(person?.current_role || person?.current_company) && (
+              <div className="flex items-center gap-1 text-[10px] text-white/40">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" className="flex-shrink-0"><path d="M20 6h-4V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2H4a2 2 0 00-2 2v11a2 2 0 002 2h16a2 2 0 002-2V8a2 2 0 00-2-2zm-6 0h-4V4h4v2z"/></svg>
+                <span className="truncate">
+                  {safeText(person.current_role)}
+                  {person?.current_role && person?.current_company && <span className="text-white/25"> · </span>}
+                  {safeText(person.current_company)}
+                </span>
+              </div>
+            )}
+            {person?.location && (
+              <div className="flex items-center gap-1 text-[10px] text-white/35">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" className="flex-shrink-0"><path d="M12 2a8 8 0 00-8 8c0 5.4 7 11.5 7.3 11.7a1 1 0 001.4 0C13 21.5 20 15.4 20 10a8 8 0 00-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg>
+                <span className="truncate">{safeText(person.location)}</span>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Social icons row */}
+        {socials.length > 0 && (
+          <div className="flex items-center gap-1.5 mt-2.5 pt-2.5" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+            {socials.map(s => {
+              const theme = SOCIAL_THEMES[s.key]
+              return (
+                <a
+                  key={s.key}
+                  href={safeText(s.url)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={`Open ${s.label}`}
+                  aria-label={s.label}
+                  className="w-7 h-7 rounded-lg flex items-center justify-center transition-all hover:scale-110 active:scale-95"
+                  style={{ background: theme.bg, color: theme.color }}
+                  onMouseEnter={e => (e.currentTarget.style.background = theme.hoverBg)}
+                  onMouseLeave={e => (e.currentTarget.style.background = theme.bg)}
+                >
+                  <SocialIcon name={s.key} />
+                </a>
+              )
+            })}
+            <span className="ml-auto text-[8px] text-white/20 font-mono">{socials.length} {socials.length === 1 ? 'profile' : 'profiles'}</span>
+          </div>
+        )}
+
+        {/* Other profiles found around the web (Crunchbase, Companies House, SoundCloud, podcasts, ...) */}
+        {Array.isArray(person?.other_profiles) && person.other_profiles.filter((p: any) => isUsableUrl(p?.url)).length > 0 && (
+          <div className="mt-2.5 pt-2.5" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+            <p className="text-[8px] uppercase tracking-[0.18em] font-bold mb-1.5" style={{ color: 'rgba(255,255,255,0.3)' }}>Public footprint</p>
+            <div className="flex flex-wrap gap-1">
+              {person.other_profiles.filter((p: any) => isUsableUrl(p?.url)).slice(0, 8).map((p: any, i: number) => (
+                <a
+                  key={i}
+                  href={safeText(p.url)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={safeText(p.url)}
+                  className="text-[9px] px-1.5 py-0.5 rounded-full transition-colors hover:bg-white/[0.08]"
+                  style={{ background: 'rgba(255,255,255,0.04)', color: 'rgba(255,255,255,0.55)', border: '1px solid rgba(255,255,255,0.06)' }}
+                >
+                  {safeText(p.label, 'Link')} ↗
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  )
 }
 
 export default function LiveCallDashboard(props: LiveCallDashboardProps) {
@@ -227,6 +449,9 @@ function LiveCallDashboardInner({
   const [copiedId, setCopiedId] = useState<string | null>(null)
   const [muted, setMuted] = useState(false)
   const [detectedEntities, setDetectedEntities] = useState<{ companies: string[]; people: string[] }>({ companies: [], people: [] })
+  // Track the (company, person) tuple last used to fire research, so we can re-fire when the
+  // prospect updates their name/company mid-call ("My name is Victor" → "actually Aman Galani").
+  const [lastResearchKey, setLastResearchKey] = useState('')
   const [researchTriggered, setResearchTriggered] = useState(false)
   const [strategyTriggered, setStrategyTriggered] = useState(false)
   const [autoResearchCount, setAutoResearchCount] = useState(0)
@@ -257,8 +482,11 @@ function LiveCallDashboardInner({
   const safeTranscript = Array.isArray(transcript) ? transcript : []
   const safeHistory = Array.isArray(callHistory) ? callHistory : []
   // Show current data, or fall back to last call's data
-  const lastCallResearch = !researchData && safeHistory.length > 0 ? safeHistory.find(c => c.researchData)?.researchData : null
-  const lastCallStrategy = !strategyData && safeHistory.length > 0 ? safeHistory.find(c => c.strategyData)?.strategyData : null
+  // Only fall back to a previous call's data when NOT in an active call.
+  // During an active call, show standby/loading until the new research/strategy completes —
+  // otherwise users see stale data from a previous prospect on a fresh call.
+  const lastCallResearch = !callActive && !researchData && safeHistory.length > 0 ? safeHistory.find(c => c.researchData)?.researchData : null
+  const lastCallStrategy = !callActive && !strategyData && safeHistory.length > 0 ? safeHistory.find(c => c.strategyData)?.strategyData : null
   const displayResearch = useSampleData ? SAMPLE_RESEARCH : (researchData || lastCallResearch)
   const displayStrategy = useSampleData ? SAMPLE_STRATEGY : (strategyData || lastCallStrategy)
   const isShowingLastCall = !researchData && !!lastCallResearch
@@ -348,36 +576,63 @@ function LiveCallDashboardInner({
     }
   }, [callActive, isLiveMode, onAddTranscript])
 
-  // Entity detection from transcript
+  // Entity detection from transcript — prioritise prospect's words
+  // (rep introducing themselves shouldn't trigger research on the rep)
   useEffect(() => {
     if (safeTranscript.length === 0) return
     try {
+      const prospectText = safeTranscript
+        .filter(function(l) { return l?.speaker === 'prospect' })
+        .map(function(l) { return safeText(l?.text, '') })
+        .join(' ')
       const fullText = safeTranscript.map(function(l) { return safeText(l?.text, '') }).join(' ')
-      const entities = extractEntities(fullText)
+      // Prefer prospect-only entities; fall back to full transcript only if prospect text is empty
+      const fromProspect = extractEntities(prospectText)
+      const hasProspectEntities = fromProspect.companies.length > 0 || fromProspect.people.length > 0
+      const entities = hasProspectEntities ? fromProspect : extractEntities(fullText)
       setDetectedEntities(entities)
     } catch (_e) { /* ignore */ }
   }, [safeTranscript.length])
 
-  // Auto-trigger Research Agent when entities detected OR after meaningful conversation
+  // Auto-trigger Research Agent when entities are detected OR after meaningful conversation.
+  // Key insight: re-fire when the (company, person) tuple changes — so if the prospect first
+  // says "Victor" and later corrects to "Aman Galani", the agent re-runs on the new name.
   useEffect(() => {
     if (!callActive || researchLoading) return
     if (safeTranscript.length < 1) return
+    if (autoResearchCount >= 5) return // safety cap
 
-    const hasEntities = detectedEntities.companies.length > 0 || detectedEntities.people.length > 0
+    // Pick the BEST person name from detected entities:
+    //   1. Prefer full names (multi-word) over single first names
+    //   2. Among same specificity, prefer the most recently detected
+    const people = detectedEntities.people || []
+    const fullNames = people.filter(p => p.split(/\s+/).filter(Boolean).length >= 2)
+    const bestPerson = fullNames.length > 0 ? fullNames[fullNames.length - 1] : (people[people.length - 1] || '')
+    // For company, prefer the most recently detected (mid-call corrections also handled)
+    const companies = detectedEntities.companies || []
+    const bestCompany = companies[companies.length - 1] || ''
 
-    if (hasEntities && !researchTriggered) {
-      // Entity found by regex — trigger immediately
-      const companyName = detectedEntities.companies[0] || ''
-      const personName = detectedEntities.people[0] || ''
-      if (!companyName && !personName) return
-      setResearchTriggered(true)
-      handleAutoResearch(companyName, personName)
-    } else if (!researchTriggered && safeTranscript.length >= 6) {
-      // No regex entities after 6 lines — check if there's meaningful content
-      // (not just greetings like "hello", "how are you", "I'm good")
+    const currentKey = bestCompany.toLowerCase().trim() + '|' + bestPerson.toLowerCase().trim()
+    const hasEntities = !!(bestCompany || bestPerson)
+
+    // Path A: Entities present AND key has changed since the last research run → fire
+    if (hasEntities && currentKey !== lastResearchKey) {
+      setLastResearchKey(currentKey)
+      if (!researchTriggered) setResearchTriggered(true)
+      handleAutoResearch(bestCompany, bestPerson)
+      return
+    }
+
+    // Path B: No entities yet, but enough transcript content → fire transcript-based research
+    if (!researchTriggered && safeTranscript.length >= 3) {
+      const prospectText = safeTranscript
+        .filter(l => l?.speaker === 'prospect')
+        .map(l => safeText(l?.text, ''))
+        .join(' ')
       const fullText = safeTranscript.map(l => safeText(l?.text, '')).join(' ')
-      const wordCount = fullText.split(/\s+/).length
-      const hasSubstance = wordCount > 30 // At least 30 words of real conversation
+      const prospectWordCount = prospectText.split(/\s+/).filter(Boolean).length
+      const totalWordCount = fullText.split(/\s+/).filter(Boolean).length
+      const hasSubstance = prospectWordCount >= 5 || totalWordCount >= 12
 
       if (hasSubstance) {
         setResearchTriggered(true)
@@ -386,14 +641,24 @@ function LiveCallDashboardInner({
         }).join('\n')
         handleAutoResearchFromTranscript(rawText)
       }
-    } else if (researchTriggered && !researchData && !researchLoading && safeTranscript.length >= 12 && autoResearchCount < 2) {
-      // First attempt returned nothing useful — retry with much more context
-      const rawText = safeTranscript.map(function(l) {
-        return (l?.speaker === 'rep' ? 'Sales Rep' : 'Client') + ': ' + safeText(l?.text, '')
-      }).join('\n')
-      handleAutoResearchFromTranscript(rawText)
+      return
     }
-  }, [detectedEntities, callActive, researchTriggered, researchLoading, researchData, safeTranscript.length, autoResearchCount])
+
+    // Path C: Already researched but result looks weak → re-fire with full transcript
+    if (researchTriggered && autoResearchCount < 4) {
+      const cpName = safeText(researchData?.company_profile?.name, '').toLowerCase()
+      const ppName = safeText(researchData?.person_profile?.full_name, '').toLowerCase()
+      const looksUnidentified = !researchData
+        || !cpName || cpName.includes('not yet') || cpName.includes('unknown') || cpName.includes('not provided') || cpName.includes('not publicly')
+        || !ppName || ppName.includes('not yet') || ppName.includes('unknown') || ppName.includes('not publicly')
+      if (looksUnidentified && safeTranscript.length >= 2) {
+        const rawText = safeTranscript.map(function(l) {
+          return (l?.speaker === 'rep' ? 'Sales Rep' : 'Client') + ': ' + safeText(l?.text, '')
+        }).join('\n')
+        handleAutoResearchFromTranscript(rawText)
+      }
+    }
+  }, [detectedEntities, callActive, researchTriggered, researchLoading, researchData, safeTranscript.length, autoResearchCount, lastResearchKey])
 
   // Auto-trigger Strategy Agent periodically during call
   useEffect(() => {
@@ -423,7 +688,15 @@ function LiveCallDashboardInner({
     setActiveAgentId(RESEARCH_AGENT_ID)
     setAutoResearchCount(function(c) { return c + 1 })
     try {
-      const query = 'Research this prospect/company for a sales call: ' + company + (person ? ' (contact: ' + person + ')' : '')
+      // Build a query that's actionable for Perplexity even when only a name is given.
+      let query: string
+      if (company && person) {
+        query = 'Live sales call. Prospect: "' + person + '" at "' + company + '". Search LinkedIn, Instagram, X/Twitter, GitHub, and the open web for this person. Capture their social URLs. Then research the company in depth.'
+      } else if (company) {
+        query = 'Live sales call. Prospect company: "' + company + '". Research the company in depth — industry, size, funding, tech stack, recent news, and pain points.'
+      } else {
+        query = 'Live sales call. Only a prospect name has been said: "' + person + '". Search LinkedIn first, then Instagram, X/Twitter, GitHub, and personal sites. Capture every social URL you find. If multiple matches exist, pick the most likely B2B/SaaS one and note alternatives in person_profile.confidence. Then research their company. Always return concrete pitch_angles and pain_points.'
+      }
       const result = await callAIAgent(query, RESEARCH_AGENT_ID)
       if (result?.success) {
         onResearchData(result?.response?.result ?? {})
@@ -444,7 +717,7 @@ function LiveCallDashboardInner({
     setActiveAgentId(RESEARCH_AGENT_ID)
     setAutoResearchCount(function(c) { return c + 1 })
     try {
-      const query = 'You are listening to a live sales call transcript. IMPORTANT RULES:\n1. ONLY research people and companies that are EXPLICITLY mentioned by name in the transcript.\n2. If no specific person name or company name is mentioned yet, return a response with company_profile.name set to "Not yet identified" and explain you are waiting for the client to introduce themselves.\n3. DO NOT guess or hallucinate company/person names. Only use names that appear in the actual transcript text below.\n4. The transcript may have speech-to-text errors — try to identify the closest real name/company if something is mentioned.\n\nTranscript:\n' + rawTranscript
+      const query = 'You are listening to a live sales call transcript. Your job: extract person names and company names the CLIENT (not the rep) mentions, then research them across LinkedIn, Instagram, X/Twitter, GitHub, and the open web.\n\nRULES:\n1. The REP is the salesperson — ignore introductions like "this is Aman from Aetheryx".\n2. The CLIENT is the prospect — focus on their words.\n3. For any person name found: search LinkedIn first ("site:linkedin.com" + name), then Instagram, X/Twitter, GitHub, personal sites. Capture every social URL. Fill person_profile fully.\n4. For any company name found: research industry, size, funding, tech stack, news, pain points.\n5. If only a first name appears, search aggressively in B2B/SaaS context and pick the strongest match. Note confidence in person_profile.confidence.\n6. NEVER refuse with "not yet identified" — make best-effort guesses and state confidence.\n7. Speech-to-text may have errors — guess the most plausible real name if garbled.\n8. ALWAYS produce concrete pitch_angles and pain_points.\n\nTranscript:\n' + rawTranscript
       const result = await callAIAgent(query, RESEARCH_AGENT_ID)
       if (result?.success) {
         onResearchData(result?.response?.result ?? {})
@@ -527,8 +800,8 @@ function LiveCallDashboardInner({
 
   // --- Live Mode: Subscribe to media-bridge SSE for two-sided transcripts ---
   const startMediaBridgeSSE = useCallback((callSid: string) => {
-    const bridgeHost = process.env.NEXT_PUBLIC_MEDIA_BRIDGE_HOST || 'aetheryx-media-bridge.fly.dev'
-    const url = `https://${bridgeHost}/events?callSid=${encodeURIComponent(callSid)}`
+    const bridgeHost = process.env.NEXT_PUBLIC_MEDIA_BRIDGE_HOST || 'aetheryx.ai'
+    const url = `https://${bridgeHost}/bridge/events?callSid=${encodeURIComponent(callSid)}`
     console.log('[Aetheryx] Subscribing to media-bridge:', url)
 
     try {
@@ -968,19 +1241,20 @@ function LiveCallDashboardInner({
     setAutoResearchCount(0)
     setAutoStrategyCount(0)
     setDetectedEntities({ companies: [], people: [] })
+    setLastResearchKey('')
   }
 
   // --- Pre-Call State: Dialer ---
   if (!callActive) {
     return (
-      <div className="rounded-2xl border border-white/[0.06] flex flex-col flex-1" style={{ background: '#0c1120' }}>
+      <div className="rounded-2xl border border-white/[0.06] flex flex-col flex-1" style={{ background: '#0A0C14' }}>
 
         {/* Center: Phone input + Dial Pad — fills space, centered */}
         <div className="flex-1 flex flex-col items-center justify-center px-5 py-3">
           {/* Title */}
           <div className="flex items-center gap-2 mb-3">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: isLiveMode ? 'rgba(52,211,153,0.1)' : 'rgba(33,107,228,0.1)' }}>
-              {isLiveMode ? <FiPhone className="w-4 h-4 text-emerald-400" /> : <FiPlay className="w-4 h-4 text-[#216BE4]" />}
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: isLiveMode ? 'rgba(52,211,153,0.1)' : 'rgba(138,108,255,0.1)' }}>
+              {isLiveMode ? <FiPhone className="w-4 h-4 text-emerald-400" /> : <FiPlay className="w-4 h-4 text-[#8A6CFF]" />}
             </div>
             <div>
               <h3 className="text-[13px] font-semibold text-white/70" style={{ fontFamily: "'Instrument Serif', serif" }}>
@@ -1015,12 +1289,35 @@ function LiveCallDashboardInner({
             ))}
           </div>
 
+          {/* Delete / clear row */}
+          <div className="flex items-center justify-between w-full max-w-[240px] mt-1.5 gap-1.5">
+            <button
+              onClick={() => onPhoneNumberChange(phoneNumber.slice(0, -1))}
+              disabled={!phoneNumber}
+              aria-label="Delete last digit"
+              className="flex-1 h-9 rounded-xl flex items-center justify-center gap-1.5 text-[11px] font-medium text-white/60 transition-all hover:bg-white/[0.06] hover:text-white active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed"
+              style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.06)' }}
+            >
+              <FiDelete className="w-3.5 h-3.5" />
+              Delete
+            </button>
+            <button
+              onClick={() => onPhoneNumberChange('')}
+              disabled={!phoneNumber}
+              aria-label="Clear number"
+              className="px-3 h-9 rounded-xl text-[11px] font-medium text-white/40 transition-all hover:bg-white/[0.06] hover:text-white/70 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed"
+              style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.06)' }}
+            >
+              Clear
+            </button>
+          </div>
+
           {/* Dial button */}
           <button
             onClick={handleDial}
             disabled={!phoneNumber.trim() || dialingLive}
             className="mt-3 w-full max-w-[240px] h-10 rounded-xl flex items-center justify-center gap-2 text-[13px] font-semibold text-white transition-all hover:shadow-lg disabled:opacity-40 active:scale-[0.98]"
-            style={{ background: isLiveMode ? 'linear-gradient(135deg, #059669, #047857)' : 'linear-gradient(135deg, #216BE4, #1a5bc7)', boxShadow: isLiveMode ? '0 4px 16px rgba(5,150,105,0.2)' : '0 4px 16px rgba(33,107,228,0.2)' }}
+            style={{ background: isLiveMode ? 'linear-gradient(135deg, #059669, #047857)' : 'linear-gradient(135deg, #8A6CFF, #5B6CFF)', boxShadow: isLiveMode ? '0 4px 16px rgba(5,150,105,0.2)' : '0 4px 16px rgba(138,108,255,0.2)' }}
           >
             {dialingLive ? <FiRefreshCw className="w-4 h-4 animate-spin" /> : isLiveMode ? <><FiPhone className="w-3.5 h-3.5" /> Dial Number</> : <><FiPlay className="w-3.5 h-3.5" /> Start Demo Call</>}
           </button>
@@ -1037,7 +1334,7 @@ function LiveCallDashboardInner({
         {/* Mode bar — bottom */}
         <div className="flex items-center justify-between px-4 py-2 border-t border-white/[0.06] flex-shrink-0">
           <div className="flex items-center gap-1.5">
-            <span className={`w-[5px] h-[5px] rounded-full ${isLiveMode ? 'bg-emerald-400' : 'bg-[#216BE4]'}`} />
+            <span className={`w-[5px] h-[5px] rounded-full ${isLiveMode ? 'bg-emerald-400' : 'bg-[#8A6CFF]'}`} />
             <span className="text-[10px] text-white/20 font-medium">{isLiveMode ? 'Live Mode' : 'Demo Mode'}</span>
           </div>
           <Button variant="ghost" size="sm" className="h-5 text-[9px] gap-1 px-1.5 text-white/15 hover:text-white/30" onClick={onNavigateToConfig}>
@@ -1150,36 +1447,71 @@ function LiveCallDashboardInner({
       <div className="grid grid-cols-12 gap-2 flex-1 min-h-0">
         {/* Panel 1: TRANSCRIPT */}
         <div className="col-span-4 flex flex-col min-h-0">
-          <div className="flex-1 flex flex-col rounded-2xl overflow-hidden" style={{ background: '#0c1120', border: '1px solid rgba(255,255,255,0.06)' }}>
-            <div className="flex items-center justify-between px-3 py-2.5 flex-shrink-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+          <div className="flex-1 flex flex-col rounded-2xl overflow-hidden" style={{ background: '#0A0C14', border: '1px solid rgba(255,255,255,0.06)' }}>
+            <div className="flex items-center justify-between px-3.5 py-2.5 flex-shrink-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <h3 className="text-[13px] font-bold text-white/70" style={{ fontFamily: "'Instrument Serif', serif" }}>Live Transcript</h3>
               </div>
               <span className="text-[9px] text-white/20 font-mono">{safeTranscript.length} lines</span>
             </div>
-            <div ref={scrollRef} className="flex-1 overflow-y-auto p-2.5 space-y-1.5">
+
+            {/* Call momentum strip — one bar per recent line, tinted by speaker */}
+            <div className="px-3.5 py-2 flex items-center gap-[3px] flex-shrink-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
+              {(() => {
+                const SLOTS = 18
+                const recent = safeTranscript.slice(-SLOTS)
+                const pad = SLOTS - recent.length
+                return (
+                  <>
+                    {Array.from({ length: pad }).map((_, i) => (
+                      <span key={'p' + i} className="flex-1 h-[3px] rounded-full" style={{ background: 'rgba(255,255,255,0.04)' }} />
+                    ))}
+                    {recent.map((l, i) => {
+                      const isLast = i === recent.length - 1
+                      const color = l?.speaker === 'rep' ? '#8A6CFF' : '#FF9CC2'
+                      const opacity = 0.35 + (i / Math.max(1, recent.length - 1)) * 0.55
+                      return (
+                        <span key={'b' + (l?.id || i)} className={'flex-1 h-[3px] rounded-full' + (isLast && callActive ? ' animate-pulse' : '')} style={{ background: color, opacity }} />
+                      )
+                    })}
+                  </>
+                )
+              })()}
+            </div>
+
+            <div ref={scrollRef} className="flex-1 overflow-y-auto p-3 space-y-2">
               {safeTranscript.length === 0 && (
                 <div className="flex flex-col items-center justify-center py-10">
                   <FiMic className="w-6 h-6 text-white/5 mb-2" />
                   <p className="text-[12px] text-white/25 text-center font-medium">Waiting for conversation...</p>
                 </div>
               )}
-              {safeTranscript.map((line) => (
-                <div key={line?.id ?? Math.random()} className="rounded-lg px-3 py-2" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.03)' }}>
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-[11px] font-bold" style={{ color: line?.speaker === 'rep' ? '#216BE4' : '#f472b6' }}>
-                      {line?.speaker === 'rep' ? 'Rep' : 'Client'}
-                    </span>
-                    <span className="text-[9px] text-white/15 font-mono">{safeText(line?.timestamp, '')}</span>
+              {safeTranscript.map((line) => {
+                const isRep = line?.speaker === 'rep'
+                const accent = isRep ? '#8A6CFF' : '#FF9CC2'
+                return (
+                  <div
+                    key={line?.id ?? Math.random()}
+                    className="rounded-xl px-3.5 py-3 relative animate-fade-rise"
+                    style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.05)' }}
+                  >
+                    {/* Left-edge speaker accent */}
+                    <span className="absolute left-0 top-3 bottom-3 w-[2px] rounded-full" style={{ background: accent, opacity: 0.5 }} />
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="text-[10px] font-bold uppercase tracking-[0.18em]" style={{ color: accent, opacity: 0.85 }}>
+                        {isRep ? 'Rep' : 'Prospect'}
+                      </span>
+                      <span className="text-[9px] text-white/15 font-mono">{safeText(line?.timestamp, '')}</span>
+                    </div>
+                    <p className="text-[13px] text-white/75 leading-relaxed">{safeText(line?.text, '')}</p>
                   </div>
-                  <p className="text-[12px] text-white/65 leading-relaxed">{safeText(line?.text, '')}</p>
-                </div>
-              ))}
+                )
+              })}
               {callActive && safeTranscript.length > 0 && (
-                <div className="flex items-center gap-1.5 py-1">
+                <div className="flex items-center gap-1.5 py-1 px-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-[10px] text-white/20">Listening...</span>
+                  <span className="text-[10px] text-white/30 uppercase tracking-widest font-semibold">Listening</span>
                 </div>
               )}
             </div>
@@ -1188,13 +1520,13 @@ function LiveCallDashboardInner({
 
         {/* Panel 2: RESEARCH AGENT */}
         <div className="col-span-4 flex flex-col min-h-0">
-          <div className="flex-1 flex flex-col rounded-2xl overflow-hidden" style={{ background: '#0c1120', border: '1px solid rgba(255,255,255,0.06)' }}>
+          <div className="flex-1 flex flex-col rounded-2xl overflow-hidden" style={{ background: '#0A0C14', border: '1px solid rgba(255,255,255,0.06)' }}>
             <div className="flex items-center justify-between px-3 py-2.5 flex-shrink-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
               <div className="flex items-center gap-2">
                 <span className="text-[12px]">🔍</span>
                 <h3 className="text-[13px] font-bold text-white/70" style={{ fontFamily: "'Instrument Serif', serif" }}>Research Agent</h3>
               </div>
-              <span className="text-[9px] px-2 py-0.5 rounded-full font-semibold" style={{ background: researchLoading ? 'rgba(33,107,228,0.08)' : displayResearch ? 'rgba(52,211,153,0.08)' : 'rgba(255,255,255,0.03)', color: researchLoading ? '#216BE4' : displayResearch ? '#34d399' : 'rgba(255,255,255,0.2)' }}>
+              <span className="text-[9px] px-2 py-0.5 rounded-full font-semibold" style={{ background: researchLoading ? 'rgba(138,108,255,0.08)' : displayResearch ? 'rgba(52,211,153,0.08)' : 'rgba(255,255,255,0.03)', color: researchLoading ? '#8A6CFF' : displayResearch ? '#34d399' : 'rgba(255,255,255,0.2)' }}>
                 {researchLoading ? 'Researching...' : researchData ? 'Complete' : isShowingLastCall ? 'Previous' : 'Standby'}
               </span>
             </div>
@@ -1203,36 +1535,90 @@ function LiveCallDashboardInner({
               {researchLoading && !displayResearch && <LoadingPlaceholder count={3} />}
               {displayResearch ? (
                 <>
+                  {/* Prospect card — slick profile-style with avatar + platform-coloured social icons */}
+                  {(displayResearch?.person_profile?.full_name || displayResearch?.person_profile?.linkedin_url || displayResearch?.person_profile?.headline) && (
+                    <ProspectCard person={displayResearch.person_profile} />
+                  )}
                   {/* Company card */}
-                  <div className="rounded-xl p-2.5" style={{ background: 'rgba(33,107,228,0.04)', border: '1px solid rgba(33,107,228,0.08)' }}>
-                    <p className="text-[9px] text-[#216BE4] uppercase font-bold tracking-wider mb-1">Company</p>
+                  <div className="rounded-xl p-2.5" style={{ background: 'rgba(138,108,255,0.04)', border: '1px solid rgba(138,108,255,0.08)' }}>
+                    <p className="text-[9px] text-[#8A6CFF] uppercase font-bold tracking-wider mb-1">Company</p>
                     <p className="text-[13px] font-bold text-white/70">{safeText(displayResearch?.company_profile?.name, 'Unknown')}</p>
                     <div className="flex flex-wrap gap-1 mt-1">
-                      {displayResearch?.company_profile?.industry && <span className="text-[9px] px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(33,107,228,0.06)', color: 'rgba(33,107,228,0.6)' }}>{safeText(displayResearch.company_profile.industry)}</span>}
+                      {displayResearch?.company_profile?.industry && <span className="text-[9px] px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(138,108,255,0.06)', color: 'rgba(138,108,255,0.6)' }}>{safeText(displayResearch.company_profile.industry)}</span>}
                       {displayResearch?.company_profile?.size && <span className="text-[9px] px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(255,255,255,0.03)', color: 'rgba(255,255,255,0.3)' }}>{safeText(displayResearch.company_profile.size)}</span>}
                     </div>
                     {displayResearch?.company_profile?.headquarters && <p className="text-[10px] text-white/25 mt-1">{safeText(displayResearch.company_profile.headquarters)}</p>}
+                    {displayResearch?.company_profile?.website && /^https?:\/\//.test(safeText(displayResearch.company_profile.website)) && (
+                      <a href={safeText(displayResearch.company_profile.website)} target="_blank" rel="noopener noreferrer" className="text-[9px] text-[#8A6CFF]/70 hover:text-[#8A6CFF] mt-1 inline-block transition-colors">Visit website ↗</a>
+                    )}
                   </div>
-                  {/* Funding */}
-                  <div className="rounded-xl p-2.5" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
-                    <p className="text-[9px] text-white/20 uppercase font-bold tracking-wider mb-1">Funding</p>
-                    {displayResearch?.funding?.total_raised && <p className="text-[11px] text-white/50 font-semibold">{safeText(displayResearch.funding.total_raised)}</p>}
-                    {displayResearch?.funding?.latest_round && <p className="text-[10px] text-white/30">{safeText(displayResearch.funding.latest_round)}</p>}
-                  </div>
-                  {/* Tech Stack */}
-                  <div className="rounded-xl p-2.5" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
-                    <p className="text-[9px] text-white/20 uppercase font-bold tracking-wider mb-1">Tech Stack</p>
-                    <div className="flex flex-wrap gap-1">
-                      {safeText(displayResearch?.tech_stack?.technologies, '').split(',').filter(Boolean).slice(0,6).map((t: string,i: number) => <span key={i} className="text-[9px] px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(33,107,228,0.06)', color: 'rgba(33,107,228,0.5)' }}>{t.trim()}</span>)}
-                    </div>
-                  </div>
-                  {/* Pitch Angles */}
-                  {displayResearch?.pitch_angles && (
-                    <div className="rounded-xl p-2.5" style={{ background: 'rgba(52,211,153,0.03)', border: '1px solid rgba(52,211,153,0.06)' }}>
-                      <p className="text-[9px] text-emerald-400/50 uppercase font-bold tracking-wider mb-1">Pitch Angles</p>
-                      <p className="text-[10px] text-white/35 leading-relaxed">{safeText(displayResearch.pitch_angles).substring(0, 250)}</p>
-                    </div>
-                  )}
+                  {/* Funding — show only when we have real data; show "searching" while loading; hide otherwise */}
+                  {(() => {
+                    const f = displayResearch?.funding || {}
+                    const realFunding = isRealValue(f.total_raised) || isRealValue(f.latest_round) || isRealValue(f.key_investors)
+                    if (realFunding) {
+                      return (
+                        <div className="rounded-xl p-2.5" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
+                          <p className="text-[9px] text-white/30 uppercase font-bold tracking-wider mb-1">Funding</p>
+                          {isRealValue(f.total_raised) && <p className="text-[11px] text-white/65 font-semibold">{safeText(f.total_raised)}</p>}
+                          {isRealValue(f.latest_round) && <p className="text-[10px] text-white/40">{safeText(f.latest_round)}</p>}
+                          {isRealValue(f.key_investors) && <p className="text-[10px] text-white/30 mt-0.5">{safeText(f.key_investors)}</p>}
+                        </div>
+                      )
+                    }
+                    if (researchLoading) return <LiveSearchingCard label="Funding" hint="Scanning Crunchbase, AngelList & public filings…" accent="amber" />
+                    return null
+                  })()}
+
+                  {/* Tech Stack — same logic */}
+                  {(() => {
+                    const t = displayResearch?.tech_stack || {}
+                    const techList = safeText(t.technologies, '').split(',').map((x: string) => x.trim()).filter((x: string) => x && isRealValue(x))
+                    const realTech = techList.length > 0 || isRealValue(t.infrastructure) || isRealValue(t.tools)
+                    if (realTech) {
+                      return (
+                        <div className="rounded-xl p-2.5" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
+                          <p className="text-[9px] text-white/30 uppercase font-bold tracking-wider mb-1">Tech Stack</p>
+                          <div className="flex flex-wrap gap-1">
+                            {techList.slice(0, 8).map((tech: string, i: number) => <span key={i} className="text-[9px] px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(138,108,255,0.08)', color: 'rgba(138,108,255,0.7)' }}>{tech}</span>)}
+                          </div>
+                          {isRealValue(t.infrastructure) && <p className="text-[10px] text-white/30 mt-1.5">{safeText(t.infrastructure)}</p>}
+                        </div>
+                      )
+                    }
+                    if (researchLoading) return <LiveSearchingCard label="Tech Stack" hint="Scanning company GitHub, BuiltWith & job listings…" accent="blue" />
+                    return null
+                  })()}
+
+                  {/* Recent News — show only when real */}
+                  {(() => {
+                    const news = safeText(displayResearch?.recent_news, '')
+                    if (isRealValue(news)) {
+                      return (
+                        <div className="rounded-xl p-2.5" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
+                          <p className="text-[9px] text-white/30 uppercase font-bold tracking-wider mb-1">Recent News</p>
+                          <p className="text-[10px] text-white/45 leading-relaxed">{news.substring(0, 240)}</p>
+                        </div>
+                      )
+                    }
+                    if (researchLoading) return <LiveSearchingCard label="Recent News" hint="Looking at news, blogs & podcasts…" accent="blue" />
+                    return null
+                  })()}
+
+                  {/* Pitch Angles — almost always show; emerald accent. Hide only if truly empty AND not loading */}
+                  {(() => {
+                    const pitch = safeText(displayResearch?.pitch_angles, '')
+                    if (isRealValue(pitch)) {
+                      return (
+                        <div className="rounded-xl p-2.5" style={{ background: 'rgba(52,211,153,0.03)', border: '1px solid rgba(52,211,153,0.06)' }}>
+                          <p className="text-[9px] text-emerald-400/60 uppercase font-bold tracking-wider mb-1">Pitch Angles</p>
+                          <p className="text-[10px] text-white/45 leading-relaxed">{pitch.substring(0, 280)}</p>
+                        </div>
+                      )
+                    }
+                    if (researchLoading) return <LiveSearchingCard label="Pitch Angles" hint="Synthesising talking points…" accent="emerald" />
+                    return null
+                  })()}
                 </>
               ) : !researchLoading && !researchError ? (
                 <div className="flex flex-col items-center justify-center py-8">
@@ -1246,13 +1632,13 @@ function LiveCallDashboardInner({
 
         {/* Panel 3: STRATEGY AGENT */}
         <div className="col-span-4 flex flex-col min-h-0">
-          <div className="flex-1 flex flex-col rounded-2xl overflow-hidden" style={{ background: '#0c1120', border: '1px solid rgba(255,255,255,0.06)' }}>
+          <div className="flex-1 flex flex-col rounded-2xl overflow-hidden" style={{ background: '#0A0C14', border: '1px solid rgba(255,255,255,0.06)' }}>
             <div className="flex items-center justify-between px-3 py-2.5 flex-shrink-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
               <div className="flex items-center gap-2">
                 <span className="text-[12px]">🎯</span>
                 <h3 className="text-[13px] font-bold text-white/70" style={{ fontFamily: "'Instrument Serif', serif" }}>Sales Strategy</h3>
               </div>
-              <span className="text-[9px] px-2 py-0.5 rounded-full font-semibold" style={{ background: strategyLoading ? 'rgba(33,107,228,0.08)' : displayStrategy ? 'rgba(52,211,153,0.08)' : 'rgba(255,255,255,0.03)', color: strategyLoading ? '#216BE4' : displayStrategy ? '#34d399' : 'rgba(255,255,255,0.2)' }}>
+              <span className="text-[9px] px-2 py-0.5 rounded-full font-semibold" style={{ background: strategyLoading ? 'rgba(138,108,255,0.08)' : displayStrategy ? 'rgba(52,211,153,0.08)' : 'rgba(255,255,255,0.03)', color: strategyLoading ? '#8A6CFF' : displayStrategy ? '#34d399' : 'rgba(255,255,255,0.2)' }}>
                 {strategyLoading ? 'Processing...' : strategyData ? 'Complete' : (displayStrategy && !strategyData) ? 'Previous' : 'Standby'}
               </span>
             </div>
