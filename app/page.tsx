@@ -5,7 +5,10 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Nav from '@/components/landing/Nav'
 import Hero from '@/components/landing/Hero'
 import Marquee from '@/components/landing/Marquee'
+import IntelligenceLayer from '@/components/landing/IntelligenceLayer'
 import Quote from '@/components/landing/Quote'
+import Workflow from '@/components/landing/Workflow'
+import Tiers from '@/components/landing/Tiers'
 import CTA from '@/components/landing/CTA'
 import Footer from '@/components/landing/Footer'
 
@@ -39,7 +42,10 @@ function LandingPageInner() {
       <Nav onRequestAccess={openAccess} />
       <Hero onRequestAccess={openAccess} />
       <Marquee />
+      <IntelligenceLayer />
       <Quote />
+      <Workflow />
+      <Tiers />
       <CTA onRequestAccess={openAccess} />
       <Footer />
 
