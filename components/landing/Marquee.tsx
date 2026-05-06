@@ -14,7 +14,7 @@ export default function Marquee() {
   const all = [...items, ...items];
 
   return (
-    <section className="marquee">
+    <section className="marquee" id="customers">
       <div className="marquee-label">Powering revenue motions for</div>
       <div className="track">
         {all.map((it, i) => (

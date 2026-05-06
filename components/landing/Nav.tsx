@@ -9,12 +9,8 @@ export default function Nav({ onRequestAccess }: { onRequestAccess?: () => void 
           AETHERYX
         </a>
         <div className="nav-links">
-          <a href="#layer">Platform</a>
-          <a href="#work">Workflow</a>
-          <a href="#tiers">Tiers</a>
-          <a href="#">Customers</a>
-          <a href="#">Changelog</a>
-          <a href="#">Docs</a>
+          <a href="#customers">Customers</a>
+          <a href="#cta">Contact</a>
         </div>
         <div className="nav-cta">
           <a className="btn btn-ghost" href="#" onClick={(e) => { e.preventDefault(); onRequestAccess?.(); }}>Sign in</a>
